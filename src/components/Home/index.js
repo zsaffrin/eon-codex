@@ -1,30 +1,37 @@
 import React, { useContext } from "react";
+import { Link } from "react-router-dom";
 
 import { FirebaseContext } from "../../contexts/firebaseContext";
 import { useCurrentUser } from "../../hooks/authHooks";
 import { Button, Loading } from "../ui";
+import UpcomingSessions from "./UpcomingSessions";
+
+const directLinks = [
+  { target: "/pcs", label: "Player Characters" },
+  { target: "/sessions", label: "Sessions" }
+];
 
 const Home = ({ history }) => {
-  const firebase = useContext(FirebaseContext);
   const [user, userLoaded] = useCurrentUser();
 
   return !userLoaded ? (
     <Loading />
+  ) : user ? (
+    <div>
+      <div>Logged in as</div>
+      <h1>{user.name}</h1>
+      <ul>
+        {directLinks.map(({ target, label }) => (
+          <li key={label}>
+            <Link to={target}>{label}</Link>
+          </li>
+        ))}
+      </ul>
+    </div>
   ) : (
     <div>
-      {user ? (
-        <>
-          <div>Logged in as</div>
-          <h1>{user.name}</h1>
-          <div>{user.uid}</div>
-        </>
-      ) : (
-        <div>
-          <div>Hey, you're not logged in, pal</div>
-        </div>
-      )}
-
-      <pre>{JSON.stringify(user, " ", 2)}</pre>
+      <h1>Welcome to the Eon Codex</h1>
+      <div>Work is in progress</div>
     </div>
   );
 };

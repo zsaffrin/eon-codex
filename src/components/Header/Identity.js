@@ -12,9 +12,12 @@ const Identity = ({ history }) => {
   return !userLoaded ? (
     <Loading />
   ) : user ? (
-    <div>
-      <Button onClick={() => firebase.logout()}>Log Out</Button>
-    </div>
+    <>
+      <div>{user.name}</div>
+      <div>
+        <Button onClick={() => firebase.logout()}>Log Out</Button>
+      </div>
+    </>
   ) : (
     <div>
       <Button onClick={() => history.push("/login")}>Log In</Button>

@@ -29,6 +29,26 @@ class Firebase {
   logout() {
     this.auth.signOut();
   }
+
+  getCollection(collectionName) {
+    return this.db
+      .collection(collectionName)
+      .get()
+      .then(snapshot =>
+        snapshot.forEach(doc => ({ id: doc.id, ...doc.data() }))
+      )
+      .catch(err => console.error(err.message));
+  }
+
+  async getDocument(docQuery) {
+    return await this.db
+      .doc(docQuery)
+      .get()
+      .then(doc => ({
+        id: doc.id,
+        ...doc.data()
+      }));
+  }
 }
 
 export default new Firebase();

@@ -14,6 +14,8 @@ import Header from "../Header";
 // Pages
 import Home from "../Home";
 import Login from "../Login";
+import PlayerCharacters from "../PlayerCharacters";
+import Sessions from "../Sessions";
 import FourOhFour from "../404";
 
 const AppLayout = styled.div`
@@ -35,6 +37,9 @@ const App = () => {
         <Switch>
           <Route path="/" exact component={Home} />
           <Route path="/login" component={Login} />
+
+          <Route path="/pcs" component={PlayerCharacters} />
+          <Route path="/sessions" component={Sessions} />
 
           <Route component={FourOhFour} />
         </Switch>
