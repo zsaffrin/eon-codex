@@ -1,23 +1,59 @@
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
 
+import { FirebaseContext } from "../../contexts/firebaseContext";
+import { useCurrentUser } from "../../hooks/authHooks";
 import { useCollection } from "../../hooks/firestoreHooks";
-import { Loading } from "../ui";
+import { Button, Loading } from "../ui";
+import EditSession from "./EditSession";
 
 const Sessions = () => {
+  const firebase = useContext(FirebaseContext);
+  const [user, userLoaded] = useCurrentUser();
   const [sessions, sessionsLoading, sessionsError] = useCollection("sessions");
+  const [editMode, setEditMode] = useState(false);
+  const [editItem, setEditItem] = useState(null);
+
+  const closeEdit = () => {
+    setEditItem(null);
+    setEditMode(false);
+  };
+  const edit = item => {
+    setEditItem(item);
+    setEditMode(true);
+  };
+  const addNew = () => {
+    setEditItem(null);
+    setEditMode(true);
+  };
+
+  if (editMode) {
+    return <EditSession session={editItem} close={closeEdit} />;
+  }
 
   return (
     <div>
       <h1>Sessions</h1>
+      <div>
+        <Button onClick={() => addNew()}>New</Button>
+      </div>
+
       {sessionsLoading ? (
         <Loading />
       ) : sessions ? (
-        sessions.map(({ id, location, startDate }) => (
-          <div key={id}>
-            <div>{location}</div>
-            <div>{startDate.toDate().toLocaleString("en-US")}</div>
-          </div>
-        ))
+        sessions.map(session => {
+          const { id, location, startDate } = session;
+          return (
+            <div key={id}>
+              <div>{location}</div>
+              <div>
+                {startDate && startDate.toDate().toLocaleString("en-US")}
+              </div>
+              <div>
+                <Button onClick={() => edit(session)}>Edit</Button>
+              </div>
+            </div>
+          );
+        })
       ) : (
         <div>No data</div>
       )}
