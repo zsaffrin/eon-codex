@@ -30,24 +30,28 @@ class Firebase {
     this.auth.signOut();
   }
 
-  getCollection(collectionName) {
+  addDoc(collection, doc) {
     return this.db
-      .collection(collectionName)
-      .get()
-      .then(snapshot =>
-        snapshot.forEach(doc => ({ id: doc.id, ...doc.data() }))
-      )
-      .catch(err => console.error(err.message));
+      .collection(collection)
+      .add(doc)
+      .then(res => ({ status: "success", result: res }))
+      .catch(err => ({ status: "error", result: err.message }));
   }
 
-  async getDocument(docQuery) {
-    return await this.db
-      .doc(docQuery)
-      .get()
-      .then(doc => ({
-        id: doc.id,
-        ...doc.data()
-      }));
+  updateDoc(query, value) {
+    return this.db
+      .doc(query)
+      .update(value)
+      .then(res => ({ status: "success", result: res }))
+      .catch(err => ({ status: "error", result: err.message }));
+  }
+
+  deleteDoc(query) {
+    return this.db
+      .doc(query)
+      .delete()
+      .then(res => ({ status: "success", result: res }))
+      .catch(err => ({ status: "error", result: err.message }));
   }
 }
 

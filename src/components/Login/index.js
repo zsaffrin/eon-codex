@@ -5,7 +5,7 @@ import { FirebaseContext } from "../../contexts/firebaseContext";
 
 const Login = ({ history }) => {
   const [creds, setCreds] = useState({ username: "", password: "" });
-  const [message, setMessage] = useState("");
+  const [message, setMessage] = useState(null);
   const firebase = useContext(FirebaseContext);
 
   const handleFieldUpdate = e => {
