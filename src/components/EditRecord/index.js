@@ -3,10 +3,8 @@ import React, { useContext, useState } from "react";
 import { FirebaseContext } from "../../contexts/firebaseContext";
 import { Button, Input, VerticalList } from "../ui";
 
-const fields = [{ name: "name" }];
-
-const EditPlayerCharacter = ({ close, pc }) => {
-  const [item, setItem] = useState(pc || {});
+const EditRecord = ({ collection, close, fields, existingItem }) => {
+  const [item, setItem] = useState(existingItem || {});
   const [message, setMessage] = useState(null);
   const firebase = useContext(FirebaseContext);
 
@@ -20,9 +18,9 @@ const EditPlayerCharacter = ({ close, pc }) => {
   async function handleFormSubmit(e) {
     e.preventDefault();
     try {
-      const res = pc
-        ? await firebase.updateDoc(`playerCharacters/${pc.id}`, item)
-        : await firebase.addDoc("playerCharacters", item);
+      const res = existingItem
+        ? await firebase.updateDoc(`${collection}/${existingItem.id}`, item)
+        : await firebase.addDoc(collection, item);
       if (res.status === "success") {
         close();
       }
@@ -36,7 +34,7 @@ const EditPlayerCharacter = ({ close, pc }) => {
 
   async function deleteItem() {
     try {
-      const res = await firebase.deleteDoc(`playerCharacters/${pc.id}`);
+      const res = await firebase.deleteDoc(`${collection}/${existingItem.id}`);
       if (res.status === "success") {
         close();
       }
@@ -50,7 +48,7 @@ const EditPlayerCharacter = ({ close, pc }) => {
 
   return (
     <div>
-      <h1>Edit PC</h1>
+      <h1>Edit Session</h1>
       {message && <div>{message}</div>}
       <form onSubmit={handleFormSubmit}>
         <VerticalList
@@ -70,13 +68,13 @@ const EditPlayerCharacter = ({ close, pc }) => {
       <div>
         <Button onClick={close}>Cancel</Button>
         <Button type="submit" onClick={handleFormSubmit}>
-          {pc ? "Save Changes" : "Add PC"}
+          {existingItem ? "Save Changes" : "Add New Record"}
         </Button>
-        {pc && <Button onClick={deleteItem}>Delete</Button>}
+        {existingItem && <Button onClick={deleteItem}>Delete</Button>}
       </div>
-      <pre>{JSON.stringify(pc, " ", 2)}</pre>
+      <pre>{JSON.stringify(existingItem, " ", 2)}</pre>
     </div>
   );
 };
 
-export default EditPlayerCharacter;
+export default EditRecord;

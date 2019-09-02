@@ -4,7 +4,7 @@ import { FirebaseContext } from "../../contexts/firebaseContext";
 import { useCurrentUser } from "../../hooks/authHooks";
 import { useCollection } from "../../hooks/firestoreHooks";
 import { Button, Loading } from "../ui";
-import EditPlayerCharacter from "./EditPlayerCharacter";
+import EditRecord from "../EditRecord";
 
 const PlayerCharacters = () => {
   const firebase = useContext(FirebaseContext);
@@ -27,7 +27,14 @@ const PlayerCharacters = () => {
   };
 
   if (editMode) {
-    return <EditPlayerCharacter pc={editItem} close={closeEdit} />;
+    return (
+      <EditRecord
+        collection="playerCharacters"
+        fields={[{ name: "name" }]}
+        existingItem={editItem}
+        close={closeEdit}
+      />
+    );
   }
 
   return (

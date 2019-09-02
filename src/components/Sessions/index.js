@@ -4,7 +4,7 @@ import { FirebaseContext } from "../../contexts/firebaseContext";
 import { useCurrentUser } from "../../hooks/authHooks";
 import { useCollection } from "../../hooks/firestoreHooks";
 import { Button, Loading } from "../ui";
-import EditSession from "./EditSession";
+import EditRecord from "../EditRecord";
 
 const Sessions = () => {
   const firebase = useContext(FirebaseContext);
@@ -27,7 +27,14 @@ const Sessions = () => {
   };
 
   if (editMode) {
-    return <EditSession session={editItem} close={closeEdit} />;
+    return (
+      <EditRecord
+        collection="sessions"
+        fields={[{ name: "location" }]}
+        existingItem={editItem}
+        close={closeEdit}
+      />
+    );
   }
 
   return (
