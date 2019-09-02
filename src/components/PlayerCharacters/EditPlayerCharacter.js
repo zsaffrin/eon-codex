@@ -55,7 +55,7 @@ const EditPlayerCharacter = ({ close, pc }) => {
       <form onSubmit={handleFormSubmit}>
         <VerticalList
           items={fields.map(({ name }) => ({
-            label: "name",
+            label: name,
             content: (
               <Input
                 type="text"
@@ -69,7 +69,9 @@ const EditPlayerCharacter = ({ close, pc }) => {
       </form>
       <div>
         <Button onClick={close}>Cancel</Button>
-        <Button type="submit">{pc ? "Save Changes" : "Add PC"}</Button>
+        <Button type="submit" onClick={handleFormSubmit}>
+          {pc ? "Save Changes" : "Add PC"}
+        </Button>
         {pc && <Button onClick={deleteItem}>Delete</Button>}
       </div>
       <pre>{JSON.stringify(pc, " ", 2)}</pre>
