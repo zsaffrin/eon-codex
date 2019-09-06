@@ -36,17 +36,30 @@ const Login = ({ history }) => {
       {message && <div>{message}</div>}
       <form onSubmit={handleFormSubmit}>
         <VerticalList
-          items={Object.keys(creds).map(key => ({
-            label: key,
-            content: (
-              <Input
-                type={key === "password" ? key : "text"}
-                id={key}
-                value={creds[key]}
-                onChange={handleFieldUpdate}
-              />
-            )
-          }))}
+          items={[
+            {
+              label: "Username",
+              content: (
+                <Input
+                  type="text"
+                  id="username"
+                  value={creds.username}
+                  onChange={handleFieldUpdate}
+                />
+              )
+            },
+            {
+              label: "Password",
+              content: (
+                <Input
+                  type="password"
+                  id="password"
+                  value={creds.password}
+                  onChange={handleFieldUpdate}
+                />
+              )
+            }
+          ]}
         />
         <div>
           <Button type="submit">Submit</Button>
