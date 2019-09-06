@@ -18,9 +18,10 @@ const EditRecord = ({ collection, close, fields, existingItem }) => {
   async function handleFormSubmit(e) {
     e.preventDefault();
     try {
+      const { id, ...rest } = item;
       const res = existingItem
-        ? await firebase.updateDoc(`${collection}/${existingItem.id}`, item)
-        : await firebase.addDoc(collection, item);
+        ? await firebase.updateDoc(`${collection}/${existingItem.id}`, rest)
+        : await firebase.addDoc(collection, rest);
       if (res.status === "success") {
         close();
       }
