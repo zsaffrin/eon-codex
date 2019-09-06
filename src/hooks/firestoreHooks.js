@@ -1,4 +1,4 @@
-import { useContext, useState, useEffect } from "react";
+import { useContext } from "react";
 import {
   useCollection as useFirestoreCollection,
   useDocument as useFirestoreDocument

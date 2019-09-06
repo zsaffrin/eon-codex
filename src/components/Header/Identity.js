@@ -7,7 +7,7 @@ import { Button, Loading } from "../ui";
 
 const Identity = ({ history }) => {
   const firebase = useContext(FirebaseContext);
-  const [user, userLoaded] = useCurrentUser();
+  const [user, userLoaded] = useCurrentUser(firebase);
 
   return !userLoaded ? (
     <Loading />

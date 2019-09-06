@@ -52,13 +52,13 @@ const EditRecord = ({ collection, close, fields, existingItem }) => {
       {message && <div>{message}</div>}
       <form onSubmit={handleFormSubmit}>
         <VerticalList
-          items={fields.map(({ name }) => ({
-            label: name,
+          items={fields.map(({ key, label, type }) => ({
+            label,
             content: (
               <Input
-                type="text"
-                id={name}
-                value={item[name]}
+                type={type}
+                id={key}
+                value={item[key]}
                 onChange={handleFieldChange}
               />
             )
@@ -72,7 +72,6 @@ const EditRecord = ({ collection, close, fields, existingItem }) => {
         </Button>
         {existingItem && <Button onClick={deleteItem}>Delete</Button>}
       </div>
-      <pre>{JSON.stringify(existingItem, " ", 2)}</pre>
     </div>
   );
 };

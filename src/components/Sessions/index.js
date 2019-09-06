@@ -8,7 +8,7 @@ import EditRecord from "../EditRecord";
 
 const Sessions = () => {
   const firebase = useContext(FirebaseContext);
-  const [user, userLoaded] = useCurrentUser();
+  const [user, userLoaded] = useCurrentUser(firebase);
   const [sessions, sessionsLoading, sessionsError] = useCollection("sessions");
   const [editMode, setEditMode] = useState(false);
   const [editItem, setEditItem] = useState(null);
@@ -30,7 +30,7 @@ const Sessions = () => {
     return (
       <EditRecord
         collection="sessions"
-        fields={[{ name: "location" }]}
+        fields={[{ key: "location", label: "Location", type: "text" }]}
         existingItem={editItem}
         close={closeEdit}
       />

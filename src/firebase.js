@@ -30,6 +30,15 @@ class Firebase {
     this.auth.signOut();
   }
 
+  getDoc(collection, doc) {
+    return this.db
+      .collection(collection)
+      .doc(doc)
+      .get()
+      .then(doc => (doc.exists ? doc.data() : null))
+      .catch(err => console.error(err.message));
+  }
+
   addDoc(collection, doc) {
     return this.db
       .collection(collection)

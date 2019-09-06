@@ -1,49 +1,36 @@
-import { useContext, useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 
-import { FirebaseContext } from "../contexts/firebaseContext";
-
-export function useCurrentUser() {
-  const firebase = useContext(FirebaseContext);
+export function useCurrentUser(firebase) {
   const [user, setUser] = useState(null);
   const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
-    if (!loaded) {
-      const unsubscribe = firebase.auth.onAuthStateChanged(user => {
-        if (user && user.uid) {
-          firebase.db
-            .collection("players")
-            .doc(user.uid)
-            .get()
-            .then(doc => {
-              let playerDetail = {
-                uid: user.uid,
-                email: user.email,
-                displayName: ""
-              };
-              if (!doc.exists) {
-                console.warn(
-                  `player detail for uid ${user.uid} not found. Loading default data`
-                );
-              } else {
-                playerDetail = {
-                  ...playerDetail,
-                  ...doc.data()
-                };
-              }
-              setUser(playerDetail);
-              setLoaded(true);
-            })
-            .catch(err => console.error(err.message));
-        } else {
-          setUser(user);
-          setLoaded(true);
+    const unsubscribe = firebase.auth.onAuthStateChanged(userData => {
+      if (userData) {
+        async function getDetail() {
+          const detail = await firebase.getDoc(
+            "players",
+            userData ? userData.uid : " "
+          );
+          return detail;
         }
-      });
+        getDetail().then(detail => {
+          setUser({
+            uid: userData.uid,
+            ...detail
+          });
+          !loaded && setLoaded(true);
+        });
+      } else {
+        setUser(userData);
+        !loaded && setLoaded(true);
+      }
+    });
 
-      return () => unsubscribe();
-    }
-  });
+    return () => {
+      unsubscribe();
+    };
+  }, []);
 
   return [user, loaded];
 }

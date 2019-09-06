@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 
 import { FirebaseContext } from "../../contexts/firebaseContext";
 import { useCurrentUser } from "../../hooks/authHooks";
@@ -6,10 +6,10 @@ import { useCollection } from "../../hooks/firestoreHooks";
 import { Button, Loading } from "../ui";
 import EditRecord from "../EditRecord";
 
-const PlayerCharacters = () => {
+const Places = () => {
   const firebase = useContext(FirebaseContext);
   const [user, userLoaded] = useCurrentUser(firebase);
-  const [pcs, pcsLoading, pcsError] = useCollection("playerCharacters");
+  const [places, placesLoading, placesError] = useCollection("places");
   const [editMode, setEditMode] = useState(false);
   const [editItem, setEditItem] = useState(null);
 
@@ -29,8 +29,11 @@ const PlayerCharacters = () => {
   if (editMode) {
     return (
       <EditRecord
-        collection="playerCharacters"
-        fields={[{ key: "name", label: "Name", type: "text" }]}
+        collection="places"
+        fields={[
+          { key: "name", label: "Name", type: "text" },
+          { key: "shortDesc", label: "Short Desc", type: "text" }
+        ]}
         existingItem={editItem}
         close={closeEdit}
       />
@@ -39,21 +42,22 @@ const PlayerCharacters = () => {
 
   return (
     <div>
-      <h1>Player Characters</h1>
+      <h1>Places</h1>
       <div>
         <Button onClick={() => addNew()}>New</Button>
       </div>
 
-      {pcsLoading ? (
+      {placesLoading ? (
         <Loading />
-      ) : pcs ? (
-        pcs.map(pc => {
-          const { id, name } = pc;
+      ) : places ? (
+        places.map(place => {
+          const { id, name, shortDesc } = place;
           return (
             <div key={id}>
               <div>{name}</div>
+              <div>{shortDesc}</div>
               <div>
-                <Button onClick={() => edit(pc)}>Edit</Button>
+                <Button onClick={() => edit(place)}>Edit</Button>
               </div>
             </div>
           );
@@ -65,4 +69,4 @@ const PlayerCharacters = () => {
   );
 };
 
-export default PlayerCharacters;
+export default Places;

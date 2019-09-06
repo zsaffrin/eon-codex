@@ -8,11 +8,14 @@ import UpcomingSessions from "./UpcomingSessions";
 
 const directLinks = [
   { target: "/pcs", label: "Player Characters" },
-  { target: "/sessions", label: "Sessions" }
+  { target: "/sessions", label: "Sessions" },
+  { target: "/gamingLocations", label: "Gaming Locations" },
+  { target: "/places", label: "Places" }
 ];
 
 const Home = ({ history }) => {
-  const [user, userLoaded] = useCurrentUser();
+  const firebase = useContext(FirebaseContext);
+  const [user, userLoaded] = useCurrentUser(firebase);
 
   return !userLoaded ? (
     <Loading />
