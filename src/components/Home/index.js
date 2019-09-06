@@ -3,8 +3,7 @@ import { Link } from "react-router-dom";
 
 import { FirebaseContext } from "../../contexts/firebaseContext";
 import { useCurrentUser } from "../../hooks/authHooks";
-import { Button, Loading } from "../ui";
-import UpcomingSessions from "./UpcomingSessions";
+import { Loading } from "../ui";
 
 const directLinks = [
   { target: "/pcs", label: "Player Characters" },

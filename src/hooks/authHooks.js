@@ -19,11 +19,11 @@ export function useCurrentUser(firebase) {
             uid: userData.uid,
             ...detail
           });
-          !loaded && setLoaded(true);
+          setLoaded(true);
         });
       } else {
         setUser(userData);
-        !loaded && setLoaded(true);
+        setLoaded(true);
       }
     });
 

@@ -1,15 +1,11 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 
-import { FirebaseContext } from "../../contexts/firebaseContext";
-import { useCurrentUser } from "../../hooks/authHooks";
 import { useCollection } from "../../hooks/firestoreHooks";
 import { Button, Loading } from "../ui";
 import EditRecord from "../EditRecord";
 
 const PlayerCharacters = () => {
-  const firebase = useContext(FirebaseContext);
-  const [user, userLoaded] = useCurrentUser(firebase);
-  const [pcs, pcsLoading, pcsError] = useCollection("playerCharacters");
+  const [pcs, pcsLoading] = useCollection("playerCharacters");
   const [editMode, setEditMode] = useState(false);
   const [editItem, setEditItem] = useState(null);
 

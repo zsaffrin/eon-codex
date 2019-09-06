@@ -1,15 +1,11 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useState } from "react";
 
-import { FirebaseContext } from "../../contexts/firebaseContext";
-import { useCurrentUser } from "../../hooks/authHooks";
 import { useCollection } from "../../hooks/firestoreHooks";
 import { Button, Loading } from "../ui";
 import EditRecord from "../EditRecord";
 
 const Places = () => {
-  const firebase = useContext(FirebaseContext);
-  const [user, userLoaded] = useCurrentUser(firebase);
-  const [places, placesLoading, placesError] = useCollection("places");
+  const [places, placesLoading] = useCollection("places");
   const [editMode, setEditMode] = useState(false);
   const [editItem, setEditItem] = useState(null);
 
