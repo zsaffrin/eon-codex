@@ -26,7 +26,15 @@ const PlayerCharacters = () => {
     return (
       <EditRecord
         collection="playerCharacters"
-        fields={[{ key: "name", label: "Name", type: "text" }]}
+        fields={[
+          { key: "name", label: "Name", type: "text" },
+          {
+            key: "player",
+            label: "Player",
+            type: "lookup",
+            lookupCollection: "players"
+          }
+        ]}
         existingItem={editItem}
         close={closeEdit}
       />
