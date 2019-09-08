@@ -29,10 +29,10 @@ const PlayerCharacters = () => {
         fields={[
           { key: "name", label: "Name", type: "text" },
           {
-            key: "player",
+            key: "uid",
             label: "Player",
             type: "lookup",
-            lookupCollection: "players"
+            lookup: "players"
           }
         ]}
         existingItem={editItem}
