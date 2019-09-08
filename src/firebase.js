@@ -39,6 +39,20 @@ class Firebase {
       .catch(err => console.error(err.message));
   }
 
+  getCollection(collection) {
+    return this.db
+      .collection(collection)
+      .get()
+      .then(snapshot => {
+        const records = [];
+        snapshot.docs.map(doc => ({
+          id: doc.id,
+          ...doc.data()
+        }));
+      })
+      .catch(err => console.error(err.message));
+  }
+
   addDoc(collection, doc) {
     return this.db
       .collection(collection)
