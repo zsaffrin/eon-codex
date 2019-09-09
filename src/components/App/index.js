@@ -14,10 +14,7 @@ import Header from "../Header";
 // Pages
 import Home from "../Home";
 import Login from "../Login";
-import PlayerCharacters from "../PlayerCharacters";
-import Sessions from "../Sessions";
-import GamingLocations from "../GamingLocations";
-import Places from "../Places";
+import ManageCollection from "../ManageCollection";
 import FourOhFour from "../404";
 
 const AppLayout = styled.div`
@@ -40,10 +37,24 @@ const App = () => {
           <Route path="/" exact component={Home} />
           <Route path="/login" component={Login} />
 
-          <Route path="/pcs" component={PlayerCharacters} />
-          <Route path="/sessions" component={Sessions} />
-          <Route path="/gamingLocations" component={GamingLocations} />
-          <Route path="/places" component={Places} />
+          <Route
+            path="/pcs"
+            render={() => (
+              <ManageCollection collectionName="playerCharacters" />
+            )}
+          />
+          <Route
+            path="/sessions"
+            render={() => <ManageCollection collectionName="sessions" />}
+          />
+          <Route
+            path="/gamingLocations"
+            render={() => <ManageCollection collectionName="gamingLocations" />}
+          />
+          <Route
+            path="/places"
+            render={() => <ManageCollection collectionName="places" />}
+          />
 
           <Route component={FourOhFour} />
         </Switch>

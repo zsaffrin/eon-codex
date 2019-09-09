@@ -53,8 +53,8 @@ const EditRecord = ({ collection, close, fields, existingItem }) => {
       {message && <div>{message}</div>}
       <form onSubmit={handleFormSubmit}>
         <VerticalList
-          items={fields.map(({ key, label, type, lookup }) => ({
-            label,
+          items={fields.map(({ key, name, type, lookup }) => ({
+            label: name,
             content: (
               <Input
                 type={type}
