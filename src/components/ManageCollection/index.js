@@ -5,10 +5,8 @@ import { Button, Loading, Table } from "../ui";
 import EditRecord from "../EditRecord";
 
 const ManageCollection = ({ collectionName }) => {
-  const [collection, collectionLoading, collectionError] = useCollection(
-    collectionName
-  );
-  const [schema, schemaLoading, schemaError] = useSchema(collectionName);
+  const [collection, collectionLoading] = useCollection(collectionName);
+  const [schema, schemaLoading] = useSchema(collectionName);
   const [editMode, setEditMode] = useState(false);
   const [editItem, setEditItem] = useState(null);
 

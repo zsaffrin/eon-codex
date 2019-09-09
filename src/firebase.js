@@ -43,13 +43,12 @@ class Firebase {
     return this.db
       .collection(collection)
       .get()
-      .then(snapshot => {
-        const records = [];
+      .then(snapshot =>
         snapshot.docs.map(doc => ({
           id: doc.id,
           ...doc.data()
-        }));
-      })
+        }))
+      )
       .catch(err => console.error(err.message));
   }
 

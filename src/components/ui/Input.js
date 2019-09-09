@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React from "react";
 
 import { useCollection } from "../../hooks/firestoreHooks";
 import { Loading } from "../ui";
