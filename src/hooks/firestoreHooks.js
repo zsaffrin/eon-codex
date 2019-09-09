@@ -33,3 +33,10 @@ export function useDocument(docQuery) {
 
   return [processedValue, loading, error];
 }
+
+export function useSchema(schemaId) {
+  const [schema, schemaLoading, schemaError] = useDocument(
+    `schemas/${schemaId}`
+  );
+  return [schema, schemaLoading, schemaError];
+}
