@@ -1,7 +1,7 @@
 import React, { Fragment } from "react";
 import { arrayOf, shape, string } from "prop-types";
 import styled from "styled-components";
-import Button from "./Button";
+import Button from "../Button";
 import TableCell from "./TableCell";
 
 const HeaderCell = styled.div`
