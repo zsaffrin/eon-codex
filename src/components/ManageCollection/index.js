@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 import { useCollection, useSchema } from "../../hooks/firestoreHooks";
 import { Button, Loading, Table } from "../ui";
-import EditRecord from "../EditRecord";
+import EditRecord from "./EditRecord";
 
 const ManageCollection = ({ collectionName }) => {
   const [collection, collectionLoading] = useCollection(collectionName);
