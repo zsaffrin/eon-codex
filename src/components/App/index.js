@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import styled from "styled-components";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 
 // Firebase context provider
 import { FirebaseContext } from "../../contexts/firebaseContext";
@@ -11,11 +11,7 @@ import { Loading } from "../ui";
 // Page Components
 import Header from "../Header";
 
-// Pages
-import Home from "../Home";
-import Login from "../Login";
-import ManageCollection from "../ManageCollection";
-import FourOhFour from "../404";
+import AppRoutes from "./AppRoutes";
 
 const AppLayout = styled.div`
   display: grid;
@@ -33,31 +29,7 @@ const App = () => {
       <Router>
         <Route path="*" component={Header} />
 
-        <Switch>
-          <Route path="/" exact component={Home} />
-          <Route path="/login" component={Login} />
-
-          <Route
-            path="/pcs"
-            render={() => (
-              <ManageCollection collectionName="playerCharacters" />
-            )}
-          />
-          <Route
-            path="/sessions"
-            render={() => <ManageCollection collectionName="sessions" />}
-          />
-          <Route
-            path="/gamingLocations"
-            render={() => <ManageCollection collectionName="gamingLocations" />}
-          />
-          <Route
-            path="/places"
-            render={() => <ManageCollection collectionName="places" />}
-          />
-
-          <Route component={FourOhFour} />
-        </Switch>
+        <AppRoutes />
       </Router>
     </AppLayout>
   );
