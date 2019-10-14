@@ -1,0 +1,70 @@
+import React, { useContext, useState, useEffect } from "react";
+
+import { FirebaseContext } from "../../contexts/firebaseContext";
+import { useSchema } from "../../hooks/firestoreHooks";
+import { Input, Loading, VerticalList } from "../ui";
+import FieldsManager from "./FieldsManager";
+
+const ManageSchema = ({ schemaName }) => {
+  const [schema, schemaLoading] = useSchema(schemaName);
+  const [workingSchema, setWorkingSchema] = useState({});
+  const firebase = useContext(FirebaseContext);
+
+  useEffect(() => {
+    if (schema && Object.keys(workingSchema).length === 0) {
+      setWorkingSchema(schema);
+    }
+  }, [schema, workingSchema]);
+
+  const handleFieldChange = e => {
+    setWorkingSchema({
+      ...workingSchema,
+      [e.target.id]: e.target.value
+    });
+  };
+
+  async function handleFormSubmit(e) {
+    e.preventDefault();
+    try {
+      const { id, ...rest } = workingSchema;
+      const res = await firebase.updateDoc(`schemas/${id}`, rest);
+      if (res.status === "success") {
+        // This needs to redirect to the schema front page
+        // Good opportunity to use new ReactRouter
+      }
+      if (res.status === "error") {
+        // Implement message display so this works
+        // setMessage(res.result);
+      }
+    } catch (err) {
+      // Implement message display so this works
+      // setMessage(err.message);
+    }
+  }
+
+  const fields = [
+    {
+      label: "Name",
+      content: (
+        <Input
+          type="text"
+          id="name"
+          value={workingSchema.name}
+          onChange={handleFieldChange}
+        />
+      )
+    }
+  ];
+
+  return schemaLoading ? (
+    <Loading />
+  ) : (
+    <div>
+      <h1>Manage Schema</h1>
+      <VerticalList items={fields} />
+      <FieldsManager schemaName={schemaName} />
+    </div>
+  );
+};
+
+export default ManageSchema;
