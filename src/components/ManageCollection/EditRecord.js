@@ -11,7 +11,8 @@ const EditRecord = ({ collection, close, fields, existingItem }) => {
   const handleFieldChange = e => {
     setItem({
       ...item,
-      [e.target.id]: e.target.value
+      [e.target.id]:
+        e.target.type === "number" ? Number(e.target.value) : e.target.value
     });
   };
 
@@ -49,7 +50,7 @@ const EditRecord = ({ collection, close, fields, existingItem }) => {
 
   return (
     <div>
-      <h1>Edit Session</h1>
+      <h1>Edit {collection} Record</h1>
       {message && <div>{message}</div>}
       <form onSubmit={handleFormSubmit}>
         <VerticalList

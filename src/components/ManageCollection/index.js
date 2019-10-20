@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 
 import { useCollection, useSchema } from "../../hooks/firestoreHooks";
+import { sortBy } from "../../utils/dataUtils";
 import { Button, Loading, Table } from "../ui";
 import EditRecord from "./EditRecord";
 
@@ -10,6 +11,11 @@ const ManageCollection = ({ collectionName, filter }) => {
     filter ? [filter.key, "==", filter.value] : null
   );
   const [schema, schemaLoading] = useSchema(collectionName);
+  const [fields, fieldsLoading] = useCollection("schemaFields", [
+    "schema",
+    "==",
+    collectionName
+  ]);
   const [editMode, setEditMode] = useState(false);
   const [editItem, setEditItem] = useState(null);
 
@@ -30,14 +36,14 @@ const ManageCollection = ({ collectionName, filter }) => {
     return (
       <EditRecord
         collection={collectionName}
-        fields={schema.fields}
+        fields={sortBy(fields, "order")}
         existingItem={editItem}
         close={closeEdit}
       />
     );
   }
 
-  return collectionLoading || schemaLoading ? (
+  return collectionLoading || schemaLoading || fieldsLoading ? (
     <Loading />
   ) : (
     <div>
@@ -48,7 +54,7 @@ const ManageCollection = ({ collectionName, filter }) => {
 
       {collection && schema ? (
         <Table
-          columns={schema.fields}
+          columns={sortBy(fields, "order")}
           entries={collection}
           actions={{ edit }}
         />

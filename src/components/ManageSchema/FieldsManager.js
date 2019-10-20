@@ -1,9 +1,12 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useContext, useEffect, useState } from "react";
 import { arrayOf, shape, string } from "prop-types";
 import styled from "styled-components";
 
+import { FirebaseContext } from "../../contexts/firebaseContext";
 import { useCollection } from "../../hooks/firestoreHooks";
 import { Button, Input, Loading } from "../ui";
+import { sortBy } from "../../utils/dataUtils";
+import Field from "./Field";
 
 const columns = [
   { key: "key", name: "Key" },
@@ -12,13 +15,13 @@ const columns = [
   { key: "type", name: "Type" }
 ];
 
-const HeaderCell = styled.div`
-  font-weight: bold;
+const StyledHeader = styled.div`
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
 `;
 
-const StyledTable = styled.div`
-  display: grid;
-  grid-template-columns: repeat(${columns.length}, 1fr);
+const HeaderCell = styled.div`
+  font-weight: bold;
 `;
 
 const FullWidthCell = styled.div`
@@ -29,42 +32,50 @@ const FieldsManager = ({ schemaName }) => {
   const [fields, fieldsLoading] = useCollection("schemaFields", [
     "schema",
     "==",
-    "places"
+    schemaName
   ]);
+  const firebase = useContext(FirebaseContext);
+
+  async function createNewField() {
+    const maxOrder = fields.reduce(
+      (acc, { order }) => (order > acc ? order : acc),
+      0
+    );
+    try {
+      const res = await firebase.db.collection("schemaFields").add({
+        key: "",
+        name: "",
+        order: maxOrder + 1,
+        schema: schemaName
+      });
+      if (res.status === "success") {
+      }
+      if (res.status === "error") {
+        // Implement message display so this works
+        // setMessage(res.result);
+      }
+    } catch (err) {
+      // Implement message display so this works
+      // setMessage(err.message);
+    }
+  }
 
   return fieldsLoading ? (
     <Loading />
   ) : (
-    <StyledTable>
-      {columns.map(({ key, name }) => (
-        <HeaderCell key={`${key}Header`}>{name}</HeaderCell>
-      ))}
-      {fields.map(({ key, name, order, type }) => (
-        <Fragment key={key}>
-          <div>
-            <Input type="text" id="key" value={key} />
-          </div>
-          <div>
-            <Input type="text" id="name" value={name} />
-          </div>
-          <div>
-            <Input type="number" id="order" value={order} />
-          </div>
-          <div>
-            <select value={type}>
-              <option value=""></option>
-              <option value="datetime">DateTime</option>
-              <option value="lookup">Lookup</option>
-              <option value="menu">Menu</option>
-              <option value="text">Text</option>
-            </select>
-          </div>
-        </Fragment>
+    <div>
+      <StyledHeader>
+        {columns.map(({ key, name }) => (
+          <HeaderCell key={`${key}Header`}>{name}</HeaderCell>
+        ))}
+      </StyledHeader>
+      {sortBy(fields, "order").map(field => (
+        <Field key={field.key} data={field} />
       ))}
       <FullWidthCell>
-        <Button>+</Button>
+        <Button onClick={createNewField}>+</Button>
       </FullWidthCell>
-    </StyledTable>
+    </div>
   );
 };
 FieldsManager.propTypes = {
