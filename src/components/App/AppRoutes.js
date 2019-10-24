@@ -4,6 +4,7 @@ import { Route, Switch } from "react-router-dom";
 import Home from "../Home";
 import Login from "../Login";
 import ManageCollection from "../ManageCollection";
+import { ManageMenus, ManageMenu } from "../ManageMenus";
 import ManageSchema from "../ManageSchema";
 import FourOhFour from "../404";
 
@@ -33,6 +34,12 @@ const AppRoutes = () => {
       <Route
         path="/schemas/:id"
         render={({ match }) => <ManageSchema schemaName={match.params.id} />}
+      />
+
+      <Route path="/menus" exact render={() => <ManageMenus />} />
+      <Route
+        path="/menu/:id"
+        render={({ match }) => <ManageMenu menuName={match.params.id} />}
       />
 
       <Route component={FourOhFour} />
