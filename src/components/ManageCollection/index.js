@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
 import { useCollection, useSchema } from "../../hooks/firestoreHooks";
 import { sortBy } from "../../utils/dataUtils";
@@ -48,6 +49,9 @@ const ManageCollection = ({ collectionName, filter }) => {
   ) : (
     <div>
       <h1>{schema.name}</h1>
+      <div>
+        <Link to={`/schemas/${collectionName}`}>Edit Schema</Link>
+      </div>
       <div>
         <Button onClick={() => addNew()}>New</Button>
       </div>

@@ -14,7 +14,7 @@ const Field = ({ data }) => {
   const [edit, setEdit] = useState(false);
   const firebase = useContext(FirebaseContext);
 
-  const { key, name, order, type } = fieldData;
+  const { key, lookup, name, order, type } = fieldData;
 
   const toggleEdit = () => setEdit(!edit);
 
@@ -104,16 +104,27 @@ const Field = ({ data }) => {
       </div>
       <div>
         {edit ? (
-          <select id="type" value={type} onChange={handleFieldChange}>
-            <option value=""></option>
-            <option value="datetime">DateTime</option>
-            <option value="lookup">Lookup</option>
-            <option value="menu">Menu</option>
-            <option value="text">Text</option>
-            <option value="number">Number</option>
-          </select>
+          <>
+            <select id="type" value={type} onChange={handleFieldChange}>
+              <option value=""></option>
+              <option value="datetime">DateTime</option>
+              <option value="lookup">Lookup</option>
+              <option value="menu">Menu</option>
+              <option value="text">Text</option>
+              <option value="number">Number</option>
+            </select>
+            <Input
+              type="text"
+              id="lookup"
+              value={lookup}
+              onChange={handleFieldChange}
+            />
+          </>
         ) : (
-          type
+          <>
+            {type}
+            {lookup}
+          </>
         )}
       </div>
       <div>
