@@ -3,6 +3,7 @@ import React from "react";
 import CollectionSelect from "./CollectionSelect";
 import MenuSelect from "./MenuSelect";
 import TextInput from "./TextInput";
+import PasswordInput from "./PasswordInput";
 import NumberInput from "./NumberInput";
 
 const Input = ({ lookup, type, ...rest }) => {
@@ -14,6 +15,9 @@ const Input = ({ lookup, type, ...rest }) => {
   }
   if (type === "number") {
     return <NumberInput {...rest} />;
+  }
+  if (type === "password") {
+    return <PasswordInput {...rest} />;
   }
 
   return <TextInput {...rest} />;
