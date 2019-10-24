@@ -1,4 +1,5 @@
 import React, { useContext, useState, useEffect } from "react";
+import { useHistory } from "react-router-dom";
 
 import { FirebaseContext } from "../../contexts/firebaseContext";
 import { useSchema } from "../../hooks/firestoreHooks";
@@ -9,6 +10,7 @@ const ManageSchema = ({ schemaName }) => {
   const [schema, schemaLoading] = useSchema(schemaName);
   const [workingSchema, setWorkingSchema] = useState({});
   const firebase = useContext(FirebaseContext);
+  const history = useHistory();
 
   useEffect(() => {
     if (schema && Object.keys(workingSchema).length === 0) {
@@ -65,6 +67,9 @@ const ManageSchema = ({ schemaName }) => {
         <Button onClick={saveSchemaDetails}>Save Details</Button>
       </div>
       <FieldsManager schemaName={schemaName} />
+      <div>
+        <Button onClick={() => history.push(`/${schemaName}`)}>Done</Button>
+      </div>
     </div>
   );
 };
