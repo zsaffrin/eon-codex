@@ -2,7 +2,7 @@ import React, { useContext, useState, useEffect } from "react";
 
 import { FirebaseContext } from "../../contexts/firebaseContext";
 import { useSchema } from "../../hooks/firestoreHooks";
-import { Input, Loading, VerticalList } from "../ui";
+import { Button, Input, Loading, VerticalList } from "../ui";
 import FieldsManager from "./FieldsManager";
 
 const ManageSchema = ({ schemaName }) => {
@@ -23,8 +23,7 @@ const ManageSchema = ({ schemaName }) => {
     });
   };
 
-  async function handleFormSubmit(e) {
-    e.preventDefault();
+  async function saveSchemaDetails() {
     try {
       const { id, ...rest } = workingSchema;
       const res = await firebase.updateDoc(`schemas/${id}`, rest);
@@ -61,7 +60,10 @@ const ManageSchema = ({ schemaName }) => {
   ) : (
     <div>
       <h1>Manage Schema</h1>
-      <VerticalList items={fields} />
+      <div>
+        <VerticalList items={fields} />
+        <Button onClick={saveSchemaDetails}>Save Details</Button>
+      </div>
       <FieldsManager schemaName={schemaName} />
     </div>
   );
