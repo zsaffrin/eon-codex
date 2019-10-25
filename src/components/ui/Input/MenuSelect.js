@@ -1,18 +1,22 @@
 import React from "react";
 import { string } from "prop-types";
 
-import { useDocument } from "../../../hooks/firestoreHooks";
+import { useCollection } from "../../../hooks/firestoreHooks";
 import Loading from "../Loading";
 import SelectInput from "./SelectInput";
 
 const MenuSelect = ({ menuName, ...rest }) => {
-  const [menu, menuLoading] = useDocument(`menus/${menuName}`);
+  const [menuItems, menuItemsLoading] = useCollection("menuItems", [
+    "menu",
+    "==",
+    menuName
+  ]);
 
-  const choices = menu
-    ? menu.options.map(({ key, label }) => ({ id: key, name: label }))
+  const choices = menuItems
+    ? menuItems.map(({ itemKey, name }) => ({ id: itemKey, name }))
     : [];
 
-  return menuLoading ? (
+  return menuItemsLoading ? (
     <Loading />
   ) : (
     <SelectInput choices={choices} {...rest} />

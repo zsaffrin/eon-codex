@@ -1,18 +1,21 @@
 import React from "react";
 
-import { useDocument } from "../../../hooks/firestoreHooks";
+import { useCollection } from "../../../hooks/firestoreHooks";
 import Loading from "../Loading";
 
 const MenuCell = ({ menu, fieldValue }) => {
-  const [record, recordLoading] = useDocument(`menus/${menu}`);
-  const choiceEntry = record
-    ? record.options.find(option => option.key === fieldValue)
-    : {};
+  const [menuItems, menuItemsLoading] = useCollection("menuItems", [
+    "menu",
+    "==",
+    menu
+  ]);
+  const chosenItem =
+    menuItems && menuItems.find(item => item.itemKey === fieldValue);
 
-  return recordLoading || !choiceEntry ? (
+  return menuItemsLoading || !chosenItem ? (
     <Loading />
   ) : (
-    <div>{choiceEntry.label}</div>
+    <div>{chosenItem.name}</div>
   );
 };
 
