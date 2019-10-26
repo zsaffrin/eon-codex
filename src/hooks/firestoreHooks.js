@@ -45,3 +45,12 @@ export function useMenu(menuName) {
   const [menu, menuLoading, menuError] = useDocument(`menus/${menuName}`);
   return [menu, menuLoading, menuError];
 }
+
+export function useMenuItems(menuName) {
+  const [menuItems, menuItemsLoading, menuItemsError] = useCollection(
+    "menuItems",
+    ["menu", "==", menuName]
+  );
+
+  return [menuItems, menuItemsLoading, menuItemsError];
+}
