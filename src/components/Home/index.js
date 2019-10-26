@@ -12,7 +12,7 @@ const directLinks = [
   { target: "/places", label: "Places" }
 ];
 
-const Home = ({ history }) => {
+const Home = () => {
   const firebase = useContext(FirebaseContext);
   const [user, userLoaded] = useCurrentUser(firebase);
 
