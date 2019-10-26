@@ -1,6 +1,9 @@
-import { useState, useEffect } from "react";
+import { useContext, useState, useEffect } from "react";
 
-export function useCurrentUser(firebase) {
+import { FirebaseContext } from "../contexts/firebaseContext";
+
+export function useCurrentUser() {
+  const firebase = useContext(FirebaseContext);
   const [user, setUser] = useState(null);
   const [loaded, setLoaded] = useState(false);
 

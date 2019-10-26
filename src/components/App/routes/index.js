@@ -8,6 +8,7 @@ import SettingsRoutes from "./SettingsRoutes";
 // import { ManageMenus, ManageMenu } from "../ManageMenus";
 // import ManageSchema from "../ManageSchema";
 import FourOhFour from "../../404";
+import PrivateRoute from "./PrivateRoute";
 
 const AppRoutes = () => {
   return (
@@ -15,9 +16,9 @@ const AppRoutes = () => {
       <Route path="/" exact component={Home} />
       <Route path="/login" component={Login} />
 
-      <Route path="/settings">
+      <PrivateRoute path="/settings">
         <SettingsRoutes />
-      </Route>
+      </PrivateRoute>
 
       <Route component={FourOhFour} />
     </Switch>
