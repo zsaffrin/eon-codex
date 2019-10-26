@@ -6,6 +6,7 @@ import TextInput from "./TextInput";
 import PasswordInput from "./PasswordInput";
 import NumberInput from "./NumberInput";
 import DatetimeInput from "./DatetimeInput";
+import LongTextInput from "./LongTextInput";
 
 const Input = ({ lookup, type, ...rest }) => {
   if (type === "lookup") {
@@ -22,6 +23,9 @@ const Input = ({ lookup, type, ...rest }) => {
   }
   if (type === "datetime") {
     return <DatetimeInput {...rest} />;
+  }
+  if (type === "longtext") {
+    return <LongTextInput {...rest} />;
   }
 
   return <TextInput {...rest} />;

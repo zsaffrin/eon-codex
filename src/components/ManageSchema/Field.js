@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import styled from "styled-components";
 
 import { FirebaseContext } from "../../contexts/firebaseContext";
+import { useMenuItems } from "../../hooks/firestoreHooks";
 import { Button, Input } from "../ui";
 
 const StyledField = styled.div`
@@ -12,6 +13,7 @@ const StyledField = styled.div`
 const Field = ({ data }) => {
   const [fieldData, setFieldData] = useState(data);
   const [edit, setEdit] = useState(false);
+  const [fieldTypes, fieldTypesLoading] = useMenuItems("fieldTypes");
   const firebase = useContext(FirebaseContext);
 
   const { key, lookup, name, order, type } = fieldData;
@@ -104,22 +106,27 @@ const Field = ({ data }) => {
       </div>
       <div>
         {edit ? (
-          <>
-            <select id="type" value={type} onChange={handleFieldChange}>
-              <option value=""></option>
-              <option value="datetime">DateTime</option>
-              <option value="lookup">Lookup</option>
-              <option value="menu">Menu</option>
-              <option value="text">Text</option>
-              <option value="number">Number</option>
-            </select>
-            <Input
-              type="text"
-              id="lookup"
-              value={lookup}
-              onChange={handleFieldChange}
-            />
-          </>
+          !fieldTypesLoading && (
+            <>
+              <select id="type" value={type} onChange={handleFieldChange}>
+                <option value=""></option>
+                {fieldTypes.map(({ itemKey, name }) => (
+                  <option key={itemKey} value={itemKey}>
+                    {name}
+                  </option>
+                ))}
+              </select>
+              {type === "menu" ||
+                (type === "lookup" && (
+                  <Input
+                    type="text"
+                    id="lookup"
+                    value={lookup}
+                    onChange={handleFieldChange}
+                  />
+                ))}
+            </>
+          )
         ) : (
           <>
             {type}
