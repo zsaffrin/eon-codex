@@ -5,6 +5,7 @@ import MenuSelect from "./MenuSelect";
 import TextInput from "./TextInput";
 import PasswordInput from "./PasswordInput";
 import NumberInput from "./NumberInput";
+import DatetimeInput from "./DatetimeInput";
 
 const Input = ({ lookup, type, ...rest }) => {
   if (type === "lookup") {
@@ -18,6 +19,9 @@ const Input = ({ lookup, type, ...rest }) => {
   }
   if (type === "password") {
     return <PasswordInput {...rest} />;
+  }
+  if (type === "datetime") {
+    return <DatetimeInput {...rest} />;
   }
 
   return <TextInput {...rest} />;

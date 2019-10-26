@@ -6,7 +6,7 @@ import { useCurrentUser } from "../../hooks/authHooks";
 import { Loading } from "../ui";
 
 const directLinks = [
-  { target: "/pcs", label: "Player Characters" },
+  { target: "/playerCharacters", label: "Player Characters" },
   { target: "/sessions", label: "Sessions" },
   { target: "/gamingLocations", label: "Gaming Locations" },
   { target: "/places", label: "Places" }

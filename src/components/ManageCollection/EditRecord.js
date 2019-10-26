@@ -9,11 +9,18 @@ const EditRecord = ({ collection, close, fields, existingItem }) => {
   const firebase = useContext(FirebaseContext);
 
   const handleFieldChange = e => {
-    setItem({
-      ...item,
-      [e.target.id]:
-        e.target.type === "number" ? Number(e.target.value) : e.target.value
-    });
+    if (e.isDate) {
+      setItem({
+        ...item,
+        [e.id]: e.value
+      });
+    } else {
+      setItem({
+        ...item,
+        [e.target.id]:
+          e.target.type === "number" ? Number(e.target.value) : e.target.value
+      });
+    }
   };
 
   async function handleFormSubmit(e) {
