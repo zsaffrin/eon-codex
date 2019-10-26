@@ -1,10 +1,12 @@
 import React from "react";
+import { useParams } from "react-router-dom";
 
-import { useMenu } from "../../hooks/firestoreHooks";
-import { Loading } from "../ui";
+import { useMenu } from "../../../hooks/firestoreHooks";
+import { Loading } from "../../ui";
 import ManageMenuItems from "./ManageMenuItems";
 
-const ManageMenu = ({ menuName }) => {
+const ManageMenu = () => {
+  const { menuName } = useParams();
   const [menu, menuLoading] = useMenu(menuName);
 
   return menuLoading ? (

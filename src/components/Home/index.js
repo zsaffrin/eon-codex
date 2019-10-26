@@ -23,22 +23,7 @@ const Home = ({ history }) => {
       <div>Logged in as</div>
       <h1>{user.name}</h1>
       <div>
-        <h2>Collections</h2>
-        <ul>
-          {directLinks.map(({ target, label }) => (
-            <li key={label}>
-              <Link to={target}>{label}</Link>
-            </li>
-          ))}
-        </ul>
-      </div>
-      <div>
-        <h2>Settings</h2>
-        <ul>
-          <li>
-            <Link to="/menus">Menus</Link>
-          </li>
-        </ul>
+        <Link to="/settings">Settings</Link>
       </div>
     </div>
   ) : (

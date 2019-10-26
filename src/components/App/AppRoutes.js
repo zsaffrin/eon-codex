@@ -3,6 +3,7 @@ import { Route, Switch } from "react-router-dom";
 
 import Home from "../Home";
 import Login from "../Login";
+import { SettingsSection } from "./sections";
 import ManageCollection from "../ManageCollection";
 import { ManageMenus, ManageMenu } from "../ManageMenus";
 import ManageSchema from "../ManageSchema";
@@ -13,6 +14,10 @@ const AppRoutes = () => {
     <Switch>
       <Route path="/" exact component={Home} />
       <Route path="/login" component={Login} />
+
+      <Route path="/settings">
+        <SettingsSection />
+      </Route>
 
       <Route
         path="/playerCharacters"

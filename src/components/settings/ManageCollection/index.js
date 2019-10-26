@@ -1,12 +1,14 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
-import { useCollection, useSchema } from "../../hooks/firestoreHooks";
-import { sortBy } from "../../utils/dataUtils";
-import { Button, Loading, Table } from "../ui";
+import { useCollection, useSchema } from "../../../hooks/firestoreHooks";
+import { sortBy } from "../../../utils/dataUtils";
+import { Button, Loading, Table } from "../../ui";
 import EditRecord from "./EditRecord";
 
-const ManageCollection = ({ collectionName, filter }) => {
+const ManageCollection = ({ filter }) => {
+  const { collectionName } = useParams();
+
   const [collection, collectionLoading] = useCollection(
     collectionName,
     filter ? [filter.key, "==", filter.value] : null
@@ -50,7 +52,7 @@ const ManageCollection = ({ collectionName, filter }) => {
     <div>
       <h1>{schema.name}</h1>
       <div>
-        <Link to={`/schemas/${collectionName}`}>Edit Schema</Link>
+        <Link to={`/settings/schema/${collectionName}`}>Edit Schema</Link>
       </div>
       <div>
         <Button onClick={() => addNew()}>New</Button>

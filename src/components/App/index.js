@@ -11,7 +11,7 @@ import { Loading } from "../ui";
 // Page Components
 import Header from "../Header";
 
-import AppRoutes from "./AppRoutes";
+import AppRoutes from "./routes";
 
 const AppLayout = styled.div`
   display: grid;

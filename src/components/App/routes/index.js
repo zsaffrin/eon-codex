@@ -1,0 +1,27 @@
+import React from "react";
+import { Route, Switch } from "react-router-dom";
+
+import Home from "../../Home";
+import Login from "../../Login";
+import SettingsRoutes from "./SettingsRoutes";
+// import ManageCollection from "../ManageCollection";
+// import { ManageMenus, ManageMenu } from "../ManageMenus";
+// import ManageSchema from "../ManageSchema";
+import FourOhFour from "../../404";
+
+const AppRoutes = () => {
+  return (
+    <Switch>
+      <Route path="/" exact component={Home} />
+      <Route path="/login" component={Login} />
+
+      <Route path="/settings">
+        <SettingsRoutes />
+      </Route>
+
+      <Route component={FourOhFour} />
+    </Switch>
+  );
+};
+
+export default AppRoutes;

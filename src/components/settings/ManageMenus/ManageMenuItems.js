@@ -1,9 +1,9 @@
 import React, { useContext } from "react";
 import styled from "styled-components";
 
-import { FirebaseContext } from "../../contexts/firebaseContext";
-import { useCollection } from "../../hooks/firestoreHooks";
-import { Button, Loading } from "../ui";
+import { FirebaseContext } from "../../../contexts/firebaseContext";
+import { useCollection } from "../../../hooks/firestoreHooks";
+import { Button, Loading } from "../../ui";
 import MenuItem from "./MenuItem";
 
 const columns = [

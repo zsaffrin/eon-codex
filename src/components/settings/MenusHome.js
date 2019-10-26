@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { useCollection } from "../../hooks/firestoreHooks";
 import { Loading } from "../ui";
 
-const ManageMenus = () => {
+const MenusHome = () => {
   const [menus, menusLoading] = useCollection("menus");
 
   return menusLoading ? (
@@ -15,7 +15,7 @@ const ManageMenus = () => {
       <ul>
         {menus.map(({ id, name }) => (
           <li key={id}>
-            <Link to={`/menu/${id}`}>{name}</Link>
+            <Link to={`/settings/menu/${id}`}>{name}</Link>
           </li>
         ))}
       </ul>
@@ -23,4 +23,4 @@ const ManageMenus = () => {
   );
 };
 
-export default ManageMenus;
+export default MenusHome;

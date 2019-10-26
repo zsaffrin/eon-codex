@@ -1,9 +1,9 @@
 import React, { useContext, useState } from "react";
 import styled from "styled-components";
 
-import { FirebaseContext } from "../../contexts/firebaseContext";
-import { useMenuItems } from "../../hooks/firestoreHooks";
-import { Button, Input } from "../ui";
+import { FirebaseContext } from "../../../contexts/firebaseContext";
+import { useMenuItems } from "../../../hooks/firestoreHooks";
+import { Button, Input } from "../../ui";
 
 const StyledField = styled.div`
   display: grid;

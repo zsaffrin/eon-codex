@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 
-import { FirebaseContext } from "../../contexts/firebaseContext";
-import { Button, Input, VerticalList } from "../ui";
+import { FirebaseContext } from "../../../contexts/firebaseContext";
+import { Button, Input, VerticalList } from "../../ui";
 
 const EditRecord = ({ collection, close, fields, existingItem }) => {
   const [item, setItem] = useState(existingItem || {});

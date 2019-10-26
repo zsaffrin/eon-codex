@@ -1,12 +1,13 @@
 import React, { useContext, useState, useEffect } from "react";
-import { useHistory } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 
-import { FirebaseContext } from "../../contexts/firebaseContext";
-import { useSchema } from "../../hooks/firestoreHooks";
-import { Button, Input, Loading, VerticalList } from "../ui";
+import { FirebaseContext } from "../../../contexts/firebaseContext";
+import { useSchema } from "../../../hooks/firestoreHooks";
+import { Button, Input, Loading, VerticalList } from "../../ui";
 import FieldsManager from "./FieldsManager";
 
-const ManageSchema = ({ schemaName }) => {
+const ManageSchema = () => {
+  const { schemaName } = useParams();
   const [schema, schemaLoading] = useSchema(schemaName);
   const [workingSchema, setWorkingSchema] = useState({});
   const firebase = useContext(FirebaseContext);
