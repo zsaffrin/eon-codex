@@ -15,7 +15,7 @@ const AppRoutes = () => {
       <Route path="/login" component={Login} />
 
       <Route
-        path="/pcs"
+        path="/playerCharacters"
         render={() => <ManageCollection collectionName="playerCharacters" />}
       />
       <Route
