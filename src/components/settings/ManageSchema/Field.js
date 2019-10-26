@@ -52,7 +52,7 @@ const Field = ({ data }) => {
   async function deleteField() {
     toggleEdit();
     try {
-      const { id, ...rest } = fieldData;
+      const { id } = fieldData;
       const res = await firebase.db.doc(`schemaFields/${id}`).delete();
       if (res.status === "success") {
       }

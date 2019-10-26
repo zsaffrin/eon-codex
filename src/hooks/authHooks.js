@@ -33,7 +33,7 @@ export function useCurrentUser() {
     return () => {
       unsubscribe();
     };
-  }, []);
+  }, [firebase]);
 
   return [user, loaded];
 }

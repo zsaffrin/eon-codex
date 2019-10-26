@@ -50,7 +50,7 @@ const MenuItem = ({ item }) => {
   async function deleteItem() {
     toggleEdit();
     try {
-      const { id, ...rest } = menuItem;
+      const { id } = menuItem;
       const res = await firebase.db.doc(`menuItems/${id}`).delete();
       if (res.status === "success") {
       }

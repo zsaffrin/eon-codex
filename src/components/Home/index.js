@@ -5,13 +5,6 @@ import { FirebaseContext } from "../../contexts/firebaseContext";
 import { useCurrentUser } from "../../hooks/authHooks";
 import { Loading } from "../ui";
 
-const directLinks = [
-  { target: "/playerCharacters", label: "Player Characters" },
-  { target: "/sessions", label: "Sessions" },
-  { target: "/gamingLocations", label: "Gaming Locations" },
-  { target: "/places", label: "Places" }
-];
-
 const Home = () => {
   const firebase = useContext(FirebaseContext);
   const [user, userLoaded] = useCurrentUser(firebase);

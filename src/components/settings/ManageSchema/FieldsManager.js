@@ -1,10 +1,10 @@
-import React, { Fragment, useContext, useEffect, useState } from "react";
+import React, { useContext } from "react";
 import { arrayOf, shape, string } from "prop-types";
 import styled from "styled-components";
 
 import { FirebaseContext } from "../../../contexts/firebaseContext";
 import { useCollection } from "../../../hooks/firestoreHooks";
-import { Button, Input, Loading } from "../../ui";
+import { Button, Loading } from "../../ui";
 import { sortBy } from "../../../utils/dataUtils";
 import Field from "./Field";
 
