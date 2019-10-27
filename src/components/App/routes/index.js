@@ -14,13 +14,13 @@ const AppRoutes = () => {
       <Route path="/" exact component={Home} />
       <Route path="/login" component={Login} />
 
-      <PrivateRoute path="/settings">
+      <PrivateRoute path="/settings" level="editor">
         <SettingsRoutes />
       </PrivateRoute>
 
-      <Route path="/info">
+      <PrivateRoute path="/info" level="loggedIn">
         <InfoRoutes />
-      </Route>
+      </PrivateRoute>
 
       <Route component={FourOhFour} />
     </Switch>
