@@ -22,6 +22,9 @@ const Title = styled(Link)`
 const Actions = styled.div`
   display: flex;
 `;
+const PlainLink = styled(Link)`
+  text-decoration: none;
+`;
 
 const Header = () => {
   const [user, userLoaded] = useCurrentUser();
@@ -32,7 +35,7 @@ const Header = () => {
       <Actions>
         {userLoaded && user && user.canEdit && (
           <div>
-            <Link to="/settings">⚙︎</Link>
+            <PlainLink to="/settings">⚙︎</PlainLink>
           </div>
         )}
         <Identity />
