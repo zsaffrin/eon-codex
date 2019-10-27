@@ -5,6 +5,8 @@ import { FirebaseContext } from "../../contexts/firebaseContext";
 import { useCurrentUser } from "../../hooks/authHooks";
 import { Loading } from "../ui";
 
+import InternalHome from "./InternalHome";
+
 const Home = () => {
   const firebase = useContext(FirebaseContext);
   const [user, userLoaded] = useCurrentUser(firebase);
@@ -12,13 +14,7 @@ const Home = () => {
   return !userLoaded ? (
     <Loading />
   ) : user ? (
-    <div>
-      <div>Logged in as</div>
-      <h1>{user.name}</h1>
-      <div>
-        <Link to="/settings">Settings</Link>
-      </div>
-    </div>
+    <InternalHome />
   ) : (
     <div>
       <h1>Welcome to the Eon Codex</h1>
