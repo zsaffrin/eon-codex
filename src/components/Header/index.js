@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
+import { useCurrentUser } from "../../hooks/authHooks";
 import Identity from "./Identity";
 
 const StyledHeader = styled.header`
@@ -23,10 +24,17 @@ const Actions = styled.div`
 `;
 
 const Header = () => {
+  const [user, userLoaded] = useCurrentUser();
+
   return (
     <StyledHeader>
       <Title to="/">Eon Codex</Title>
       <Actions>
+        {userLoaded && user && user.canEdit && (
+          <div>
+            <Link to="/settings">⚙︎</Link>
+          </div>
+        )}
         <Identity />
       </Actions>
     </StyledHeader>
