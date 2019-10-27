@@ -1,13 +1,18 @@
 import React, { useContext } from "react";
-import { withRouter } from "react-router-dom";
+import { useHistory, withRouter } from "react-router-dom";
 
 import { useCurrentUser } from "../../hooks/authHooks";
 import { FirebaseContext } from "../../contexts/firebaseContext";
 import { Button, Loading } from "../ui";
 
-const Identity = ({ history }) => {
+const Identity = () => {
   const firebase = useContext(FirebaseContext);
   const [user, userLoaded] = useCurrentUser(firebase);
+  const history = useHistory();
+
+  const handleLogout = () => {
+    firebase.logout();
+  };
 
   return !userLoaded ? (
     <Loading />
@@ -15,7 +20,7 @@ const Identity = ({ history }) => {
     <>
       <div>{user.name}</div>
       <div>
-        <Button onClick={() => firebase.logout()}>Log Out</Button>
+        <Button onClick={handleLogout}>Log Out</Button>
       </div>
     </>
   ) : (
