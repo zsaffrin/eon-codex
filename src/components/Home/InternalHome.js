@@ -1,14 +1,29 @@
 import React from "react";
 import styled from "styled-components";
 
-const StyledPage = styled.div`
-  background: url("https://res.cloudinary.com/dbg0v7696/image/upload/v1572134405/eon-codex/Hive_Primus_exterior.png");
-  background-size: cover;
-  color: #fff;
-`;
+import { LinkTile, Page } from "../ui";
+
+const LinkGrid = styled.div(({ theme }) => {
+  const { space } = theme;
+  return `
+    display: grid;
+    grid-gap: ${space.md};
+    grid-auto-flow: column;
+  `;
+});
 
 const InternalHome = () => {
-  return <StyledPage>Eon Codex</StyledPage>;
+  return (
+    <Page>
+      <LinkGrid>
+        <div>
+          <LinkTile title="Info" to="/info">
+            <div>People, places, things</div>
+          </LinkTile>
+        </div>
+      </LinkGrid>
+    </Page>
+  );
 };
 
 export default InternalHome;

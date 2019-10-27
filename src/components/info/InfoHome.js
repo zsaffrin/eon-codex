@@ -1,18 +1,16 @@
 import React from "react";
 import { Link, useRouteMatch } from "react-router-dom";
 
+import { LinkTile, Page } from "../ui";
+
 const InfoHome = () => {
   const { url } = useRouteMatch();
 
   return (
-    <div>
+    <Page>
       <h1>Info</h1>
-      <ul>
-        <li>
-          <Link to={`${url}/places`}>Places</Link>
-        </li>
-      </ul>
-    </div>
+      <LinkTile to={`${url}/places`} title="Places" />
+    </Page>
   );
 };
 

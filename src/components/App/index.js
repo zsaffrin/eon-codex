@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import styled from "styled-components";
+import styled, { ThemeProvider } from "styled-components";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 
 // Firebase context provider
@@ -11,7 +11,11 @@ import { Loading } from "../ui";
 // Page Components
 import Header from "../Header";
 
+// Routes
 import AppRoutes from "./routes";
+
+// Themes
+import { defaultTheme } from "../../themes";
 
 const AppLayout = styled.div`
   display: grid;
@@ -25,13 +29,15 @@ const App = () => {
   return !firebase ? (
     <Loading />
   ) : (
-    <AppLayout>
-      <Router>
-        <Route path="*" component={Header} />
+    <ThemeProvider theme={defaultTheme}>
+      <AppLayout>
+        <Router>
+          <Route path="*" component={Header} />
 
-        <AppRoutes />
-      </Router>
-    </AppLayout>
+          <AppRoutes />
+        </Router>
+      </AppLayout>
+    </ThemeProvider>
   );
 };
 

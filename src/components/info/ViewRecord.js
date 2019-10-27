@@ -2,7 +2,7 @@ import React from "react";
 import { useParams } from "react-router-dom";
 
 import { useDocument } from "../../hooks/firestoreHooks";
-import { Loading } from "../ui";
+import { Loading, Page } from "../ui";
 
 const ViewRecord = () => {
   const { collectionName, recordId } = useParams();
@@ -13,10 +13,10 @@ const ViewRecord = () => {
   return recordLoading ? (
     <Loading />
   ) : (
-    <div>
+    <Page>
       <h1>{record.name}</h1>
       <div>{record.shortDesc}</div>
-    </div>
+    </Page>
   );
 };
 

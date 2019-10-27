@@ -2,7 +2,7 @@ import React from "react";
 import { Link, useParams } from "react-router-dom";
 
 import { useCollection, useSchema } from "../../hooks/firestoreHooks";
-import { Loading } from "../ui";
+import { Loading, Page } from "../ui";
 
 const ViewCollection = () => {
   const { collectionName } = useParams();
@@ -12,7 +12,7 @@ const ViewCollection = () => {
   return schemaLoading || collectionLoading ? (
     <Loading />
   ) : (
-    <div>
+    <Page>
       <h1>{schema.name}</h1>
       <ul>
         {collection.map(({ id, name }) => (
@@ -21,7 +21,7 @@ const ViewCollection = () => {
           </li>
         ))}
       </ul>
-    </div>
+    </Page>
   );
 };
 
