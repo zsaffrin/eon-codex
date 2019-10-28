@@ -15,7 +15,7 @@ const DatetimeInput = ({ id, value, onChange }) => {
   return (
     <DatePicker
       id={id}
-      selected={value.toDate()}
+      selected={value && value.toDate ? value.toDate() : value}
       dateFormat="MMMM d, yyyy"
       onChange={handleChange}
     />

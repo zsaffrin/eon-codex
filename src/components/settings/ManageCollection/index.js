@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link, useParams, useLocation } from "react-router-dom";
 
 import { useCollection, useSchema } from "../../../hooks/firestoreHooks";
 import { sortBy } from "../../../utils/dataUtils";
@@ -8,6 +8,7 @@ import EditRecord from "./EditRecord";
 
 const ManageCollection = ({ filter }) => {
   const { collectionName } = useParams();
+  const location = useLocation();
 
   const [collection, collectionLoading] = useCollection(
     collectionName,
@@ -21,6 +22,13 @@ const ManageCollection = ({ filter }) => {
   ]);
   const [editMode, setEditMode] = useState(false);
   const [editItem, setEditItem] = useState(null);
+  const [sortField, setSortField] = useState("id");
+
+  useEffect(() => {
+    if (location.state.sortKey && location.state.sortKey !== sortField) {
+      setSortField(location.state.sortKey);
+    }
+  }, [location]);
 
   const closeEdit = () => {
     setEditItem(null);
@@ -61,7 +69,7 @@ const ManageCollection = ({ filter }) => {
       {collection && schema ? (
         <Table
           columns={sortBy(fields, "order")}
-          entries={collection}
+          entries={sortBy(collection, sortField)}
           actions={{ edit }}
         />
       ) : (

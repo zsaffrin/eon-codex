@@ -1,16 +1,35 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
+import { Page } from "../ui";
+
 const CollectionsHome = () => {
   return (
-    <div>
+    <Page>
       <h1>Collections</h1>
       <ul>
         <li>
-          <Link to="/settings/collection/places">Places</Link>
+          <Link
+            to={{
+              pathname: "/settings/collection/places",
+              state: { sortKey: "name" }
+            }}
+          >
+            Places
+          </Link>
+        </li>
+        <li>
+          <Link
+            to={{
+              pathname: "/settings/collection/sessions",
+              state: { sortKey: "date" }
+            }}
+          >
+            Sessions
+          </Link>
         </li>
       </ul>
-    </div>
+    </Page>
   );
 };
 

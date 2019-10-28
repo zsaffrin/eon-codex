@@ -5,6 +5,7 @@ import Home from "../../Home";
 import Login from "../../Login";
 import InfoRoutes from "./InfoRoutes";
 import SettingsRoutes from "./SettingsRoutes";
+import SessionRoutes from "./SessionRoutes";
 import FourOhFour from "../../404";
 import PrivateRoute from "./PrivateRoute";
 
@@ -20,6 +21,10 @@ const AppRoutes = () => {
 
       <PrivateRoute path="/info" level="loggedIn">
         <InfoRoutes />
+      </PrivateRoute>
+
+      <PrivateRoute path="/sessions" level="loggedIn">
+        <SessionRoutes />
       </PrivateRoute>
 
       <Route component={FourOhFour} />

@@ -8,7 +8,7 @@ const LinkGrid = styled.div(({ theme }) => {
   return `
     display: grid;
     grid-gap: ${space.md};
-    grid-auto-flow: column;
+    grid-template-columns: 1fr;
   `;
 });
 
@@ -19,6 +19,11 @@ const InternalHome = () => {
         <div>
           <LinkTile title="Info" to="/info">
             <div>People, places, things</div>
+          </LinkTile>
+        </div>
+        <div>
+          <LinkTile title="Sessions" to="/sessions">
+            <div>Gatherings of the rolls</div>
           </LinkTile>
         </div>
       </LinkGrid>
