@@ -3,7 +3,7 @@ import { Link, useParams, useLocation } from "react-router-dom";
 
 import { useCollection, useSchema } from "../../../hooks/firestoreHooks";
 import { sortBy } from "../../../utils/dataUtils";
-import { Button, Loading, Table } from "../../ui";
+import { Button, Loading, Page, Table } from "../../ui";
 import EditRecord from "./EditRecord";
 
 const ManageCollection = ({ filter }) => {
@@ -25,7 +25,11 @@ const ManageCollection = ({ filter }) => {
   const [sortField, setSortField] = useState("id");
 
   useEffect(() => {
-    if (location.state.sortKey && location.state.sortKey !== sortField) {
+    if (
+      location.state &&
+      location.state.sortKey &&
+      location.state.sortKey !== sortField
+    ) {
       setSortField(location.state.sortKey);
     }
   }, [location]);
@@ -57,7 +61,7 @@ const ManageCollection = ({ filter }) => {
   return collectionLoading || schemaLoading || fieldsLoading ? (
     <Loading />
   ) : (
-    <div>
+    <Page fullWidth>
       <h1>{schema.name}</h1>
       <div>
         <Link to={`/settings/schema/${collectionName}`}>Edit Schema</Link>
@@ -75,7 +79,7 @@ const ManageCollection = ({ filter }) => {
       ) : (
         <div>No data</div>
       )}
-    </div>
+    </Page>
   );
 };
 
