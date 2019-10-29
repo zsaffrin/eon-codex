@@ -26,6 +26,11 @@ const InternalHome = () => {
             <div>Gatherings of the rolls</div>
           </LinkTile>
         </div>
+        <div>
+          <LinkTile title="PCs" to="/info/playerCharacters">
+            <div>Adventurous folk</div>
+          </LinkTile>
+        </div>
       </LinkGrid>
     </Page>
   );
