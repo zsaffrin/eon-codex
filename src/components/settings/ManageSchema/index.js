@@ -3,7 +3,7 @@ import { useHistory, useParams } from "react-router-dom";
 
 import { FirebaseContext } from "../../../contexts/firebaseContext";
 import { useSchema } from "../../../hooks/firestoreHooks";
-import { Button, Input, Loading, VerticalList } from "../../ui";
+import { Button, Input, Loading, Page, VerticalList } from "../../ui";
 import FieldsManager from "./FieldsManager";
 
 const ManageSchema = () => {
@@ -61,7 +61,7 @@ const ManageSchema = () => {
   return schemaLoading ? (
     <Loading />
   ) : (
-    <div>
+    <Page fullWidth>
       <h1>Manage Schema</h1>
       <div>
         <VerticalList items={fields} />
@@ -69,9 +69,13 @@ const ManageSchema = () => {
       </div>
       <FieldsManager schemaName={schemaName} />
       <div>
-        <Button onClick={() => history.push(`/${schemaName}`)}>Done</Button>
+        <Button
+          onClick={() => history.push(`/settings/collection/${schemaName}`)}
+        >
+          Done
+        </Button>
       </div>
-    </div>
+    </Page>
   );
 };
 

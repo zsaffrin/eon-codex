@@ -1,11 +1,13 @@
 import React from "react";
 import { Link, useRouteMatch } from "react-router-dom";
 
+import { Page } from "../ui";
+
 const SettingsHome = () => {
   const { url } = useRouteMatch();
 
   return (
-    <div>
+    <Page>
       <h1>Settings</h1>
       <ul>
         <li>
@@ -15,7 +17,7 @@ const SettingsHome = () => {
           <Link to={`${url}/menus`}>Menus</Link>
         </li>
       </ul>
-    </div>
+    </Page>
   );
 };
 

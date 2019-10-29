@@ -2,7 +2,7 @@ import React from "react";
 import { Link, useRouteMatch } from "react-router-dom";
 
 import { useCollection } from "../../hooks/firestoreHooks";
-import { Loading } from "../ui";
+import { Loading, Page } from "../ui";
 import { sortBy } from "../../utils/dataUtils";
 import { formatDate } from "../../utils/dateUtils";
 
@@ -12,7 +12,7 @@ const SessionsHome = () => {
   return collectionLoading ? (
     <Loading />
   ) : (
-    <div>
+    <Page>
       <h1>Sessions</h1>
       <ul>
         {sortBy(collection, "date").map(({ id, date, location }) => (
@@ -21,7 +21,7 @@ const SessionsHome = () => {
           </li>
         ))}
       </ul>
-    </div>
+    </Page>
   );
 };
 

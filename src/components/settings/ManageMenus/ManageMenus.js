@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 import { useCollection } from "../../../hooks/firestoreHooks";
-import { Loading } from "../../ui";
+import { Loading, Page } from "../../ui";
 
 const ManageMenus = () => {
   const [menus, menusLoading] = useCollection("menus");
@@ -10,7 +10,7 @@ const ManageMenus = () => {
   return menusLoading ? (
     <Loading />
   ) : (
-    <div>
+    <Page>
       <h1>Menus</h1>
       <ul>
         {menus.map(({ id, name }) => (
@@ -19,7 +19,7 @@ const ManageMenus = () => {
           </li>
         ))}
       </ul>
-    </div>
+    </Page>
   );
 };
 

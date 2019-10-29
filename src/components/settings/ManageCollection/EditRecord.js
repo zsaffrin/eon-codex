@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 
 import { FirebaseContext } from "../../../contexts/firebaseContext";
-import { Button, Input, VerticalList } from "../../ui";
+import { Button, Input, Page, VerticalList } from "../../ui";
 
 const EditRecord = ({ collection, close, fields, existingItem }) => {
   const [item, setItem] = useState(existingItem || {});
@@ -56,7 +56,7 @@ const EditRecord = ({ collection, close, fields, existingItem }) => {
   }
 
   return (
-    <div>
+    <Page fullWidth>
       <h1>Edit {collection} Record</h1>
       {message && <div>{message}</div>}
       <form onSubmit={handleFormSubmit}>
@@ -82,7 +82,7 @@ const EditRecord = ({ collection, close, fields, existingItem }) => {
         </Button>
         {existingItem && <Button onClick={deleteItem}>Delete</Button>}
       </div>
-    </div>
+    </Page>
   );
 };
 
