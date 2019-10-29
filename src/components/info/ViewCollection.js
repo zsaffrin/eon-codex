@@ -3,6 +3,7 @@ import { Link, useParams } from "react-router-dom";
 
 import { useCollection, useSchema } from "../../hooks/firestoreHooks";
 import { Loading, Page } from "../ui";
+import { sortBy } from "../../utils/dataUtils";
 
 const ViewCollection = () => {
   const { collectionName } = useParams();
@@ -15,7 +16,7 @@ const ViewCollection = () => {
     <Page>
       <h1>{schema.name}</h1>
       <ul>
-        {collection.map(({ id, name }) => (
+        {sortBy(collection, "name").map(({ id, name }) => (
           <li key={id}>
             <Link to={`${collectionName}/${id}`}>{name}</Link>
           </li>
