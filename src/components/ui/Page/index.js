@@ -8,8 +8,18 @@ const StyledPage = styled.div(({ theme }) => {
   `;
 });
 
-const Page = ({ children }) => {
-  return <StyledPage>{children}</StyledPage>;
+const CenteredContainer = styled.div`
+  max-width: 48em;
+  margin-left: auto;
+  margin-right: auto;
+`;
+
+const Page = ({ children, fullWidth }) => {
+  return (
+    <StyledPage>
+      {fullWidth ? children : <CenteredContainer>{children}</CenteredContainer>}
+    </StyledPage>
+  );
 };
 
 export default Page;
