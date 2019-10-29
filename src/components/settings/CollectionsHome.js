@@ -28,6 +28,16 @@ const CollectionsHome = () => {
             Sessions
           </Link>
         </li>
+        <li>
+          <Link
+            to={{
+              pathname: "/settings/collection/playerCharacters",
+              state: { sortKey: "name" }
+            }}
+          >
+            PCs
+          </Link>
+        </li>
       </ul>
     </Page>
   );
