@@ -9,6 +9,7 @@ const StyledInput = styled.input(({ theme }) => {
     padding: 0.5em;
     font-size: 0.9em;
     width: 100%;
+    max-width: 18em;
   `;
 });
 
