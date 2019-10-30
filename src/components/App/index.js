@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import styled, { ThemeProvider } from "styled-components";
+import styled, { createGlobalStyle, ThemeProvider } from "styled-components";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 
 // Firebase context provider
@@ -17,6 +17,11 @@ import AppRoutes from "./routes";
 // Themes
 import { defaultTheme } from "../../themes";
 
+const GlobalStyle = createGlobalStyle`
+  html {box-sizing: border-box;}
+  *, *:before, *:after { box-sizing: inherit; }
+`;
+
 const AppLayout = styled.div`
   display: grid;
   grid-template-rows: auto 1fr;
@@ -31,6 +36,7 @@ const App = () => {
   ) : (
     <ThemeProvider theme={defaultTheme}>
       <AppLayout>
+        <GlobalStyle />
         <Router>
           <Route path="*" component={Header} />
 
