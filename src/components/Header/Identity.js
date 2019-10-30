@@ -1,9 +1,17 @@
 import React, { useContext } from "react";
 import { useHistory, withRouter } from "react-router-dom";
+import styled from "styled-components";
 
 import { useCurrentUser } from "../../hooks/authHooks";
 import { FirebaseContext } from "../../contexts/firebaseContext";
 import { Button, Loading } from "../ui";
+
+const CenteredRow = styled.div`
+  display: grid;
+  align-items: center;
+  grid-gap: 0.5em;
+  grid-auto-flow: column;
+`;
 
 const Identity = () => {
   const firebase = useContext(FirebaseContext);
@@ -17,16 +25,16 @@ const Identity = () => {
   return !userLoaded ? (
     <Loading />
   ) : user ? (
-    <>
+    <CenteredRow>
       <div>{user.name}</div>
       <div>
         <Button onClick={handleLogout}>Log Out</Button>
       </div>
-    </>
+    </CenteredRow>
   ) : (
-    <div>
+    <CenteredRow>
       <Button onClick={() => history.push("/login")}>Log In</Button>
-    </div>
+    </CenteredRow>
   );
 };
 

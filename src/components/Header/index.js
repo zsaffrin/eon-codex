@@ -9,6 +9,7 @@ const StyledHeader = styled.header`
   border-bottom: 2px solid #8e44ad;
   padding: 5px;
   display: flex;
+  align-items: center;
   justify-content: space-between;
 `;
 const Title = styled(Link)`
@@ -21,6 +22,7 @@ const Title = styled(Link)`
 `;
 const Actions = styled.div`
   display: flex;
+  align-items: center;
 `;
 const PlainLink = styled(Link)`
   text-decoration: none;
