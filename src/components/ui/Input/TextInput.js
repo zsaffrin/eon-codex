@@ -8,6 +8,7 @@ const StyledInput = styled.input(({ theme }) => {
     border-radius: 0.25em;
     padding: 0.5em;
     font-size: 0.9em;
+    width: 100%;
   `;
 });
 
