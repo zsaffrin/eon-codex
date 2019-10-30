@@ -6,13 +6,11 @@ const List = styled.div`
   display: grid;
   grid-template-columns: 1fr 3fr;
   grid-gap: 1em;
+  max-width: 48em;
 `;
 const Label = styled.label`
   font-weight: bold;
   text-align: right;
-`;
-const Content = styled.div`
-  max-width: 48em;
 `;
 
 const VerticalList = ({ items }) => {
@@ -21,7 +19,7 @@ const VerticalList = ({ items }) => {
       {items.map(({ label, content }) => (
         <Fragment key={label}>
           <Label>{label}</Label>
-          <Content>{content}</Content>
+          <div>{content}</div>
         </Fragment>
       ))}
     </List>
