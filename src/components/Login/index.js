@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 
-import { Button, Input, VerticalList } from "../ui";
+import { Button, Input, Page, VerticalList } from "../ui";
 import { FirebaseContext } from "../../contexts/firebaseContext";
 
 const Login = ({ history }) => {
@@ -31,7 +31,7 @@ const Login = ({ history }) => {
   }
 
   return (
-    <div>
+    <Page fullWidth>
       <h1>Log In</h1>
       {message && <div>{message}</div>}
       <form onSubmit={handleFormSubmit}>
@@ -65,7 +65,7 @@ const Login = ({ history }) => {
           <Button type="submit">Submit</Button>
         </div>
       </form>
-    </div>
+    </Page>
   );
 };
 
