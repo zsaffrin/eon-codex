@@ -11,6 +11,9 @@ const Label = styled.label`
   font-weight: bold;
   text-align: right;
 `;
+const Content = styled.div`
+  max-width: 48em;
+`;
 
 const VerticalList = ({ items }) => {
   return (
@@ -18,7 +21,7 @@ const VerticalList = ({ items }) => {
       {items.map(({ label, content }) => (
         <Fragment key={label}>
           <Label>{label}</Label>
-          <div>{content}</div>
+          <Content>{content}</Content>
         </Fragment>
       ))}
     </List>
