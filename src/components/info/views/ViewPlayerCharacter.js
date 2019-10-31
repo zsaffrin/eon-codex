@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import ReactMarkdown from "react-markdown";
 
 import { useDocument } from "../../../hooks/firestoreHooks";
-import { Loading, Lookup, Page } from "../../ui";
+import { Breadcrumb, Loading, Lookup, Page } from "../../ui";
 
 const ViewPlayerCharacter = () => {
   const { recordId } = useParams();
@@ -15,6 +15,12 @@ const ViewPlayerCharacter = () => {
     <Loading />
   ) : (
     <Page>
+      <Breadcrumb
+        links={[
+          { label: "Home", target: "/" },
+          { label: "PCs", target: "/info/playerCharacters" }
+        ]}
+      />
       <h1>{record.name}</h1>
       <div>
         Played by <Lookup collection="players" recordId={record.player} />

@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import ReactMarkdown from "react-markdown";
 
 import { useDocument } from "../../../hooks/firestoreHooks";
-import { Loading, Lookup, Page } from "../../ui";
+import { Breadcrumb, Loading, Lookup, Page } from "../../ui";
 import { formatDate } from "../../../utils/dateUtils";
 
 const ViewSession = () => {
@@ -16,6 +16,13 @@ const ViewSession = () => {
     <Loading />
   ) : (
     <Page>
+      <Breadcrumb
+        links={[
+          { label: "Home", target: "/" },
+          { label: "Sessions", target: "/sessions" }
+        ]}
+      />
+
       <h1>Session</h1>
       <div>Date Played: {formatDate(session.date.toDate())}</div>
       <div>

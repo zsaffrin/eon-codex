@@ -2,7 +2,7 @@ import React from "react";
 import { Link, useRouteMatch } from "react-router-dom";
 
 import { useCollection } from "../../hooks/firestoreHooks";
-import { Loading, Page } from "../ui";
+import { Breadcrumb, Loading, Page } from "../ui";
 import { sortBy } from "../../utils/dataUtils";
 import { formatDate } from "../../utils/dateUtils";
 
@@ -13,6 +13,7 @@ const SessionsHome = () => {
     <Loading />
   ) : (
     <Page>
+      <Breadcrumb links={[{ label: "Home", target: "/" }]} />
       <h1>Sessions</h1>
       <ul>
         {sortBy(collection, "date").map(({ id, date, location }) => (

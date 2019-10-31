@@ -2,7 +2,7 @@ import React from "react";
 import { Link, useParams } from "react-router-dom";
 
 import { useCollection, useSchema } from "../../hooks/firestoreHooks";
-import { Loading, Page } from "../ui";
+import { Breadcrumb, Loading, Page } from "../ui";
 import { sortBy } from "../../utils/dataUtils";
 
 const ViewCollection = () => {
@@ -14,6 +14,12 @@ const ViewCollection = () => {
     <Loading />
   ) : (
     <Page>
+      <Breadcrumb
+        links={[
+          { label: "Home", target: "/" },
+          { label: "Info", target: "/info" }
+        ]}
+      />
       <h1>{schema.name}</h1>
       <ul>
         {sortBy(collection, "name").map(({ id, name }) => (
