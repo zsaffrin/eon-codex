@@ -2,9 +2,9 @@ import React from "react";
 import styled from "styled-components";
 
 const StyledInput = styled.input(({ theme }) => {
-  const { color } = theme;
+  const { inputs } = theme;
   return `
-    border: 1px solid ${color.accent};
+    border: 1px solid ${inputs.borderColor};
     border-radius: 0.25em;
     padding: 0.5em;
     font-size: 0.9em;
