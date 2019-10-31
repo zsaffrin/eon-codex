@@ -4,6 +4,7 @@ import styled from "styled-components";
 
 const List = styled.div`
   display: grid;
+  align-items: center;
   grid-template-columns: 1fr 3fr;
   grid-gap: 1em;
   max-width: 48em;
