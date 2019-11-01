@@ -1,16 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-import { LinkTile, Page } from "../ui";
-
-const LinkGrid = styled.div(({ theme }) => {
-  const { space } = theme;
-  return `
-    display: grid;
-    grid-gap: ${space.md};
-    grid-template-columns: 1fr;
-  `;
-});
+import { LinkGrid, LinkTile, Page } from "../ui";
 
 const InternalHome = () => {
   return (
