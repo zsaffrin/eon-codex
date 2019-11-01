@@ -3,7 +3,7 @@ import { Link, useParams, useLocation } from "react-router-dom";
 
 import { useCollection, useSchema } from "../../../hooks/firestoreHooks";
 import { sortBy } from "../../../utils/dataUtils";
-import { Button, Loading, Page, Table } from "../../ui";
+import { Breadcrumb, Button, Loading, Page, Table } from "../../ui";
 import EditRecord from "./EditRecord";
 
 const ManageCollection = ({ filter }) => {
@@ -62,6 +62,13 @@ const ManageCollection = ({ filter }) => {
     <Loading />
   ) : (
     <Page fullWidth>
+      <Breadcrumb
+        links={[
+          { label: "Home", target: "/" },
+          { label: "Settings", target: "/settings" },
+          { label: "Collections", target: "/settings/collections" }
+        ]}
+      />
       <h1>{schema.name}</h1>
       <div>
         <Link to={`/settings/schema/${collectionName}`}>Edit Schema</Link>
