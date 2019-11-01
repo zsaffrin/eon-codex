@@ -4,7 +4,7 @@ import { Route, Switch, useRouteMatch } from "react-router-dom";
 import InfoHome from "../../info";
 import ViewCollection from "../../info/ViewCollection";
 import ViewRecord from "../../info/ViewRecord";
-import { ViewPlace, ViewPlayerCharacter } from "../../info/views";
+import { ViewPerson, ViewPlace, ViewPlayerCharacter } from "../../info/views";
 
 const InfoRoutes = () => {
   const { path } = useRouteMatch();
@@ -16,6 +16,9 @@ const InfoRoutes = () => {
       </Route>
       <Route path={`${path}/:collectionName`} exact>
         <ViewCollection />
+      </Route>
+      <Route path={`${path}/people/:recordId`}>
+        <ViewPerson />
       </Route>
       <Route path={`${path}/places/:recordId`}>
         <ViewPlace />
