@@ -1,43 +1,38 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-import { Page } from "../ui";
+import { Breadcrumb, Page } from "../ui";
+
+const collectionLinks = [
+  { label: "People", path: "/settings/collection/people", sort: "name" },
+  { label: "Places", path: "/settings/collection/places", sort: "name" },
+  { label: "PCs", path: "/settings/collection/playerCharacters", sort: "name" },
+  { label: "Sessions", path: "/settings/collection/sessions", sort: "date" }
+];
 
 const CollectionsHome = () => {
   return (
     <Page>
+      <Breadcrumb
+        links={[
+          { label: "Home", target: "/" },
+          { label: "Settings", target: "/settings" }
+        ]}
+      />
       <h1>Collections</h1>
       <ul>
-        <li>
-          <Link
-            to={{
-              pathname: "/settings/collection/places",
-              state: { sortKey: "name" }
-            }}
-          >
-            Places
-          </Link>
-        </li>
-        <li>
-          <Link
-            to={{
-              pathname: "/settings/collection/sessions",
-              state: { sortKey: "date" }
-            }}
-          >
-            Sessions
-          </Link>
-        </li>
-        <li>
-          <Link
-            to={{
-              pathname: "/settings/collection/playerCharacters",
-              state: { sortKey: "name" }
-            }}
-          >
-            PCs
-          </Link>
-        </li>
+        {collectionLinks.map(({ label, path, sort }) => (
+          <li key={label}>
+            <Link
+              to={{
+                pathname: path,
+                state: { sortKey: sort }
+              }}
+            >
+              {label}
+            </Link>
+          </li>
+        ))}
       </ul>
     </Page>
   );
