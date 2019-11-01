@@ -10,6 +10,7 @@ const InfoHome = () => {
     <Page>
       <h1>Info</h1>
       <LinkTile to={`${url}/places`} title="Places" />
+      <LinkTile to={`${url}/people`} title="People" />
     </Page>
   );
 };
