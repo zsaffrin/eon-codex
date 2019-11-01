@@ -1,7 +1,7 @@
 import React from "react";
 import { Link, useRouteMatch } from "react-router-dom";
 
-import { LinkTile, Page } from "../ui";
+import { LinkGrid, LinkTile, Page } from "../ui";
 
 const InfoHome = () => {
   const { url } = useRouteMatch();
@@ -9,8 +9,10 @@ const InfoHome = () => {
   return (
     <Page>
       <h1>Info</h1>
-      <LinkTile to={`${url}/places`} title="Places" />
-      <LinkTile to={`${url}/people`} title="People" />
+      <LinkGrid>
+        <LinkTile to={`${url}/places`} title="Places" />
+        <LinkTile to={`${url}/people`} title="People" />
+      </LinkGrid>
     </Page>
   );
 };
