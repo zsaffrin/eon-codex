@@ -1,7 +1,7 @@
 import Breadcrumb from "./Breadcrumb";
 import Button from "./Button";
 import Input from "./Input";
-import LinkTile from "./LinkTile";
+import { LinkGrid, LinkTile } from "./LinkGrid";
 import Loading from "./Loading";
 import Lookup from "./Lookup";
 import Page from "./Page";
@@ -12,6 +12,7 @@ export {
   Breadcrumb,
   Button,
   Input,
+  LinkGrid,
   LinkTile,
   Loading,
   Lookup,
