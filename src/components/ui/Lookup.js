@@ -8,7 +8,7 @@ const Lookup = ({ collection, recordId }) => {
     `${collection}/${recordId}`
   );
 
-  return <span>{recordLoading ? <Loading /> : record.name}</span>;
+  return recordLoading ? <Loading inline /> : <span>{record.name}</span>;
 };
 
 export default Lookup;
