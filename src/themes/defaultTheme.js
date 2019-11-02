@@ -12,6 +12,7 @@ const color = {
   purples: ["", "", "", "#6115ad"],
   primary: "#8e44ad",
   primaryLight: "#AB69C8",
+  primaryAltText: "#fff",
   accent: "#cfd3d6"
 };
 const inputs = {
