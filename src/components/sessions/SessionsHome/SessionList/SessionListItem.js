@@ -1,7 +1,7 @@
 import React from "react";
-import { bool } from "prop-types";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import tinycolor from "tinycolor2";
 
 import { formatDate } from "../../../../utils/dateUtils";
 import { Lookup } from "../../../ui";
@@ -21,7 +21,7 @@ const StyledItem = styled(Link)(({ compact, theme }) => {
     }
 
     &:hover {
-      border-color: ${color.primaryLight};
+      border-color: ${tinycolor(color.primary).lighten(10)};
     }
   `;
 });
@@ -29,12 +29,18 @@ const DateCell = styled.div(({ theme }) => {
   const { color, space } = theme;
   return `
     background: ${color.primary};
-    color: ${color.primaryAltText};
+    color: ${tinycolor(color.primary).isLight() ? color.black : color.white};
     font-weight: bold;
 
     ${StyledItem}:hover > & {
-      background: ${color.primaryLight};
+      background: ${tinycolor(color.primary).lighten(10)};
     }
+  `;
+});
+const ContentCell = styled.div(({ theme }) => {
+  const { color } = theme;
+  return `
+    color: ${color.primary};
   `;
 });
 
@@ -44,9 +50,9 @@ const SessionListItem = ({ compact, session }) => {
   return (
     <StyledItem to={`/sessions/${id}`} compact={compact ? 1 : 0}>
       <DateCell>{formatDate(date.toDate())}</DateCell>
-      <div>
+      <ContentCell>
         <Lookup collection="gamingLocations" recordId={location} />
-      </div>
+      </ContentCell>
     </StyledItem>
   );
 };
