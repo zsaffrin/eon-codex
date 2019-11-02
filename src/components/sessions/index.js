@@ -1,3 +1,3 @@
-import SessionsHome from "./SessionsHome";
+import SessionsHome from "./SessionsHome/SessionsHome";
 
-export { SessionsHome };
+export default SessionsHome;
