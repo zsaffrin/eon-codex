@@ -5,6 +5,8 @@ import ReactMarkdown from "react-markdown";
 import { useDocument } from "../../../hooks/firestoreHooks";
 import { Breadcrumb, Loading, Lookup, Page } from "../../ui";
 import { formatDate } from "../../../utils/dateUtils";
+import ViewPlannedSession from "./ViewPlannedSession";
+import ViewPlayedSession from "./ViewPlayedSession";
 
 const ViewSession = () => {
   const { sessionId } = useParams();
@@ -12,29 +14,18 @@ const ViewSession = () => {
     `sessions/${sessionId}`
   );
 
-  return sessionLoading ? (
-    <Loading />
-  ) : (
-    <Page>
-      <Breadcrumb
-        links={[
-          { label: "Home", target: "/" },
-          { label: "Sessions", target: "/sessions" }
-        ]}
-      />
+  if (sessionLoading) {
+    return <Loading />;
+  }
 
-      <h1>Session</h1>
-      <div>Date Played: {formatDate(session.date.toDate())}</div>
-      <div>
-        Played at:{" "}
-        <Lookup collection="gamingLocations" recordId={session.location} />
-      </div>
-      <div>
-        <h2>Recap</h2>
-        <ReactMarkdown source={session.recap} />
-      </div>
-    </Page>
-  );
+  if (session.status === "planned") {
+    return <ViewPlannedSession session={session} />;
+  }
+  if (session.status === "played") {
+    return <ViewPlayedSession session={session} />;
+  }
+
+  return <div>No view configured for session status "{session.status}"</div>;
 };
 
 export default ViewSession;
