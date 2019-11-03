@@ -1,8 +1,7 @@
 import React from "react";
-import ReactMarkdown from "react-markdown";
 
 import { formatDate } from "../../../utils/dateUtils";
-import { Breadcrumb, Lookup, Page } from "../../ui";
+import { Breadcrumb, Lookup, Page, ShowMarkdown } from "../../ui";
 
 const ViewPlayedSession = ({ session }) => {
   const { date, location, recap } = session;
@@ -22,7 +21,7 @@ const ViewPlayedSession = ({ session }) => {
       </div>
       <div>
         <h2>Recap</h2>
-        {recap && recap.length > 0 && <ReactMarkdown source={session.recap} />}
+        {recap && recap.length > 0 && <ShowMarkdown content={session.recap} />}
       </div>
     </Page>
   );
