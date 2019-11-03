@@ -18,7 +18,12 @@ const color = {
   black: "#384048"
 };
 const inputs = {
-  borderColor: color.accent
+  borderColor: color.accent,
+  buttonColorDefault: color.accent,
+  buttonColorDisabled: color.accent,
+  buttonTextColorLight: color.white,
+  buttonTextColorDark: color.black,
+  buttonTextColorDisabled: color.white
 };
 
 const defaultTheme = {
