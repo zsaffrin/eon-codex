@@ -66,7 +66,9 @@ const ManageMenuItems = ({ menuName }) => {
         <MenuItem key={item.id} item={item} />
       ))}
       <FullWidthCell>
-        <Button onClick={createNewMenuItem}>+</Button>
+        <Button small onClick={createNewMenuItem}>
+          +
+        </Button>
       </FullWidthCell>
     </div>
   );

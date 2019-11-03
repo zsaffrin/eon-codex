@@ -105,12 +105,20 @@ const MenuItem = ({ item }) => {
       <div>
         {edit ? (
           <>
-            <Button onClick={saveItem}>Save</Button>
-            <Button onClick={cancelEdit}>Cancel</Button>
-            <Button onClick={deleteItem}>Delete</Button>
+            <Button small onClick={saveItem}>
+              Save
+            </Button>
+            <Button small onClick={cancelEdit}>
+              Cancel
+            </Button>
+            <Button small onClick={deleteItem}>
+              Delete
+            </Button>
           </>
         ) : (
-          <Button onClick={toggleEdit}>Edit</Button>
+          <Button small onClick={toggleEdit}>
+            Edit
+          </Button>
         )}
       </div>
     </StyledMenuItem>

@@ -73,7 +73,9 @@ const FieldsManager = ({ schemaName }) => {
         <Field key={field.key} data={field} />
       ))}
       <FullWidthCell>
-        <Button onClick={createNewField}>+</Button>
+        <Button small onClick={createNewField}>
+          +
+        </Button>
       </FullWidthCell>
     </div>
   );

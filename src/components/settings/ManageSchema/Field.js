@@ -116,7 +116,8 @@ const Field = ({ data }) => {
                   </option>
                 ))}
               </select>
-              {type === "menu" ||
+              {type === "multiselect" ||
+                type === "menu" ||
                 (type === "lookup" && (
                   <Input
                     type="text"
@@ -137,12 +138,20 @@ const Field = ({ data }) => {
       <div>
         {edit ? (
           <>
-            <Button onClick={saveField}>Save</Button>
-            <Button onClick={cancelEdit}>Cancel</Button>
-            <Button onClick={deleteField}>Delete</Button>
+            <Button small onClick={saveField}>
+              Save
+            </Button>
+            <Button small onClick={cancelEdit}>
+              Cancel
+            </Button>
+            <Button small onClick={deleteField}>
+              Delete
+            </Button>
           </>
         ) : (
-          <Button onClick={toggleEdit}>Edit</Button>
+          <Button small onClick={toggleEdit}>
+            Edit
+          </Button>
         )}
       </div>
     </StyledField>
