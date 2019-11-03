@@ -39,10 +39,14 @@ const Table = ({ columns, entries, actions }) => (
         {actions && (
           <div>
             {actions.delete && (
-              <Button onClick={() => actions.delete(entry.id)}>Delete</Button>
+              <Button small onClick={() => actions.delete(entry.id)}>
+                Delete
+              </Button>
             )}
             {actions.edit && (
-              <Button onClick={() => actions.edit(entry)}>Edit</Button>
+              <Button small onClick={() => actions.edit(entry)}>
+                Edit
+              </Button>
             )}
           </div>
         )}
