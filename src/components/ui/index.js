@@ -6,7 +6,6 @@ import Loading from "./Loading";
 import Lookup from "./Lookup";
 import Markdown from "./Markdown";
 import Page from "./Page";
-import ShowMarkdown from "./ShowMarkdown";
 import Table from "./Table";
 import VerticalList from "./VerticalList";
 
@@ -20,7 +19,6 @@ export {
   Lookup,
   Markdown,
   Page,
-  ShowMarkdown,
   Table,
   VerticalList
 };
