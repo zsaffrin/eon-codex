@@ -74,7 +74,9 @@ const ManageCollection = ({ filter }) => {
         <Link to={`/settings/schema/${collectionName}`}>Edit Schema</Link>
       </div>
       <div>
-        <Button onClick={() => addNew()}>New</Button>
+        <Button small primary onClick={() => addNew()}>
+          New
+        </Button>
       </div>
 
       {collection && schema ? (
