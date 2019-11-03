@@ -12,6 +12,7 @@ const InfoHome = () => {
       <LinkGrid>
         <LinkTile to={`${url}/places`} title="Places" />
         <LinkTile to={`${url}/people`} title="People" />
+        <LinkTile to={`${url}/groups`} title="Groups and Guilds" />
       </LinkGrid>
     </Page>
   );

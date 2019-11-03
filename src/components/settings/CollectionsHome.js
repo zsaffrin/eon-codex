@@ -7,7 +7,8 @@ const collectionLinks = [
   { label: "People", path: "/settings/collection/people", sort: "name" },
   { label: "Places", path: "/settings/collection/places", sort: "name" },
   { label: "PCs", path: "/settings/collection/playerCharacters", sort: "name" },
-  { label: "Sessions", path: "/settings/collection/sessions", sort: "date" }
+  { label: "Sessions", path: "/settings/collection/sessions", sort: "date" },
+  { label: "Groups", path: "/settings/collection/groups", sort: "name" }
 ];
 
 const CollectionsHome = () => {
