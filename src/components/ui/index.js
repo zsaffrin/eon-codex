@@ -5,6 +5,7 @@ import { LinkGrid, LinkTile } from "./LinkGrid";
 import Loading from "./Loading";
 import Lookup from "./Lookup";
 import Page from "./Page";
+import ShowMarkdown from "./ShowMarkdown";
 import Table from "./Table";
 import VerticalList from "./VerticalList";
 
@@ -17,6 +18,7 @@ export {
   Loading,
   Lookup,
   Page,
+  ShowMarkdown,
   Table,
   VerticalList
 };
