@@ -8,12 +8,15 @@ const HeaderCell = styled.div`
   font-weight: bold;
 `;
 
-const StyledTable = styled.div`
-  display: grid;
-  grid-template-columns:
-    repeat(${props => (props.columns ? props.columns.length : 1)}, 1fr)
-    ${props => props.actions && "auto"};
-`;
+const StyledTable = styled.div(({ actions, columns }) => {
+  return `
+    display: grid;
+    grid-template-columns:
+      repeat(${columns ? columns.length : 1}, 1fr)
+      ${actions && "auto"};
+    grid-gap: 1px;
+  `;
+});
 
 const Table = ({ columns, entries, actions }) => (
   <StyledTable columns={columns} actions={actions}>
