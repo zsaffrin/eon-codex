@@ -10,7 +10,9 @@ const color = {
   // https://palx.jxnblk.com/1561ad
   grays: ["#f8f9f9", "#ecedee", "#dee0e3", "#bfc4c8", "#adb3b9", "#818a92"],
   purples: ["", "", "", "#6115ad"],
+  background: "#f8f9f9",
   primary: "#8e44ad",
+  secondary: "#5b90c5",
   accent: "#cfd3d6",
   white: "#f8f9f9",
   black: "#384048"
