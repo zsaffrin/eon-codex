@@ -1,4 +1,5 @@
 import React from "react";
+import { string } from "prop-types";
 import styled from "styled-components";
 
 import SessionListItem from "./SessionListItem";
@@ -11,7 +12,7 @@ const StyledList = styled.div(({ compact, theme }) => {
   `;
 });
 
-const SessionList = ({ compact, sessions }) => {
+const SessionList = ({ compact, mainColor, sessions }) => {
   return (
     <StyledList compact={compact ? 1 : 0}>
       {sessions.map(session => (
@@ -19,10 +20,13 @@ const SessionList = ({ compact, sessions }) => {
           compact={compact ? 1 : 0}
           key={session.id}
           session={session}
+          mainColor={mainColor}
         />
       ))}
     </StyledList>
   );
 };
+SessionList.propTypes = { mainColor: string };
+SessionList.defaultProps = { mainColor: "#666" };
 
 export default SessionList;
