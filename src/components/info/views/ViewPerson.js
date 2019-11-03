@@ -8,7 +8,7 @@ import { Breadcrumb, Loading, Page } from "../../ui";
 const ViewPerson = () => {
   const { recordId } = useParams();
   const [record, recordLoading, recordError] = useDocument(
-    `places/${recordId}`
+    `people/${recordId}`
   );
 
   return recordLoading ? (
