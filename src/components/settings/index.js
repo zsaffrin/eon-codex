@@ -1,4 +1,4 @@
-import { CollectionsHome } from "./Collections";
+import { CollectionsHome } from "./collections";
 import MenusHome from "./MenusHome";
 import SettingsHome from "./SettingsHome";
 
