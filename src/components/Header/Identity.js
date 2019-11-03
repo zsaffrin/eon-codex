@@ -28,12 +28,16 @@ const Identity = () => {
     <CenteredRow>
       <div>{user.name}</div>
       <div>
-        <Button onClick={handleLogout}>Log Out</Button>
+        <Button small onClick={handleLogout}>
+          Log Out
+        </Button>
       </div>
     </CenteredRow>
   ) : (
     <CenteredRow>
-      <Button onClick={() => history.push("/login")}>Log In</Button>
+      <Button small onClick={() => history.push("/login")}>
+        Log In
+      </Button>
     </CenteredRow>
   );
 };
