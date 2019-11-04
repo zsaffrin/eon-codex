@@ -1,8 +1,12 @@
 import React from "react";
 import { Route, Switch, useRouteMatch } from "react-router-dom";
 
-import { CollectionsHome, MenusHome, SettingsHome } from "../../settings";
-import { ManageCollection } from "../../settings/collections";
+import {
+  CollectionsHome,
+  ManageCollection,
+  MenusHome,
+  SettingsHome
+} from "../../settings";
 import { ManageMenu } from "../../settings/ManageMenus";
 import ManageSchema from "../../settings/ManageSchema";
 
