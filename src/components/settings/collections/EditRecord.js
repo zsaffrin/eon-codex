@@ -14,6 +14,11 @@ const EditRecord = ({ collection, close, fields, existingItem }) => {
         ...item,
         [e.id]: e.value
       });
+    } else if (e.isMultiselect) {
+      setItem({
+        ...item,
+        [e.fieldId]: e.value
+      });
     } else {
       setItem({
         ...item,
