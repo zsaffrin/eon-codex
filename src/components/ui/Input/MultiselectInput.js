@@ -4,10 +4,14 @@ import styled from "styled-components";
 
 import MultiselectInputChoice from "./MultiselectInputChoice";
 
-const StyledChoices = styled.div`
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-`;
+const StyledChoices = styled.div(({ theme }) => {
+  const { space } = theme;
+  return `
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: ${space.thin};
+  `;
+});
 
 const MultiselectInput = ({ id, value, choices, onChange }) => {
   const [selections, setSelections] = useState(value);
