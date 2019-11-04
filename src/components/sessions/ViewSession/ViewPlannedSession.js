@@ -5,7 +5,14 @@ import { formatDate } from "../../../utils/dateUtils";
 import { Breadcrumb, Lookup, Page } from "../../ui";
 
 const ViewPlannedSession = ({ session }) => {
-  const { date, location, recap } = session;
+  const { date, location, participants } = session;
+
+  const players = participants
+    ? Object.keys(participants).reduce(
+        (acc, key) => (key ? [...acc, key] : acc),
+        []
+      )
+    : [];
 
   return (
     <Page>
@@ -20,6 +27,18 @@ const ViewPlannedSession = ({ session }) => {
       <div>
         Scheduled to play at:{" "}
         <Lookup collection="gamingLocations" recordId={location} />
+      </div>
+      <div>
+        <h2>Participants</h2>
+        <div>
+          {players.length > 0
+            ? players.map(player => (
+                <div>
+                  <Lookup collection="playerCharacters" recordId={player} />
+                </div>
+              ))
+            : "None"}
+        </div>
       </div>
     </Page>
   );
