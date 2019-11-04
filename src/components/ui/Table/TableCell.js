@@ -4,6 +4,7 @@ import CollectionCell from "./CollectionCell";
 import MenuCell from "./MenuCell";
 import DateCell from "./DateCell";
 import LongTextCell from "./LongTextCell";
+import MultiselectCell from "./MultiselectCell";
 
 const TableCell = ({ lookup, fieldValue, type }) => {
   if (type === "lookup") {
@@ -17,6 +18,9 @@ const TableCell = ({ lookup, fieldValue, type }) => {
   }
   if (type === "longtext") {
     return <LongTextCell fieldValue={fieldValue} />;
+  }
+  if (type === "multiselect") {
+    return <MultiselectCell fieldValue={fieldValue} />;
   }
 
   return <div>{fieldValue}</div>;
