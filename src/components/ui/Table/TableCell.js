@@ -2,6 +2,7 @@ import React from "react";
 
 import CollectionCell from "./CollectionCell";
 import MenuCell from "./MenuCell";
+import BooleanCell from "./BooleanCell";
 import DateCell from "./DateCell";
 import LongTextCell from "./LongTextCell";
 import MultiselectCell from "./MultiselectCell";
@@ -21,6 +22,9 @@ const TableCell = ({ lookup, fieldValue, type }) => {
   }
   if (type === "multiselect") {
     return <MultiselectCell fieldValue={fieldValue} />;
+  }
+  if (type === "boolean") {
+    return <BooleanCell fieldValue={fieldValue} />;
   }
 
   return <div>{fieldValue}</div>;

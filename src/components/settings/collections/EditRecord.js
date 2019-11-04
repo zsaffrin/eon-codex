@@ -14,6 +14,11 @@ const EditRecord = ({ collection, close, fields, existingItem }) => {
         ...item,
         [e.id]: e.value
       });
+    } else if (e.type === "checkbox") {
+      setItem({
+        ...item,
+        [e.target.id]: e.target.checked
+      });
     } else if (e.isMultiselect) {
       setItem({
         ...item,
