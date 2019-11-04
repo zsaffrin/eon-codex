@@ -8,6 +8,7 @@ import PasswordInput from "./PasswordInput";
 import NumberInput from "./NumberInput";
 import DatetimeInput from "./DatetimeInput";
 import LongTextInput from "./LongTextInput";
+import BooleanInput from "./BooleanInput";
 
 const Input = ({ lookup, type, ...rest }) => {
   if (type === "lookup") {
@@ -30,6 +31,9 @@ const Input = ({ lookup, type, ...rest }) => {
   }
   if (type === "longtext") {
     return <LongTextInput {...rest} />;
+  }
+  if (type === "boolean") {
+    return <BooleanInput {...rest} />;
   }
 
   return <TextInput {...rest} />;
