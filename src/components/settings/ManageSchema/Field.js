@@ -66,6 +66,8 @@ const Field = ({ data }) => {
     }
   }
 
+  const lookupFieldTypes = ["multiselect", "menu", "lookup"];
+
   return (
     <StyledField>
       <div>
@@ -116,16 +118,14 @@ const Field = ({ data }) => {
                   </option>
                 ))}
               </select>
-              {type === "multiselect" ||
-                type === "menu" ||
-                (type === "lookup" && (
-                  <Input
-                    type="text"
-                    id="lookup"
-                    value={lookup}
-                    onChange={handleFieldChange}
-                  />
-                ))}
+              {lookupFieldTypes.includes(type) && (
+                <Input
+                  type="text"
+                  id="lookup"
+                  value={lookup}
+                  onChange={handleFieldChange}
+                />
+              )}
             </>
           )
         ) : (
