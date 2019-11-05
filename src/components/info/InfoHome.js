@@ -1,20 +1,27 @@
 import React from "react";
-import { Link, useRouteMatch } from "react-router-dom";
+import styled from "styled-components";
 
-import { LinkGrid, LinkTile, Page } from "../ui";
+import { Page } from "../ui";
+import InfoCategory from "./InfoCategory";
+
+const CategoryList = styled.div(({ theme }) => {
+  const { space } = theme;
+  return `
+    display: grid;
+    grid-gap: ${space.lg};
+  `;
+});
 
 const InfoHome = () => {
-  const { url } = useRouteMatch();
-
   return (
     <Page>
       <h1>Info</h1>
-      <LinkGrid>
-        <LinkTile to={`${url}/places`} title="Places" />
-        <LinkTile to={`${url}/people`} title="People" />
-        <LinkTile to={`${url}/groups`} title="Groups and Guilds" />
-        <LinkTile to={`${url}/playerCharacters`} title="PCs" />
-      </LinkGrid>
+      <CategoryList>
+        <InfoCategory title="Places" collectionName="places" />
+        <InfoCategory title="People" collectionName="people" />
+        <InfoCategory title="Groups and Guilds" collectionName="groups" />
+        <InfoCategory title="PCs" collectionName="playerCharacters" />
+      </CategoryList>
     </Page>
   );
 };
