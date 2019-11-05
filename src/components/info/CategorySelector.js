@@ -1,18 +1,29 @@
 import React from "react";
 import { Link, useParams } from "react-router-dom";
 import styled from "styled-components";
+import tinycolor from "tinycolor2";
 
 const CategoryChoiceWrap = styled.div(({ theme }) => {
-  const { space } = theme;
+  const { color, space } = theme;
   return `
+    background: ${color.primary};
     display: grid;
-    grid-auto-flow: column;
+    grid-template-columns: repeat(4, 1fr);
   `;
 });
 const CategoryChoice = styled(Link)(({ theme }) => {
-  const { space } = theme;
+  const { color, space } = theme;
   return `
-    padding: ${space.sm};
+    color: ${tinycolor(color.primary).isLight() ? color.black : color.white};
+    font-weight: bold;
+    padding: ${space.md};
+    text-align: center;
+    text-decoration: none;
+    text-transform: uppercase;
+
+    &:hover {
+      background: ${tinycolor(color.primary).darken(10)}
+    }
   `;
 });
 

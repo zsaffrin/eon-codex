@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-import { Page } from "../ui";
+import { Breadcrumb, Page } from "../ui";
 import InfoCategory from "./InfoCategory";
 import CategorySelector from "./CategorySelector";
 import RecordSelector from "./RecordSelector";
@@ -18,7 +18,8 @@ const CategoryList = styled.div(({ theme }) => {
 const InfoHome = () => {
   return (
     <Page>
-      <h1>Info</h1>
+      <Breadcrumb links={[{ label: "Home", target: "/" }, { label: "Info", target: "/info" }]} />
+
       <CategorySelector />
       <RecordSelector />
       <RecordViewer />
