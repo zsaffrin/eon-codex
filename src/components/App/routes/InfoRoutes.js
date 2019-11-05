@@ -16,26 +16,8 @@ const InfoRoutes = () => {
 
   return (
     <Switch>
-      <Route path={path} exact>
+      <Route path={`${path}/:categoryId?/:recordId?`} exact>
         <InfoHome />
-      </Route>
-      <Route path={`${path}/:collectionName`} exact>
-        <ViewCollection />
-      </Route>
-      <Route path={`${path}/groups/:recordId`}>
-        <ViewGroup />
-      </Route>
-      <Route path={`${path}/people/:recordId`}>
-        <ViewPerson />
-      </Route>
-      <Route path={`${path}/places/:recordId`}>
-        <ViewPlace />
-      </Route>
-      <Route path={`${path}/playerCharacters/:recordId`}>
-        <ViewPlayerCharacter />
-      </Route>
-      <Route path={`${path}/:collectionName/:recordId`}>
-        <ViewRecord />
       </Route>
     </Switch>
   );

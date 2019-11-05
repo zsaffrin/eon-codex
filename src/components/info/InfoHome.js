@@ -3,6 +3,9 @@ import styled from "styled-components";
 
 import { Page } from "../ui";
 import InfoCategory from "./InfoCategory";
+import CategorySelector from "./CategorySelector";
+import RecordSelector from "./RecordSelector";
+import RecordViewer from "./RecordViewer";
 
 const CategoryList = styled.div(({ theme }) => {
   const { space } = theme;
@@ -16,12 +19,16 @@ const InfoHome = () => {
   return (
     <Page>
       <h1>Info</h1>
-      <CategoryList>
+      <CategorySelector />
+      <RecordSelector />
+      <RecordViewer />
+
+      {/* <CategoryList>
         <InfoCategory title="Places" collectionName="places" />
         <InfoCategory title="People" collectionName="people" />
         <InfoCategory title="Groups and Guilds" collectionName="groups" />
         <InfoCategory title="PCs" collectionName="playerCharacters" />
-      </CategoryList>
+      </CategoryList> */}
     </Page>
   );
 };
