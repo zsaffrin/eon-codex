@@ -12,8 +12,9 @@ const RecordChoiceWrap = styled.div(({ theme }) => {
   return `
     background: ${color.secondary};
     border: 1px solid ${color.secondary};
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
   `;
 });
 const RecordChoice = styled(Link)(({ selected, theme }) => {
@@ -25,7 +26,7 @@ const RecordChoice = styled(Link)(({ selected, theme }) => {
     color: ${selected ? color.secondary : color.background};
     display: grid;
     align-items: center;
-    padding: ${space.sm};
+    padding: ${space.sm} ${space.lg};
     text-align: center;
     text-decoration: none;
 
