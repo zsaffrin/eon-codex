@@ -1,5 +1,5 @@
 import React from "react";
-import styled from "styled-components";
+import { useParams } from "react-router-dom";
 
 import { Breadcrumb, Page } from "../ui";
 import CategorySelector from "./CategorySelector";
@@ -7,6 +7,8 @@ import RecordSelector from "./RecordSelector";
 import RecordViewer from "./RecordViewer";
 
 const InfoHome = () => {
+  const { categoryId, recordId } = useParams();
+
   return (
     <Page>
       <Breadcrumb
@@ -16,8 +18,8 @@ const InfoHome = () => {
         ]}
       />
       <CategorySelector />
-      <RecordSelector />
-      <RecordViewer />
+      {categoryId && <RecordSelector />}
+      {recordId && <RecordViewer />}
     </Page>
   );
 };
