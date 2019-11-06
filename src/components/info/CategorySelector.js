@@ -7,14 +7,16 @@ const CategoryChoiceWrap = styled.div(({ theme }) => {
   const { color, space } = theme;
   return `
     background: ${color.primary};
+    border: 1px solid ${color.primary};
     display: grid;
     grid-template-columns: repeat(4, 1fr);
   `;
 });
-const CategoryChoice = styled(Link)(({ theme }) => {
+const CategoryChoice = styled(Link)(({ selected, theme }) => {
   const { color, space } = theme;
   return `
-    color: ${tinycolor(color.primary).isLight() ? color.black : color.white};
+    background: ${selected && tinycolor(color.primary).lighten(50)}
+    color: ${selected ? color.primary : color.background};
     font-weight: bold;
     padding: ${space.md};
     text-align: center;
@@ -27,14 +29,26 @@ const CategoryChoice = styled(Link)(({ theme }) => {
   `;
 });
 
+const categories = [
+  { key: "groups", label: "Groups" },
+  { key: "people", label: "People" },
+  { key: "places", label: "Places" },
+  { key: "playerCharacters", label: "PCs" }
+];
+
 const CategorySelector = () => {
-  const { categoryId, recordId } = useParams();
+  const { categoryId } = useParams();
   return (
     <CategoryChoiceWrap>
-      <CategoryChoice to="/info/places">Places</CategoryChoice>
-      <CategoryChoice to="/info/people">People</CategoryChoice>
-      <CategoryChoice to="/info/groups">Groups</CategoryChoice>
-      <CategoryChoice to="/info/playerCharacters">PCs</CategoryChoice>
+      {categories.map(({ key, label }) => (
+        <CategoryChoice
+          selected={categoryId === key}
+          to={`/info/${key}`}
+          key={key}
+        >
+          {label}
+        </CategoryChoice>
+      ))}
     </CategoryChoiceWrap>
   );
 };

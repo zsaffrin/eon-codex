@@ -8,18 +8,21 @@ import { sortBy } from "../../utils/dataUtils";
 import { Loading } from "../ui";
 
 const RecordChoiceWrap = styled.div(({ theme }) => {
-  const { color, space } = theme;
+  const { color } = theme;
   return `
     background: ${color.secondary};
+    border: 1px solid ${color.secondary};
     display: grid;
     grid-template-columns: repeat(4, 1fr);
   `;
 });
-const RecordChoice = styled(Link)(({ theme }) => {
+const RecordChoice = styled(Link)(({ selected, theme }) => {
   const { color, space } = theme;
+
   return `
+    background: ${selected && tinycolor(color.secondary).lighten(50)}
     border-radius: inherit;
-    color: ${color.background};
+    color: ${selected ? color.secondary : color.background};
     display: grid;
     align-items: center;
     padding: ${space.sm};
@@ -27,13 +30,17 @@ const RecordChoice = styled(Link)(({ theme }) => {
     text-decoration: none;
 
     &:hover {
-      background: ${tinycolor(color.secondary).darken(10)}
+      background: ${
+        selected
+          ? tinycolor(color.secondary).lighten(30)
+          : tinycolor(color.secondary).darken(10)
+      }
     }
   `;
 });
 
 const RecordSelector = () => {
-  const { categoryId } = useParams();
+  const { categoryId, recordId } = useParams();
   const [collection, collectionLoading] = useCollection(categoryId || " ");
 
   return (
@@ -42,7 +49,12 @@ const RecordSelector = () => {
         <Loading />
       ) : (
         sortBy(collection, "name").map(({ id, name }) => (
-          <RecordChoice to={`/info/${categoryId}/${id}`}>{name}</RecordChoice>
+          <RecordChoice
+            selected={recordId === id}
+            to={`/info/${categoryId}/${id}`}
+          >
+            {name}
+          </RecordChoice>
         ))
       )}
     </RecordChoiceWrap>
