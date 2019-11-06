@@ -1,15 +1,15 @@
 import React from "react";
 
-import { Markdown } from "../../ui";
+import { Markdown, Page } from "../../ui";
 
 const ViewPerson = ({ record }) => {
   const { name, desc } = record;
 
   return (
-    <div>
+    <Page>
       <h1>{name}</h1>
       <Markdown content={desc} />
-    </div>
+    </Page>
   );
 };
 

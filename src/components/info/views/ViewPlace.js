@@ -1,16 +1,16 @@
 import React from "react";
 
-import { Markdown } from "../../ui";
+import { Markdown, Page } from "../../ui";
 
 const ViewPlace = ({ record }) => {
   const { name, shortDesc, longDesc } = record;
 
   return (
-    <div>
+    <Page>
       <h1>{name}</h1>
       <div>{shortDesc}</div>
       <Markdown content={longDesc} />
-    </div>
+    </Page>
   );
 };
 

@@ -1,16 +1,16 @@
 import React from "react";
 
-import { Markdown } from "../../ui";
+import { Markdown, Page } from "../../ui";
 
 const ViewGroup = ({ record }) => {
   const { name, shortDesc, desc } = record;
 
   return (
-    <div>
+    <Page>
       <h1>{name}</h1>
       <div>{shortDesc}</div>
       <Markdown content={desc} />
-    </div>
+    </Page>
   );
 };
 

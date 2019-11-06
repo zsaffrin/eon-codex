@@ -2,7 +2,7 @@ import React from "react";
 import { useParams } from "react-router-dom";
 
 import { useDocument } from "../../hooks/firestoreHooks";
-import { Loading } from "../ui";
+import { Loading, Page } from "../ui";
 import { ViewGroup, ViewPerson, ViewPlace, ViewPlayerCharacter } from "./views";
 
 const RecordViewer = () => {
@@ -26,7 +26,11 @@ const RecordViewer = () => {
   if (categoryId === "playerCharacters") {
     return <ViewPlayerCharacter record={record} />;
   }
-  return <div>Something's wrong, no view found</div>;
+  return (
+    <Page>
+      {categoryId && "Something's wrong - no view for this category configured"}
+    </Page>
+  );
 };
 
 export default RecordViewer;
