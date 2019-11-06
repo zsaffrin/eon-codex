@@ -1,10 +1,19 @@
 import React, { useContext, useState, useEffect } from "react";
 import { useHistory, useParams } from "react-router-dom";
+import styled from "styled-components";
 
 import { FirebaseContext } from "../../../contexts/firebaseContext";
 import { useSchema } from "../../../hooks/firestoreHooks";
 import { Button, Input, Loading, Page, VerticalList } from "../../ui";
 import FieldsManager from "./FieldsManager";
+
+const PageSection = styled.div(({ theme }) => {
+  const { space } = theme;
+  return `
+    padding-bottom: ${space.md};
+    padding-top: ${space.md};
+  `;
+});
 
 const ManageSchema = () => {
   const { schemaName } = useParams();
@@ -63,18 +72,24 @@ const ManageSchema = () => {
   ) : (
     <Page fullWidth>
       <h1>Manage Schema</h1>
-      <div>
+      <PageSection>
         <VerticalList items={fields} />
-        <Button onClick={saveSchemaDetails}>Save Details</Button>
-      </div>
-      <FieldsManager schemaName={schemaName} />
-      <div>
+        <Button small onClick={saveSchemaDetails}>
+          Save Details
+        </Button>
+      </PageSection>
+      <PageSection>
+        <h2>Fields</h2>
+        <FieldsManager schemaName={schemaName} />
+      </PageSection>
+      <PageSection>
         <Button
+          small
           onClick={() => history.push(`/settings/collection/${schemaName}`)}
         >
           Done
         </Button>
-      </div>
+      </PageSection>
     </Page>
   );
 };

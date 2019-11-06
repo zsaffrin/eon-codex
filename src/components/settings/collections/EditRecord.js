@@ -1,7 +1,19 @@
 import React, { useContext, useState } from "react";
+import styled from "styled-components";
 
 import { FirebaseContext } from "../../../contexts/firebaseContext";
 import { Button, Input, Page, VerticalList } from "../../ui";
+
+const Buttons = styled.div(({ theme }) => {
+  const { space } = theme;
+  return `
+    display: grid;
+    grid-auto-flow: column;
+    grid-gap: ${space.sm};
+    justify-content: center;
+    padding: ${space.md};
+  `;
+});
 
 const EditRecord = ({ collection, close, fields, existingItem }) => {
   const [item, setItem] = useState(existingItem || {});
@@ -85,13 +97,13 @@ const EditRecord = ({ collection, close, fields, existingItem }) => {
           }))}
         />
       </form>
-      <div>
-        <Button onClick={close}>Cancel</Button>
-        <Button type="submit" onClick={handleFormSubmit}>
+      <Buttons>
+        <Button primary type="submit" onClick={handleFormSubmit}>
           {existingItem ? "Save Changes" : "Add New Record"}
         </Button>
+        <Button onClick={close}>Cancel</Button>
         {existingItem && <Button onClick={deleteItem}>Delete</Button>}
-      </div>
+      </Buttons>
     </Page>
   );
 };
