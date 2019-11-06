@@ -1,30 +1,15 @@
 import React from "react";
-import { useParams } from "react-router-dom";
-import ReactMarkdown from "react-markdown";
 
-import { useDocument } from "../../../hooks/firestoreHooks";
-import { Breadcrumb, Loading, Page } from "../../ui";
+import { Markdown } from "../../ui";
 
-const ViewPerson = () => {
-  const { recordId } = useParams();
-  const [record, recordLoading, recordError] = useDocument(
-    `people/${recordId}`
-  );
+const ViewPerson = ({ record }) => {
+  const { name, desc } = record;
 
-  return recordLoading ? (
-    <Loading />
-  ) : (
-    <Page>
-      <Breadcrumb
-        links={[
-          { label: "Home", target: "/" },
-          { label: "Info", target: "/info" },
-          { label: "People", target: "/info/people" }
-        ]}
-      />
-      <h1>{record.name}</h1>
-      <ReactMarkdown source={record.desc} />
-    </Page>
+  return (
+    <div>
+      <h1>{name}</h1>
+      <Markdown content={desc} />
+    </div>
   );
 };
 
