@@ -6,11 +6,7 @@ import Loading from "../Loading";
 import MultiselectInput from "./MultiselectInput";
 
 const Multiselect = ({ lookup, ...rest }) => {
-  const [collection, collectionLoading] = useCollection(lookup, [
-    "active",
-    "==",
-    "on"
-  ]);
+  const [collection, collectionLoading] = useCollection(lookup);
 
   const choices = collection
     ? collection.map(({ id, name }) => ({ id, name }))
