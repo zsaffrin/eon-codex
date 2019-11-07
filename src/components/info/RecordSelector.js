@@ -21,7 +21,7 @@ const RecordChoice = styled(Link)(({ selected, theme }) => {
   const { color, space } = theme;
 
   return `
-    background: ${selected && tinycolor(color.secondary).lighten(50)}
+    background: ${selected && tinycolor(color.secondary).lighten(60)}
     border-radius: inherit;
     color: ${selected ? color.secondary : color.background};
     display: grid;
@@ -33,7 +33,7 @@ const RecordChoice = styled(Link)(({ selected, theme }) => {
     &:hover {
       background: ${
         selected
-          ? tinycolor(color.secondary).lighten(30)
+          ? tinycolor(color.secondary).lighten(50)
           : tinycolor(color.secondary).darken(10)
       }
     }
@@ -53,6 +53,7 @@ const RecordSelector = () => {
           <RecordChoice
             selected={recordId === id}
             to={`/info/${categoryId}/${id}`}
+            key={id}
           >
             {name}
           </RecordChoice>

@@ -15,7 +15,7 @@ const CategoryChoiceWrap = styled.div(({ theme }) => {
 const CategoryChoice = styled(Link)(({ selected, theme }) => {
   const { color, space } = theme;
   return `
-    background: ${selected && tinycolor(color.primary).lighten(50)}
+    background: ${selected && tinycolor(color.primary).lighten(60)}
     color: ${selected ? color.primary : color.background};
     font-weight: bold;
     padding: ${space.md};
@@ -24,7 +24,11 @@ const CategoryChoice = styled(Link)(({ selected, theme }) => {
     text-transform: uppercase;
 
     &:hover {
-      background: ${tinycolor(color.primary).darken(10)}
+      background: ${
+        selected
+          ? tinycolor(color.primary).lighten(50)
+          : tinycolor(color.primary).darken(10)
+      }
     }
   `;
 });
