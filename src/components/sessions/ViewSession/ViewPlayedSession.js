@@ -4,7 +4,7 @@ import { formatDate } from "../../../utils/dateUtils";
 import { Breadcrumb, Lookup, Page, Markdown } from "../../ui";
 
 const ViewPlayedSession = ({ session }) => {
-  const { date, location, recap } = session;
+  const { date, location, players, recap } = session;
 
   return (
     <Page>
@@ -19,6 +19,20 @@ const ViewPlayedSession = ({ session }) => {
       <div>
         Played at: <Lookup collection="gamingLocations" recordId={location} />
       </div>
+      {players && (
+        <div>
+          <h2>Participants</h2>
+          <div>
+            {players.length > 0
+              ? players.map(player => (
+                  <div>
+                    <Lookup collection="playerCharacters" recordId={player} />
+                  </div>
+                ))
+              : "None"}
+          </div>
+        </div>
+      )}
       <div>
         <h2>Recap</h2>
         {recap && recap.length > 0 && <Markdown content={session.recap} />}

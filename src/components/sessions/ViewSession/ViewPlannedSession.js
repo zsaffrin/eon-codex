@@ -28,18 +28,20 @@ const ViewPlannedSession = ({ session }) => {
         Scheduled to play at:{" "}
         <Lookup collection="gamingLocations" recordId={location} />
       </div>
-      <div>
-        <h2>Participants</h2>
+      {players && (
         <div>
-          {players.length > 0
-            ? players.map(player => (
-                <div>
-                  <Lookup collection="playerCharacters" recordId={player} />
-                </div>
-              ))
-            : "None"}
+          <h2>Expected PCs</h2>
+          <div>
+            {players.length > 0
+              ? players.map(player => (
+                  <div key={player}>
+                    <Lookup collection="playerCharacters" recordId={player} />
+                  </div>
+                ))
+              : "None"}
+          </div>
         </div>
-      </div>
+      )}
     </Page>
   );
 };
