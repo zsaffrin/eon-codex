@@ -30,7 +30,7 @@ const StyledItem = styled(Link)(({ maincolor, compact, theme }) => {
     }
   `;
 });
-const DateCell = styled.div(({ maincolor, theme }) => {
+const TitleCell = styled.div(({ maincolor, theme }) => {
   const { color } = theme;
   const primaryColor = tinycolor(maincolor);
 
@@ -57,7 +57,7 @@ const ContentCell = styled.div(({ maincolor }) => {
 });
 
 const SessionListItem = ({ compact, mainColor, session }) => {
-  const { date, id, location } = session;
+  const { date, id, location, title } = session;
 
   return (
     <StyledItem
@@ -65,8 +65,9 @@ const SessionListItem = ({ compact, mainColor, session }) => {
       compact={compact ? 1 : 0}
       maincolor={mainColor}
     >
-      <DateCell maincolor={mainColor}>{formatDate(date.toDate())}</DateCell>
+      <TitleCell maincolor={mainColor}>{title}</TitleCell>
       <ContentCell maincolor={mainColor}>
+        {`${formatDate(date.toDate())} @ `}
         <Lookup collection="gamingLocations" recordId={location} />
       </ContentCell>
     </StyledItem>

@@ -2,6 +2,7 @@ import React from "react";
 import { string } from "prop-types";
 import styled from "styled-components";
 
+import { sortBy } from "../../../../utils/dataUtils";
 import SessionListItem from "./SessionListItem";
 
 const StyledList = styled.div(({ compact, theme }) => {
@@ -15,7 +16,7 @@ const StyledList = styled.div(({ compact, theme }) => {
 const SessionList = ({ compact, mainColor, sessions }) => {
   return (
     <StyledList compact={compact ? 1 : 0}>
-      {sessions.map(session => (
+      {sortBy(sessions, "date", "desc").map(session => (
         <SessionListItem
           compact={compact ? 1 : 0}
           key={session.id}
