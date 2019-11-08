@@ -4,7 +4,14 @@ import { formatDate } from "../../../utils/dateUtils";
 import { Breadcrumb, Lookup, Page, Markdown } from "../../ui";
 
 const ViewPlayedSession = ({ session }) => {
-  const { date, location, players, recap } = session;
+  const { date, location, participants, recap } = session;
+
+  const players = participants
+    ? Object.keys(participants).reduce(
+        (acc, key) => (key ? [...acc, key] : acc),
+        []
+      )
+    : [];
 
   return (
     <Page>
