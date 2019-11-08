@@ -1,5 +1,6 @@
 import Breadcrumb from "./Breadcrumb";
 import Button from "./Button";
+import Icon from "./Icon";
 import Input from "./Input";
 import { LinkGrid, LinkTile } from "./LinkGrid";
 import Loading from "./Loading";
@@ -12,6 +13,7 @@ import VerticalList from "./VerticalList";
 export {
   Breadcrumb,
   Button,
+  Icon,
   Input,
   LinkGrid,
   LinkTile,
