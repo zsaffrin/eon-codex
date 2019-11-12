@@ -1,14 +1,21 @@
 import React from "react";
 
 import { useDocument } from "../../hooks/firestoreHooks";
-import { Loading } from "../ui";
+import { Link, Loading } from "../ui";
 
-const Lookup = ({ collection, recordId }) => {
+const Lookup = ({ collection, recordId, noLink }) => {
   const [record, recordLoading, recordError] = useDocument(
     `${collection}/${recordId}`
   );
 
-  return recordLoading ? <Loading inline /> : <span>{record.name}</span>;
+  if (recordLoading) {
+    return <Loading inline />;
+  }
+  if (noLink) {
+    return <span>{record.name}</span>;
+  }
+
+  return <Link to={`/info/${collection}/${recordId}`}>{record.name}</Link>;
 };
 
 export default Lookup;
