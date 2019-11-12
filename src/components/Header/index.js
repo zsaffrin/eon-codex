@@ -4,7 +4,7 @@ import styled from "styled-components";
 
 import { useCurrentUser } from "../../hooks/authHooks";
 import { Icon } from "../ui";
-import Identity from "./Identity";
+import { Identity, LoginStatus } from "./Identity";
 
 const StyledHeader = styled.header`
   border-bottom: 2px solid #8e44ad;
@@ -36,14 +36,19 @@ const Header = () => {
     <StyledHeader>
       <Title to="/">Eon Codex</Title>
       <Actions>
-        {userLoaded && user && user.canEdit && (
-          <div>
-            <PlainLink to="/settings">
-              <Icon name="cog" fixedWidth />
-            </PlainLink>
-          </div>
+        {userLoaded && user && (
+          <>
+            {user.canEdit && (
+              <div>
+                <PlainLink to="/settings">
+                  <Icon name="cog" fixedWidth />
+                </PlainLink>
+              </div>
+            )}
+            <Identity />
+          </>
         )}
-        <Identity />
+        <LoginStatus />
       </Actions>
     </StyledHeader>
   );
