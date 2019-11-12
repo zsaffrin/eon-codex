@@ -4,7 +4,7 @@ import { formatDate } from "../../../utils/dateUtils";
 import { Breadcrumb, Lookup, Page, Markdown } from "../../ui";
 
 const ViewPlayedSession = ({ session }) => {
-  const { date, location, participants, recap } = session;
+  const { date, location, participants, recap, title } = session;
 
   const players = participants
     ? Object.keys(participants).reduce(
@@ -21,10 +21,11 @@ const ViewPlayedSession = ({ session }) => {
           { label: "Sessions", target: "/sessions" }
         ]}
       />
-      <h1>Played Session</h1>
+      <h1>{title}</h1>
       <div>Date Played: {formatDate(date.toDate())}</div>
       <div>
-        Played at: <Lookup collection="gamingLocations" recordId={location} />
+        Played at:{" "}
+        <Lookup collection="gamingLocations" recordId={location} noLink />
       </div>
       {players && (
         <div>
@@ -32,7 +33,7 @@ const ViewPlayedSession = ({ session }) => {
           <div>
             {players.length > 0
               ? players.map(player => (
-                  <div>
+                  <div key={player}>
                     <Lookup collection="playerCharacters" recordId={player} />
                   </div>
                 ))
