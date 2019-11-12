@@ -9,7 +9,7 @@ const ViewPlayerCharacter = ({ record }) => {
     <Page>
       <h1>{name}</h1>
       <div>
-        Played by <Lookup collection="players" recordId={player} />
+        Played by <Lookup collection="players" recordId={player} noLink />
       </div>
       <Markdown content={bio} />
     </Page>
