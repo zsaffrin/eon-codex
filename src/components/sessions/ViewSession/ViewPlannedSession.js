@@ -1,5 +1,4 @@
 import React from "react";
-import ReactMarkdown from "react-markdown";
 
 import { formatDate } from "../../../utils/dateUtils";
 import { Breadcrumb, Lookup, Page } from "../../ui";
@@ -26,7 +25,7 @@ const ViewPlannedSession = ({ session }) => {
       <div>Scheduled Date: {formatDate(date.toDate())}</div>
       <div>
         Scheduled to play at:{" "}
-        <Lookup collection="gamingLocations" recordId={location} />
+        <Lookup collection="gamingLocations" recordId={location} noLink />
       </div>
       {players && (
         <div>
