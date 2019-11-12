@@ -1,6 +1,7 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import styled from "styled-components";
+
+import { Link } from "../../ui";
 
 const StyledLinks = styled.div`
   font-size: 0.85em;

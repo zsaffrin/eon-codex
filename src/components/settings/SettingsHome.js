@@ -1,7 +1,7 @@
 import React from "react";
-import { Link, useRouteMatch } from "react-router-dom";
+import { useRouteMatch } from "react-router-dom";
 
-import { Page } from "../ui";
+import { Link, Page } from "../ui";
 
 const SettingsHome = () => {
   const { url } = useRouteMatch();

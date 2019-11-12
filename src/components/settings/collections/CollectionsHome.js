@@ -1,7 +1,6 @@
 import React from "react";
-import { Link } from "react-router-dom";
 
-import { Breadcrumb, Page } from "../../ui";
+import { Breadcrumb, Link, Page } from "../../ui";
 
 const collectionLinks = [
   { label: "People", path: "/settings/collection/people", sort: "name" },

@@ -1,8 +1,7 @@
 import React from "react";
-import { Link } from "react-router-dom";
 
 import { useCollection } from "../../hooks/firestoreHooks";
-import { Breadcrumb, Loading, Page } from "../ui";
+import { Breadcrumb, Link, Loading, Page } from "../ui";
 
 const MenusHome = () => {
   const [menus, menusLoading] = useCollection("menus");

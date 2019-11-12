@@ -1,6 +1,7 @@
 import React from "react";
 import ReactMarkdown from "react-markdown";
-import { Link } from "react-router-dom";
+
+import { Link } from "../ui";
 
 const RenderLink = props =>
   props.href.match(/^(https?:)?\/\//) ? (
