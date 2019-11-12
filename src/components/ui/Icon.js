@@ -1,8 +1,8 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-const Icon = ({ name }) => {
-  return <FontAwesomeIcon icon={name} />;
+const Icon = ({ name, ...props }) => {
+  return <FontAwesomeIcon icon={name} {...props} />;
 };
 
 export default Icon;
