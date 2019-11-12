@@ -68,7 +68,7 @@ const SessionListItem = ({ compact, mainColor, session }) => {
       <TitleCell maincolor={mainColor}>{title}</TitleCell>
       <ContentCell maincolor={mainColor}>
         {`${formatDate(date.toDate())} @ `}
-        <Lookup collection="gamingLocations" recordId={location} />
+        <Lookup collection="gamingLocations" recordId={location} noLink />
       </ContentCell>
     </StyledItem>
   );
