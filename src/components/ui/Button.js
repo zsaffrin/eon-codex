@@ -39,6 +39,9 @@ const ColorButton = styled(StyledButton)(({ primary, disabled, theme }) => {
 
   return `
     background: ${tinycolor(buttonColor)};
+    background: linear-gradient(${tinycolor(buttonColor).lighten(
+      15
+    )}, ${tinycolor(buttonColor)});
     color: ${tinycolor(buttonTextColor)};
     border: 1px solid ${tinycolor(buttonColor).darken(10)};
     box-shadow: inset 0 1px 0 ${tinycolor(buttonColor).lighten(10)};
@@ -55,7 +58,7 @@ const ColorButton = styled(StyledButton)(({ primary, disabled, theme }) => {
     };
 
     &:hover {
-      background: ${tinycolor(buttonColor).darken(15)};
+      background: ${tinycolor(buttonColor)};
     }
   `;
 });
