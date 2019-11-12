@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 import { useCurrentUser } from "../../hooks/authHooks";
+import { Icon } from "../ui";
 import Identity from "./Identity";
 
 const StyledHeader = styled.header`
@@ -37,7 +38,9 @@ const Header = () => {
       <Actions>
         {userLoaded && user && user.canEdit && (
           <div>
-            <PlainLink to="/settings">⚙︎</PlainLink>
+            <PlainLink to="/settings">
+              <Icon name="cog" fixedWidth />
+            </PlainLink>
           </div>
         )}
         <Identity />
