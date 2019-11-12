@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { Link, useParams, useLocation } from "react-router-dom";
+import { useParams, useLocation } from "react-router-dom";
 
 import { useCollection, useSchema } from "../../../hooks/firestoreHooks";
 import { sortBy } from "../../../utils/dataUtils";
-import { Breadcrumb, Button, Loading, Page, Table } from "../../ui";
+import { Breadcrumb, Button, Link, Loading, Page, Table } from "../../ui";
 import EditRecord from "./EditRecord";
 
 const ManageCollection = ({ filter }) => {
