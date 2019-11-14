@@ -1,7 +1,7 @@
 import React from "react";
 import ReactMarkdown from "react-markdown";
 
-import { Link } from "../ui";
+import { Image, Link } from "../ui";
 
 const RenderLink = props =>
   props.href.match(/^(https?:)?\/\//) ? (
@@ -11,7 +11,12 @@ const RenderLink = props =>
   );
 
 const Markdown = ({ content }) => {
-  return <ReactMarkdown source={content} renderers={{ link: RenderLink }} />;
+  return (
+    <ReactMarkdown
+      source={content}
+      renderers={{ link: RenderLink, image: Image }}
+    />
+  );
 };
 
 export default Markdown;
