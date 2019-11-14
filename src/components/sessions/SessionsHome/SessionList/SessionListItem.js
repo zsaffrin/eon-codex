@@ -6,70 +6,76 @@ import tinycolor from "tinycolor2";
 import { formatDate } from "../../../../utils/dateUtils";
 import { Lookup } from "../../../ui";
 
-const StyledItem = styled(Link)(({ maincolor, compact, theme }) => {
-  const { color, space } = theme;
-  const primaryColor = tinycolor(maincolor);
+const StyledItem = styled(Link)(({ maincolor, theme }) => {
+  const { space } = theme;
+
   return `
-    border: 1px solid ${primaryColor};
+    border: 1px solid ${maincolor};
     border-radius: ${space.sm};
-    display: grid;
-    grid-template-columns: ${compact ? "9em" : "10em"} 1fr;
     text-decoration: none;
 
+    ${StyledItem}:hover {
+      border-color: ${tinycolor(maincolor).darken(10)}
+    }
+  `;
+});
+const ItemHeader = styled.div(({ maincolor, theme }) => {
+  const { color, space } = theme;
+
+  return `
+    display: flex;
+  
     & > div {
-      padding: ${compact ? `${space.thin} ${space.md}` : space.md}
-      font-size: ${compact ? "0.85em" : "inherit"}
-    }
+      background: ${maincolor};
+      color: ${color.background};
+      font-weight: bold;
+      padding: ${space.sm} ${space.md};
 
-    &:hover {
-      border-color: ${
-        primaryColor.isLight()
-          ? primaryColor.darken(20)
-          : primaryColor.lighten(10)
-      };
+      ${StyledItem}:hover & {
+        background: ${tinycolor(maincolor).darken(10)}
+      }
     }
   `;
 });
-const TitleCell = styled.div(({ maincolor, theme }) => {
-  const { color } = theme;
-  const primaryColor = tinycolor(maincolor);
+const NumberCell = styled.div`
+  text-align: center;
+  width: 2.5em;
+`;
+const TitleCell = styled.div`
+  flex-grow: 1;
+`;
+const ItemContent = styled.div(({ maincolor, theme }) => {
+  const { space } = theme;
 
   return `
-    background: ${primaryColor};
-    color: ${color.background};
-    font-weight: bold;
+    color: ${maincolor};
+    padding: ${space.sm} ${space.md};
 
-    ${StyledItem}:hover > & {
-      background: ${primaryColor.darken(10)};
-    }
-  `;
-});
-const ContentCell = styled.div(({ maincolor }) => {
-  const primaryColor = tinycolor(maincolor);
-
-  return `
-    color: ${primaryColor.darken(10)};
-
-    &:hover {
-      color: ${primaryColor.darken(10)};
+    ${StyledItem}:hover & {
+      color: ${tinycolor(maincolor).darken(10)}
     }
   `;
 });
 
-const SessionListItem = ({ compact, mainColor, session }) => {
-  const { date, id, location, title } = session;
+const SessionListItem = ({ mainColor, session }) => {
+  const { date, id, location, sessionNumber, title } = session;
 
   return (
-    <StyledItem
-      to={`/sessions/${id}`}
-      compact={compact ? 1 : 0}
-      maincolor={mainColor}
-    >
-      <TitleCell maincolor={mainColor}>{title}</TitleCell>
-      <ContentCell maincolor={mainColor}>
+    <StyledItem to={`/sessions/${id}`} maincolor={mainColor}>
+      <ItemHeader maincolor={mainColor}>
+        {title ? (
+          <>
+            <NumberCell>{sessionNumber}</NumberCell>
+            <TitleCell>{title}</TitleCell>
+          </>
+        ) : (
+          <TitleCell>{`Session ${sessionNumber}`}</TitleCell>
+        )}
+      </ItemHeader>
+      <ItemContent maincolor={mainColor}>
         {`${formatDate(date.toDate())} @ `}
         <Lookup collection="gamingLocations" recordId={location} noLink />
-      </ContentCell>
+      </ItemContent>
     </StyledItem>
   );
 };

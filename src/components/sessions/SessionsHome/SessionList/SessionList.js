@@ -5,20 +5,19 @@ import styled from "styled-components";
 import { sortBy } from "../../../../utils/dataUtils";
 import SessionListItem from "./SessionListItem";
 
-const StyledList = styled.div(({ compact, theme }) => {
+const StyledList = styled.div(({ theme }) => {
   const { space } = theme;
   return `
     display: grid;
-    grid-gap: ${compact ? space.thin : space.md}
+    grid-gap: ${space.md}
   `;
 });
 
-const SessionList = ({ compact, mainColor, sessions }) => {
+const SessionList = ({ mainColor, sessions }) => {
   return (
-    <StyledList compact={compact ? 1 : 0}>
+    <StyledList>
       {sortBy(sessions, "date", "desc").map(session => (
         <SessionListItem
-          compact={compact ? 1 : 0}
           key={session.id}
           session={session}
           mainColor={mainColor}
