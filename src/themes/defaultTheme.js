@@ -8,14 +8,21 @@ const space = {
 const color = {
   // Color palette generated on Palx
   // https://palx.jxnblk.com/1561ad
-  grays: ["#f8f9f9", "#ecedee", "#dee0e3", "#bfc4c8", "#adb3b9", "#818a92"],
-  purples: ["", "", "", "#6115ad"],
-  background: "#f8f9f9",
   primary: "#8e44ad",
   secondary: "#5b90c5",
   accent: "#cfd3d6",
+  lightgray: "#dfe1e3",
+  darkgray: "#626d78",
+  highlight: "#FFE65D",
   white: "#f8f9f9",
-  black: "#384048"
+  black: "#384048",
+
+  background: "#f9f9fa"
+};
+const text = {
+  color: color.black,
+  linkColor: "#C12E79",
+  linkHoverColor: color.primary
 };
 const inputs = {
   borderColor: color.accent,
@@ -25,11 +32,17 @@ const inputs = {
   buttonTextColorDark: color.black,
   buttonTextColorDisabled: color.white
 };
+const footer = {
+  background: color.darkgray,
+  color: color.background
+};
 
 const defaultTheme = {
   space,
   color,
-  inputs
+  footer,
+  inputs,
+  text
 };
 
 export default defaultTheme;
