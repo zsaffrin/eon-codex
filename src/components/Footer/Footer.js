@@ -10,6 +10,7 @@ const StyledFooter = styled.div(({ theme }) => {
     color: ${footer.color};
     display: grid;
     grid-template-columns: 1fr auto;
+    grid-gap: ${space.lg};
     padding: ${space.lg};
     `;
 });
@@ -29,7 +30,11 @@ const Footer = () => {
         <div>
           The Eon Codex is a companion app to our homebrewed D&amp;D campaign
         </div>
-        <div>Campaign design by Dan Surette. Site design by Zach Saffrin.</div>
+        <div>
+          Campaign design by Dan Surette
+          <br />
+          Site design by Zach Saffrin
+        </div>
       </TextContent>
       <div>
         <Link blended external to="https://github.com/zsaffrin/eon-codex">
