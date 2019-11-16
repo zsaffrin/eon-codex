@@ -3,6 +3,7 @@ import styled, { createGlobalStyle, ThemeProvider } from "styled-components";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { faCog, faUser } from "@fortawesome/free-solid-svg-icons";
+import { faGithub } from "@fortawesome/free-brands-svg-icons";
 
 // Firebase context provider
 import { FirebaseContext } from "../../contexts/firebaseContext";
@@ -12,6 +13,7 @@ import { Loading } from "../ui";
 
 // Page Components
 import Header from "../Header";
+import Footer from "../Footer";
 
 // Routes
 import AppRoutes from "./routes";
@@ -20,17 +22,26 @@ import AppRoutes from "./routes";
 import { defaultTheme } from "../../themes";
 
 // Set FontAwesome library
-library.add(faCog, faUser);
+library.add(faCog, faUser, faGithub);
 
-const GlobalStyle = createGlobalStyle`
-  html {box-sizing: border-box;}
-  *, *:before, *:after { box-sizing: inherit; }
-`;
+const GlobalStyle = createGlobalStyle(({ theme }) => {
+  const { color, text } = theme;
+  return `
+    html {box-sizing: border-box;}
+    *, *:before, *:after { box-sizing: inherit; }
+
+    background: ${color.background};
+    color: ${text.color};
+  `;
+});
 
 const AppLayout = styled.div`
   display: grid;
   grid-template-rows: auto 1fr;
   min-height: 100vh;
+`;
+const ContentWrap = styled.div`
+  min-height: calc(100vh - 1em);
 `;
 
 const App = () => {
@@ -43,9 +54,12 @@ const App = () => {
       <AppLayout>
         <GlobalStyle />
         <Router>
-          <Route path="*" component={Header} />
+          <ContentWrap>
+            <Route path="*" component={Header} />
+            <AppRoutes />
+          </ContentWrap>
 
-          <AppRoutes />
+          <Route path="*" component={Footer} />
         </Router>
       </AppLayout>
     </ThemeProvider>
