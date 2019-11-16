@@ -5,7 +5,7 @@ import styled from "styled-components";
 const StyledLink = styled(Link)(({ theme }) => {
   const { color, space } = theme;
   return `
-    border: 1px solid ${color.grays[3]};
+    border: 1px solid ${color.lightgray};
     border-radius: ${space.sm};
     color: inherit;
     display: block;
@@ -13,7 +13,7 @@ const StyledLink = styled(Link)(({ theme }) => {
     text-decoration: none;
 
     &:hover {
-      border-color: ${color.purples[3]};
+      border-color: ${color.primary};
     }
   `;
 });
