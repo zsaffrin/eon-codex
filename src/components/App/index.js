@@ -42,6 +42,8 @@ const AppLayout = styled.div`
 `;
 const ContentWrap = styled.div`
   min-height: calc(100vh - 1em);
+  display: grid;
+  grid-template-rows: auto 1fr;
 `;
 
 const App = () => {
