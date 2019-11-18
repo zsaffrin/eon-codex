@@ -1,10 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Route, Redirect } from "react-router-dom";
 
-import { useCurrentUser } from "../../../hooks/authHooks";
+import { UserContext } from "../../../contexts";
 
 const PrivateRoute = ({ children, level, ...rest }) => {
-  const [user, userLoaded] = useCurrentUser();
+  const { user } = useContext(UserContext);
 
   const isAuthorized = () => {
     if (level === "loggedIn" && user) {
@@ -17,12 +17,10 @@ const PrivateRoute = ({ children, level, ...rest }) => {
   };
 
   return (
-    userLoaded && (
-      <Route
-        {...rest}
-        render={() => (isAuthorized() ? children : <Redirect to="/" />)}
-      />
-    )
+    <Route
+      {...rest}
+      render={() => (isAuthorized() ? children : <Redirect to="/" />)}
+    />
   );
 };
 
