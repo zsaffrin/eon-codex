@@ -1,9 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
-import { useCurrentUser } from "../../hooks/authHooks";
-import { Icon } from "../ui";
+import { UserContext } from "../../contexts";
+import { Icon, Loading } from "../ui";
 import { Identity, LoginStatus } from "./Identity";
 
 const StyledHeader = styled.header`
@@ -30,15 +30,17 @@ const PlainLink = styled(Link)`
 `;
 
 const Header = () => {
-  const [user, userLoaded] = useCurrentUser();
+  const { user, userLoaded } = useContext(UserContext);
 
   return (
     <StyledHeader>
       <Title to="/">Eon Codex</Title>
       <Actions>
-        {userLoaded && user && (
+        {!userLoaded ? (
+          <Loading />
+        ) : (
           <>
-            {user.canEdit && (
+            {user && user.canEdit && (
               <div>
                 <PlainLink to="/settings">
                   <Icon name="cog" fixedWidth />
@@ -46,9 +48,9 @@ const Header = () => {
               </div>
             )}
             <Identity />
+            <LoginStatus />
           </>
         )}
-        <LoginStatus />
       </Actions>
     </StyledHeader>
   );
