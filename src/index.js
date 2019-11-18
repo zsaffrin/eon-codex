@@ -3,11 +3,13 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./components/App";
 
-import { FirebaseProvider } from "./contexts/firebaseContext";
+import { FirebaseProvider, UserProvider } from "./contexts";
 
 ReactDOM.render(
   <FirebaseProvider>
-    <App />
+    <UserProvider>
+      <App />
+    </UserProvider>
   </FirebaseProvider>,
   document.getElementById("root")
 );
