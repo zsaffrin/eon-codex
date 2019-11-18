@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { Link, useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const StyledPage = styled.div`
   background-image: url("https://res.cloudinary.com/dbg0v7696/image/upload/f_auto,q_auto/v1572134405/eon-codex/Hive_Primus_exterior.png");
@@ -17,7 +17,6 @@ const LoginPanel = styled.div`
 `;
 
 const ExternalHome = () => {
-  const history = useHistory();
   return (
     <StyledPage>
       <LoginPanel>
