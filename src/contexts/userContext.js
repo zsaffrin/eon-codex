@@ -8,7 +8,7 @@ const UserProvider = ({ children }) => {
   const [user, userLoaded] = useCurrentUser();
 
   return (
-    <UserContext.Provider value={userLoaded && user}>
+    <UserContext.Provider value={{ user, userLoaded }}>
       {children}
     </UserContext.Provider>
   );
