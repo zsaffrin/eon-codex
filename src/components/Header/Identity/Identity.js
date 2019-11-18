@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
 
-import { useCurrentUser } from "../../../hooks/authHooks";
+import { UserContext } from "../../../contexts";
 import { Icon, Loading } from "../../ui";
 
 const StyledWrap = styled.div(({ theme }) => {
@@ -14,15 +14,15 @@ const StyledWrap = styled.div(({ theme }) => {
 });
 
 const Identity = () => {
-  const [user, userLoaded] = useCurrentUser();
+  const { user } = useContext(UserContext);
 
-  return !userLoaded ? (
-    <Loading />
-  ) : (
-    <StyledWrap>
-      <Icon name="user" fixedWidth />
-      <div>{user.name}</div>
-    </StyledWrap>
+  return (
+    user && (
+      <StyledWrap>
+        <Icon name="user" fixedWidth />
+        <div>{user.name}</div>
+      </StyledWrap>
+    )
   );
 };
 
