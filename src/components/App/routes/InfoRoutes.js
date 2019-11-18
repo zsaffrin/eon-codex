@@ -1,15 +1,8 @@
 import React from "react";
 import { Route, Switch, useRouteMatch } from "react-router-dom";
 
-import InfoHome from "../../info";
-import ViewCollection from "../../info/ViewCollection";
-import ViewRecord from "../../info/ViewRecord";
-import {
-  ViewGroup,
-  ViewPerson,
-  ViewPlace,
-  ViewPlayerCharacter
-} from "../../info/views";
+import InfoHome, { EditRecord } from "../../info";
+import PrivateRoute from "./PrivateRoute";
 
 const InfoRoutes = () => {
   const { path } = useRouteMatch();
@@ -19,6 +12,13 @@ const InfoRoutes = () => {
       <Route path={`${path}/:categoryId?/:recordId?`} exact>
         <InfoHome />
       </Route>
+      <PrivateRoute
+        path={`${path}/:categoryId/:recordId/edit`}
+        exact
+        level="editor"
+      >
+        <EditRecord />
+      </PrivateRoute>
     </Switch>
   );
 };
