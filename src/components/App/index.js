@@ -6,7 +6,7 @@ import { faCog, faUser } from "@fortawesome/free-solid-svg-icons";
 import { faGithub } from "@fortawesome/free-brands-svg-icons";
 
 // Firebase context provider
-import { FirebaseContext } from "../../contexts/firebaseContext";
+import { FirebaseContext, UserContext } from "../../contexts";
 
 // UI Components
 import { Loading } from "../ui";
@@ -48,8 +48,9 @@ const ContentWrap = styled.div`
 
 const App = () => {
   const firebase = useContext(FirebaseContext);
+  const { userLoaded } = useContext(UserContext);
 
-  return !firebase ? (
+  return !firebase || !userLoaded ? (
     <Loading />
   ) : (
     <ThemeProvider theme={defaultTheme}>
