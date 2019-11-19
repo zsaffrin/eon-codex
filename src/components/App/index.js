@@ -27,11 +27,13 @@ library.add(faCog, faUser, faGithub);
 const GlobalStyle = createGlobalStyle(({ theme }) => {
   const { color, text } = theme;
   return `
-    html {box-sizing: border-box;}
+    html { background: ${color.background}; }
     *, *:before, *:after { box-sizing: inherit; }
-
-    background: ${color.background};
-    color: ${text.color};
+    
+    body {      
+      box-sizing: border-box;
+      color: ${text.color};
+    }
   `;
 });
 
