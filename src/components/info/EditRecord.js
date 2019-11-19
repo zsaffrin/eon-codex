@@ -9,7 +9,7 @@ import {
   useSchema
 } from "../../hooks/firestoreHooks";
 import { sortBy } from "../../utils/dataUtils";
-import { Button, Input, Loading, VerticalList } from "../ui";
+import { Button, Input, Loading, Page, VerticalList } from "../ui";
 
 export const EditRecord = ({ addNew }) => {
   const { categoryId, recordId } = useParams();
@@ -78,8 +78,8 @@ export const EditRecord = ({ addNew }) => {
   return !workingRecord || fieldsLoading || schemaLoading ? (
     <Loading />
   ) : (
-    <div>
-      <div>{`Edit ${schema.name} Record`}</div>
+    <Page>
+      <h1>{`Edit ${schema.name} Record`}</h1>
       <form onSubmit={handleFormSubmit}>
         <VerticalList
           items={sortBy(fields, "order").map(({ key, name, type, lookup }) => ({
@@ -118,6 +118,6 @@ export const EditRecord = ({ addNew }) => {
           }
         ]}
       />
-    </div>
+    </Page>
   );
 };
