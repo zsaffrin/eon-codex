@@ -2,9 +2,9 @@ import React, { useContext } from "react";
 import styled from "styled-components";
 
 import { UserContext } from "../../../contexts";
-import { Icon, Loading } from "../../ui";
+import { Icon, Link } from "../../ui";
 
-const StyledWrap = styled.div(({ theme }) => {
+const StyledWrap = styled(Link)(({ theme }) => {
   const { space } = theme;
   return `
     display: flex;
@@ -18,7 +18,7 @@ const Identity = () => {
 
   return (
     user && (
-      <StyledWrap>
+      <StyledWrap to="/user">
         <Icon name="user" fixedWidth />
         <div>{user.name}</div>
       </StyledWrap>
