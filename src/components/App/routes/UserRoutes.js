@@ -1,7 +1,7 @@
 import React from "react";
 import { Redirect, Route, Switch, useRouteMatch } from "react-router-dom";
 
-import { Profile } from "../../user";
+import { EditPc, Profile } from "../../user";
 
 const UserRoutes = () => {
   const { path } = useRouteMatch();
@@ -10,6 +10,9 @@ const UserRoutes = () => {
     <Switch>
       <Route path={path} exact>
         <Profile />
+      </Route>
+      <Route path={`${path}/editPc/:pcId`} exact>
+        <EditPc />
       </Route>
 
       <Redirect to={path} />
