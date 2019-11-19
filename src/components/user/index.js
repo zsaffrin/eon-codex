@@ -1,3 +1,4 @@
 import Profile from "./Profile";
+import EditPc from "./EditPc";
 
-export { Profile };
+export { EditPc, Profile };
