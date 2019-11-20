@@ -26,6 +26,7 @@ const text = {
 };
 const inputs = {
   borderColor: color.accent,
+  buttonColorDanger: "#BE1525",
   buttonColorDefault: color.accent,
   buttonColorDisabled: color.accent,
   buttonTextColorLight: color.white,
