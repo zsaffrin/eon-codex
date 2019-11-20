@@ -13,31 +13,36 @@ const StyledButton = styled.button(({ small, theme }) => {
     padding: ${small ? `${space.thin} ${space.md}` : `${space.md} ${space.lg}`};
   `;
 });
-const ColorButton = styled(StyledButton)(({ primary, disabled, theme }) => {
-  const { color, inputs } = theme;
-  const {
-    buttonColorDefault,
-    buttonColorDisabled,
-    buttonTextColorLight,
-    buttonTextColorDark
-  } = inputs;
+const ColorButton = styled(StyledButton)(
+  ({ primary, danger, disabled, theme }) => {
+    const { color, inputs } = theme;
+    const {
+      buttonColorDanger,
+      buttonColorDefault,
+      buttonColorDisabled,
+      buttonTextColorLight,
+      buttonTextColorDark
+    } = inputs;
 
-  let buttonColor = buttonColorDefault;
-  if (primary) {
-    buttonColor = color.primary;
-  }
-  if (disabled) {
-    buttonColor = buttonColorDisabled;
-  }
+    let buttonColor = buttonColorDefault;
+    if (primary) {
+      buttonColor = color.primary;
+    }
+    if (disabled) {
+      buttonColor = buttonColorDisabled;
+    }
+    if (danger) {
+      buttonColor = buttonColorDanger;
+    }
 
-  let buttonTextColor = "";
-  if (tinycolor(buttonColor).isLight()) {
-    buttonTextColor = buttonTextColorDark;
-  } else {
-    buttonTextColor = buttonTextColorLight;
-  }
+    let buttonTextColor = "";
+    if (tinycolor(buttonColor).isLight()) {
+      buttonTextColor = buttonTextColorDark;
+    } else {
+      buttonTextColor = buttonTextColorLight;
+    }
 
-  return `
+    return `
     background: ${tinycolor(buttonColor)};
     background: linear-gradient(${tinycolor(buttonColor).lighten(
       15
@@ -61,7 +66,8 @@ const ColorButton = styled(StyledButton)(({ primary, disabled, theme }) => {
       background: ${tinycolor(buttonColor)};
     }
   `;
-});
+  }
+);
 
 const Button = props => {
   return <ColorButton {...props}>{props.children}</ColorButton>;
