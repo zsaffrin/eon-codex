@@ -8,7 +8,7 @@ import { Button, Input, Loading, Page, VerticalList } from "../ui";
 
 const availableFields = ["name", "bio"];
 
-const EditPc = () => {
+const EditPc = ({ addNew }) => {
   const firebase = useContext(FirebaseContext);
   const history = useHistory();
   const { user, userLoaded } = useContext(UserContext);
@@ -20,12 +20,47 @@ const EditPc = () => {
   ]);
   const [pc, pcLoading, pcError] = useDocument(`playerCharacters/${pcId}`);
   const [workingPc, setWorkingPc] = useState(null);
+  const [confirmDelete, setConfirmDelete] = useState(false);
 
   useEffect(() => {
-    if (!pcLoading && pc && !workingPc) {
+    if (addNew) {
+      if (!fieldsLoading && userLoaded && !workingPc) {
+        setWorkingPc(
+          fields.reduce((acc, field) => {
+            let defaultValue = "";
+            if (field.type === "number") {
+              defaultValue = 0;
+            }
+            if (field.type === "boolean") {
+              defaultValue = false;
+            }
+            if (field.type === "multiselect") {
+              defaultValue = [];
+            }
+            if (field.key === "player") {
+              defaultValue = user.uid;
+            }
+
+            return {
+              ...acc,
+              [field.key]: defaultValue
+            };
+          }, {})
+        );
+      }
+    } else if (!pcLoading && pc && !workingPc) {
       setWorkingPc(pc);
     }
-  }, [pc, pcLoading, workingPc]);
+  }, [
+    addNew,
+    fields,
+    fieldsLoading,
+    pc,
+    pcLoading,
+    workingPc,
+    user,
+    userLoaded
+  ]);
 
   const handleFieldChange = e => {
     if (e.isDate) {
@@ -56,9 +91,25 @@ const EditPc = () => {
     e.preventDefault();
     try {
       const { id, ...rest } = workingPc;
-      const res = await firebase.updateDoc(`playerCharacters/${pc.id}`, rest);
+      const res = addNew
+        ? await firebase.addDoc("playerCharacters", rest)
+        : await firebase.updateDoc(`playerCharacters/${pc.id}`, rest);
       if (res.status === "success") {
         history.push(`/user`);
+      }
+      if (res.status === "error") {
+        console.error(res);
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
+  async function deletePc() {
+    try {
+      const res = await firebase.deleteDoc(`playerCharacters/${pc.id}`);
+      if (res.status === "success") {
+        history.push("/user");
       }
       if (res.status === "error") {
         console.error(res);
@@ -72,7 +123,7 @@ const EditPc = () => {
     return <Loading />;
   }
 
-  if (workingPc.player != user.uid) {
+  if (!addNew && workingPc.player != user.uid) {
     return <Redirect to="/user" />;
   }
 
@@ -103,13 +154,30 @@ const EditPc = () => {
         items={[
           {
             label: "",
-            content: (
+            content: confirmDelete ? (
+              <div>
+                <div>
+                  Are you sure you want to Delete this PC? This is permanent!
+                </div>
+                <div>
+                  <Button small onClick={() => setConfirmDelete(false)}>
+                    No, never mind
+                  </Button>
+                  <Button small danger onClick={deletePc}>
+                    Yes, Delete
+                  </Button>
+                </div>
+              </div>
+            ) : (
               <div>
                 <Button small primary onClick={handleFormSubmit}>
-                  Save Changes
+                  {addNew ? "Add PC" : "Save Changes"}
                 </Button>
                 <Button small onClick={() => history.push(`/user`)}>
                   Cancel
+                </Button>
+                <Button small danger onClick={() => setConfirmDelete(true)}>
+                  Delete
                 </Button>
               </div>
             )
