@@ -14,6 +14,9 @@ const UserRoutes = () => {
       <Route path={`${path}/editPc/:pcId`} exact>
         <EditPc />
       </Route>
+      <Route path={`${path}/newPc`} exact>
+        <EditPc addNew />
+      </Route>
 
       <Redirect to={path} />
     </Switch>
