@@ -1,10 +1,13 @@
 import React, { useContext } from "react";
+import { useHistory, useRouteMatch } from "react-router-dom";
 
 import { useCollection } from "../../hooks/firestoreHooks";
 import { UserContext } from "../../contexts";
-import { Breadcrumb, Link, Loading, Page } from "../ui";
+import { Breadcrumb, Button, Link, Loading, Page } from "../ui";
 
 const Profile = () => {
+  const history = useHistory();
+  const { url } = useRouteMatch();
   const { user, userLoaded } = useContext(UserContext);
   const [pcs, pcsLoading, pcsError] = useCollection("playerCharacters", [
     "player",
@@ -25,6 +28,11 @@ const Profile = () => {
       <h1>{user.name}</h1>
       <div>
         <h2>My PCs</h2>
+        <div>
+          <Button small onClick={() => history.push(`${url}/newPc`)}>
+            New PC
+          </Button>
+        </div>
         <ul>
           {pcs.map(({ id, name }) => (
             <li key={id}>
