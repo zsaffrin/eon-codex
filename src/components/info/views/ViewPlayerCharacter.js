@@ -18,11 +18,10 @@ const ViewPlayerCharacter = ({ record }) => {
         </div>
       )}
       <h1>{name}</h1>
-      <div>
+      <p>
         Played by <Lookup collection="players" recordId={player} noLink />
-      </div>
+      </p>
       <Markdown content={bio} />
-      <Notes />
     </Page>
   );
 };
