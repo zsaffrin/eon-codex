@@ -4,7 +4,7 @@ import { Breadcrumb, Link, Page } from "../../ui";
 
 const collectionLinks = [
   { label: "Groups", path: "/settings/collection/groups", sort: "name" },
-  { label: "Notes", path: "/settings/collection/notes", sort: "name" },
+  { label: "Notes", path: "/settings/collection/notes", sort: "collection" },
   { label: "People", path: "/settings/collection/people", sort: "name" },
   { label: "Places", path: "/settings/collection/places", sort: "name" },
   { label: "PCs", path: "/settings/collection/playerCharacters", sort: "name" },
