@@ -5,10 +5,11 @@ import { FirebaseContext, UserContext } from "../../../contexts";
 import { Button, Input, Lookup, Markdown } from "../../ui";
 
 const PlayerName = styled.div(({ theme }) => {
-  const { color } = theme;
+  const { color, space } = theme;
   return `
     color: ${color.accent};
     font-weight: bold;
+    padding: ${space.sm};
   `;
 });
 
