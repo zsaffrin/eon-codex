@@ -34,6 +34,11 @@ const GlobalStyle = createGlobalStyle(({ theme }) => {
       box-sizing: border-box;
       color: ${text.color};
     }
+
+    p {
+      line-height: 1.5;
+      margin: 0 0 1em;
+    }
   `;
 });
 
