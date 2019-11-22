@@ -3,6 +3,7 @@ import { useRouteMatch } from "react-router-dom";
 
 import { UserContext } from "../../../contexts";
 import { Link, Markdown, Page } from "../../ui";
+import Notes from "./Notes";
 
 const ViewPerson = ({ record }) => {
   const { name, desc } = record;
@@ -18,6 +19,7 @@ const ViewPerson = ({ record }) => {
       )}
       <h1>{name}</h1>
       <Markdown content={desc} />
+      <Notes />
     </Page>
   );
 };

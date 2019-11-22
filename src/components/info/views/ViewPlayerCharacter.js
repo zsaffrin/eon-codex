@@ -3,6 +3,7 @@ import { useRouteMatch } from "react-router-dom";
 
 import { UserContext } from "../../../contexts";
 import { Link, Lookup, Markdown, Page } from "../../ui";
+import Notes from "./Notes";
 
 const ViewPlayerCharacter = ({ record }) => {
   const { name, player, bio } = record;
@@ -21,6 +22,7 @@ const ViewPlayerCharacter = ({ record }) => {
         Played by <Lookup collection="players" recordId={player} noLink />
       </div>
       <Markdown content={bio} />
+      <Notes />
     </Page>
   );
 };
