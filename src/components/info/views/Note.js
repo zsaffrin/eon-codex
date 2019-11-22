@@ -2,7 +2,7 @@ import React, { Fragment, useContext, useState } from "react";
 import styled from "styled-components";
 
 import { FirebaseContext, UserContext } from "../../../contexts";
-import { Button, Input, Lookup, Markdown } from "../../ui";
+import { Button, Icon, Input, Lookup, Markdown } from "../../ui";
 
 const PlayerName = styled.div(({ theme }) => {
   const { color, space } = theme;
@@ -99,7 +99,7 @@ const Note = ({ record }) => {
             </>
           ) : (
             <Button small onClick={() => setEditNote(true)}>
-              Edit
+              <Icon name="edit" />
             </Button>
           )}
         </div>
