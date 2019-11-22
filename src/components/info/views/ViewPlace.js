@@ -3,6 +3,7 @@ import { useRouteMatch } from "react-router-dom";
 
 import { UserContext } from "../../../contexts";
 import { Link, Markdown, Page } from "../../ui";
+import Notes from "./Notes";
 
 const ViewPlace = ({ record }) => {
   const { name, shortDesc, longDesc } = record;
@@ -17,8 +18,9 @@ const ViewPlace = ({ record }) => {
         </div>
       )}
       <h1>{name}</h1>
-      <div>{shortDesc}</div>
+      <p>{shortDesc}</p>
       <Markdown content={longDesc} />
+      <Notes />
     </Page>
   );
 };
