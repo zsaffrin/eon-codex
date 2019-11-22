@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import styled, { createGlobalStyle, ThemeProvider } from "styled-components";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import { library } from "@fortawesome/fontawesome-svg-core";
-import { faCog, faUser } from "@fortawesome/free-solid-svg-icons";
+import { faCog, faUser, faEdit } from "@fortawesome/free-solid-svg-icons";
 import { faGithub } from "@fortawesome/free-brands-svg-icons";
 
 // Firebase context provider
@@ -22,7 +22,7 @@ import AppRoutes from "./routes";
 import { defaultTheme } from "../../themes";
 
 // Set FontAwesome library
-library.add(faCog, faUser, faGithub);
+library.add(faCog, faUser, faEdit, faGithub);
 
 const GlobalStyle = createGlobalStyle(({ theme }) => {
   const { color, text } = theme;
