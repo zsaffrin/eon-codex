@@ -1,10 +1,10 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useCollection } from "react-firebase-hooks/firestore";
 import styled from "styled-components";
 
 import { FirebaseContext, UserContext } from "../../../contexts";
-import { Button, Loading } from "../../ui";
+import { Button, Loading } from "..";
 import Note from "./Note";
 import NoteAdder from "./NoteAdder";
 
@@ -25,12 +25,14 @@ const NoteList = styled.div(({ theme }) => {
 const Notes = () => {
   const firebase = useContext(FirebaseContext);
   const { user } = useContext(UserContext);
-  const { categoryId, recordId } = useParams();
+  const { categoryId, recordId, sessionId } = useParams();
+  const [category] = useState(categoryId || "sessions");
+  const [record] = useState(recordId || sessionId);
   const [value, loading, error] = useCollection(
     firebase.db
       .collection("notes")
-      .where("collection", "==", categoryId)
-      .where("article", "==", recordId)
+      .where("collection", "==", category)
+      .where("article", "==", record)
   );
 
   const processedValues = value
@@ -41,7 +43,6 @@ const Notes = () => {
     <Loading />
   ) : (
     <div>
-      <h2>Player Notes</h2>
       <NoteList>
         {processedValues.map(note => (
           <Note record={note} key={note.id} />

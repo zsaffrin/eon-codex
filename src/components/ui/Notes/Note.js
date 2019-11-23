@@ -2,7 +2,7 @@ import React, { Fragment, useContext, useState } from "react";
 import styled from "styled-components";
 
 import { FirebaseContext, UserContext } from "../../../contexts";
-import { Button, Icon, Input, Lookup, Markdown } from "../../ui";
+import { Button, Icon, Input, Lookup, Markdown } from "..";
 
 const PlayerName = styled.div(({ theme }) => {
   const { color, space } = theme;

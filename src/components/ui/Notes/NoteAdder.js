@@ -2,20 +2,22 @@ import React, { useContext, useState } from "react";
 import { useParams } from "react-router-dom";
 
 import { FirebaseContext, UserContext } from "../../../contexts";
-import { Button, Input } from "../../ui";
+import { Button, Input } from "..";
 
 const NoteAdder = () => {
   const firebase = useContext(FirebaseContext);
   const { user } = useContext(UserContext);
-  const { categoryId, recordId } = useParams();
+  const { categoryId, recordId, sessionId } = useParams();
+  const [category] = useState(categoryId || "sessions");
+  const [record] = useState(recordId || sessionId);
   const [active, setActive] = useState(false);
   const [newNote, setNewNote] = useState("");
 
   async function saveNote() {
     try {
       const noteToAdd = {
-        collection: categoryId,
-        article: recordId,
+        collection: category,
+        article: record,
         player: user.uid,
         content: newNote
       };
