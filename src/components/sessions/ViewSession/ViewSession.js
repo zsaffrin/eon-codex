@@ -1,18 +1,14 @@
 import React from "react";
 import { useParams } from "react-router-dom";
-import ReactMarkdown from "react-markdown";
 
 import { useDocument } from "../../../hooks/firestoreHooks";
-import { Breadcrumb, Loading, Lookup, Page } from "../../ui";
-import { formatDate } from "../../../utils/dateUtils";
+import { Loading } from "../../ui";
 import ViewPlannedSession from "./ViewPlannedSession";
 import ViewPlayedSession from "./ViewPlayedSession";
 
 const ViewSession = () => {
   const { sessionId } = useParams();
-  const [session, sessionLoading, sessionError] = useDocument(
-    `sessions/${sessionId}`
-  );
+  const [session, sessionLoading] = useDocument(`sessions/${sessionId}`);
 
   if (sessionLoading) {
     return <Loading />;

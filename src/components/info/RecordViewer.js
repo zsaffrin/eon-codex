@@ -7,9 +7,7 @@ import { ViewGroup, ViewPerson, ViewPlace, ViewPlayerCharacter } from "./views";
 
 const RecordViewer = () => {
   const { categoryId, recordId } = useParams();
-  const [record, recordLoading, recordError] = useDocument(
-    `${categoryId}/${recordId}`
-  );
+  const [record, recordLoading] = useDocument(`${categoryId}/${recordId}`);
 
   if (recordLoading) {
     return <Loading />;

@@ -4,7 +4,7 @@ import styled from "styled-components";
 import tinycolor from "tinycolor2";
 
 const CategoryChoiceWrap = styled.div(({ theme }) => {
-  const { color, space } = theme;
+  const { color } = theme;
   return `
     background: ${color.primary};
     border: 1px solid ${color.primary};

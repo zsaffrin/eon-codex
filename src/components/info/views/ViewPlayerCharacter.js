@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { useRouteMatch } from "react-router-dom";
 
 import { UserContext } from "../../../contexts";
-import { Link, Lookup, Markdown, Notes, Page } from "../../ui";
+import { Link, Lookup, Markdown, Page } from "../../ui";
 
 const ViewPlayerCharacter = ({ record }) => {
   const { name, player, bio } = record;

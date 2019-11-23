@@ -9,7 +9,7 @@ const Profile = () => {
   const history = useHistory();
   const { url } = useRouteMatch();
   const { user, userLoaded } = useContext(UserContext);
-  const [pcs, pcsLoading, pcsError] = useCollection("playerCharacters", [
+  const [pcs, pcsLoading] = useCollection("playerCharacters", [
     "player",
     "==",
     user.uid

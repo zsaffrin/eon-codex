@@ -4,9 +4,7 @@ import { useDocument } from "../../hooks/firestoreHooks";
 import { Link, Loading } from "../ui";
 
 const Lookup = ({ collection, recordId, noLink }) => {
-  const [record, recordLoading, recordError] = useDocument(
-    `${collection}/${recordId}`
-  );
+  const [record, recordLoading] = useDocument(`${collection}/${recordId}`);
 
   if (recordLoading) {
     return <Loading inline />;

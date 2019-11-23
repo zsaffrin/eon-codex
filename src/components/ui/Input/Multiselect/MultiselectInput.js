@@ -20,7 +20,7 @@ const MultiselectInput = ({ id, value, choices, onChange }) => {
     if (Object.keys(selections).length !== Object.keys(value).length) {
       onChange({ isMultiselect: true, fieldId: id, value: selections });
     }
-  }, [selections, value]);
+  }, [selections, value, id, onChange]);
 
   const removeKey = (obj, keyToRemove) => {
     const newObj = Object.keys(obj).reduce(

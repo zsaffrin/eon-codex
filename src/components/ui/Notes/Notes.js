@@ -4,7 +4,7 @@ import { useCollection } from "react-firebase-hooks/firestore";
 import styled from "styled-components";
 
 import { FirebaseContext, UserContext } from "../../../contexts";
-import { Button, Loading } from "..";
+import { Loading } from "..";
 import Note from "./Note";
 import NoteAdder from "./NoteAdder";
 
@@ -28,7 +28,7 @@ const Notes = () => {
   const { categoryId, recordId, sessionId } = useParams();
   const [category] = useState(categoryId || "sessions");
   const [record] = useState(recordId || sessionId);
-  const [value, loading, error] = useCollection(
+  const [value, loading] = useCollection(
     firebase.db
       .collection("notes")
       .where("collection", "==", category)

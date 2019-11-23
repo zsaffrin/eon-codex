@@ -18,7 +18,7 @@ const EditPc = ({ addNew }) => {
     "==",
     "playerCharacters"
   ]);
-  const [pc, pcLoading, pcError] = useDocument(`playerCharacters/${pcId}`);
+  const [pc, pcLoading] = useDocument(`playerCharacters/${pcId}`);
   const [workingPc, setWorkingPc] = useState(null);
   const [confirmDelete, setConfirmDelete] = useState(false);
 

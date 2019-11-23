@@ -32,7 +32,7 @@ const ManageCollection = ({ filter }) => {
     ) {
       setSortField(location.state.sortKey);
     }
-  }, [location]);
+  }, [location, sortField]);
 
   const closeEdit = () => {
     setEditItem(null);

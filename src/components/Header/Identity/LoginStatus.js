@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { useHistory } from "react-router-dom";
 
 import { FirebaseContext, UserContext } from "../../../contexts";
-import { Button, Loading } from "../../ui";
+import { Button } from "../../ui";
 
 const LoginStatus = () => {
   const firebase = useContext(FirebaseContext);

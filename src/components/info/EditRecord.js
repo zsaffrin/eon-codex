@@ -14,9 +14,7 @@ import { Button, Input, Loading, Page, VerticalList } from "../ui";
 export const EditRecord = ({ addNew }) => {
   const { categoryId, recordId } = useParams();
   const history = useHistory();
-  const [record, recordLoading, recordError] = useDocument(
-    `${categoryId}/${recordId}`
-  );
+  const [record, recordLoading] = useDocument(`${categoryId}/${recordId}`);
   const [workingRecord, setWorkingRecord] = useState(null);
   const [schema, schemaLoading] = useSchema(categoryId);
   const [fields, fieldsLoading] = useCollection("schemaFields", [
