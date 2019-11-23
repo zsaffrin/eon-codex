@@ -1,8 +1,8 @@
 import React from "react";
 import { string } from "prop-types";
 
-import { useCollection } from "../../../hooks/firestoreHooks";
-import Loading from "../Loading";
+import { useCollection } from "../../../../hooks/firestoreHooks";
+import Loading from "../../Loading";
 import MultiselectInput from "./MultiselectInput";
 
 const Multiselect = ({ lookup, ...rest }) => {
