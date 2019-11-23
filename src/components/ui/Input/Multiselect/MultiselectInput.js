@@ -17,16 +17,29 @@ const MultiselectInput = ({ id, value, choices, onChange }) => {
   const [selections, setSelections] = useState(value);
 
   useEffect(() => {
-    if (selections !== value) {
+    if (Object.keys(selections).length !== Object.keys(value).length) {
       onChange({ isMultiselect: true, fieldId: id, value: selections });
     }
-  }, [selections]);
+  }, [selections, value]);
+
+  const removeKey = (obj, keyToRemove) => {
+    const newObj = Object.keys(obj).reduce(
+      (acc, key) =>
+        key === keyToRemove ? { ...acc } : { ...acc, [key]: obj[key] },
+      {}
+    );
+    return newObj;
+  };
 
   const handleSelectionChange = selectionToggled => {
-    setSelections({
-      ...selections,
-      [selectionToggled]: !selections[selectionToggled]
-    });
+    if (selections[selectionToggled]) {
+      setSelections(removeKey(selections, selectionToggled));
+    } else {
+      setSelections({
+        ...selections,
+        [selectionToggled]: true
+      });
+    }
   };
 
   const choiceItems = choices.map(choice => (
