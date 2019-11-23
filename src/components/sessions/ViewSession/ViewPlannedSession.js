@@ -1,7 +1,7 @@
 import React from "react";
 
 import { formatDate } from "../../../utils/dateUtils";
-import { Breadcrumb, Lookup, Page } from "../../ui";
+import { Breadcrumb, Lookup, Notes, Page } from "../../ui";
 
 const ViewPlannedSession = ({ session }) => {
   const { date, location, participants } = session;
@@ -41,6 +41,10 @@ const ViewPlannedSession = ({ session }) => {
           </div>
         </div>
       )}
+      <div>
+        <h2>Player Notes</h2>
+        <Notes />
+      </div>
     </Page>
   );
 };
