@@ -123,7 +123,7 @@ const EditPc = ({ addNew }) => {
     return <Loading />;
   }
 
-  if (!addNew && workingPc.player != user.uid) {
+  if (!addNew && workingPc.player !== user.uid) {
     return <Redirect to="/user" />;
   }
 
