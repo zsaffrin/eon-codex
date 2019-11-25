@@ -58,15 +58,15 @@ const ItemContent = styled.div(({ maincolor, theme }) => {
 });
 
 const SessionListItem = ({ mainColor, session }) => {
-  const { date, id, location, sessionNumber, title } = session;
+  const { date, id, location, sessionNumber, name } = session;
 
   return (
     <StyledItem to={`/sessions/${id}`} maincolor={mainColor}>
       <ItemHeader maincolor={mainColor}>
-        {title ? (
+        {name ? (
           <>
             <NumberCell>{sessionNumber}</NumberCell>
-            <TitleCell>{title}</TitleCell>
+            <TitleCell>{name}</TitleCell>
           </>
         ) : (
           <TitleCell>{`Session ${sessionNumber}`}</TitleCell>
