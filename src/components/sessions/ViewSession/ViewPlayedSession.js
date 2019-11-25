@@ -1,10 +1,10 @@
 import React from "react";
 
 import { formatDate } from "../../../utils/dateUtils";
-import { Breadcrumb, Lookup, Page, Markdown, Notes } from "../../ui";
+import { Breadcrumb, Lookup, Loot, Page, Markdown, Notes } from "../../ui";
 
 const ViewPlayedSession = ({ session }) => {
-  const { date, location, participants, recap, title } = session;
+  const { date, location, participants, recap, name } = session;
 
   const players = participants
     ? Object.keys(participants).reduce(
@@ -21,7 +21,7 @@ const ViewPlayedSession = ({ session }) => {
           { label: "Sessions", target: "/sessions" }
         ]}
       />
-      <h1>{title}</h1>
+      <h1>{name}</h1>
       <div>Date Played: {formatDate(date.toDate())}</div>
       <div>
         Played at:{" "}
@@ -41,6 +41,10 @@ const ViewPlayedSession = ({ session }) => {
           </div>
         </div>
       )}
+      <div>
+        <h2>Loot</h2>
+        <Loot />
+      </div>
       <div>
         <h2>Recap</h2>
         {recap && recap.length > 0 && <Markdown content={session.recap} />}
