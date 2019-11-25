@@ -7,6 +7,7 @@ import Link from "./Link";
 import { LinkGrid, LinkTile } from "./LinkGrid";
 import Loading from "./Loading";
 import Lookup from "./Lookup";
+import Loot from "./Loot";
 import Markdown from "./Markdown";
 import Notes from "./Notes";
 import Page from "./Page";
@@ -24,6 +25,7 @@ export {
   LinkTile,
   Loading,
   Lookup,
+  Loot,
   Markdown,
   Notes,
   Page,
