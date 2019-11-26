@@ -4,9 +4,9 @@ import { Redirect, useHistory, useParams } from "react-router-dom";
 import { FirebaseContext, UserContext } from "../../contexts";
 import { useCollection, useDocument } from "../../hooks/firestoreHooks";
 import { sortBy } from "../../utils/dataUtils";
-import { Button, Input, Loading, Page, VerticalList } from "../ui";
+import { Button, ButtonRow, Input, Loading, Page, VerticalList } from "../ui";
 
-const availableFields = ["name", "bio"];
+const availableFields = ["name", "notes", "info", "bio"];
 
 const EditPc = ({ addNew }) => {
   const firebase = useContext(FirebaseContext);
@@ -135,23 +135,21 @@ const EditPc = ({ addNew }) => {
     <Page>
       <h1>Edit PC</h1>
       <VerticalList
-        items={sortBy(filteredFields, "order").map(
-          ({ key, name, type, lookup }) => ({
-            label: name,
-            content: (
-              <Input
-                type={type}
-                id={key}
-                lookup={lookup}
-                value={workingPc[key]}
-                onChange={handleFieldChange}
-              />
-            )
-          })
-        )}
-      />
-      <VerticalList
         items={[
+          ...sortBy(filteredFields, "order").map(
+            ({ key, name, type, lookup }) => ({
+              label: name,
+              content: (
+                <Input
+                  type={type}
+                  id={key}
+                  lookup={lookup}
+                  value={workingPc[key]}
+                  onChange={handleFieldChange}
+                />
+              )
+            })
+          ),
           {
             label: "",
             content: confirmDelete ? (
@@ -169,7 +167,7 @@ const EditPc = ({ addNew }) => {
                 </div>
               </div>
             ) : (
-              <div>
+              <ButtonRow>
                 <Button small primary onClick={handleFormSubmit}>
                   {addNew ? "Add PC" : "Save Changes"}
                 </Button>
@@ -179,7 +177,7 @@ const EditPc = ({ addNew }) => {
                 <Button small danger onClick={() => setConfirmDelete(true)}>
                   Delete
                 </Button>
-              </div>
+              </ButtonRow>
             )
           }
         ]}
