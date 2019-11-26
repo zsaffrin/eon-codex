@@ -23,7 +23,7 @@ const StyledTable = styled.table(({ theme }) => {
 const TableHead = styled.thead(({ theme }) => {
   const { space } = theme;
   return `
-    & > th {
+    & tr th {
       font-size: 0.8em;
       font-weight: bold;
       padding: ${space.sm} ${space.md};
