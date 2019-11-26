@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
 
+import { sortBy } from "../../../utils/dataUtils";
 import { UserContext } from "../../../contexts";
 import { useCollection } from "../../../hooks/firestoreHooks";
 import { Loading } from "../../ui";
@@ -59,7 +60,7 @@ const Loot = () => {
             </tr>
           </TableHead>
           <tbody>
-            {items.map(item => (
+            {sortBy(items, "name").map(item => (
               <LootItem item={item} key={item.id} />
             ))}
           </tbody>
