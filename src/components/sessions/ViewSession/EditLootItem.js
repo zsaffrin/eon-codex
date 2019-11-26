@@ -14,13 +14,17 @@ export const EditLootItem = () => {
   const [workingRecord, setWorkingRecord] = useState(null);
   const [fields, fieldsLoading] = useSchemaFields("loot");
   const firebase = useContext(FirebaseContext);
+  const [confirmDelete, setConfirmDelete] = useState(false);
 
   useEffect(() => {
     if (!fieldsLoading && !recordLoading && record && !workingRecord) {
       const seedItem = fields.reduce(
         (acc, field) =>
           record[field.key]
-            ? { ...acc, [field.key]: record[field.key] }
+            ? {
+                ...acc,
+                [field.key]: record[field.key]
+              }
             : { ...acc, [field.key]: "" },
         {
           id: record.id
@@ -71,6 +75,20 @@ export const EditLootItem = () => {
     }
   }
 
+  async function handleDelete() {
+    try {
+      const res = await firebase.deleteDoc(`loot/${recordId}`);
+      if (res.status === "success") {
+        history.push(`/sessions/${record.session}`);
+      }
+      if (res.status === "error") {
+        console.error(res);
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
   return !workingRecord || fieldsLoading ? (
     <Loading />
   ) : (
@@ -96,7 +114,19 @@ export const EditLootItem = () => {
         items={[
           {
             label: "",
-            content: (
+            content: confirmDelete ? (
+              <div>
+                <div>Are you sure you want to delete this item?</div>
+                <div>
+                  <Button small onClick={() => setConfirmDelete(false)}>
+                    Nope, Cancel
+                  </Button>
+                  <Button danger small onClick={handleDelete}>
+                    Yes, Delete
+                  </Button>
+                </div>
+              </div>
+            ) : (
               <div>
                 <Button small primary onClick={handleFormSubmit}>
                   Save Changes
@@ -106,6 +136,9 @@ export const EditLootItem = () => {
                   onClick={() => history.push(`/sessions/${record.session}`)}
                 >
                   Cancel
+                </Button>
+                <Button danger small onClick={() => setConfirmDelete(true)}>
+                  Delete
                 </Button>
               </div>
             )
