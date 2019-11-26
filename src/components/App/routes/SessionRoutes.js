@@ -4,7 +4,7 @@ import { Route, Switch, useRouteMatch } from "react-router-dom";
 import PrivateRoute from "./PrivateRoute";
 import SessionsHome from "../../sessions";
 import ViewSession from "../../sessions/ViewSession";
-import EditLootItem from "../../ui/Loot/EditLootItem";
+import EditLootItem from "../../sessions/ViewSession/EditLootItem";
 
 const SessionRoutes = () => {
   const { path } = useRouteMatch();
