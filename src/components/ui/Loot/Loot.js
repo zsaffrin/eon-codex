@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
 
+import { UserContext } from "../../../contexts";
 import { useCollection } from "../../../hooks/firestoreHooks";
 import { Loading } from "../../ui";
 import LootItem from "./LootItem";
+import LootAdder from "./LootAdder";
 
 const StyledTable = styled.table(({ theme }) => {
   const { color } = theme;
@@ -33,6 +35,7 @@ const TableHead = styled.thead(({ theme }) => {
 
 const Loot = () => {
   const { sessionId } = useParams();
+  const { user } = useContext(UserContext);
   const [items, itemsLoading] = useCollection("loot", [
     "session",
     "==",
@@ -43,21 +46,28 @@ const Loot = () => {
     return <Loading />;
   }
 
-  return items.length > 0 ? (
-    <StyledTable>
-      <TableHead>
-        <th>Item</th>
-        <th>Claim</th>
-        <th>Comments</th>
-      </TableHead>
-      <tbody>
-        {items.map(item => (
-          <LootItem item={item} key={item.id} />
-        ))}
-      </tbody>
-    </StyledTable>
-  ) : (
-    <div>No loot</div>
+  return (
+    <>
+      {items.length > 0 ? (
+        <StyledTable>
+          <TableHead>
+            <tr>
+              <th>Item</th>
+              <th>Claim</th>
+              <th>Comments</th>
+            </tr>
+          </TableHead>
+          <tbody>
+            {items.map(item => (
+              <LootItem item={item} key={item.id} />
+            ))}
+          </tbody>
+        </StyledTable>
+      ) : (
+        <div>No loot</div>
+      )}
+      {user.canEdit && <LootAdder />}
+    </>
   );
 };
 
