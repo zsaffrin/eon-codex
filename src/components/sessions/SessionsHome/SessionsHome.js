@@ -19,7 +19,7 @@ const SessionsHome = () => {
 
         return acc;
       },
-      { upcoming: [], past: [] }
+      { planned: [], played: [] }
     );
 
   return collectionLoading ? (
@@ -28,8 +28,12 @@ const SessionsHome = () => {
     <Page>
       <Breadcrumb links={[{ label: "Home", target: "/" }]} />
       <h1>Sessions</h1>
-      <PlannedSessions sessions={sessions.planned} />
-      <PlayedSessions sessions={sessions.played} />
+      {sessions.planned.length > 0 && (
+        <PlannedSessions sessions={sessions.planned} />
+      )}
+      {sessions.played.length > 0 && (
+        <PlayedSessions sessions={sessions.played} />
+      )}
     </Page>
   );
 };
