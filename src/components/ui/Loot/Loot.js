@@ -55,6 +55,7 @@ const Loot = () => {
               <th>Item</th>
               <th>Claim</th>
               <th>Comments</th>
+              {user.canEdit && <th />}
             </tr>
           </TableHead>
           <tbody>
