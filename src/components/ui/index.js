@@ -1,5 +1,6 @@
 import Breadcrumb from "./Breadcrumb";
 import Button from "./Button";
+import ButtonRow from "./ButtonRow";
 import Icon from "./Icon";
 import Image from "./Image";
 import Input from "./Input";
@@ -17,6 +18,7 @@ import VerticalList from "./VerticalList";
 export {
   Breadcrumb,
   Button,
+  ButtonRow,
   Icon,
   Image,
   Input,
