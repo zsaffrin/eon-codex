@@ -16,10 +16,19 @@ export const EditLootItem = () => {
   const firebase = useContext(FirebaseContext);
 
   useEffect(() => {
-    if (!recordLoading && record && !workingRecord) {
-      setWorkingRecord(record);
+    if (!fieldsLoading && !recordLoading && record && !workingRecord) {
+      const seedItem = fields.reduce(
+        (acc, field) =>
+          record[field.key]
+            ? { ...acc, [field.key]: record[field.key] }
+            : { ...acc, [field.key]: "" },
+        {
+          id: record.id
+        }
+      );
+      setWorkingRecord(seedItem);
     }
-  }, [record, recordLoading, workingRecord]);
+  }, [fieldsLoading, fields, record, recordLoading, workingRecord]);
 
   const handleFieldChange = e => {
     if (e.isDate) {
