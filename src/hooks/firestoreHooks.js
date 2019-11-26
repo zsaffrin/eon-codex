@@ -40,6 +40,14 @@ export function useSchema(schemaId) {
   );
   return [schema, schemaLoading, schemaError];
 }
+export function useSchemaFields(schemaId) {
+  const [fields, fieldsLoading, fieldsError] = useCollection("schemaFields", [
+    "schema",
+    "==",
+    schemaId
+  ]);
+  return [fields, fieldsLoading, fieldsError];
+}
 
 export function useMenu(menuName) {
   const [menu, menuLoading, menuError] = useDocument(`menus/${menuName}`);
