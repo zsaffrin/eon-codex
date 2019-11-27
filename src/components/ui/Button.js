@@ -2,15 +2,27 @@ import React from "react";
 import styled from "styled-components";
 import tinycolor from "tinycolor2";
 
-const StyledButton = styled.button(({ small, theme }) => {
+const StyledButton = styled.button(({ small, theme, tiny }) => {
   const { space } = theme;
+
+  let fontSize = "1em";
+  let pad = `${space.md} ${space.lg}`;
+  if (small) {
+    fontSize = "0.9em";
+    pad = `${space.thin} ${space.md}`;
+  }
+  if (tiny) {
+    fontSize = "0.8em";
+    pad = `${space.thin} ${space.sm}`;
+  }
+
   return `
     -webkit-appearance: none;
     border-radius: ${space.sm};
     cursor: pointer;
-    font-size: ${small ? "0.9em" : "1em"};
+    font-size: ${fontSize};
     font-weight: bold;
-    padding: ${small ? `${space.thin} ${space.md}` : `${space.md} ${space.lg}`};
+    padding: ${pad};
   `;
 });
 const ColorButton = styled(StyledButton)(
