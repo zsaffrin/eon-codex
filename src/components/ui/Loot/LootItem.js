@@ -37,7 +37,7 @@ const LootItem = ({ item }) => {
       {user.canEdit && (
         <td>
           <Button
-            small
+            tiny
             onClick={() => history.push(`/sessions/editLootItem/${id}`)}
           >
             Edit
