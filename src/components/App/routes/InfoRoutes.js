@@ -1,8 +1,8 @@
 import React from "react";
 import { Route, Switch, useRouteMatch } from "react-router-dom";
 
-import InfoHome, { EditRecord } from "../../info";
-import PrivateRoute from "./PrivateRoute";
+import Info from "../../info";
+// import PrivateRoute from "./PrivateRoute";
 
 const InfoRoutes = () => {
   const { path } = useRouteMatch();
@@ -10,15 +10,15 @@ const InfoRoutes = () => {
   return (
     <Switch>
       <Route path={`${path}/:categoryId?/:recordId?`} exact>
-        <InfoHome />
+        <Info />
       </Route>
-      <PrivateRoute
+      {/* <PrivateRoute
         path={`${path}/:categoryId/:recordId/edit`}
         exact
         level="editor"
       >
         <EditRecord />
-      </PrivateRoute>
+      </PrivateRoute> */}
     </Switch>
   );
 };
