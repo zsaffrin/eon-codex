@@ -1,7 +1,7 @@
-import React from "react";
-import { Route, Switch, useRouteMatch } from "react-router-dom";
+import React from 'react';
+import { Route, Switch, useRouteMatch } from 'react-router-dom';
 
-import Info from "../../info";
+import Info from '../../info';
 // import PrivateRoute from "./PrivateRoute";
 
 const InfoRoutes = () => {
@@ -9,7 +9,7 @@ const InfoRoutes = () => {
 
   return (
     <Switch>
-      <Route path={`${path}/:categoryId?/:recordId?`} exact>
+      <Route path={`${path}/:categoryId?/:recordId?/:mode?`}>
         <Info />
       </Route>
       {/* <PrivateRoute
