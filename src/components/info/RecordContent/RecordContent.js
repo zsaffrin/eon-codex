@@ -23,6 +23,7 @@ const RecordContent = () => {
   if (!recordId) {
     return (
       <Page>
+        <ActionBar />
         Select a record
       </Page>
     );
