@@ -20,7 +20,7 @@ const ActionBar = () => {
   return (
     <StyledBar>
       <Link to={`/info/${categoryId}/_/add`}>New</Link>
-      <Link to={`/info/${categoryId}/${recordId}/edit`}>Edit</Link>
+      {recordId && <Link to={`/info/${categoryId}/${recordId}/edit`}>Edit</Link>}
     </StyledBar>
   );
 };
