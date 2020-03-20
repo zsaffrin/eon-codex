@@ -112,12 +112,22 @@ const EditRecord = ({ addNew }) => {
   };
 
   const formItems = schemaFieldsLoading || !record ? [] : sortBy(schemaFields, 'order').reduce((acc, field) => {
-    const { key, name, type } = field;
+    const {
+      key, name, type, lookup,
+    } = field;
     return [
       ...acc,
       {
         label: name,
-        content: <Input id={key} type={type} value={record[key]} onChange={handleInputChange} />,
+        content: (
+          <Input
+            id={key}
+            type={type}
+            lookup={lookup}
+            value={record[key]}
+            onChange={handleInputChange}
+          />
+        ),
       },
     ];
   }, []);
