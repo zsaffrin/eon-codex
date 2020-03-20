@@ -1,24 +1,26 @@
-import Breadcrumb from "./Breadcrumb";
-import Button from "./Button";
-import ButtonRow from "./ButtonRow";
-import Icon from "./Icon";
-import Image from "./Image";
-import Input from "./Input";
-import Link from "./Link";
-import { LinkGrid, LinkTile } from "./LinkGrid";
-import Loading from "./Loading";
-import Lookup from "./Lookup";
-import Loot from "./Loot";
-import Markdown from "./Markdown";
-import Notes from "./Notes";
-import Page from "./Page";
-import Table from "./Table";
-import VerticalList from "./VerticalList";
+import Breadcrumb from './Breadcrumb';
+import Button from './Button';
+import ButtonRow from './ButtonRow';
+import H from './H';
+import Icon from './Icon';
+import Image from './Image';
+import Input from './Input';
+import Link from './Link';
+import { LinkGrid, LinkTile } from './LinkGrid';
+import Loading from './Loading';
+import Lookup from './Lookup';
+import Loot from './Loot';
+import Markdown from './Markdown';
+import Notes from './Notes';
+import Page from './Page';
+import Table from './Table';
+import VerticalList from './VerticalList';
 
 export {
   Breadcrumb,
   Button,
   ButtonRow,
+  H,
   Icon,
   Image,
   Input,
@@ -32,5 +34,5 @@ export {
   Notes,
   Page,
   Table,
-  VerticalList
+  VerticalList,
 };

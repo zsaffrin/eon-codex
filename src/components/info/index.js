@@ -1,5 +1,3 @@
-import InfoHome from "./InfoHome";
-import { EditRecord } from "./EditRecord";
+import Info from './Info';
 
-export default InfoHome;
-export { EditRecord };
+export default Info;
