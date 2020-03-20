@@ -1,60 +1,61 @@
-import React, { useContext, useEffect, useState } from "react";
-import { useParams, useHistory } from "react-router-dom";
+import React, { useContext, useEffect, useState } from 'react';
+import { useParams, useHistory } from 'react-router-dom';
 
-import { FirebaseContext } from "../../../contexts";
+import { FirebaseContext } from '../../../contexts';
 
-import { useDocument, useSchemaFields } from "../../../hooks/firestoreHooks";
-import { sortBy } from "../../../utils/dataUtils";
-import { Button, Input, Loading, Page, VerticalList } from "../../ui";
+import { useDocument, useSchemaFields } from '../../../hooks/firestoreHooks';
+import { sortBy } from '../../../utils/dataUtils';
+import {
+  Button, Input, Loading, Page, VerticalList,
+} from '../../ui';
 
 export const EditLootItem = () => {
   const { recordId } = useParams();
   const history = useHistory();
   const [record, recordLoading] = useDocument(`loot/${recordId}`);
   const [workingRecord, setWorkingRecord] = useState(null);
-  const [fields, fieldsLoading] = useSchemaFields("loot");
+  const [fields, fieldsLoading] = useSchemaFields('loot');
   const firebase = useContext(FirebaseContext);
   const [confirmDelete, setConfirmDelete] = useState(false);
 
   useEffect(() => {
     if (!fieldsLoading && !recordLoading && record && !workingRecord) {
       const seedItem = fields.reduce(
-        (acc, field) =>
-          record[field.key]
-            ? {
-                ...acc,
-                [field.key]: record[field.key]
-              }
-            : { ...acc, [field.key]: "" },
+        (acc, field) => (record[field.key]
+          ? {
+            ...acc,
+            [field.key]: record[field.key],
+          }
+          : { ...acc, [field.key]: '' }),
         {
-          id: record.id
-        }
+          id: record.id,
+        },
       );
       setWorkingRecord(seedItem);
     }
   }, [fieldsLoading, fields, record, recordLoading, workingRecord]);
 
-  const handleFieldChange = e => {
+  const handleFieldChange = (e) => {
     if (e.isDate) {
       setWorkingRecord({
         ...workingRecord,
-        [e.id]: e.value
+        [e.id]: e.value,
       });
-    } else if (e.type === "checkbox") {
+    } else if (e.type === 'checkbox') {
       setWorkingRecord({
         ...workingRecord,
-        [e.target.id]: e.target.checked
+        [e.target.id]: e.target.checked,
       });
     } else if (e.isMultiselect) {
       setWorkingRecord({
         ...workingRecord,
-        [e.fieldId]: e.value
+        [e.fieldId]: e.value,
       });
     } else {
       setWorkingRecord({
         ...workingRecord,
         [e.target.id]:
-          e.target.type === "number" ? Number(e.target.value) : e.target.value
+          e.target.type === 'number' ? Number(e.target.value) : e.target.value,
       });
     }
   };
@@ -64,10 +65,10 @@ export const EditLootItem = () => {
     try {
       const { id, ...rest } = workingRecord;
       const res = await firebase.updateDoc(`loot/${id}`, rest);
-      if (res.status === "success") {
+      if (res.status === 'success') {
         history.push(`/sessions/${record.session}`);
       }
-      if (res.status === "error") {
+      if (res.status === 'error') {
         console.error(res);
       }
     } catch (err) {
@@ -78,10 +79,10 @@ export const EditLootItem = () => {
   async function handleDelete() {
     try {
       const res = await firebase.deleteDoc(`loot/${recordId}`);
-      if (res.status === "success") {
+      if (res.status === 'success') {
         history.push(`/sessions/${record.session}`);
       }
-      if (res.status === "error") {
+      if (res.status === 'error') {
         console.error(res);
       }
     } catch (err) {
@@ -96,7 +97,9 @@ export const EditLootItem = () => {
       <h1>Edit Loot Item</h1>
       <form onSubmit={handleFormSubmit}>
         <VerticalList
-          items={sortBy(fields, "order").map(({ key, name, type, lookup }) => ({
+          items={sortBy(fields, 'order').map(({
+            key, name, type, lookup,
+          }) => ({
             label: name,
             content: (
               <Input
@@ -106,14 +109,14 @@ export const EditLootItem = () => {
                 value={workingRecord[key]}
                 onChange={handleFieldChange}
               />
-            )
+            ),
           }))}
         />
       </form>
       <VerticalList
         items={[
           {
-            label: "",
+            label: '',
             content: confirmDelete ? (
               <div>
                 <div>Are you sure you want to delete this item?</div>
@@ -141,8 +144,8 @@ export const EditLootItem = () => {
                   Delete
                 </Button>
               </div>
-            )
-          }
+            ),
+          },
         ]}
       />
     </Page>
