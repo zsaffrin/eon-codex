@@ -5,6 +5,6 @@ const StyledCell = styled.div`
   text-align: center;
 `;
 
-const LongTextCell = ({ fieldValue }) => <StyledCell>{fieldValue}</StyledCell>;
+const NumberCell = ({ fieldValue }) => <StyledCell>{fieldValue}</StyledCell>;
 
-export default LongTextCell;
+export default NumberCell;

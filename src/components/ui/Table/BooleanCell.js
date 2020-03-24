@@ -1,7 +1,10 @@
-import React from "react";
+import React from 'react';
+import styled from 'styled-components';
 
-const BooleanCell = ({ fieldValue }) => {
-  return <div>{fieldValue && "✓"}</div>;
-};
+const StyledCell = styled.div`
+  text-align: center;
+`;
+
+const BooleanCell = ({ fieldValue }) => <StyledCell>{fieldValue && '✓'}</StyledCell>;
 
 export default BooleanCell;

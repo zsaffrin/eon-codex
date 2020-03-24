@@ -1,15 +1,15 @@
-import React from "react";
+import React from 'react';
 
-import { useDocument } from "../../../hooks/firestoreHooks";
-import Loading from "../Loading";
+import { useDocument } from '../../../hooks/firestoreHooks';
+import Loading from '../Loading';
 
-const nullValues = [null, undefined, ""];
+const nullValues = [null, undefined, ''];
 
 const CollectionCell = ({ fieldValue, lookup }) => {
   const [record, recordLoading] = useDocument(
-    `${nullValues.includes(lookup) ? " " : lookup}/${
-      nullValues.includes(fieldValue) ? " " : fieldValue
-    }`
+    `${nullValues.includes(lookup) ? ' ' : lookup}/${
+      nullValues.includes(fieldValue) ? ' ' : fieldValue
+    }`,
   );
 
   return recordLoading ? <Loading /> : <div>{record && record.name}</div>;
