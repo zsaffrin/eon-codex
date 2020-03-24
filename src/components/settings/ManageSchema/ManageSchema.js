@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import { FirebaseContext } from '../../../contexts/firebaseContext';
 import { useSchema } from '../../../hooks/firestoreHooks';
 import {
-  Button, H, Input, Loading, Page, VerticalList,
+  ButtonRow, Button, H, Input, Loading, Page, VerticalList,
 } from '../../ui';
 import FieldsManager from './FieldsManager';
 
@@ -79,6 +79,17 @@ const ManageSchema = () => {
       ),
     },
   ] : [];
+  fields.push({
+    fullRow: true,
+    label: 'buttons',
+    content: (
+      <ButtonRow align="center">
+        <Button small onClick={saveSchemaDetails}>
+          Save Details
+        </Button>
+      </ButtonRow>
+    ),
+  });
 
   return !workingSchema ? (
     <Loading />
@@ -87,9 +98,7 @@ const ManageSchema = () => {
       <h1>Manage Schema</h1>
       <PageSection>
         <VerticalList items={fields} />
-        <Button small onClick={saveSchemaDetails}>
-          Save Details
-        </Button>
+
       </PageSection>
       <PageSection>
         <H l={2}>Fields</H>
@@ -97,7 +106,7 @@ const ManageSchema = () => {
       </PageSection>
       <PageSection>
         <Button
-          small
+          primary
           onClick={() => history.push(`/settings/collection/${schemaName}`)}
         >
           Done
