@@ -1,14 +1,15 @@
-import React from "react";
-import { Route, Switch, useRouteMatch } from "react-router-dom";
+import React from 'react';
+import { Route, Switch, useRouteMatch } from 'react-router-dom';
 
 import {
   CollectionsHome,
   ManageCollection,
   MenusHome,
-  SettingsHome
-} from "../../settings";
-import { ManageMenu } from "../../settings/ManageMenus";
-import ManageSchema from "../../settings/ManageSchema";
+  SettingsHome,
+} from '../../settings';
+import { ManageMenu } from '../../settings/ManageMenus';
+import ManageSchema from '../../settings/ManageSchema';
+import EditSchemaField from '../../settings/ManageSchema/EditSchemaField';
 
 const SettingsRoutes = () => {
   const { path } = useRouteMatch();
@@ -38,6 +39,9 @@ const SettingsRoutes = () => {
       </Route>
       <Route path={`${path}/schema/:schemaName`}>
         <ManageSchema />
+      </Route>
+      <Route path={`${path}/schemaField/:collectionName/:schemaFieldId?`}>
+        <EditSchemaField />
       </Route>
     </Switch>
   );
