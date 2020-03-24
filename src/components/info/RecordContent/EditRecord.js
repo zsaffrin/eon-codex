@@ -70,7 +70,11 @@ const EditRecord = ({ addNew }) => {
       console.error('Need a name');
     } else {
       try {
-        const res = await firebase.addDoc(categoryId, record);
+        const res = await firebase.addDoc(categoryId, {
+          ...record,
+          created: new Date(),
+          modified: new Date(),
+        });
         if (res.status === 'success') {
           history.push(`/info/${categoryId}/${res.result.id}`);
         }
@@ -86,6 +90,7 @@ const EditRecord = ({ addNew }) => {
     try {
       const res = await firebase.updateDoc(`${categoryId}/${record.id}`, {
         ...record,
+        modified: new Date(),
       });
       if (res.status === 'success') {
         history.push(`/info/${categoryId}/${record.id}`);
