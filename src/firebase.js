@@ -66,7 +66,11 @@ class Firebase {
     return this.db
       .collection(collection)
       .doc(id)
-      .set(doc)
+      .set({
+        ...doc,
+        created: new Date(),
+        modified: new Date(),
+      })
       .then((res) => ({ status: 'success', result: res }))
       .catch((err) => ({ status: 'error', result: err.message }));
   }
