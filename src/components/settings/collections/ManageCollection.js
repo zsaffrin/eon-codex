@@ -102,11 +102,12 @@ const ManageCollection = () => {
 
       {collection && schema ? (
         <Table
-          columns={sortBy(columns, 'order')}
+          columns={sortBy(columns, 'displayOrder')}
           entries={sortBy(collection, sortField)}
           actions={[
             { label: 'Edit', action: edit },
           ]}
+          orderKey="created"
         />
       ) : (
         <div>No data</div>
