@@ -1,28 +1,30 @@
-import React, { useContext } from "react";
-import styled, { createGlobalStyle, ThemeProvider } from "styled-components";
-import { BrowserRouter as Router, Route } from "react-router-dom";
-import { library } from "@fortawesome/fontawesome-svg-core";
-import { faCog, faUser, faEdit } from "@fortawesome/free-solid-svg-icons";
-import { faGithub } from "@fortawesome/free-brands-svg-icons";
+import React, { useContext } from 'react';
+import styled, { createGlobalStyle, ThemeProvider } from 'styled-components';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { library } from '@fortawesome/fontawesome-svg-core';
+import {
+  faArrowUp, faArrowDown, faCog, faUser, faEdit, faPlus,
+} from '@fortawesome/free-solid-svg-icons';
+import { faGithub } from '@fortawesome/free-brands-svg-icons';
 
 // Firebase context provider
-import { FirebaseContext, UserContext } from "../../contexts";
+import { FirebaseContext, UserContext } from '../../contexts';
 
 // UI Components
-import { Loading } from "../ui";
+import { Loading } from '../ui';
 
 // Page Components
-import Header from "../Header";
-import Footer from "../Footer";
+import Header from '../Header';
+import Footer from '../Footer';
 
 // Routes
-import AppRoutes from "./routes";
+import AppRoutes from './routes';
 
 // Themes
-import { defaultTheme } from "../../themes";
+import { defaultTheme } from '../../themes';
 
 // Set FontAwesome library
-library.add(faCog, faUser, faEdit, faGithub);
+library.add(faArrowUp, faArrowDown, faCog, faUser, faEdit, faGithub, faPlus);
 
 const GlobalStyle = createGlobalStyle(({ theme }) => {
   const { color, text } = theme;
