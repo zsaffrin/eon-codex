@@ -21,7 +21,7 @@ const TableCell = ({
   lookup, fieldValue, type, actions, entry, showAsBoolean,
 }) => {
   let content = fieldValue;
-  if (type === 'boolean' || type === 'longtext') {
+  if (showAsBoolean || type === 'boolean') {
     content = <BooleanCell fieldValue={fieldValue} />;
   } else {
     if (type === 'lookup') {
@@ -41,6 +41,9 @@ const TableCell = ({
     }
     if (type === 'number') {
       content = <NumberCell fieldValue={fieldValue} />;
+    }
+    if (type === 'longtext') {
+      content = <LongTextCell fieldValue={fieldValue} />;
     }
   }
 

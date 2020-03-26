@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
-  arrayOf, shape, string,
+  arrayOf, shape, string, bool, func,
 } from 'prop-types';
 import styled from 'styled-components';
 
-import { sortBy } from '../../../utils/dataUtils';
+import { findMinMaxOfKey, sortBy } from '../../../utils/dataUtils';
+import Button from '../Button';
+import Icon from '../Icon';
 import TableCell from './TableCell';
 
 const StyledTable = styled.table`
@@ -26,11 +28,20 @@ const HeaderCell = styled.th(({ align, theme }) => {
   `;
 });
 
+
 const Table = ({
-  columns, entries, actions, orderKey,
+  columns, entries, actions, reorderable, orderKey, handleOrderChange,
 }) => {
   const [sortKey, setSortKey] = useState(orderKey || 'name');
   const [sortOrder, setSortOrder] = useState('asc');
+  const [orderMin, setOrderMin] = useState(0);
+  const [orderMax, setOrderMax] = useState(0);
+
+  useEffect(() => {
+    const order = findMinMaxOfKey(entries, orderKey);
+    setOrderMin(order.min);
+    setOrderMax(order.max);
+  }, [entries, orderKey]);
 
   const updateSort = (key) => {
     if (sortKey === key) {
@@ -49,6 +60,7 @@ const Table = ({
       {/* Header cells */}
       <thead>
         <TableRow>
+          {reorderable && <HeaderCell />}
           {columns.map(({ key, name, align }) => (
             <HeaderCell key={`${key}Header`} align={align} onClick={() => updateSort(key)}>
               {name}
@@ -60,17 +72,48 @@ const Table = ({
 
       {/* Content cells */}
       <tbody>
-        {sortBy(entries, sortKey, sortOrder).map((entry) => (
+        {sortBy(entries, sortKey, sortOrder).map((entry, idx) => (
           <TableRow key={entry.id}>
+            {/* Ordering controls */}
+            {reorderable && (
+              entry[orderKey] ? (
+                <td>
+                  {entry[orderKey] > orderMin && (
+                    <Button tiny onClick={() => handleOrderChange(entry[orderKey] - 1, entry[orderKey] - 2)}>
+                      <Icon name="arrow-up" />
+                    </Button>
+                  )}
+                  {entry[orderKey] < orderMax && (
+                    <Button tiny onClick={() => handleOrderChange(entry[orderKey] - 1, entry[orderKey])}>
+                      <Icon name="arrow-down" />
+                    </Button>
+                  )}
+                </td>
+              ) : (
+                <td>
+                  {idx === 0 && (
+                    <Button
+                      tiny
+                      onClick={() => handleOrderChange(0, 0)}
+                      title={`Fields are not initiated with the designated orderKey ("${orderKey}"). Click here to populate.`}
+                    >
+                      <Icon name="plus" />
+                    </Button>
+                  )}
+                </td>
+              )
+            )}
+
             {/* Data columns */}
             {columns.map(({
-              key, lookup, type,
+              key, lookup, type, showAsBoolean,
             }) => (
               <TableCell
                 key={key}
                 lookup={lookup}
                 type={type}
                 fieldValue={entry[key]}
+                showAsBoolean={showAsBoolean}
               />
             ))}
 
@@ -87,12 +130,16 @@ Table.propTypes = {
   entries: arrayOf(shape({})),
   actions: arrayOf(shape({})),
   orderKey: string,
+  reorderable: bool,
+  handleOrderChange: func,
 };
 Table.defaultProps = {
   columns: [],
   entries: [],
   actions: null,
   orderKey: null,
+  reorderable: false,
+  handleOrderChange: () => {},
 };
 
 export default Table;
