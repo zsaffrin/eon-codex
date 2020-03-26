@@ -1,3 +1,4 @@
 import ManageSchema from './ManageSchema';
+import AddSchema from './AddSchema';
 
-export default ManageSchema;
+export { AddSchema, ManageSchema };
