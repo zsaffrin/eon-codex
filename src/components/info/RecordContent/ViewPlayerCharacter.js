@@ -1,7 +1,9 @@
 import React from 'react';
 import { shape, string } from 'prop-types';
 
-import { Lookup, Markdown, Page } from '../../ui';
+import {
+  Lookup, Markdown, Notes, Page,
+} from '../../ui';
 
 const ViewPlayerCharacter = ({ record }) => {
   const {
@@ -20,6 +22,7 @@ const ViewPlayerCharacter = ({ record }) => {
         <div>
           <h2>Info</h2>
           <Markdown content={info} />
+          <Notes />
         </div>
       )}
       {bio && (
