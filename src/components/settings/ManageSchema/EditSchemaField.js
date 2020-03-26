@@ -99,8 +99,6 @@ const EditSchemaField = () => {
         const res = await firebase.addDoc('schemaFields', {
           ...schemaField,
           schema: collectionName,
-          created: new Date(),
-          modified: new Date(),
         });
         if (res.status === 'success') {
           history.push(`/settings/schema/${collectionName}`);
@@ -115,11 +113,9 @@ const EditSchemaField = () => {
   };
 
   const saveSchemaFieldData = async () => {
+    const { id, ...rest } = schemaField;
     try {
-      const res = await firebase.updateDoc(`schemaFields/${schemaFieldId}`, {
-        ...schemaField,
-        modified: new Date(),
-      });
+      const res = await firebase.updateDoc(`schemaFields/${schemaFieldId}`, rest);
       if (res.status === 'success') {
         history.push(`/settings/schema/${collectionName}`);
       }
