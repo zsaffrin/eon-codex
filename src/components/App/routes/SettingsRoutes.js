@@ -8,7 +8,7 @@ import {
   SettingsHome,
 } from '../../settings';
 import { ManageMenu } from '../../settings/ManageMenus';
-import ManageSchema from '../../settings/ManageSchema';
+import { AddSchema, ManageSchema } from '../../settings/ManageSchema';
 import EditSchemaField from '../../settings/ManageSchema/EditSchemaField';
 
 const SettingsRoutes = () => {
@@ -22,6 +22,9 @@ const SettingsRoutes = () => {
 
       <Route path={`${path}/collections`} exact>
         <CollectionsHome />
+      </Route>
+      <Route path={`${path}/collection/new`} exact>
+        <AddSchema />
       </Route>
       <Route path={`${path}/collection/:collectionName`}>
         <ManageCollection />
