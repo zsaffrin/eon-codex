@@ -10,15 +10,16 @@ import MultiselectCell from './MultiselectCell';
 import ActionsCell from './ActionsCell';
 import NumberCell from './NumberCell';
 
-const StyledCell = styled.td(({ theme }) => {
+const StyledCell = styled.td(({ theme, nowrap }) => {
   const { space } = theme;
   return `
     padding: ${space.thin} ${space.sm};
+    white-space: ${nowrap ? 'nowrap' : 'normal'};
   `;
 });
 
 const TableCell = ({
-  lookup, fieldValue, type, actions, entry, showAsBoolean,
+  lookup, fieldValue, type, actions, entry, showAsBoolean, nowrap,
 }) => {
   let content = fieldValue;
   if (showAsBoolean || type === 'boolean') {
@@ -47,7 +48,7 @@ const TableCell = ({
     }
   }
 
-  return <StyledCell>{content}</StyledCell>;
+  return <StyledCell nowrap={nowrap ? 1 : 0}>{content}</StyledCell>;
 };
 
 export default TableCell;

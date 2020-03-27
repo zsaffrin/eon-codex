@@ -106,7 +106,7 @@ const Table = ({
 
             {/* Data columns */}
             {columns.map(({
-              key, lookup, type, showAsBoolean,
+              key, lookup, type, showAsBoolean, nowrap,
             }) => (
               <TableCell
                 key={key}
@@ -114,11 +114,12 @@ const Table = ({
                 type={type}
                 fieldValue={entry[key]}
                 showAsBoolean={showAsBoolean}
+                nowrap={nowrap}
               />
             ))}
 
             {/* Action buttons */}
-            <TableCell type="actions" actions={actions} entry={entry} />
+            {actions && <TableCell type="actions" actions={actions} entry={entry} />}
           </TableRow>
         ))}
       </tbody>
