@@ -76,10 +76,11 @@ class Firebase {
   }
 
   updateDoc(query, value) {
+    const { id, exists, ...rest } = value;
     return this.db
       .doc(query)
       .update({
-        ...value,
+        ...rest,
         modified: new Date(),
       })
       .then((res) => ({ status: 'success', result: res }))
