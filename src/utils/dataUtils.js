@@ -9,7 +9,7 @@ export const sortBy = (data, key, direction = 'asc') => data.sort((a, b) => {
     return 0;
   }
 
-  if (a[key] && a[key].toDate) {
+  if (a[key] && a[key].toDate && b[key] && b[key].toDate) {
     if (a[key].toDate() > b[key].toDate()) {
       return 1;
     }
