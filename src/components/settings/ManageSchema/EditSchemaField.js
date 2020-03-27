@@ -21,9 +21,6 @@ const schemaFieldFields = [
   { key: 'key', name: 'Key', defaultValue: '' },
   { key: 'name', name: 'Name', defaultValue: '' },
   {
-    key: 'order', name: 'Order', type: 'number', defaultValue: 0,
-  },
-  {
     key: 'type', name: 'Type', type: 'menu', lookup: 'fieldTypes', defaultValue: '',
   },
   { key: 'lookup', name: 'Lookup', defaultValue: '' },
@@ -62,33 +59,51 @@ const EditSchemaField = () => {
   }, [add, fieldDataLoading, fieldData, schemaField]);
 
   const handleInputChange = (e) => {
-    if (e.isDate) {
-      setSchemaField({
-        ...schemaField,
-        [e.id]: e.value,
-      });
-    } else if (e.type === 'checkbox') {
-      setSchemaField({
-        ...schemaField,
-        [e.target.id]: e.target.checked,
-      });
-    } else if (e.isMultiselect) {
-      setSchemaField({
-        ...schemaField,
-        [e.fieldId]: e.value,
-      });
-    } else if (e.target.type === 'checkbox') {
-      setSchemaField({
-        ...schemaField,
-        [e.target.id]: e.target.checked,
-      });
-    } else {
-      setSchemaField({
-        ...schemaField,
-        [e.target.id]:
-          e.target.type === 'number' ? Number(e.target.value) : e.target.value,
-      });
+    let newSchemaField = { ...schemaField };
+
+    if (e.target.id === 'type') {
+      let defaultValue = '';
+      if (e.target.value === 'boolean') {
+        defaultValue = false;
+      }
+      if (e.target.value === 'number') {
+        defaultValue = 0;
+      }
+
+      newSchemaField = {
+        ...newSchemaField,
+        defaultValue,
+      };
     }
+
+    if (e.isDate) {
+      newSchemaField = {
+        ...newSchemaField,
+        [e.id]: e.value,
+      };
+    } else if (e.type === 'checkbox') {
+      newSchemaField = {
+        ...newSchemaField,
+        [e.target.id]: e.target.checked,
+      };
+    } else if (e.isMultiselect) {
+      newSchemaField = {
+        ...newSchemaField,
+        [e.fieldId]: e.value,
+      };
+    } else if (e.target.type === 'number') {
+      newSchemaField = {
+        ...newSchemaField,
+        [e.target.id]: Number(e.target.value),
+      };
+    } else {
+      newSchemaField = {
+        ...newSchemaField,
+        [e.target.id]: e.target.value,
+      };
+    }
+
+    setSchemaField(newSchemaField);
   };
 
   const addNewSchemaField = async () => {
