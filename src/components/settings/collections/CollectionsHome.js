@@ -1,12 +1,14 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 
 import { useCollection } from '../../../hooks/firestoreHooks';
 import {
-  Breadcrumb, Link, Loading, Page,
+  Breadcrumb, ButtonRow, Button, Link, Loading, Page,
 } from '../../ui';
 
 const CollectionsHome = () => {
   const [schemas, schemasLoading] = useCollection('schemas');
+  const history = useHistory();
 
   return schemasLoading ? <Loading /> : (
     <Page>
@@ -17,6 +19,9 @@ const CollectionsHome = () => {
         ]}
       />
       <h1>Collections</h1>
+      <ButtonRow align="left">
+        <Button primary small onClick={() => history.push('/settings/collection/new')}>New</Button>
+      </ButtonRow>
       <ul>
         {schemas.map(({ id, name }) => (
           <li key={id}>

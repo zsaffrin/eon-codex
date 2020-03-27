@@ -1,21 +1,20 @@
-import React from "react";
+import React from 'react';
 
-import { useCollection } from "../../../hooks/firestoreHooks";
-import Loading from "../Loading";
+import { useCollection } from '../../../hooks/firestoreHooks';
+import Loading from '../Loading';
 
 const MenuCell = ({ menu, fieldValue }) => {
-  const [menuItems, menuItemsLoading] = useCollection("menuItems", [
-    "menu",
-    "==",
-    menu
+  const [menuItems, menuItemsLoading] = useCollection('menuItems', [
+    'menu',
+    '==',
+    menu,
   ]);
-  const chosenItem =
-    menuItems && menuItems.find(item => item.itemKey === fieldValue);
+  const chosenItem = menuItems && menuItems.find((item) => item.itemKey === fieldValue);
 
-  return menuItemsLoading || !chosenItem ? (
+  return menuItemsLoading ? (
     <Loading />
   ) : (
-    <div>{chosenItem.name}</div>
+    <div>{chosenItem && chosenItem.name}</div>
   );
 };
 

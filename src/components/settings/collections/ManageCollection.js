@@ -1,34 +1,36 @@
-import React, { useEffect, useState } from "react";
-import { useParams, useLocation } from "react-router-dom";
+import React, { useEffect, useState } from 'react';
+import { useHistory, useParams, useLocation } from 'react-router-dom';
 
-import { useCollection, useSchema } from "../../../hooks/firestoreHooks";
-import { sortBy } from "../../../utils/dataUtils";
-import { Breadcrumb, Button, Link, Loading, Page, Table } from "../../ui";
-import EditRecord from "./EditRecord";
+import { useCollection, useSchema } from '../../../hooks/firestoreHooks';
+import { sortBy } from '../../../utils/dataUtils';
+import {
+  Breadcrumb, ButtonRow, Button, Loading, Page, Table,
+} from '../../ui';
+import EditRecord from './EditRecord';
 
-const ManageCollection = ({ filter }) => {
+const ManageCollection = () => {
   const { collectionName } = useParams();
   const location = useLocation();
 
   const [collection, collectionLoading] = useCollection(
     collectionName,
-    filter ? [filter.key, "==", filter.value] : null
   );
   const [schema, schemaLoading] = useSchema(collectionName);
-  const [fields, fieldsLoading] = useCollection("schemaFields", [
-    "schema",
-    "==",
-    collectionName
+  const [fields, fieldsLoading] = useCollection('schemaFields', [
+    'schema',
+    '==',
+    collectionName,
   ]);
   const [editMode, setEditMode] = useState(false);
   const [editItem, setEditItem] = useState(null);
-  const [sortField, setSortField] = useState("id");
+  const [sortField, setSortField] = useState('id');
+  const history = useHistory();
 
   useEffect(() => {
     if (
-      location.state &&
-      location.state.sortKey &&
-      location.state.sortKey !== sortField
+      location.state
+      && location.state.sortKey
+      && location.state.sortKey !== sortField
     ) {
       setSortField(location.state.sortKey);
     }
@@ -38,7 +40,7 @@ const ManageCollection = ({ filter }) => {
     setEditItem(null);
     setEditMode(false);
   };
-  const edit = item => {
+  const edit = (item) => {
     setEditItem(item);
     setEditMode(true);
   };
@@ -51,12 +53,31 @@ const ManageCollection = ({ filter }) => {
     return (
       <EditRecord
         collection={collectionName}
-        fields={sortBy(fields, "order")}
+        fields={sortBy(fields, 'order')}
         existingItem={editItem}
         close={closeEdit}
       />
     );
   }
+
+  const columns = fields ? fields.reduce((acc, field) => {
+    const { showOnTables, type } = field;
+    if (showOnTables) {
+      return [
+        ...acc,
+        {
+          ...field,
+          align: (
+            type === 'boolean'
+            || type === 'longtext'
+            || type === 'multiselect'
+            || type === 'number'
+          ) ? 'center' : null,
+        },
+      ];
+    }
+    return acc;
+  }, []) : [];
 
   return collectionLoading || schemaLoading || fieldsLoading ? (
     <Loading />
@@ -64,26 +85,29 @@ const ManageCollection = ({ filter }) => {
     <Page fullWidth>
       <Breadcrumb
         links={[
-          { label: "Home", target: "/" },
-          { label: "Settings", target: "/settings" },
-          { label: "Collections", target: "/settings/collections" }
+          { label: 'Home', target: '/' },
+          { label: 'Settings', target: '/settings' },
+          { label: 'Collections', target: '/settings/collections' },
         ]}
       />
       <h1>{schema.name}</h1>
-      <div>
-        <Link to={`/settings/schema/${collectionName}`}>Edit Schema</Link>
-      </div>
-      <div>
+      <ButtonRow align="space-between">
         <Button small primary onClick={() => addNew()}>
           New
         </Button>
-      </div>
+        <Button small onClick={() => history.push(`/settings/schema/${collectionName}`)}>
+          Edit Schema
+        </Button>
+      </ButtonRow>
 
       {collection && schema ? (
         <Table
-          columns={sortBy(fields, "order")}
+          columns={sortBy(columns, 'displayOrder')}
           entries={sortBy(collection, sortField)}
-          actions={{ edit }}
+          actions={[
+            { label: 'Edit', action: edit },
+          ]}
+          orderKey="created"
         />
       ) : (
         <div>No data</div>

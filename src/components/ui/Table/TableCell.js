@@ -1,33 +1,54 @@
-import React from "react";
+import React from 'react';
+import styled from 'styled-components';
 
-import CollectionCell from "./CollectionCell";
-import MenuCell from "./MenuCell";
-import BooleanCell from "./BooleanCell";
-import DateCell from "./DateCell";
-import LongTextCell from "./LongTextCell";
-import MultiselectCell from "./MultiselectCell";
+import CollectionCell from './CollectionCell';
+import MenuCell from './MenuCell';
+import BooleanCell from './BooleanCell';
+import DateCell from './DateCell';
+import LongTextCell from './LongTextCell';
+import MultiselectCell from './MultiselectCell';
+import ActionsCell from './ActionsCell';
+import NumberCell from './NumberCell';
 
-const TableCell = ({ lookup, fieldValue, type }) => {
-  if (type === "lookup") {
-    return <CollectionCell lookup={lookup} fieldValue={fieldValue} />;
-  }
-  if (type === "menu") {
-    return <MenuCell menu={lookup} fieldValue={fieldValue} />;
-  }
-  if (type === "datetime") {
-    return <DateCell fieldValue={fieldValue} />;
-  }
-  if (type === "longtext") {
-    return <LongTextCell fieldValue={fieldValue} />;
-  }
-  if (type === "multiselect") {
-    return <MultiselectCell fieldValue={fieldValue} />;
-  }
-  if (type === "boolean") {
-    return <BooleanCell fieldValue={fieldValue} />;
+const StyledCell = styled.td(({ theme, nowrap }) => {
+  const { space } = theme;
+  return `
+    padding: ${space.thin} ${space.sm};
+    white-space: ${nowrap ? 'nowrap' : 'normal'};
+  `;
+});
+
+const TableCell = ({
+  lookup, fieldValue, type, actions, entry, showAsBoolean, nowrap,
+}) => {
+  let content = fieldValue;
+  if (showAsBoolean || type === 'boolean') {
+    content = <BooleanCell fieldValue={fieldValue} />;
+  } else {
+    if (type === 'lookup') {
+      content = <CollectionCell lookup={lookup} fieldValue={fieldValue} />;
+    }
+    if (type === 'menu') {
+      content = <MenuCell menu={lookup} fieldValue={fieldValue} />;
+    }
+    if (type === 'datetime') {
+      content = <DateCell fieldValue={fieldValue} />;
+    }
+    if (type === 'multiselect') {
+      content = <MultiselectCell fieldValue={fieldValue} />;
+    }
+    if (type === 'actions') {
+      content = <ActionsCell actions={actions} entry={entry} />;
+    }
+    if (type === 'number') {
+      content = <NumberCell fieldValue={fieldValue} />;
+    }
+    if (type === 'longtext') {
+      content = <LongTextCell fieldValue={fieldValue} />;
+    }
   }
 
-  return <div>{fieldValue}</div>;
+  return <StyledCell nowrap={nowrap ? 1 : 0}>{content}</StyledCell>;
 };
 
 export default TableCell;

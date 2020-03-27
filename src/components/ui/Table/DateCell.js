@@ -1,16 +1,14 @@
-import React from "react";
+import React from 'react';
 
-const DateCell = ({ fieldValue }) => {
-  return (
-    <div>
-      {fieldValue &&
-        fieldValue.toDate().toLocaleDateString("en-US", {
-          weekday: "short",
-          month: "short",
-          day: "numeric"
+const DateCell = ({ fieldValue }) => (
+  <div>
+    {fieldValue
+        && fieldValue.toDate().toLocaleDateString('en-US', {
+          weekday: 'short',
+          month: 'short',
+          day: 'numeric',
         })}
-    </div>
-  );
-};
+  </div>
+);
 
 export default DateCell;

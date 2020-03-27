@@ -1,7 +1,7 @@
 import React from 'react';
 import { shape, string } from 'prop-types';
 
-import { Markdown, Page } from '../../ui';
+import { Markdown, Notes, Page } from '../../ui';
 
 const ViewPerson = ({ record }) => {
   const { name, desc } = record;
@@ -10,6 +10,7 @@ const ViewPerson = ({ record }) => {
     <Page>
       <h1>{name}</h1>
       <Markdown content={desc} />
+      <Notes />
     </Page>
   );
 };

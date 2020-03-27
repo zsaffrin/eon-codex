@@ -1,7 +1,7 @@
 import React from 'react';
 import { shape, string } from 'prop-types';
 
-import { Markdown, Page } from '../../ui';
+import { Markdown, Notes, Page } from '../../ui';
 
 const ViewPlace = ({ record }) => {
   const { name, shortDesc, longDesc } = record;
@@ -11,6 +11,7 @@ const ViewPlace = ({ record }) => {
       <h1>{name}</h1>
       <p>{shortDesc}</p>
       <Markdown content={longDesc} />
+      <Notes />
     </Page>
   );
 };

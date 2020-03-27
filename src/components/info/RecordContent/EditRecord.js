@@ -83,10 +83,9 @@ const EditRecord = ({ addNew }) => {
     }
   };
   const saveRecordChanges = async () => {
+    const { id, ...rest } = record;
     try {
-      const res = await firebase.updateDoc(`${categoryId}/${record.id}`, {
-        ...record,
-      });
+      const res = await firebase.updateDoc(`${categoryId}/${record.id}`, rest);
       if (res.status === 'success') {
         history.push(`/info/${categoryId}/${record.id}`);
       }

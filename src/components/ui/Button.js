@@ -1,18 +1,18 @@
-import React from "react";
-import styled from "styled-components";
-import tinycolor from "tinycolor2";
+import React from 'react';
+import styled from 'styled-components';
+import tinycolor from 'tinycolor2';
 
 const StyledButton = styled.button(({ small, theme, tiny }) => {
   const { space } = theme;
 
-  let fontSize = "1em";
+  let fontSize = '1em';
   let pad = `${space.md} ${space.lg}`;
   if (small) {
-    fontSize = "0.9em";
+    fontSize = '0.9em';
     pad = `${space.thin} ${space.md}`;
   }
   if (tiny) {
-    fontSize = "0.8em";
+    fontSize = '0.8em';
     pad = `${space.thin} ${space.sm}`;
   }
 
@@ -26,14 +26,16 @@ const StyledButton = styled.button(({ small, theme, tiny }) => {
   `;
 });
 const ColorButton = styled(StyledButton)(
-  ({ primary, danger, disabled, theme }) => {
+  ({
+    primary, danger, disabled, theme,
+  }) => {
     const { color, inputs } = theme;
     const {
       buttonColorDanger,
       buttonColorDefault,
       buttonColorDisabled,
       buttonTextColorLight,
-      buttonTextColorDark
+      buttonTextColorDark,
     } = inputs;
 
     let buttonColor = buttonColorDefault;
@@ -47,7 +49,7 @@ const ColorButton = styled(StyledButton)(
       buttonColor = buttonColorDanger;
     }
 
-    let buttonTextColor = "";
+    let buttonTextColor = '';
     if (tinycolor(buttonColor).isLight()) {
       buttonTextColor = buttonTextColorDark;
     } else {
@@ -57,32 +59,30 @@ const ColorButton = styled(StyledButton)(
     return `
     background: ${tinycolor(buttonColor)};
     background: linear-gradient(${tinycolor(buttonColor).lighten(
-      15
-    )}, ${tinycolor(buttonColor)});
+    15,
+  )}, ${tinycolor(buttonColor)});
     color: ${tinycolor(buttonTextColor)};
     border: 1px solid ${tinycolor(buttonColor).darken(10)};
     box-shadow: inset 0 1px 0 ${tinycolor(buttonColor).lighten(10)};
     text-shadow: ${
-      tinycolor(buttonColor).isLight()
-        ? `0 1px 0 ${tinycolor(buttonColor)
-            .lighten(50)
-            .setAlpha(0.25)
-            .toRgbString()}`
-        : `0 -1px 0 ${tinycolor(buttonColor)
-            .darken(50)
-            .setAlpha(0.5)
-            .toRgbString()}`
-    };
+  tinycolor(buttonColor).isLight()
+    ? `0 1px 0 ${tinycolor(buttonColor)
+      .lighten(50)
+      .setAlpha(0.25)
+      .toRgbString()}`
+    : `0 -1px 0 ${tinycolor(buttonColor)
+      .darken(50)
+      .setAlpha(0.5)
+      .toRgbString()}`
+};
 
     &:hover {
       background: ${tinycolor(buttonColor)};
     }
   `;
-  }
+  },
 );
 
-const Button = props => {
-  return <ColorButton {...props}>{props.children}</ColorButton>;
-};
+const Button = (props) => <ColorButton {...props}>{props.children}</ColorButton>;
 
 export default Button;

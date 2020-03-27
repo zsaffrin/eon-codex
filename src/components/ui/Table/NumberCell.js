@@ -5,6 +5,6 @@ const StyledCell = styled.div`
   text-align: center;
 `;
 
-const BooleanCell = ({ fieldValue }) => <StyledCell>{fieldValue && '✓'}</StyledCell>;
+const NumberCell = ({ fieldValue }) => <StyledCell>{fieldValue}</StyledCell>;
 
-export default BooleanCell;
+export default NumberCell;

@@ -1,10 +1,10 @@
-import React from "react";
-import { Route, Switch, useRouteMatch } from "react-router-dom";
+import React from 'react';
+import { Route, Switch, useRouteMatch } from 'react-router-dom';
 
-import PrivateRoute from "./PrivateRoute";
-import SessionsHome from "../../sessions";
-import ViewSession from "../../sessions/ViewSession";
-import EditLootItem from "../../sessions/ViewSession/EditLootItem";
+import PrivateRoute from './PrivateRoute';
+import SessionsHome from '../../sessions';
+import ViewSession from '../../sessions/ViewSession';
+import EditLootItem from '../../sessions/ViewSession/EditLootItem';
 
 const SessionRoutes = () => {
   const { path } = useRouteMatch();
@@ -18,7 +18,7 @@ const SessionRoutes = () => {
         <ViewSession />
       </Route>
       <PrivateRoute
-        path={`${path}/editLootItem/:recordId`}
+        path={`${path}/:sessionId/editLootItem/:recordId`}
         exact
         level="editor"
       >
