@@ -1,16 +1,16 @@
-import React from "react";
+import React from 'react';
 
-import { useCollection } from "../../../hooks/firestoreHooks";
-import { Breadcrumb, Loading, Page } from "../../ui";
-import PlayedSessions from "./PlayedSessions";
-import PlannedSessions from "./PlannedSessions";
+import { useCollection } from '../../../hooks/firestoreHooks';
+import { Breadcrumb, Loading, Page } from '../../ui';
+import PlayedSessions from './PlayedSessions';
+import PlannedSessions from './PlannedSessions';
+import PlayingSessions from './PlayingSessions';
 
 const SessionsHome = () => {
-  const [collection, collectionLoading] = useCollection("sessions");
+  const [collection, collectionLoading] = useCollection('sessions');
 
-  const sessions =
-    collection &&
-    collection.reduce(
+  const sessions = collection
+    && collection.reduce(
       (acc, session) => {
         if (!acc[session.status]) {
           acc[session.status] = [];
@@ -19,15 +19,18 @@ const SessionsHome = () => {
 
         return acc;
       },
-      { planned: [], played: [] }
+      { planned: [], played: [] },
     );
 
   return collectionLoading ? (
     <Loading />
   ) : (
     <Page>
-      <Breadcrumb links={[{ label: "Home", target: "/" }]} />
+      <Breadcrumb links={[{ label: 'Home', target: '/' }]} />
       <h1>Sessions</h1>
+      {sessions.playing.length > 0 && (
+        <PlayingSessions sessions={sessions.playing} />
+      )}
       {sessions.planned.length > 0 && (
         <PlannedSessions sessions={sessions.planned} />
       )}
