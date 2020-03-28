@@ -10,7 +10,7 @@ const SessionsHome = () => {
   const [collection, collectionLoading] = useCollection('sessions');
 
   const sessions = collection
-    && collection.reduce(
+    ? collection.reduce(
       (acc, session) => {
         if (!acc[session.status]) {
           acc[session.status] = [];
@@ -19,8 +19,8 @@ const SessionsHome = () => {
 
         return acc;
       },
-      { planned: [], played: [] },
-    );
+      { planned: [], played: [], playing: [] },
+    ) : [];
 
   return collectionLoading ? (
     <Loading />
