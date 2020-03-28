@@ -14,9 +14,6 @@ const SessionRoutes = () => {
       <Route path={path} exact>
         <SessionsHome />
       </Route>
-      <Route path={`${path}/:sessionId`} exact>
-        <ViewSession />
-      </Route>
       <PrivateRoute
         path={`${path}/:sessionId/editLootItem/:recordId`}
         exact
@@ -24,6 +21,9 @@ const SessionRoutes = () => {
       >
         <EditLootItem />
       </PrivateRoute>
+      <Route path={`${path}/:sessionId/:mode?`} exact>
+        <ViewSession />
+      </Route>
     </Switch>
   );
 };
