@@ -19,14 +19,14 @@ const StyledCell = styled.td(({ theme, nowrap }) => {
 });
 
 const TableCell = ({
-  lookup, fieldValue, type, actions, entry, showAsBoolean, nowrap,
+  lookup, lookupArg, fieldValue, type, actions, entry, showAsBoolean, nowrap,
 }) => {
   let content = fieldValue;
   if (showAsBoolean || type === 'boolean') {
     content = <BooleanCell fieldValue={fieldValue} />;
   } else {
     if (type === 'lookup') {
-      content = <CollectionCell lookup={lookup} fieldValue={fieldValue} />;
+      content = <CollectionCell lookup={lookup} lookupArg={lookupArg} fieldValue={fieldValue} />;
     }
     if (type === 'menu') {
       content = <MenuCell menu={lookup} fieldValue={fieldValue} />;
