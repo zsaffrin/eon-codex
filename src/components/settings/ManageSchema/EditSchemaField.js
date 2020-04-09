@@ -81,7 +81,7 @@ const EditSchemaField = () => {
         ...newSchemaField,
         [e.id]: e.value,
       };
-    } else if (e.type === 'checkbox') {
+    } else if (e.target.type === 'checkbox') {
       newSchemaField = {
         ...newSchemaField,
         [e.target.id]: e.target.checked,

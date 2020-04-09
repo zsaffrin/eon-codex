@@ -106,11 +106,12 @@ const Table = ({
 
             {/* Data columns */}
             {columns.map(({
-              key, lookup, type, showAsBoolean, nowrap,
+              key, lookup, lookupArg, type, showAsBoolean, nowrap,
             }) => (
               <TableCell
                 key={key}
                 lookup={lookup}
+                lookupArg={lookupArg}
                 type={type}
                 fieldValue={entry[key]}
                 showAsBoolean={showAsBoolean}
