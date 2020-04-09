@@ -3,7 +3,7 @@ import styled, { createGlobalStyle, ThemeProvider } from 'styled-components';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import {
-  faArrowUp, faArrowDown, faCog, faUser, faEdit, faPlus,
+  faArrowUp, faArrowDown, faCog, faHome, faInfoCircle, faUser, faEdit, faPlus,
 } from '@fortawesome/free-solid-svg-icons';
 import { faGithub } from '@fortawesome/free-brands-svg-icons';
 
@@ -24,7 +24,7 @@ import AppRoutes from './routes';
 import { defaultTheme } from '../../themes';
 
 // Set FontAwesome library
-library.add(faArrowUp, faArrowDown, faCog, faUser, faEdit, faGithub, faPlus);
+library.add(faArrowUp, faArrowDown, faCog, faHome, faInfoCircle, faUser, faEdit, faGithub, faPlus);
 
 const GlobalStyle = createGlobalStyle(({ theme }) => {
   const { color, text } = theme;
