@@ -11,6 +11,7 @@ import Loading from './Loading';
 import Lookup from './Lookup';
 import Loot from './Loot';
 import Markdown from './Markdown';
+import MenuLookup from './MenuLookup';
 import Modal from './Modal';
 import Notes from './Notes';
 import Page from './Page';
@@ -32,6 +33,7 @@ export {
   Lookup,
   Loot,
   Markdown,
+  MenuLookup,
   Modal,
   Notes,
   Page,
