@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 import { useCurrentUser } from '../../../../hooks/authHooks';
 import {
-  Lookup, Modal, Table,
+  Link, Lookup, Modal, Table,
 } from '../../../ui';
 import EditLootItem from './EditLootItem';
 
@@ -34,13 +34,16 @@ const LootCategory = ({ title, items }) => {
   ];
 
   const entries = items ? items.reduce((acc, item) => {
-    const { claim } = item;
+    const { claim, name, url } = item;
 
     return [
       ...acc,
       {
         ...item,
         claim: claim ? <Lookup collection="playerCharacters" recordId={claim} /> : null,
+        name: url ? (
+          <Link external to={url}>{name}</Link>
+        ) : name,
       },
     ];
   }, []) : [];
@@ -63,7 +66,7 @@ const LootCategory = ({ title, items }) => {
         </Modal>
       )}
       <TitleBar>{title}</TitleBar>
-      <Table columns={columns} entries={entries} actions={actions} />
+      <Table columns={columns} entries={entries} actions={actions} orderKey="name" />
     </StyledCategory>
   );
 };
