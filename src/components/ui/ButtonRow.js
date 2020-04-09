@@ -4,7 +4,9 @@ import {
   arrayOf, string, oneOfType, node,
 } from 'prop-types';
 
-const Row = styled.div(({ align, items, theme }) => {
+const Row = styled.div(({
+  align, items, theme,
+}) => {
   const { space } = theme;
   return `
     display: grid;
