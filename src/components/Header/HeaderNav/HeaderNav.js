@@ -2,6 +2,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
+import { Icon } from '../../ui';
+
 const StyledNav = styled.nav(({ theme }) => {
   const { color } = theme;
   return `
@@ -40,16 +42,22 @@ const NavItem = styled(Link)(({ theme }) => {
   `;
 });
 
+const navLinks = [
+  { i: 1, url: '/', content: <Icon name="home" /> },
+  { i: 2, url: '/sessions', content: 'Sessions' },
+  { i: 3, url: '/info', content: 'Info' },
+  { i: 4, url: '/loot', content: 'Loot' },
+];
+
 const HeaderNav = () => (
   <StyledNav>
     <ContentWrap>
       <NavItemList>
-        <li>
-          <NavItem to="/sessions">Sessions</NavItem>
-        </li>
-        <li>
-          <NavItem to="/info">Info</NavItem>
-        </li>
+        {navLinks.map(({ i, url, content }) => (
+          <li key={i}>
+            <NavItem to={url}>{content}</NavItem>
+          </li>
+        ))}
       </NavItemList>
     </ContentWrap>
   </StyledNav>
