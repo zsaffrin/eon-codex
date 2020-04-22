@@ -8,6 +8,7 @@ const BreadcrumbTrail = styled.div(({ theme }) => {
   const { space } = theme;
   return `
     display: grid;
+    font-size: 0.8rem;
     grid-auto-flow: column;
     grid-auto-columns: min-content;
     grid-gap: ${space.md};
