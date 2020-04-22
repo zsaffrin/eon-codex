@@ -4,8 +4,9 @@ import {
 } from 'prop-types';
 import styled from 'styled-components';
 
-import { findMinMaxOfKey, sortBy } from '../../../utils/dataUtils';
-import Button from '../Button';
+import { useFirebase } from '../../../hooks';
+import { findMinMaxOfKey, moveArrayItem, sortBy } from '../../../utils';
+import { Button } from '../Button';
 import Icon from '../Icon';
 import TableCell from './TableCell';
 
@@ -30,12 +31,13 @@ const HeaderCell = styled.th(({ align, theme }) => {
 
 
 const Table = ({
-  columns, entries, actions, reorderable, orderKey, handleOrderChange,
+  columns, entries, actions, reorderable, orderKey,
 }) => {
   const [sortKey, setSortKey] = useState(orderKey || 'name');
   const [sortOrder, setSortOrder] = useState('asc');
   const [orderMin, setOrderMin] = useState(0);
   const [orderMax, setOrderMax] = useState(0);
+  const firebase = useFirebase();
 
   useEffect(() => {
     const order = findMinMaxOfKey(entries, orderKey);
@@ -53,6 +55,13 @@ const Table = ({
     } else {
       setSortKey(key);
     }
+  };
+
+  const reorder = (currentIndex, newIndex) => {
+    const updatedItems = moveArrayItem(entries, currentIndex, newIndex);
+    return updatedItems.map((item, idx) => firebase.updateDoc(`schemaFields/${item.id}`, {
+      [orderKey]: idx + 1,
+    }));
   };
 
   return (
@@ -79,12 +88,22 @@ const Table = ({
               entry[orderKey] ? (
                 <td>
                   {entry[orderKey] > orderMin && (
-                    <Button tiny onClick={() => handleOrderChange(entry[orderKey] - 1, entry[orderKey] - 2)}>
+                    <Button
+                      tiny
+                      onClick={() => (
+                        reorder(entry[orderKey] - 1, entry[orderKey] - 2)
+                      )}
+                    >
                       <Icon name="arrow-up" />
                     </Button>
                   )}
                   {entry[orderKey] < orderMax && (
-                    <Button tiny onClick={() => handleOrderChange(entry[orderKey] - 1, entry[orderKey])}>
+                    <Button
+                      tiny
+                      onClick={() => (
+                        reorder(entry[orderKey] - 1, entry[orderKey])
+                      )}
+                    >
                       <Icon name="arrow-down" />
                     </Button>
                   )}
@@ -94,7 +113,7 @@ const Table = ({
                   {idx === 0 && (
                     <Button
                       tiny
-                      onClick={() => handleOrderChange(0, 0)}
+                      onClick={() => reorder(0, 0)}
                       title={`Fields are not initiated with the designated orderKey ("${orderKey}"). Click here to populate.`}
                     >
                       <Icon name="plus" />
@@ -105,19 +124,16 @@ const Table = ({
             )}
 
             {/* Data columns */}
-            {columns.map(({
-              key, lookup, lookupArg, type, showAsBoolean, nowrap,
-            }) => (
-              <TableCell
-                key={key}
-                lookup={lookup}
-                lookupArg={lookupArg}
-                type={type}
-                fieldValue={entry[key]}
-                showAsBoolean={showAsBoolean}
-                nowrap={nowrap}
-              />
-            ))}
+            {columns.map((col) => {
+              const { key } = col;
+              return (
+                <TableCell
+                  fieldValue={entry[key]}
+                  key={key}
+                  {...col}
+                />
+              );
+            })}
 
             {/* Action buttons */}
             {actions && <TableCell type="actions" actions={actions} entry={entry} />}

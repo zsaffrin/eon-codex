@@ -1,5 +1,6 @@
-import React from "react";
-import styled from "styled-components";
+import React from 'react';
+import { string, func } from 'prop-types';
+import styled from 'styled-components';
 
 const StyledInput = styled.input(({ theme }) => {
   const { inputs } = theme;
@@ -13,8 +14,26 @@ const StyledInput = styled.input(({ theme }) => {
   `;
 });
 
-const TextInput = ({ id, value, onChange }) => {
-  return <StyledInput type="text" id={id} value={value} onChange={onChange} />;
+const TextInput = ({ id, value, onChange }) => (
+  <StyledInput
+    type="text"
+    id={id}
+    value={value}
+    onChange={(e) => onChange({
+      id,
+      value: e.target.value,
+    })}
+  />
+);
+TextInput.propTypes = {
+  id: string,
+  value: string,
+  onChange: func,
+};
+TextInput.defaultProps = {
+  id: '',
+  value: '',
+  onChange: () => {},
 };
 
 export default TextInput;

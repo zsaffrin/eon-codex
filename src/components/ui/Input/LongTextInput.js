@@ -1,5 +1,6 @@
-import React from "react";
-import styled from "styled-components";
+import React from 'react';
+import { func, string } from 'prop-types';
+import styled from 'styled-components';
 
 const StyledTextarea = styled.textarea(({ height, theme }) => {
   const { color } = theme;
@@ -9,20 +10,35 @@ const StyledTextarea = styled.textarea(({ height, theme }) => {
     padding: 0.5em;
     font-size: 0.9em;
     width: 100%;
-    min-height: ${height ? `${height}em` : "20em"};
+    min-height: ${height || '20em'};
   `;
 });
 
-const LongTextInput = ({ id, value, onChange, height }) => {
-  return (
-    <StyledTextarea
-      id={id}
-      name={id}
-      value={value}
-      onChange={onChange}
-      height={height ? height : 0}
-    />
-  );
+const LongtextInput = ({
+  id, value, onChange, height,
+}) => (
+  <StyledTextarea
+    id={id}
+    name={id}
+    value={value}
+    onChange={(e) => onChange({
+      id,
+      value: e,
+    })}
+    height={height || 0}
+  />
+);
+LongtextInput.propTypes = {
+  id: string,
+  value: string,
+  onChange: func,
+  height: string,
+};
+LongtextInput.defaultProps = {
+  id: null,
+  value: '',
+  onChange: () => {},
+  height: null,
 };
 
-export default LongTextInput;
+export default LongtextInput;

@@ -1,6 +1,7 @@
-import React, { createContext } from "react";
+import React, { createContext } from 'react';
+import { arrayOf, node, oneOfType } from 'prop-types';
 
-import firebase from "../firebase";
+import firebase from '../firebase';
 
 const FirebaseContext = createContext();
 
@@ -9,5 +10,11 @@ const FirebaseProvider = ({ children }) => (
     {children}
   </FirebaseContext.Provider>
 );
+FirebaseProvider.propTypes = {
+  children: oneOfType([arrayOf(node), node]),
+};
+FirebaseProvider.defaultProps = {
+  children: [],
+};
 
 export { FirebaseContext, FirebaseProvider };
