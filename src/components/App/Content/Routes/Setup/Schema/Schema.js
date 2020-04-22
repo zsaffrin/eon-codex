@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import { useSchema, useSchemaFields } from '../../../../../../hooks';
 import { sortBy } from '../../../../../../utils';
 import {
-  ButtonRow, Button, H, Link, Loading, Modal, Page, VerticalList,
+  Breadcrumb, ButtonRow, Button, H, Link, Loading, Modal, Page, VerticalList,
 } from '../../../../../ui';
 import ManageSchemaFields from './ManageSchemaFields';
 import { EditRecord } from '../../../shared';
@@ -70,11 +70,12 @@ const Schema = () => {
       )}
       <SchemaLayout>
         <div>
-          <div>
-            <Link to="/setup">Setup</Link>
-            {' / '}
-            Manage Schema
-          </div>
+          <Breadcrumb
+            items={[
+              <Link to="/setup">Setup</Link>,
+              'Manage Schema',
+            ]}
+          />
           <TitleRow>
             <H l={1}>{schema.name}</H>
             <ButtonRow>

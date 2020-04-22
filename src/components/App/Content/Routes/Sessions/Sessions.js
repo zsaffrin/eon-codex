@@ -1,21 +1,24 @@
 import React from 'react';
+import { Route, Switch, useRouteMatch } from 'react-router-dom';
 
-import { sortBy } from '../../../../../utils';
 import { useCollection } from '../../../../../hooks';
-import { H, Loading, Page } from '../../../../ui';
+import { Loading } from '../../../../ui';
+import SessionsHome from './SessionsHome';
+import ViewSession from './ViewSession';
 
 const Sessions = () => {
+  const { path } = useRouteMatch();
   const [sessions, sessionsLoading] = useCollection('sessions');
 
   return sessionsLoading ? <Loading /> : (
-    <Page>
-      <H l={1}>Sessions</H>
-      <ul>
-        {sortBy(sessions, 'date', 'desc').map(({ id, name }) => (
-          <li key={id}>{name}</li>
-        ))}
-      </ul>
-    </Page>
+    <Switch>
+      <Route path={path} exact>
+        <SessionsHome sessions={sessions} />
+      </Route>
+      <Route path={`${path}/:sessionId`} exact>
+        <ViewSession sessions={sessions} />
+      </Route>
+    </Switch>
   );
 };
 
