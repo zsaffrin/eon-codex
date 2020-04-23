@@ -5,6 +5,7 @@ import { formatDate } from '../../../../../../utils';
 import {
   H, Lookup, Markdown,
 } from '../../../../../ui';
+import SessionLoot from './SessionLoot';
 
 const ViewPlayedSession = ({ session }) => {
   const {
@@ -37,6 +38,12 @@ const ViewPlayedSession = ({ session }) => {
         <Markdown content={liveNotes} />
       </div>
       )}
+
+      {/* Loot */}
+      <div>
+        <H l={2}>Loot</H>
+        <SessionLoot />
+      </div>
     </>
   );
 };

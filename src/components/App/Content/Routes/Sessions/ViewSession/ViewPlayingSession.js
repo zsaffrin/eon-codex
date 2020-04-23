@@ -4,6 +4,7 @@ import { func, shape, string } from 'prop-types';
 import { formatDate } from '../../../../../../utils';
 import { H, Lookup, Markdown } from '../../../../../ui';
 import LiveNotesEditor from './LiveNotesEditor';
+import SessionLoot from './SessionLoot';
 
 const ViewPlayingSession = ({ session }) => {
   const {
@@ -26,6 +27,12 @@ const ViewPlayingSession = ({ session }) => {
         <H l={2}>Live Notes</H>
         <Markdown content={liveNotes} />
         <LiveNotesEditor liveNotesData={liveNotes} />
+      </div>
+
+      {/* Loot */}
+      <div>
+        <H l={2}>Loot</H>
+        <SessionLoot />
       </div>
     </>
   );
