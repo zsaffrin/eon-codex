@@ -15,9 +15,7 @@ const ViewCollection = ({ collectionId, schemaId, orderKey }) => {
     setEditItem(editItem ? null : itemToEdit);
   };
 
-  const columns = schemaFields ? sortBy(schemaFields, 'displayOrder').reduce((acc, field) => (
-    [...acc, field]
-  ), []) : [];
+  const columns = schemaFields ? sortBy(schemaFields, 'displayOrder') : [];
   const actions = [
     { label: 'Edit', action: toggleEditItem },
   ];
