@@ -23,7 +23,7 @@ const LongtextInput = ({
     value={value}
     onChange={(e) => onChange({
       id,
-      value: e,
+      value: e.target.value,
     })}
     height={height || 0}
   />
