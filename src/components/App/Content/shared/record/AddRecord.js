@@ -54,7 +54,8 @@ const AddRecord = ({
         const {
           key, lookup, name, type,
         } = field;
-        return [
+
+        return imperativeFields.filter((i) => i.key === key).length > 0 ? acc : [
           ...acc,
           {
             label: name,
