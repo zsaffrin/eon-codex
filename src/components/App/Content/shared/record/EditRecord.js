@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { string, func, shape } from 'prop-types';
+import {
+  arrayOf, string, func, shape,
+} from 'prop-types';
 import styled from 'styled-components';
 
 import { sortBy } from '../../../../../utils';
@@ -18,7 +20,7 @@ const DeleteConfirmation = styled.div(({ theme }) => {
 });
 
 const EditRecord = ({
-  schemaId, sortKey, onCancel, onSaveSuccess, recordData, title,
+  schemaId, sortKey, imperativeFields, onCancel, onSaveSuccess, onDeleteSuccess, recordData, title,
 }) => {
   const [schema, schemaLoading] = useSchema(schemaId);
   const [schemaFields, schemaFieldsLoading] = useSchemaFields(schemaId);
@@ -54,13 +56,23 @@ const EditRecord = ({
   };
 
   const saveRecordChanges = async () => {
-    const recordToSave = schemaFields.reduce((acc, field) => {
+    let recordToSave = schemaFields.reduce((acc, field) => {
       const { key } = field;
       return {
         ...acc,
         [key]: record[key] || null,
       };
     }, {});
+    recordToSave.schema = schemaId;
+    if (imperativeFields) {
+      recordToSave = imperativeFields.reduce((acc, field) => {
+        const { key, value } = field;
+        return {
+          ...acc,
+          [key]: value,
+        };
+      }, recordToSave);
+    }
 
     try {
       console.info(`Updating doc ${schema.collection}/${record.id}`);
@@ -76,7 +88,11 @@ const EditRecord = ({
     try {
       const res = await firebase.deleteDoc(`${schema.collection}/${record.id}`);
       if (res.status === 'success') {
-        onSaveSuccess();
+        if (onDeleteSuccess) {
+          onDeleteSuccess();
+        } else {
+          onSaveSuccess();
+        }
       }
       if (res.status === 'error') { console.error(res); }
     } catch (err) { console.error(err); }
@@ -105,21 +121,23 @@ const EditRecord = ({
           key, lookup, name, type,
         } = field;
 
-        return [
-          ...acc,
-          {
-            label: name,
-            content: (
-              <Input
-                id={key}
-                type={type}
-                lookup={lookup}
-                value={record[key]}
-                onChange={handleInputUpdate}
-              />
-            ),
-          },
-        ];
+        return imperativeFields && imperativeFields.filter((i) => i.key === key).length > 0
+          ? acc
+          : [
+            ...acc,
+            {
+              label: name,
+              content: (
+                <Input
+                  id={key}
+                  type={type}
+                  lookup={lookup}
+                  value={record[key]}
+                  onChange={handleInputUpdate}
+                />
+              ),
+            },
+          ];
       }, [])
   ) : [];
   if (confirmDelete) {
@@ -128,7 +146,7 @@ const EditRecord = ({
       label: 'confirmDelete',
       content: (
         <DeleteConfirmation>
-          Delete this item
+          {`Delete this ${schema ? schema.recordName : 'item'}`}
           <br />
           ARE YOU SURE?
           <br />
@@ -154,16 +172,23 @@ const EditRecord = ({
 EditRecord.propTypes = {
   schemaId: string,
   sortKey: string,
+  imperativeFields: arrayOf(shape({
+    key: string,
+    value: string,
+  })),
   onCancel: func,
   onSaveSuccess: func,
+  onDeleteSuccess: func,
   recordData: shape({}),
   title: string,
 };
 EditRecord.defaultProps = {
   schemaId: ' ',
   sortKey: '',
-  onCancel: () => {},
-  onSaveSuccess: () => {},
+  imperativeFields: null,
+  onCancel: null,
+  onSaveSuccess: null,
+  onDeleteSuccess: null,
   recordData: {},
   title: null,
 };
