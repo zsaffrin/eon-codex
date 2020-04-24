@@ -14,7 +14,7 @@ const ActionsCell = ({ actions, entry }) => {
       {actions.map(({ label, action, authLevelRequired }) => {
         console.info(authLevelRequired);
         return (
-          user && user.authLevelNum >= authLevelRequired
+          user && (!authLevelRequired || (user.authLevelNum >= authLevelRequired))
         && <Button tiny onClick={() => action(entry)} key={label}>{label}</Button>
         );
       })}
