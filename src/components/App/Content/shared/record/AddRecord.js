@@ -77,7 +77,11 @@ const AddRecord = ({
     label: 'actions',
     content: (
       <ButtonRow align="center">
-        <Button primary onClick={addNewRecord}>Add Record</Button>
+        <Button primary onClick={addNewRecord}>
+          {schema ? (
+            `Add ${schema.recordName || `${schema.name} Record`}`
+          ) : 'Add Record'}
+        </Button>
         <Button onClick={onCancel}>Cancel</Button>
       </ButtonRow>
     ),
