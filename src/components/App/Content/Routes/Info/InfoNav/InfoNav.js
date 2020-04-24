@@ -7,7 +7,8 @@ import InfoNavItem from './InfoNavItem';
 const StyledNav = styled.div(({ items, theme }) => {
   const { color } = theme;
   return `
-    border: 1px solid ${color.primary};
+    border: 1px solid ${color.lightgray};
+    border-bottom: none;
     display: grid;
     grid-template-columns: repeat(${items}, 1fr);
     align-items: center;
@@ -34,7 +35,7 @@ const navItems = [
 ];
 
 const InfoNav = () => {
-  const { categoryId } = useParams();
+  const { collectionId } = useParams();
 
   return (
     <StyledNav items={navItems.length}>
@@ -42,7 +43,7 @@ const InfoNav = () => {
         <InfoNavItem
           item={item}
           key={item.fieldKey}
-          active={categoryId === item.fieldKey}
+          active={collectionId === item.fieldKey}
         />
       ))}
     </StyledNav>
