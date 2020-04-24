@@ -78,6 +78,9 @@ const HeaderNav = () => {
   ] : [
     { url: '/login', content: 'Login' },
   ];
+  if (user && user.authLevelNum > 3) {
+    secondaryNavItems.unshift({ url: '/setup', content: <Icon name="cog" /> });
+  }
 
   return (
     <StyledNav>
