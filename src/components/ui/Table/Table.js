@@ -21,11 +21,11 @@ const TableRow = styled.tr(({ theme }) => {
     border-bottom: 1px solid ${tables.rowBorderColor};
   `;
 });
-const HeaderCell = styled.th(({ align, theme }) => {
+const HeaderCell = styled.th(({ center, theme }) => {
   const { space } = theme;
   return `
     padding: ${space.md} ${space.sm};
-    text-align: ${align || 'left'};
+    text-align: ${center ? 'center' : 'left'};
   `;
 });
 
@@ -70,8 +70,12 @@ const Table = ({
       <thead>
         <TableRow>
           {reorderable && <HeaderCell />}
-          {columns.map(({ key, name, align }) => (
-            <HeaderCell key={`${key}Header`} align={align} onClick={() => updateSort(key)}>
+          {columns.map(({ key, name, type }) => (
+            <HeaderCell
+              key={`${key}Header`}
+              center={(type === 'kS0IrlGzDlKE9MKTHUYA' || type === 'EpX4vmYkb5yrNBCvrw4H') ? 1 : 0}
+              onClick={() => updateSort(key)}
+            >
               {name}
             </HeaderCell>
           ))}
