@@ -1,16 +1,26 @@
 import React from 'react';
 import { arrayOf, shape } from 'prop-types';
 
-import ButtonRow from '../ButtonRow';
-import Button from '../Button';
+import { useCurrentUser } from '../../../hooks';
+import { Button, ButtonRow } from '../Button';
 
-const ActionsCell = ({ actions, entry }) => (
-  <ButtonRow align="start">
-    {actions.map(({ label, action }) => (
-      <Button tiny onClick={() => action(entry)} key={label}>{label}</Button>
-    ))}
-  </ButtonRow>
-);
+const ActionsCell = ({ actions, entry }) => {
+  const { user } = useCurrentUser();
+
+  console.info(user.authLevelNum);
+
+  return (
+    <ButtonRow align="start" compact>
+      {actions.map(({ label, action, authLevelRequired }) => {
+        console.info(authLevelRequired);
+        return (
+          user && user.authLevelNum >= authLevelRequired
+        && <Button tiny onClick={() => action(entry)} key={label}>{label}</Button>
+        );
+      })}
+    </ButtonRow>
+  );
+};
 ActionsCell.propTypes = {
   actions: arrayOf(shape({})),
   entry: shape({}),

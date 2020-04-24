@@ -30,10 +30,10 @@ class Firebase {
     this.auth.signOut();
   }
 
-  getDoc(collection, doc) {
+  getDoc(collection, docId) {
     return this.db
       .collection(collection)
-      .doc(doc)
+      .doc(docId)
       .get()
       .then((doc) => (doc.exists ? doc.data() : null))
       .catch((err) => console.error(err.message));

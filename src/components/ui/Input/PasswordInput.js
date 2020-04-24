@@ -1,5 +1,6 @@
-import React from "react";
-import styled from "styled-components";
+import React from 'react';
+import { func, string } from 'prop-types';
+import styled from 'styled-components';
 
 const StyledInput = styled.input(({ theme }) => {
   const { inputs } = theme;
@@ -13,10 +14,26 @@ const StyledInput = styled.input(({ theme }) => {
   `;
 });
 
-const PasswordInput = ({ id, value, onChange }) => {
-  return (
-    <StyledInput type="password" id={id} value={value} onChange={onChange} />
-  );
+const PasswordInput = ({ id, value, onChange }) => (
+  <StyledInput
+    type="password"
+    id={id}
+    value={value}
+    onChange={(e) => onChange({
+      id,
+      value: e.target.value,
+    })}
+  />
+);
+PasswordInput.propTypes = {
+  id: string,
+  value: string,
+  onChange: func,
+};
+PasswordInput.defaultProps = {
+  id: null,
+  value: null,
+  onChange: () => {},
 };
 
 export default PasswordInput;

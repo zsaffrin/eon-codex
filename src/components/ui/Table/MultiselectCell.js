@@ -1,4 +1,5 @@
 import React from 'react';
+import { shape } from 'prop-types';
 import styled from 'styled-components';
 
 const StyledCell = styled.div`
@@ -12,5 +13,11 @@ const MultiselectCell = ({ fieldValue }) => (
       : 0}
   </StyledCell>
 );
+MultiselectCell.propTypes = {
+  fieldValue: shape({}),
+};
+MultiselectCell.defaultProps = {
+  fieldValue: {},
+};
 
 export default MultiselectCell;

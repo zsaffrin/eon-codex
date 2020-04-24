@@ -1,3 +1,3 @@
-import defaultTheme from "./defaultTheme";
+import ravien from './ravien';
 
-export { defaultTheme };
+export { ravien };

@@ -1,28 +1,42 @@
-import React from "react";
-import styled from "styled-components";
+import React from 'react';
+import { arrayOf, node } from 'prop-types';
+import styled from 'styled-components';
 
-import { Link } from "../../ui";
+import { randomKey } from '../../../utils';
 
-const StyledLinks = styled.div`
-  font-size: 0.85em;
+const BreadcrumbTrail = styled.div(({ theme }) => {
+  const { space } = theme;
+  return `
+    display: grid;
+    font-size: 0.8rem;
+    grid-auto-flow: column;
+    grid-auto-columns: min-content;
+    grid-gap: ${space.md};
+    justify-items: start;
+    white-space: nowrap;
 
-  & > *:not(:last-child):after {
-    content: ">";
-    display: inline-block;
-    margin: 0 0.25em;
-  }
-`;
+    & > *:after {
+      content: '/';
+      padding-left: ${space.md};
+    }
+    & > *:last-of-type:after {
+      content: '';
+      padding: 0;
+    }
+  `;
+});
 
-const Breadcrumb = ({ links }) => {
-  return (
-    <StyledLinks>
-      {links.map(({ label, target }) => (
-        <Link to={target} key={label}>
-          {label}
-        </Link>
-      ))}
-    </StyledLinks>
-  );
+const Breadcrumb = ({ items }) => (
+  <BreadcrumbTrail>
+    {items.map((item) => <div key={randomKey(5)}>{item}</div>)}
+  </BreadcrumbTrail>
+);
+
+Breadcrumb.propTypes = {
+  items: arrayOf(node),
+};
+Breadcrumb.defaultProps = {
+  items: [],
 };
 
 export default Breadcrumb;

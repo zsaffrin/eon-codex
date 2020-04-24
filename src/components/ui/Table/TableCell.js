@@ -1,54 +1,64 @@
 import React from 'react';
+import {
+  bool, number, oneOfType, shape, string,
+} from 'prop-types';
 import styled from 'styled-components';
 
-import CollectionCell from './CollectionCell';
-import MenuCell from './MenuCell';
+import ActionsCell from './ActionsCell';
 import BooleanCell from './BooleanCell';
 import DateCell from './DateCell';
-import LongTextCell from './LongTextCell';
+import LookupCell from './LookupCell';
 import MultiselectCell from './MultiselectCell';
-import ActionsCell from './ActionsCell';
-import NumberCell from './NumberCell';
 
-const StyledCell = styled.td(({ theme, nowrap }) => {
+const StyledCell = styled.td(({ nowrap, theme }) => {
   const { space } = theme;
   return `
     padding: ${space.thin} ${space.sm};
-    white-space: ${nowrap ? 'nowrap' : 'normal'};
+    white-space: ${nowrap ? 'nowrap' : 'inherit'};
   `;
 });
 
-const TableCell = ({
-  lookup, lookupArg, fieldValue, type, actions, entry, showAsBoolean, nowrap,
-}) => {
+const TableCell = (props) => {
+  const { fieldValue, nowrap, type } = props;
+
   let content = fieldValue;
-  if (showAsBoolean || type === 'boolean') {
-    content = <BooleanCell fieldValue={fieldValue} />;
-  } else {
-    if (type === 'lookup') {
-      content = <CollectionCell lookup={lookup} lookupArg={lookupArg} fieldValue={fieldValue} />;
-    }
-    if (type === 'menu') {
-      content = <MenuCell menu={lookup} fieldValue={fieldValue} />;
-    }
-    if (type === 'datetime') {
-      content = <DateCell fieldValue={fieldValue} />;
-    }
-    if (type === 'multiselect') {
-      content = <MultiselectCell fieldValue={fieldValue} />;
-    }
-    if (type === 'actions') {
-      content = <ActionsCell actions={actions} entry={entry} />;
-    }
-    if (type === 'number') {
-      content = <NumberCell fieldValue={fieldValue} />;
-    }
-    if (type === 'longtext') {
-      content = <LongTextCell fieldValue={fieldValue} />;
-    }
+
+  // Actions
+  if (type === 'actions') {
+    content = <ActionsCell {...props} />;
+  }
+
+  // Boolean or Longtext
+  if (type === 'kS0IrlGzDlKE9MKTHUYA' || type === 'EpX4vmYkb5yrNBCvrw4H') {
+    content = <BooleanCell {...props} />;
+  }
+
+  // Date
+  if (type === 'o6dGESH0GHoa0ypYPrcg') {
+    content = <DateCell {...props} />;
+  }
+
+  // Lookup
+  if (type === 'ChOfADmf2wqLZEA5eDo7') {
+    content = <LookupCell {...props} />;
+  }
+
+  // Multiselect
+  if (type === 'zc4uYOZDSTNrt0Se9jKC') {
+    content = <MultiselectCell {...props} />;
   }
 
   return <StyledCell nowrap={nowrap ? 1 : 0}>{content}</StyledCell>;
+};
+TableCell.propTypes = {
+  fieldValue: oneOfType([bool, number, shape({}), string]),
+  nowrap: bool,
+  type: string,
+};
+TableCell.defaultProps = {
+  fieldValue: null,
+  nowrap: false,
+  type: 'text',
 };
 
 export default TableCell;

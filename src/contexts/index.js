@@ -1,4 +1,7 @@
-import { FirebaseContext, FirebaseProvider } from "./firebaseContext";
-import { UserContext, UserProvider } from "./userContext";
+import { UserContext, UserProvider } from './currentUserContext';
+import { FirebaseContext, FirebaseProvider } from './firebaseContext';
 
-export { FirebaseContext, FirebaseProvider, UserContext, UserProvider };
+export {
+  UserContext, UserProvider,
+  FirebaseContext, FirebaseProvider,
+};
