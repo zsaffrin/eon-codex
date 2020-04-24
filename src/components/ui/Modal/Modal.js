@@ -23,8 +23,8 @@ const Content = styled.div(({ theme }) => {
   const { color } = theme;
   return `
     background: ${color.background};
-    max-height: 95vh;
-    overflow: scroll;
+    max-height: 85vh;
+    overflow: auto;
   `;
 });
 
