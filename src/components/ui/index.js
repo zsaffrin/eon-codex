@@ -1,3 +1,4 @@
+import Auth from './Auth';
 import Breadcrumb from './Breadcrumb';
 import { Button, ButtonRow } from './Button';
 import H from './H';
@@ -14,6 +15,7 @@ import Table from './Table';
 import VerticalList from './VerticalList';
 
 export {
+  Auth,
   Breadcrumb,
   Button,
   ButtonRow,
