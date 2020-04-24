@@ -4,7 +4,7 @@ import { useHistory, useParams } from 'react-router-dom';
 import styled from 'styled-components';
 
 import { sortBy } from '../../../../../../../utils';
-import { Button, Modal } from '../../../../../../ui';
+import { Auth, Button, Modal } from '../../../../../../ui';
 import { AddRecord } from '../../../../shared';
 import RecordListItem from './RecordListItem';
 
@@ -46,9 +46,11 @@ const CategoryRecordSelector = ({ records }) => {
       {sortBy(records, 'name').map(({ id, name }) => (
         <RecordListItem key={id} id={id} label={name} />
       ))}
-      <ActionsItem>
-        <Button tiny onClick={toggleAddRecord}>New</Button>
-      </ActionsItem>
+      <Auth level={3}>
+        <ActionsItem>
+          <Button tiny onClick={toggleAddRecord}>New</Button>
+        </ActionsItem>
+      </Auth>
     </div>
   );
 };

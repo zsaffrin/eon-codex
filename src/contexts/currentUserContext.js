@@ -21,12 +21,24 @@ const UserProvider = ({ children }) => {
         );
         return detail;
       }
+      async function getAuthLevels() {
+        const detail = await firebase.getCollection(
+          'authLevels',
+        );
+        return detail;
+      }
+
+      const getPlayerData = () => (
+        getDetail().then((detail) => getAuthLevels().then((authLevels) => ([detail, authLevels])))
+      );
 
       if (userData) {
-        getDetail().then((detail) => {
+        getPlayerData().then((data) => {
+          const authLevelNum = [...data[1]].find((l) => l.id === data[0].authLevel).level;
           setUser({
             uid: userData.uid,
-            ...detail,
+            authLevelNum,
+            ...data[0],
           });
           setUserLoaded(true);
         });

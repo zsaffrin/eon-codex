@@ -3,7 +3,7 @@ import { shape, string } from 'prop-types';
 import styled from 'styled-components';
 
 import {
-  ButtonRow, Button, H, Modal, Page,
+  Auth, ButtonRow, Button, H, Modal, Page,
 } from '../../../../../../ui';
 import { EditRecord } from '../../../../shared';
 import GroupRecord from './GroupRecord';
@@ -61,7 +61,9 @@ const CategoryRecordContent = ({ record }) => {
             <H l={1} compact>{name}</H>
           </div>
           <ButtonRow>
-            <Button small onClick={toggleEditRecord}>Edit</Button>
+            <Auth level={3}>
+              <Button small onClick={toggleEditRecord}>Edit</Button>
+            </Auth>
           </ButtonRow>
         </HeaderRow>
 

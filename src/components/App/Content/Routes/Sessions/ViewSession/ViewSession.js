@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
 
 import {
-  ButtonRow, Button, Breadcrumb, H, Link, Modal, Page,
+  Auth, ButtonRow, Button, Breadcrumb, H, Link, Modal, Page,
 } from '../../../../../ui';
 import { EditRecord } from '../../../shared';
 import ViewPlannedSession from './ViewPlannedSession';
@@ -87,7 +87,9 @@ const ViewSession = ({ sessions }) => {
             <H l={1} compact>{name}</H>
           </div>
           <ButtonRow>
-            <Button small onClick={toggleEditSession}>Edit</Button>
+            <Auth level={3}>
+              <Button small onClick={toggleEditSession}>Edit</Button>
+            </Auth>
           </ButtonRow>
         </HeaderRow>
 

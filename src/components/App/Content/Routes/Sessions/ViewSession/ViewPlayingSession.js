@@ -2,7 +2,9 @@ import React from 'react';
 import { func, shape, string } from 'prop-types';
 
 import { formatDate } from '../../../../../../utils';
-import { H, Lookup, Markdown } from '../../../../../ui';
+import {
+  Auth, H, Lookup, Markdown,
+} from '../../../../../ui';
 import LiveNotesEditor from './LiveNotesEditor';
 import SessionLoot from './SessionLoot';
 
@@ -26,7 +28,10 @@ const ViewPlayingSession = ({ session }) => {
       <div>
         <H l={2}>Live Notes</H>
         <Markdown content={liveNotes} />
-        <LiveNotesEditor liveNotesData={liveNotes} />
+        <Auth level={3}>
+          <LiveNotesEditor liveNotesData={liveNotes} />
+        </Auth>
+
       </div>
 
       {/* Loot */}

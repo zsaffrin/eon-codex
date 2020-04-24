@@ -15,7 +15,15 @@ const StyledInput = styled.input(({ theme }) => {
 });
 
 const PasswordInput = ({ id, value, onChange }) => (
-  <StyledInput type="password" id={id} value={value} onChange={onChange} />
+  <StyledInput
+    type="password"
+    id={id}
+    value={value}
+    onChange={(e) => onChange({
+      id,
+      value: e.target.value,
+    })}
+  />
 );
 PasswordInput.propTypes = {
   id: string,

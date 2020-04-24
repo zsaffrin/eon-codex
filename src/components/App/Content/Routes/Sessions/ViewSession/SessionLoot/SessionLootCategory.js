@@ -31,7 +31,7 @@ const SessionLootCategory = ({ fields, items, title }) => {
 
   const columns = sortBy(fields, 'displayOrder').filter(({ key }) => fieldKeysToInclude.includes(key));
   const actions = [
-    { label: 'Edit', action: toggleEditLootItem },
+    { label: 'Edit', action: toggleEditLootItem, authLevelRequired: 3 },
   ];
 
   return (

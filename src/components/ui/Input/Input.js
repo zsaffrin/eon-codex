@@ -38,6 +38,11 @@ const Input = (props) => {
     return <NumberInput {...props} />;
   }
 
+  // Password
+  if (type === 'zVfrIGEEvr5su9KErpkY') {
+    return <PasswordInput {...props} />;
+  }
+
   // Multiselect
   if (type === 'zc4uYOZDSTNrt0Se9jKC') {
     return <MultiselectInput {...props} />;

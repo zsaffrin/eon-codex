@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 import { useCollection, useSchemaFields } from '../../../../../../../hooks';
 import {
-  ButtonRow, Button, Loading, Modal,
+  Auth, ButtonRow, Button, Loading, Modal,
 } from '../../../../../../ui';
 import { AddRecord } from '../../../../shared';
 import SessionLootCategory from './SessionLootCategory';
@@ -73,7 +73,9 @@ const SessionLoot = () => {
         </Modal>
       )}
       <ButtonRow align="start">
-        <Button small onClick={toggleAddLootItem}>Add Loot Item</Button>
+        <Auth level={3}>
+          <Button small onClick={toggleAddLootItem}>Add Loot Item</Button>
+        </Auth>
       </ButtonRow>
       {lootItems}
     </StyledLoot>

@@ -2,6 +2,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
+import { randomKey } from '../../../../../utils';
+import { useCurrentUser } from '../../../../../hooks';
 import { Icon } from '../../../../ui';
 
 const StyledNav = styled.nav(({ theme }) => {
@@ -42,39 +44,56 @@ const NavItem = styled(Link)(({ theme }) => {
   `;
 });
 
-const linkGroups = [
-  {
-    g: 1,
-    items: [
-      { i: 1, url: '/', content: <Icon name="home" /> },
-      { i: 2, url: '/sessions', content: 'Sessions' },
-      { i: 3, url: '/info', content: 'Info' },
-      { i: 4, url: '/loot', content: 'Loot' },
-    ],
-  },
-  {
-    g: 2,
-    items: [
-      { i: 1, url: '/setup', content: <Icon name="cog" /> },
-      { i: 2, url: '/player', content: <Icon name="user" /> },
-    ],
-  },
-];
+const HeaderNav = () => {
+  const { user } = useCurrentUser();
 
-const HeaderNav = () => (
-  <StyledNav>
-    <ContentWrap>
-      {linkGroups.map(({ g, items }) => (
-        <NavItemGroup key={g}>
-          {items.map(({ i, url, content }) => (
-            <li key={i}>
-              <NavItem to={url}>{content}</NavItem>
-            </li>
-          ))}
-        </NavItemGroup>
-      ))}
-    </ContentWrap>
-  </StyledNav>
-);
+  const primaryNavItems = [
+    {
+      url: '/',
+      content: <Icon name="home" />,
+    },
+  ];
+  primaryNavItems.push({
+    url: '/info',
+    content: 'Info',
+  });
+  if (user && user.authLevelNum > 1) {
+    primaryNavItems.push({
+      url: '/sessions',
+      content: 'Sessions',
+    });
+  }
+
+  const secondaryNavItems = user ? [
+    {
+      url: '/player',
+      content: (
+        <div>
+          <Icon name="user" />
+          {` ${user.name}`}
+        </div>
+      ),
+    },
+    { url: '/logout', content: 'Logout' },
+  ] : [
+    { url: '/login', content: 'Login' },
+  ];
+
+  return (
+    <StyledNav>
+      <ContentWrap>
+        {[primaryNavItems, secondaryNavItems].map((items) => (
+          <NavItemGroup key={randomKey(5)}>
+            {items.map(({ url, content }) => (
+              <li key={randomKey(5)}>
+                <NavItem to={url}>{content}</NavItem>
+              </li>
+            ))}
+          </NavItemGroup>
+        ))}
+      </ContentWrap>
+    </StyledNav>
+  );
+};
 
 export default HeaderNav;
