@@ -56,7 +56,7 @@ const linkGroups = [
     g: 2,
     items: [
       { i: 1, url: '/setup', content: <Icon name="cog" /> },
-      { i: 2, url: '/profile', content: <Icon name="user" /> },
+      { i: 2, url: '/player', content: <Icon name="user" /> },
     ],
   },
 ];
