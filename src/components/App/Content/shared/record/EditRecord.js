@@ -63,7 +63,6 @@ const EditRecord = ({
         [key]: record[key] || null,
       };
     }, {});
-    recordToSave.schema = schemaId;
     if (imperativeFields) {
       recordToSave = imperativeFields.reduce((acc, field) => {
         const { key, value } = field;
