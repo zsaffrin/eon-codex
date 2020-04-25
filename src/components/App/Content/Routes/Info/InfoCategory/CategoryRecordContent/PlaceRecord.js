@@ -4,11 +4,11 @@ import { shape, string } from 'prop-types';
 import { Markdown } from '../../../../../../ui';
 
 const PlaceRecord = ({ record }) => {
-  const { desc } = record;
+  const { longDesc } = record;
 
   return (
     <>
-      <Markdown content={desc} />
+      <Markdown content={longDesc} />
       {/* <Notes /> */}
     </>
   );
