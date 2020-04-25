@@ -49,6 +49,9 @@ const ManageSchemaFields = () => {
             onCancel={toggleEditField}
             onSaveSuccess={toggleEditField}
             recordData={editField}
+            imperativeFields={[
+              { key: 'schema', value: schemaId },
+            ]}
           />
         </Modal>
       )}
