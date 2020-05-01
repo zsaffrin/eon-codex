@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 
-import { useSchema, useSchemaFields } from '../../../../../../hooks';
+import { useSchemaFields } from '../../../../../../hooks';
 import {
   ButtonRow, Button, Loading, Modal, Table,
 } from '../../../../../ui';
@@ -10,8 +10,7 @@ import { sortBy } from '../../../../../../utils';
 
 const ManageSchemaFields = () => {
   const { schemaId } = useParams();
-  const [fields, fieldsLoading] = useSchemaFields('75luZmtngldtl8lGN92m');
-  const [schema, schemaLoading] = useSchema(schemaId);
+  const [fields, fieldsLoading] = useSchemaFields('schemaFields');
   const [schemaFields, schemaFieldsLoading] = useSchemaFields(schemaId);
   const [addNew, setAddNew] = useState(false);
   const [editField, setEditField] = useState(null);
@@ -28,12 +27,12 @@ const ManageSchemaFields = () => {
     { label: 'Edit', action: toggleEditField },
   ];
 
-  return schemaLoading || schemaFieldsLoading || fieldsLoading ? <Loading /> : (
+  return schemaFieldsLoading || fieldsLoading ? <Loading /> : (
     <div>
       {addNew && (
         <Modal>
           <AddRecord
-            schemaId="75luZmtngldtl8lGN92m"
+            schemaId="schemaFields"
             onCancel={toggleAddNew}
             onAddSuccess={toggleAddNew}
             imperativeFields={[
@@ -45,7 +44,7 @@ const ManageSchemaFields = () => {
       {editField && (
         <Modal>
           <EditRecord
-            schemaId="75luZmtngldtl8lGN92m"
+            schemaId="schemaFields"
             onCancel={toggleEditField}
             onSaveSuccess={toggleEditField}
             recordData={editField}
@@ -64,7 +63,7 @@ const ManageSchemaFields = () => {
         actions={actions}
         orderKey="displayOrder"
         reorderable
-        collectionId={schema.collection}
+        collectionId={schemaId}
       />
     </div>
   );

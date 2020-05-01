@@ -11,7 +11,7 @@ const Setup = () => {
     <Switch>
       <Route path={path} exact component={SetupHome} />
       <Route path={`${path}/schema/:schemaId`} component={Schema} />
-      <Route path={`${path}/collection/:schemaId`} component={Collection} />
+      <Route path={`${path}/collection/:collectionId`} component={Collection} />
     </Switch>
   );
 };

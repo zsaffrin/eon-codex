@@ -40,7 +40,7 @@ const AddRecord = ({
     }, record) : record;
 
     try {
-      const res = await firebase.addDoc(schema.collection, recordToAdd);
+      const res = await firebase.addDoc(schemaId, recordToAdd);
       if (res.status === 'success') {
         onAddSuccess();
       }
