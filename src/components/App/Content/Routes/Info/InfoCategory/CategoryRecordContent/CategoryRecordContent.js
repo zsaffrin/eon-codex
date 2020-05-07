@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { shape, string } from 'prop-types';
+import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
 
 import {
@@ -25,19 +26,20 @@ const HeaderRow = styled.div`
 `;
 
 const CategoryRecordContent = ({ record }) => {
+  const { collectionId } = useParams();
   const [editRecord, setEditRecord] = useState(false);
 
   const toggleEditRecord = () => {
     setEditRecord(!editRecord);
   };
 
-  const { name, schema } = record;
+  const { name } = record;
 
   let content;
-  if (schema === 'groups') { content = <GroupRecord record={record} />; }
-  if (schema === 'people') { content = <PersonRecord record={record} />; }
-  if (schema === 'places') { content = <PlaceRecord record={record} />; }
-  if (schema === 'playerCharacters') { content = <CharacterRecord record={record} />; }
+  if (collectionId === 'groups') { content = <GroupRecord record={record} />; }
+  if (collectionId === 'people') { content = <PersonRecord record={record} />; }
+  if (collectionId === 'places') { content = <PlaceRecord record={record} />; }
+  if (collectionId === 'playerCharacters') { content = <CharacterRecord record={record} />; }
 
   return (
     <Page>
@@ -47,7 +49,7 @@ const CategoryRecordContent = ({ record }) => {
         {editRecord && (
           <Modal>
             <EditRecord
-              schemaId={schema}
+              schemaId={collectionId}
               onCancel={toggleEditRecord}
               onSaveSuccess={toggleEditRecord}
               recordData={record}
