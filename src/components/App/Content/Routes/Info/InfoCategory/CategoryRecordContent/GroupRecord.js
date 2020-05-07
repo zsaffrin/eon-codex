@@ -8,7 +8,7 @@ const GroupRecord = ({ record }) => {
 
   return (
     <>
-      <Markdown content={desc} />
+      {desc && <Markdown content={desc} />}
       {/* <Notes /> */}
     </>
   );
