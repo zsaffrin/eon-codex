@@ -1,6 +1,7 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 
+import { PrivateRoute } from '../shared';
 import FourOhFour from './404';
 import Home from './Home';
 import Info from './Info';
@@ -17,8 +18,12 @@ const Routes = () => (
     <Route path="/logout" exact component={Logout} />
     <Route path="/info/:collectionId?/:recordId?" component={Info} />
     <Route path="/sessions" component={Sessions} />
-    <Route path="/setup" component={Setup} />
-    <Route path="/player" component={Player} />
+    <PrivateRoute path="/setup" authLevel={2}>
+      <Setup />
+    </PrivateRoute>
+    <PrivateRoute path="/player" authLevel={1}>
+      <Player />
+    </PrivateRoute>
     <Route component={FourOhFour} />
   </Switch>
 );
