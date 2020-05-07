@@ -3,13 +3,13 @@ import 'firebase/auth';
 import 'firebase/firestore';
 
 const firebaseConfig = {
-  apiKey: 'AIzaSyD-UrQ-fXWu3OcldY0xU8MU8-ztFYYe46c',
-  authDomain: 'eon-codex-23d99.firebaseapp.com',
-  databaseURL: 'https://eon-codex-23d99.firebaseio.com',
-  projectId: 'eon-codex-23d99',
-  storageBucket: 'eon-codex-23d99.appspot.com',
-  messagingSenderId: '156955843402',
-  appId: '1:156955843402:web:10f4a8824adb6c00',
+  apiKey: process.env.REACT_APP_FIREBASE_APIKEY,
+  authDomain: process.env.REACT_APP_FIREBASE_AUTHDOMAIN,
+  databaseURL: process.env.REACT_APP_FIREBASE_DATABASEURL,
+  projectId: process.env.REACT_APP_FIREBASE_PROJECTID,
+  storageBucket: process.env.REACT_APP_FIREBASE_STORAGEBUCKET,
+  messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGINGSENDERID,
+  appId: process.env.REACT_APP_FIREBASE_APPID,
 };
 
 class Firebase {
