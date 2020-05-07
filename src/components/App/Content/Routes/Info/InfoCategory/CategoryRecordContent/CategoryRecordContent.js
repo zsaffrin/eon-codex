@@ -70,7 +70,9 @@ const CategoryRecordContent = ({ record }) => {
         </HeaderRow>
 
         {/* Content */}
-        {content}
+        <div>
+          {content}
+        </div>
       </PageLayout>
 
     </Page>
