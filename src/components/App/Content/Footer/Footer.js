@@ -33,6 +33,8 @@ const Footer = () => (
         Campaign design by Dan Surette
         <br />
         Site design by Zach Saffrin
+        <br />
+        Banner art by Craig Pion
       </div>
     </TextContent>
     <div>
