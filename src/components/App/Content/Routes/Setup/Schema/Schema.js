@@ -27,7 +27,7 @@ const TitleRow = styled.div`
 const Schema = () => {
   const { schemaId } = useParams();
   const [schema, schemaLoading] = useSchema(schemaId);
-  const [schemaFields, schemaFieldsLoading] = useSchemaFields('iAdRtEsIZgLhr3DCViIX');
+  const [schemaFields, schemaFieldsLoading] = useSchemaFields('schemas');
   const [editMode, setEditMode] = useState(false);
   const history = useHistory();
 
@@ -61,7 +61,7 @@ const Schema = () => {
       {editMode && (
         <Modal>
           <EditRecord
-            schemaId="iAdRtEsIZgLhr3DCViIX"
+            schemaId="schemas"
             onCancel={toggleEditMode}
             onSaveSuccess={toggleEditMode}
             recordData={schema}
