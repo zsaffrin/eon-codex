@@ -79,7 +79,7 @@ const Schema = () => {
           <TitleRow>
             <H l={1}>{schema.name}</H>
             <ButtonRow>
-              <Button tiny onClick={() => history.push(`/setup/collection/${schema.id}`)}>Collection</Button>
+              <Button tiny onClick={() => history.push(`/setup/collection/${schemaId}`)}>Collection</Button>
             </ButtonRow>
           </TitleRow>
           <VerticalList items={rows} />

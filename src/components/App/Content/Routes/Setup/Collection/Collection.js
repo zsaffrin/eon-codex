@@ -16,8 +16,8 @@ const TitleRow = styled.div`
 `;
 
 const Collection = () => {
-  const { schemaId } = useParams();
-  const [schema, schemaLoading] = useSchema(schemaId);
+  const { collectionId } = useParams();
+  const [schema, schemaLoading] = useSchema(collectionId);
   const [addNewRecord, setAddNewRecord] = useState(false);
   const history = useHistory();
 
@@ -30,11 +30,11 @@ const Collection = () => {
       {addNewRecord && (
       <Modal>
         <AddRecord
-          schemaId={schemaId}
+          schemaId={collectionId}
           onCancel={toggleAddNewRecord}
           onAddSuccess={toggleAddNewRecord}
           imperativeFields={[
-            { key: 'schema', value: schemaId },
+            { key: 'schema', value: collectionId },
           ]}
         />
       </Modal>
@@ -55,8 +55,7 @@ const Collection = () => {
         <Button tiny onClick={toggleAddNewRecord}>{`New ${schema.recordName}`}</Button>
       </ButtonRow>
       <ViewCollection
-        schemaId={schemaId}
-        collectionId={schema.collection}
+        collectionId={collectionId}
         orderKey={schema.defaultSortKey}
       />
     </Page>

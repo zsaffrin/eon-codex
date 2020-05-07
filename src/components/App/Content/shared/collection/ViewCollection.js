@@ -6,8 +6,8 @@ import { useCollection, useSchemaFields } from '../../../../../hooks';
 import { Loading, Modal, Table } from '../../../../ui';
 import { EditRecord } from '../record';
 
-const ViewCollection = ({ collectionId, schemaId, orderKey }) => {
-  const [schemaFields, schemaFieldsLoading] = useSchemaFields(schemaId);
+const ViewCollection = ({ collectionId, orderKey }) => {
+  const [schemaFields, schemaFieldsLoading] = useSchemaFields(collectionId);
   const [records, recordsLoading] = useCollection(collectionId);
   const [editItem, setEditItem] = useState(null);
 
@@ -25,7 +25,7 @@ const ViewCollection = ({ collectionId, schemaId, orderKey }) => {
       {editItem && (
         <Modal>
           <EditRecord
-            schemaId={schemaId}
+            schemaId={collectionId}
             onCancel={toggleEditItem}
             onSaveSuccess={toggleEditItem}
             recordData={editItem}
@@ -43,12 +43,10 @@ const ViewCollection = ({ collectionId, schemaId, orderKey }) => {
 };
 ViewCollection.propTypes = {
   collectionId: string,
-  schemaId: string,
   orderKey: string,
 };
 ViewCollection.defaultProps = {
   collectionId: ' ',
-  schemaId: ' ',
   orderKey: null,
 };
 

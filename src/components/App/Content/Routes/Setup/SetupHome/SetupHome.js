@@ -1,12 +1,31 @@
 import React, { useState } from 'react';
+import { useRouteMatch } from 'react-router-dom';
+import styled from 'styled-components';
 
 import {
-  ButtonRow, Button, H, Modal, Page,
+  ButtonRow, Button, H, Link, Modal, Page,
 } from '../../../../../ui';
 import Collections from './Collections';
 import { AddRecord } from '../../../shared';
 
+const PageLayout = styled(Page)(({ theme }) => {
+  const { space } = theme;
+  return `
+    display: grid;
+    grid-gap: ${space.lg};
+  `;
+});
+const ContentLayout = styled.div(({ theme }) => {
+  const { space } = theme;
+  return `
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: ${space.lg};
+  `;
+});
+
 const SetupHome = () => {
+  const { path } = useRouteMatch();
   const [addNew, setAddNew] = useState(false);
 
   const toggleAddNew = () => {
@@ -14,26 +33,39 @@ const SetupHome = () => {
   };
 
   return (
-    <Page>
+    <PageLayout>
       {addNew && (
       <Modal>
         <AddRecord
-          schemaId="iAdRtEsIZgLhr3DCViIX"
+          schemaId="schemas"
           onCancel={toggleAddNew}
           onAddSuccess={toggleAddNew}
           imperativeFields={[
-            { key: 'schema', value: 'iAdRtEsIZgLhr3DCViIX' },
+            { key: 'schema', value: 'schemas' },
           ]}
         />
       </Modal>
       )}
       <H l={1}>Setup</H>
-      <H l={2}>Collections</H>
-      <ButtonRow align="start">
-        <Button tiny onClick={toggleAddNew}>New</Button>
-      </ButtonRow>
-      <Collections />
-    </Page>
+      <ContentLayout>
+        <div>
+          <H l={2}>Collections</H>
+          <ButtonRow align="start">
+            <Button tiny onClick={toggleAddNew}>New</Button>
+          </ButtonRow>
+          <Collections />
+        </div>
+
+        <div>
+          <H l={2}>Tools</H>
+          <ul>
+            <li>
+              <Link to={`${path}/tools/updateFieldValues`}>Update Field Values</Link>
+            </li>
+          </ul>
+        </div>
+      </ContentLayout>
+    </PageLayout>
   );
 };
 
