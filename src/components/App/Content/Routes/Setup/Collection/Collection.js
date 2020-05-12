@@ -57,6 +57,7 @@ const Collection = () => {
       <ViewCollection
         collectionId={collectionId}
         orderKey={schema.defaultSortKey}
+        orderDirection={schema.defaultSortDirection || null}
       />
     </Page>
   );

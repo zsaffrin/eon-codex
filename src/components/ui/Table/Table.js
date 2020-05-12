@@ -31,10 +31,10 @@ const HeaderCell = styled.th(({ center, theme }) => {
 
 
 const Table = ({
-  columns, entries, actions, reorderable, orderKey,
+  columns, entries, actions, reorderable, orderKey, orderDirection,
 }) => {
   const [sortKey, setSortKey] = useState(orderKey || 'name');
-  const [sortOrder, setSortOrder] = useState('asc');
+  const [sortOrder, setSortOrder] = useState(orderDirection || 'asc');
   const [orderMin, setOrderMin] = useState(0);
   const [orderMax, setOrderMax] = useState(0);
   const firebase = useFirebase();
@@ -152,6 +152,7 @@ Table.propTypes = {
   entries: arrayOf(shape({})),
   actions: arrayOf(shape({})),
   orderKey: string,
+  orderDirection: string,
   reorderable: bool,
   handleOrderChange: func,
 };
@@ -160,6 +161,7 @@ Table.defaultProps = {
   entries: [],
   actions: null,
   orderKey: null,
+  orderDirection: null,
   reorderable: false,
   handleOrderChange: () => {},
 };
