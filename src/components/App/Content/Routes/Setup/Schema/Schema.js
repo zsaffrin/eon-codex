@@ -64,6 +64,7 @@ const Schema = () => {
             schemaId="schemas"
             onCancel={toggleEditMode}
             onSaveSuccess={toggleEditMode}
+            onDeleteSuccess={() => history.push('/setup')}
             recordData={schema}
           />
         </Modal>
