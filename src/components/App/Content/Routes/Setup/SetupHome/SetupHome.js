@@ -43,6 +43,7 @@ const SetupHome = () => {
           imperativeFields={[
             { key: 'schema', value: 'schemas' },
           ]}
+          specifyId
         />
       </Modal>
       )}
