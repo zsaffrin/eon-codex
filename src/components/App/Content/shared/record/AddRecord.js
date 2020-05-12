@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import {
-  arrayOf, func, shape, string,
+  arrayOf, bool, func, shape, string,
 } from 'prop-types';
 
 import { sortBy } from '../../../../../utils';
@@ -10,7 +10,7 @@ import {
 } from '../../../../ui';
 
 const AddRecord = ({
-  schemaId, sortKey, onCancel, onAddSuccess, imperativeFields, title,
+  schemaId, sortKey, onCancel, onAddSuccess, imperativeFields, specifyId, title,
 }) => {
   const [schema, schemaLoading] = useSchema(schemaId);
   const [schemaFields, schemaFieldsLoading] = useSchemaFields(schemaId);
@@ -21,6 +21,7 @@ const AddRecord = ({
       [key]: defaultValue,
     };
   }, {}) : {});
+  const [newRecordId, setNewRecordId] = useState('');
   const firebase = useFirebase();
 
   const handleInputUpdate = ({ id, value }) => {
@@ -40,7 +41,9 @@ const AddRecord = ({
     }, record) : record;
 
     try {
-      const res = await firebase.addDoc(schemaId, recordToAdd);
+      const res = specifyId
+        ? await firebase.setDoc(schemaId, newRecordId, recordToAdd)
+        : await firebase.addDoc(schemaId, recordToAdd);
       if (res.status === 'success') {
         onAddSuccess();
       }
@@ -86,6 +89,19 @@ const AddRecord = ({
       </ButtonRow>
     ),
   });
+  if (specifyId) {
+    formRows.unshift({
+      label: 'ID',
+      content: (
+        <Input
+          id="id"
+          type="FeJHQhhXaYb8A3ngJ8hG"
+          value={newRecordId}
+          onChange={({ value }) => setNewRecordId(value)}
+        />
+      ),
+    });
+  }
 
   return schemaLoading || schemaFieldsLoading ? <Loading /> : (
     <Page>
@@ -104,6 +120,7 @@ AddRecord.propTypes = {
     key: string,
     value: string,
   })),
+  specifyId: bool,
   title: string,
 };
 AddRecord.defaultProps = {
@@ -111,6 +128,7 @@ AddRecord.defaultProps = {
   onAddSuccess: () => {},
   sortKey: null,
   imperativeFields: null,
+  specifyId: false,
   title: null,
 };
 
