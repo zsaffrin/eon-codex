@@ -3,14 +3,15 @@ import { func, shape, string } from 'prop-types';
 
 import { formatDate } from '../../../../../../utils';
 import {
-  Auth, H, Lookup, Markdown,
+  Auth, H, Icon, Link, Lookup, Markdown,
 } from '../../../../../ui';
 import LiveNotesEditor from './LiveNotesEditor';
 import SessionLoot from './SessionLoot';
+import PlaylistShortcuts from './PlaylistShortcuts';
 
 const ViewPlayingSession = ({ session }) => {
   const {
-    date, location, liveNotes,
+    date, location, liveNotes, meetingUrl, gameUrl,
   } = session;
 
   return (
@@ -21,8 +22,32 @@ const ViewPlayingSession = ({ session }) => {
         <div>
           {'Location: '}
           <Lookup collection="gamingLocations" recordId={location} noLink />
+          {location === 'W3Pi4m3LNdcUIi4jL30c' && meetingUrl && (
+            <>
+              {' - '}
+              <Link to={meetingUrl} external>Join Meeting</Link>
+              {gameUrl && (
+                <>
+                  {' - '}
+                  <Link to={gameUrl} external>Game Session</Link>
+                </>
+              )}
+            </>
+          )}
         </div>
       </div>
+
+      {/* Playlists */}
+      {location === 'W3Pi4m3LNdcUIi4jL30c' && (
+        <div>
+          <H l={2}>
+            Playlists
+            {' '}
+            <Icon name={['fab', 'spotify']} style={{ color: '#1DB954' }} />
+          </H>
+          <PlaylistShortcuts />
+        </div>
+      )}
 
       {/* Live Notes */}
       <div>
