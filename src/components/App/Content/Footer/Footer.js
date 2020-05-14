@@ -22,6 +22,12 @@ const TextContent = styled.div(({ theme }) => {
     grid-gap: ${space.md};
   `;
 });
+const RepoContent = styled.div`
+  & > span {
+    font-size: 0.9rem;
+    font-family: monospace;
+  }
+`;
 
 const Footer = () => (
   <StyledFooter>
@@ -37,11 +43,15 @@ const Footer = () => (
         Banner art by Craig Pion
       </div>
     </TextContent>
-    <div>
+    <RepoContent>
+      <span>
+        {process.env.REACT_APP_VERSION}
+      </span>
+      {' '}
       <Link blended external to="https://github.com/zsaffrin/eon-codex">
         <Icon name={['fab', 'github']} />
       </Link>
-    </div>
+    </RepoContent>
   </StyledFooter>
 );
 
