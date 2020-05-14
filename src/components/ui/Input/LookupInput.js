@@ -2,14 +2,13 @@ import React from 'react';
 import { string } from 'prop-types';
 
 import { sortBy } from '../../../utils';
-import { useCollection, useSchema } from '../../../hooks';
+import { useCollection } from '../../../hooks';
 import Loading from '../Loading';
 import SelectInput from './SelectInput';
 
 const LookupInput = (props) => {
   const { lookup, lookupDisplayKey, fieldValue } = props;
-  const [schema, schemaLoading] = useSchema(lookup);
-  const [records, recordsLoading] = useCollection(schema && schema.collection ? schema.collection : ' ');
+  const [records, recordsLoading] = useCollection(lookup || ' ');
 
   const choices = records ? records.reduce((acc, record) => ([
     ...acc,
@@ -19,7 +18,7 @@ const LookupInput = (props) => {
     },
   ]), []) : [];
 
-  return recordsLoading || schemaLoading ? <Loading /> : (
+  return recordsLoading ? <Loading /> : (
     <SelectInput choices={sortBy(choices, 'label')} value={fieldValue} {...props} />
   );
 };

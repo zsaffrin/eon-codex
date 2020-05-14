@@ -74,8 +74,8 @@ const EditRecord = ({
     }
 
     try {
-      console.info(`Updating doc ${schema.collection}/${record.id}`);
-      const res = await firebase.updateDoc(`${schema.collection}/${record.id}`, recordToSave);
+      console.info(`Updating doc ${schemaId}/${record.id}`);
+      const res = await firebase.updateDoc(`${schemaId}/${record.id}`, recordToSave);
       if (res.status === 'success') {
         onSaveSuccess();
       }
@@ -85,7 +85,7 @@ const EditRecord = ({
 
   const deleteRecord = async () => {
     try {
-      const res = await firebase.deleteDoc(`${schema.collection}/${record.id}`);
+      const res = await firebase.deleteDoc(`${schemaId}/${record.id}`);
       if (res.status === 'success') {
         if (onDeleteSuccess) {
           onDeleteSuccess();

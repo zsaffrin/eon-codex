@@ -11,7 +11,7 @@ import {
   faPlus,
   faUser,
 } from '@fortawesome/free-solid-svg-icons';
-import { faGithub } from '@fortawesome/free-brands-svg-icons';
+import { faGithub, faSpotify } from '@fortawesome/free-brands-svg-icons';
 
 import { FirebaseProvider, UserProvider } from '../../contexts';
 import GlobalStyle from './GlobalStyle';
@@ -28,6 +28,7 @@ library.add(
   faHome,
   faInfoCircle,
   faPlus,
+  faSpotify,
   faUser,
 );
 

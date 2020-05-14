@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { arrayOf, shape } from 'prop-types';
-import { useParams } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import styled from 'styled-components';
 
 import {
@@ -28,6 +28,7 @@ const ViewSession = ({ sessions }) => {
   const { sessionId } = useParams();
   const [editSession, setEditSession] = useState(false);
   const session = sessions.find(({ id }) => id === sessionId) || {};
+  const history = useHistory();
 
   const toggleEditSession = () => {
     setEditSession(!editSession);
@@ -67,6 +68,7 @@ const ViewSession = ({ sessions }) => {
               schemaId="sessions"
               onCancel={toggleEditSession}
               onSaveSuccess={toggleEditSession}
+              onDeleteSuccess={() => history.push('/sessions')}
               recordData={session}
             />
           </Modal>
