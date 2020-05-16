@@ -5,11 +5,12 @@ import { formatDate } from '../../../../../../utils';
 import {
   H, Lookup, Markdown,
 } from '../../../../../ui';
+import Participants from './Participants';
 import SessionLoot from './SessionLoot';
 
 const ViewPlayedSession = ({ session }) => {
   const {
-    date, location, recap, liveNotes,
+    date, location, recap, liveNotes, participants,
   } = session;
 
   return (
@@ -21,6 +22,12 @@ const ViewPlayedSession = ({ session }) => {
           {'Location: '}
           <Lookup collection="gamingLocations" recordId={location} noLink />
         </div>
+      </div>
+
+      {/* Participants */}
+      <div>
+        <H l={2}>Participants</H>
+        <Participants sessionParticipants={participants} />
       </div>
 
       {/* Recap */}

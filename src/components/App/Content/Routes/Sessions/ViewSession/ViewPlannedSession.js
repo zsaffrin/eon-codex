@@ -2,11 +2,12 @@ import React from 'react';
 import { func, shape, string } from 'prop-types';
 
 import { formatDate } from '../../../../../../utils';
-import { Lookup, Markdown } from '../../../../../ui';
+import { H, Lookup, Markdown } from '../../../../../ui';
+import Participants from './Participants';
 
 const ViewPlannedSession = ({ session }) => {
   const {
-    date, location, liveNotes,
+    date, location, liveNotes, participants,
   } = session;
 
   return (
@@ -18,6 +19,12 @@ const ViewPlannedSession = ({ session }) => {
           {'Location: '}
           {location ? <Lookup collection="gamingLocations" recordId={location} noLink /> : 'TBD'}
         </div>
+      </div>
+
+      {/* Participants */}
+      <div>
+        <H l={2}>Expected Participants</H>
+        <Participants sessionParticipants={participants} />
       </div>
 
       {/* Live Notes */}
