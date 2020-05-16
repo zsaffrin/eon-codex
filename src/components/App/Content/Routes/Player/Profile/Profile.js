@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 import { useCurrentUser } from '../../../../../../hooks';
 import { Breadcrumb, H, Page } from '../../../../../ui';
-import ManageCharacters from './ManageCharacters';
+import ManagePCs from './ManagePCs';
 
 const PageLayout = styled.div(({ theme }) => {
   const { space } = theme;
@@ -29,7 +29,7 @@ const Profile = () => {
         </div>
         <div>
           <H l={2}>My PCs</H>
-          <ManageCharacters />
+          <ManagePCs />
         </div>
       </PageLayout>
     </Page>

@@ -1,18 +1,16 @@
 import React, { useState } from 'react';
 
-import { sortBy } from '../../../../../../utils';
-import { useCollection, useCurrentUser, useSchemaFields } from '../../../../../../hooks';
+import { sortBy } from '../../../../../../../utils';
+import { useCollection, useCurrentUser } from '../../../../../../../hooks';
 import {
-  ButtonRow, Button, Loading, Modal, Table,
-} from '../../../../../ui';
-import { AddRecord, EditRecord } from '../../../shared';
+  ButtonRow, Button, Loading, Modal,
+} from '../../../../../../ui';
+import { AddRecord, EditRecord } from '../../../../shared';
+import PCList from './PCList';
 
-const fieldsToInclude = ['name', 'status'];
-
-const ManageCharacters = () => {
+const ManagePCs = () => {
   const { user } = useCurrentUser();
   const [characters, charactersLoading] = useCollection('playerCharacters', ['player', '==', user.uid]);
-  const [fields, fieldsLoading] = useSchemaFields('playerCharacters');
   const [addPC, setAddPC] = useState(false);
   const [editPC, setEditPC] = useState(null);
 
@@ -23,15 +21,7 @@ const ManageCharacters = () => {
     setEditPC(editPC ? null : pcToEdit);
   };
 
-  const columns = fields ? sortBy(fields, 'displayOrder').reduce((acc, field) => (
-    fieldsToInclude.includes(field.key) ? [...acc, field] : acc
-  ), []) : [];
-
-  const actions = [
-    { label: 'Edit', action: toggleEditPC },
-  ];
-
-  return charactersLoading || fieldsLoading ? <Loading /> : (
+  return charactersLoading ? <Loading /> : (
     <div>
       {addPC && (
         <Modal>
@@ -61,9 +51,9 @@ const ManageCharacters = () => {
       <ButtonRow align="start">
         <Button primary small onClick={toggleAddPC}>New PC</Button>
       </ButtonRow>
-      <Table columns={columns} entries={characters} actions={actions} />
+      <PCList items={sortBy(characters, 'name')} toggleEdit={toggleEditPC} />
     </div>
   );
 };
 
-export default ManageCharacters;
+export default ManagePCs;
