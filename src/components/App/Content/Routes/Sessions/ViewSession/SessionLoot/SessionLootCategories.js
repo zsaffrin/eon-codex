@@ -35,12 +35,14 @@ const SessionLootCategories = ({ lootCategoryData, lootItemData, schemaFields })
   return (
     <StyledLootCategories>
       {/* Gold */}
-      <SessionGoldLoot
-        key="dipcwkNkgCZKjI2gGVFD"
-        items={goldLootItems}
-        title="Gold"
-        fields={schemaFields}
-      />
+      {goldLootItems.length > 0 && (
+        <SessionGoldLoot
+          key="dipcwkNkgCZKjI2gGVFD"
+          items={goldLootItems}
+          title="Gold"
+          fields={schemaFields}
+        />
+      )}
 
       {/* Other Categories */}
       {lootItemSections}
