@@ -27,11 +27,15 @@ const Content = styled.div(({ theme }) => {
     grid-template-columns: 1fr 3fr;
   `;
 });
-const TotalCell = styled.div`
-  display: grid;
-  align-content: start;
-  justify-content: center;
-`;
+const TotalCell = styled.div(({ theme }) => {
+  const { space } = theme;
+  return `
+    display: grid;
+    align-content: start;
+    justify-content: center;
+    padding: ${space.md};
+  `;
+});
 const Total = styled.div`
   font-size: 3em;
   font-weight: bold;
