@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
-import { arrayOf, shape, string } from 'prop-types';
+import {
+  arrayOf, shape, string, number,
+} from 'prop-types';
 import styled from 'styled-components';
 
 import { sortBy } from '../../../../../../../utils';
@@ -33,12 +35,17 @@ const TotalCell = styled.div(({ theme }) => {
     display: grid;
     align-content: start;
     justify-content: center;
-    padding: ${space.md};
+    padding-bottom: ${space.lg};
   `;
 });
 const Total = styled.div`
   font-size: 3em;
   font-weight: bold;
+
+  & > span {
+    font-size: 0.5em;
+    text-transform: uppercase;
+  }
 `;
 const Breakdown = styled.div`
   font-size: 0.8em;
@@ -50,9 +57,11 @@ const Split = styled.div`
   }
 `;
 
-const fieldKeysToInclude = ['name', 'value', 'whereFound'];
+const fieldKeysToInclude = ['name', 'value', 'comments'];
 
-const SessionGoldLoot = ({ fields, items, title }) => {
+const SessionGoldLoot = ({
+  fields, items, title, shares,
+}) => {
   const [editLootItem, setEditLootItem] = useState(null);
 
   const toggleEditLootItem = (item) => {
@@ -63,6 +72,10 @@ const SessionGoldLoot = ({ fields, items, title }) => {
   const actions = [
     { label: 'Edit', action: toggleEditLootItem, authLevelRequired: 3 },
   ];
+
+  const totalAmount = items.reduce((acc, i) => (
+    i.value ? acc + i.value : acc
+  ), 0);
 
   return (
     <StyledCategory>
@@ -79,12 +92,15 @@ const SessionGoldLoot = ({ fields, items, title }) => {
       <TitleBar>{title}</TitleBar>
       <Content>
         <TotalCell>
-          <Total>235gp</Total>
-          <Breakdown>x6 Participants</Breakdown>
+          <Total>
+            {totalAmount}
+            <span>gp</span>
+          </Total>
+          <Breakdown>{`x${shares} Participants`}</Breakdown>
           <Split>
             =
             {' '}
-            <span>5 gp</span>
+            <span>{`${+(totalAmount / shares).toFixed(1)} gp`}</span>
             {' '}
             each
           </Split>
@@ -102,11 +118,13 @@ SessionGoldLoot.propTypes = {
   items: arrayOf(shape({})),
   title: string,
   fields: arrayOf(shape({})),
+  shares: number,
 };
 SessionGoldLoot.defaultProps = {
   items: [],
   title: '',
   fields: [],
+  shares: 1,
 };
 
 export default SessionGoldLoot;
