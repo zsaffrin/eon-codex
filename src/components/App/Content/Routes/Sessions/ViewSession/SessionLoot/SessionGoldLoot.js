@@ -96,7 +96,7 @@ const SessionGoldLoot = ({
             {totalAmount}
             <span>gp</span>
           </Total>
-          <Breakdown>{`x${shares} Participants`}</Breakdown>
+          <Breakdown>{`/ ${shares} shares`}</Breakdown>
           <Split>
             =
             {' '}
