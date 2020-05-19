@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { shape } from 'prop-types';
 import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
 
@@ -18,7 +19,7 @@ const StyledLoot = styled.div(({ theme }) => {
   `;
 });
 
-const SessionLoot = () => {
+const SessionLoot = ({ participants }) => {
   const { sessionId } = useParams();
   const [addLootItem, setAddLootItem] = useState(false);
   const [lootCategories, lootCategoriesLoading] = useCollection('lootCategories');
@@ -55,10 +56,17 @@ const SessionLoot = () => {
         lootItemData={sessionLootItems}
         lootCategoryData={lootCategories}
         schemaFields={schemaFields}
+        participants={Object.keys(participants).length}
       />
 
     </StyledLoot>
   );
+};
+SessionLoot.propTypes = {
+  participants: shape({}),
+};
+SessionLoot.defaultProps = {
+  participants: {},
 };
 
 export default SessionLoot;
