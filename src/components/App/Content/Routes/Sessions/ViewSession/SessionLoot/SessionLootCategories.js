@@ -1,5 +1,5 @@
 import React from 'react';
-import { arrayOf, shape } from 'prop-types';
+import { arrayOf, shape, number } from 'prop-types';
 import styled from 'styled-components';
 
 import SessionLootCategory from './SessionLootCategory';
@@ -13,7 +13,9 @@ const StyledLootCategories = styled.div(({ theme }) => {
   `;
 });
 
-const SessionLootCategories = ({ lootCategoryData, lootItemData, schemaFields }) => {
+const SessionLootCategories = ({
+  lootCategoryData, lootItemData, schemaFields, participants,
+}) => {
   const goldLootItems = lootItemData.filter((i) => i.category === 'dipcwkNkgCZKjI2gGVFD');
 
   const lootItemSections = lootCategoryData.reduce((acc, cat) => {
@@ -41,6 +43,7 @@ const SessionLootCategories = ({ lootCategoryData, lootItemData, schemaFields })
           items={goldLootItems}
           title="Gold"
           fields={schemaFields}
+          shares={participants}
         />
       )}
 
@@ -56,11 +59,13 @@ SessionLootCategories.propTypes = {
   lootItemData: arrayOf(shape({})),
   lootCategoryData: arrayOf(shape({})),
   schemaFields: arrayOf(shape({})),
+  participants: number,
 };
 SessionLootCategories.defaultProps = {
   lootItemData: [],
   lootCategoryData: [],
   schemaFields: [],
+  participants: 0,
 };
 
 export default SessionLootCategories;
