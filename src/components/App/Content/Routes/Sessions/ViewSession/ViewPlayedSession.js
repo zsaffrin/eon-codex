@@ -49,7 +49,9 @@ const ViewPlayedSession = ({ session }) => {
       {/* Loot */}
       <div>
         <H l={2}>Loot</H>
-        <SessionLoot />
+        <SessionLoot
+          participants={participants}
+        />
       </div>
     </>
   );
