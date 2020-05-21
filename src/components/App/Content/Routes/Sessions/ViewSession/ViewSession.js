@@ -78,7 +78,7 @@ const ViewSession = ({ sessions }) => {
         <Breadcrumb
           items={[
             <Link to="/sessions">Sessions</Link>,
-            name,
+            `${sessionNumber}${name ? ` - ${name}` : ''}`,
           ]}
         />
 
