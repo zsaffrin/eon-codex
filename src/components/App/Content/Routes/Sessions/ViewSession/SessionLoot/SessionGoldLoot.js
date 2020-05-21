@@ -57,7 +57,7 @@ const Split = styled.div`
   }
 `;
 
-const fieldKeysToInclude = ['name', 'value', 'comments'];
+const fieldKeysToInclude = ['name', 'value', 'whereFound'];
 
 const SessionGoldLoot = ({
   fields, items, title, shares,
