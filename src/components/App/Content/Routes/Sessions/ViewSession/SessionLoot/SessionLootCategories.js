@@ -17,6 +17,7 @@ const SessionLootCategories = ({
   lootCategoryData, lootItemData, schemaFields, participants,
 }) => {
   const goldLootItems = lootItemData.filter((i) => i.category === 'dipcwkNkgCZKjI2gGVFD');
+  const miscLootItems = lootItemData.filter((i) => !i.category);
 
   const lootItemSections = lootCategoryData.reduce((acc, cat) => {
     const { id, name } = cat;
@@ -51,6 +52,14 @@ const SessionLootCategories = ({
       {lootItemSections}
 
       {/* Misc (no Category) */}
+      {miscLootItems.length > 0 && (
+        <SessionLootCategory
+          key="misc"
+          items={miscLootItems}
+          title="Misc"
+          fields={schemaFields}
+        />
+      )}
     </StyledLootCategories>
   );
 };
