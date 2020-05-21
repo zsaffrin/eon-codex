@@ -58,10 +58,16 @@ const HeaderNav = () => {
     content: 'Info',
   });
   if (user && user.authLevelNum > 1) {
-    primaryNavItems.push({
-      url: '/sessions',
-      content: 'Sessions',
-    });
+    primaryNavItems.push(
+      {
+        url: '/sessions',
+        content: 'Sessions',
+      },
+      {
+        url: '/loot',
+        content: 'Loot',
+      },
+    );
   }
 
   const secondaryNavItems = user ? [
