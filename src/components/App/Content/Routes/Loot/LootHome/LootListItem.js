@@ -3,7 +3,9 @@ import { shape } from 'prop-types';
 import styled from 'styled-components';
 
 import { EditRecord } from '../../../shared';
-import { Button, Icon, Modal } from '../../../../../ui';
+import {
+  Auth, Button, Icon, Link, Modal,
+} from '../../../../../ui';
 
 const StyledItem = styled.li(({ claimed, theme }) => {
   const { color, space } = theme;
@@ -42,14 +44,20 @@ const LootListItem = ({ item, session, pc }) => {
       )}
       <div>
         <div>{name}</div>
-        <Small>{`Session ${session.sessionNumber}`}</Small>
+        <Small>
+          <Link to={`/sessions/${session.id}`}>
+            {`Session ${session.sessionNumber}`}
+          </Link>
+        </Small>
         {whereFound && <Small>{whereFound}</Small>}
         {pc && <Small>{`Claimed by ${pc.name}`}</Small>}
       </div>
       <div>
-        <Button tiny onClick={() => toggleEditLootItem(item)}>
-          <Icon name="edit" />
-        </Button>
+        <Auth level={3}>
+          <Button tiny onClick={() => toggleEditLootItem(item)}>
+            <Icon name="edit" />
+          </Button>
+        </Auth>
       </div>
     </StyledItem>
   );
