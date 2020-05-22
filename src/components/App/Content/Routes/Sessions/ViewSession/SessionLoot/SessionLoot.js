@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { shape } from 'prop-types';
 import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
 
@@ -7,7 +8,7 @@ import {
   Auth, ButtonRow, Button, Loading, Modal,
 } from '../../../../../../ui';
 import { AddRecord } from '../../../../shared';
-import SessionLootCategory from './SessionLootCategory';
+import SessionLootCategories from './SessionLootCategories';
 
 const StyledLoot = styled.div(({ theme }) => {
   const { space } = theme;
@@ -18,7 +19,7 @@ const StyledLoot = styled.div(({ theme }) => {
   `;
 });
 
-const SessionLoot = () => {
+const SessionLoot = ({ participants }) => {
   const { sessionId } = useParams();
   const [addLootItem, setAddLootItem] = useState(false);
   const [lootCategories, lootCategoriesLoading] = useCollection('lootCategories');
@@ -30,33 +31,6 @@ const SessionLoot = () => {
   const toggleAddLootItem = () => {
     setAddLootItem(!addLootItem);
   };
-
-  const lootItems = lootCategories ? lootCategories.reduce((acc, cat) => {
-    const { id, name } = cat;
-    const items = sessionLootItems ? sessionLootItems.filter((item) => item.category === id) : [];
-    return items.length > 0 ? [
-      ...acc,
-      (
-        <SessionLootCategory
-          key={id}
-          items={items}
-          title={name}
-          fields={schemaFields}
-        />
-      ),
-    ] : acc;
-  }, []) : [];
-  const miscItems = sessionLootItems ? sessionLootItems.filter((item) => !item.category) : [];
-  if (miscItems.length > 0) {
-    lootItems.push(
-      <SessionLootCategory
-        key="none"
-        items={miscItems}
-        title="Misc"
-        fields={schemaFields}
-      />,
-    );
-  }
 
   return lootCategoriesLoading || sessionLootItemsLoading || schemaFieldsLoading ? <Loading /> : (
     <StyledLoot>
@@ -77,9 +51,22 @@ const SessionLoot = () => {
           <Button small onClick={toggleAddLootItem}>Add Loot Item</Button>
         </Auth>
       </ButtonRow>
-      {lootItems}
+
+      <SessionLootCategories
+        lootItemData={sessionLootItems}
+        lootCategoryData={lootCategories}
+        schemaFields={schemaFields}
+        participants={Object.keys(participants).length}
+      />
+
     </StyledLoot>
   );
+};
+SessionLoot.propTypes = {
+  participants: shape({}),
+};
+SessionLoot.defaultProps = {
+  participants: {},
 };
 
 export default SessionLoot;

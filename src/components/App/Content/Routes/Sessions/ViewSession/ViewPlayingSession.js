@@ -7,11 +7,12 @@ import {
 } from '../../../../../ui';
 import LiveNotesEditor from './LiveNotesEditor';
 import SessionLoot from './SessionLoot';
+import Participants from './Participants';
 import PlaylistShortcuts from './PlaylistShortcuts';
 
 const ViewPlayingSession = ({ session }) => {
   const {
-    date, location, liveNotes, meetingUrl, gameUrl,
+    date, location, liveNotes, meetingUrl, gameUrl, participants,
   } = session;
 
   return (
@@ -48,6 +49,12 @@ const ViewPlayingSession = ({ session }) => {
           <PlaylistShortcuts />
         </div>
       )}
+
+      {/* Participants */}
+      <div>
+        <H l={2}>Participants</H>
+        <Participants sessionParticipants={participants} />
+      </div>
 
       {/* Live Notes */}
       <div>

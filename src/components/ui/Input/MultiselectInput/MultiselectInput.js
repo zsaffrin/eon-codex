@@ -12,7 +12,7 @@ const MultiselectInput = (props) => {
   const choices = collection ? collection.map(({ id, name }) => ({ id, label: name })) : [];
 
   return collectionLoading ? <Loading /> : (
-    <Multiselect choices={choices} />
+    <Multiselect choices={choices} {...props} />
   );
 };
 

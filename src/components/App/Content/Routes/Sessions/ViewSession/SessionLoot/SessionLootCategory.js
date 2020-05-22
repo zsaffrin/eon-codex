@@ -3,7 +3,7 @@ import { arrayOf, shape, string } from 'prop-types';
 import styled from 'styled-components';
 
 import { sortBy } from '../../../../../../../utils';
-import { Modal, Table } from '../../../../../../ui';
+import { Link, Modal, Table } from '../../../../../../ui';
 import { EditRecord } from '../../../../shared';
 
 const StyledCategory = styled.div(({ theme }) => {
@@ -30,6 +30,10 @@ const SessionLootCategory = ({ fields, items, title }) => {
   };
 
   const columns = sortBy(fields, 'displayOrder').filter(({ key }) => fieldKeysToInclude.includes(key));
+  const entries = items.map((i) => ({
+    ...i,
+    name: i.url ? <Link to={i.url} external>{i.name}</Link> : i.name,
+  }));
   const actions = [
     { label: 'Edit', action: toggleEditLootItem, authLevelRequired: 3 },
   ];
@@ -49,7 +53,7 @@ const SessionLootCategory = ({ fields, items, title }) => {
       <TitleBar>{title}</TitleBar>
       <Table
         columns={columns}
-        entries={items}
+        entries={entries}
         actions={actions}
       />
     </StyledCategory>

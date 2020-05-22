@@ -7,6 +7,7 @@ import Home from './Home';
 import Info from './Info';
 import Login from './Login';
 import Logout from './Logout';
+import Loot from './Loot';
 import Player from './Player';
 import Sessions from './Sessions';
 import Setup from './Setup';
@@ -18,6 +19,7 @@ const Routes = () => (
     <Route path="/logout" exact component={Logout} />
     <Route path="/info/:collectionId?/:recordId?" component={Info} />
     <Route path="/sessions" component={Sessions} />
+    <Route path="/loot" component={Loot} />
     <PrivateRoute path="/setup" authLevel={2}>
       <Setup />
     </PrivateRoute>
