@@ -24,7 +24,9 @@ const Small = styled.div`
 
 const LootListItem = ({ item, session, pc }) => {
   const [editLootItem, setEditLootItem] = useState(null);
-  const { name, whereFound } = item;
+  const {
+    name, comments, whereFound, url,
+  } = item;
 
   const toggleEditLootItem = (i) => {
     setEditLootItem(editLootItem ? null : i);
@@ -43,7 +45,8 @@ const LootListItem = ({ item, session, pc }) => {
         </Modal>
       )}
       <div>
-        <div>{name}</div>
+        {url ? <Link to={url} external>{name}</Link> : <div>{name}</div>}
+        {comments && <Small>{comments}</Small>}
         <Small>
           <Link to={`/sessions/${session.id}`}>
             {`Session ${session.sessionNumber}`}

@@ -5,7 +5,10 @@ import { H, Page } from '../../../../../ui';
 import LootList from './LootList';
 
 const LootHome = ({ items }) => {
-  const filteredItems = items.filter((i) => i.category !== 'dipcwkNkgCZKjI2gGVFD');
+  const filteredItems = items.filter((i) => (
+    i.category !== 'dipcwkNkgCZKjI2gGVFD'
+    && !i.unclaimable
+  ));
 
   return (
     <Page>

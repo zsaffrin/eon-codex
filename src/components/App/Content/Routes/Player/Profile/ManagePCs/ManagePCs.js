@@ -11,6 +11,8 @@ import PCList from './PCList';
 const ManagePCs = () => {
   const { user } = useCurrentUser();
   const [characters, charactersLoading] = useCollection('playerCharacters', ['player', '==', user.uid]);
+  const [sessions, sessionsLoading] = useCollection('sessions');
+  const [loot, lootLoading] = useCollection('loot');
   const [addPC, setAddPC] = useState(false);
   const [editPC, setEditPC] = useState(null);
 
@@ -21,7 +23,7 @@ const ManagePCs = () => {
     setEditPC(editPC ? null : pcToEdit);
   };
 
-  return charactersLoading ? <Loading /> : (
+  return charactersLoading || sessionsLoading || lootLoading ? <Loading /> : (
     <div>
       {addPC && (
         <Modal>
@@ -51,7 +53,12 @@ const ManagePCs = () => {
       <ButtonRow align="start">
         <Button primary small onClick={toggleAddPC}>New PC</Button>
       </ButtonRow>
-      <PCList items={sortBy(characters, 'name')} toggleEdit={toggleEditPC} />
+      <PCList
+        characters={sortBy(characters, 'name')}
+        toggleEdit={toggleEditPC}
+        sessions={sessions}
+        loot={loot}
+      />
     </div>
   );
 };

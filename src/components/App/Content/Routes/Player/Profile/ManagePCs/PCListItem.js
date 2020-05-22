@@ -1,8 +1,9 @@
 import React from 'react';
-import { func, shape } from 'prop-types';
+import { func, shape, arrayOf } from 'prop-types';
 import styled from 'styled-components';
 
 import { Button, H } from '../../../../../../ui';
+import PCLootList from './PCLootList';
 
 const StyledItem = styled.li(({ theme }) => {
   const { color, space } = theme;
@@ -13,32 +14,56 @@ const StyledItem = styled.li(({ theme }) => {
     grid-template-columns: 1fr min-content;
   `;
 });
+const ItemContent = styled.div(({ theme }) => {
+  const { space } = theme;
+  return `
+    display: grid;
+    grid-gap: ${space.lg};
+    padding: ${space.lg};
+  `;
+});
 
-const PCListItem = ({ item, toggleEdit }) => {
-  const { name, classDesc, raceDesc } = item;
+const PCListItem = ({
+  character, loot, sessions, toggleEdit,
+}) => {
+  const {
+    id, name, classDesc, raceDesc,
+  } = character;
+
+  const filteredLoot = loot.filter((i) => i.claim === character.id);
 
   return (
     <StyledItem>
       <div>
-        <H l={3} compact>{name}</H>
         <div>
+          <H l={3} compact>{name}</H>
           {raceDesc && `${raceDesc} `}
           {classDesc}
         </div>
+        <ItemContent>
+          <div>
+            <H l={4}>Loot</H>
+            <PCLootList pcId={id} loot={filteredLoot} sessions={sessions} />
+          </div>
+        </ItemContent>
       </div>
       <div>
-        <Button tiny onClick={() => toggleEdit(item)}>Edit</Button>
+        <Button tiny onClick={() => toggleEdit(character)}>Edit</Button>
       </div>
     </StyledItem>
   );
 };
 
 PCListItem.propTypes = {
-  item: shape({}),
+  character: shape({}),
+  loot: arrayOf(shape({})),
+  sessions: arrayOf(shape({})),
   toggleEdit: func,
 };
 PCListItem.defaultProps = {
-  item: {},
+  character: {},
+  loot: [],
+  sessions: [],
   toggleEdit: () => {},
 };
 

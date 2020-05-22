@@ -1,5 +1,5 @@
 import React from 'react';
-import { arrayOf, func, shape } from 'prop-types';
+import { arrayOf, shape } from 'prop-types';
 import styled from 'styled-components';
 
 import PCListItem from './PCListItem';
@@ -10,20 +10,19 @@ const StyledList = styled.ul`
   padding: 0;
 `;
 
-const PCList = ({ items, toggleEdit }) => (
+const PCList = ({ characters, ...rest }) => (
   <StyledList>
-    {items.map((item) => (
-      <PCListItem key={item.id} item={item} toggleEdit={toggleEdit} />
+    {characters.map((char) => (
+      <PCListItem {...rest} character={char} key={char.id} />
     ))}
   </StyledList>
 );
+
 PCList.propTypes = {
-  items: arrayOf(shape({})),
-  toggleEdit: func,
+  characters: arrayOf(shape({})),
 };
 PCList.defaultProps = {
-  items: [],
-  toggleEdit: () => {},
+  characters: [],
 };
 
 export default PCList;
