@@ -7,6 +7,7 @@ import {
   Auth, ButtonRow, Button, Breadcrumb, H, Link, Modal, Page,
 } from '../../../../../ui';
 import { EditRecord } from '../../../shared';
+import SessionNav from './SessionNav';
 import ViewPlannedSession from './ViewPlannedSession';
 import ViewPlayedSession from './ViewPlayedSession';
 import ViewPlayingSession from './ViewPlayingSession';
@@ -81,6 +82,9 @@ const ViewSession = ({ sessions }) => {
             `${sessionNumber}${name ? ` - ${name}` : ''}`,
           ]}
         />
+
+        {/* Session Nav */}
+        <SessionNav sessions={sessions} currentSession={session} />
 
         {/* Header Row */}
         <HeaderRow>
