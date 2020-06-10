@@ -26,7 +26,7 @@ const SessionLootCategory = ({ fields, items, title }) => {
   const [editLootItem, setEditLootItem] = useState(null);
 
   const toggleEditLootItem = (item) => {
-    setEditLootItem(editLootItem ? null : item);
+    setEditLootItem(editLootItem ? null : items.find((i) => i.id === item.id));
   };
 
   const columns = sortBy(fields, 'displayOrder').filter(({ key }) => fieldKeysToInclude.includes(key));
