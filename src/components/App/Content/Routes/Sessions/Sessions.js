@@ -1,6 +1,7 @@
 import React from 'react';
 import { Route, Switch, useRouteMatch } from 'react-router-dom';
 
+import { sortBy } from '../../../../../utils';
 import { useCollection } from '../../../../../hooks';
 import { Loading } from '../../../../ui';
 import SessionsHome from './SessionsHome';
@@ -16,7 +17,7 @@ const Sessions = () => {
         <SessionsHome sessions={sessions} />
       </Route>
       <Route path={`${path}/:sessionId`} exact>
-        <ViewSession sessions={sessions} />
+        <ViewSession sessions={sortBy(sessions, 'date')} />
       </Route>
     </Switch>
   );

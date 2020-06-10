@@ -3,6 +3,8 @@ import { library } from '@fortawesome/fontawesome-svg-core';
 import {
   faArrowDown,
   faArrowUp,
+  faChevronLeft,
+  faChevronRight,
   faCog,
   faDharmachakra,
   faEdit,
@@ -21,6 +23,8 @@ import Content from './Content';
 library.add(
   faArrowDown,
   faArrowUp,
+  faChevronLeft,
+  faChevronRight,
   faCog,
   faDharmachakra,
   faEdit,
