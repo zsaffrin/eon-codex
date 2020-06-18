@@ -1,6 +1,7 @@
 import Auth from './Auth';
 import Breadcrumb from './Breadcrumb';
 import { Button, ButtonRow } from './Button';
+import Card from './Card';
 import H from './H';
 import Icon from './Icon';
 import Image from './Image';
@@ -19,6 +20,7 @@ export {
   Breadcrumb,
   Button,
   ButtonRow,
+  Card,
   H,
   Icon,
   Image,
