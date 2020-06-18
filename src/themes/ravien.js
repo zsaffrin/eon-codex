@@ -15,6 +15,7 @@ const color = {
   highlight: '#C12E79',
 
   lightgray: '#dfe1e3',
+  medgray: '#aeb4b9',
   darkgray: '#626d78',
   white: '#f8f9f9',
   black: '#384048',
@@ -56,6 +57,12 @@ const footer = {
   color: color.background,
 };
 
+const loot = {
+  defaultColor: '#34495e',
+  claimedColor: color.medgray,
+  categoryColors: ['#27ae60', '#c0392b', '#e67e22', '#8e44ad', '#2980b9', '#d35400'],
+};
+
 const ravien = {
   space,
   color,
@@ -64,6 +71,7 @@ const ravien = {
   text,
   buttons,
   inputs,
+  loot,
   footer,
 };
 
