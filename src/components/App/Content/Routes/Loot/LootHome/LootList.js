@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 import { useCollection } from '../../../../../../hooks';
 import { Loading } from '../../../../../ui';
-import LootListItem from './LootListItem';
+import { LootItem } from '../../../shared';
 
 const StyledList = styled.ul(({ theme }) => {
   const { space } = theme;
@@ -41,12 +41,13 @@ const LootList = ({ items }) => {
   return sessionsLoading || pcsLoading ? <Loading /> : (
     <StyledList>
       {sortedItems.map((i) => (
-        <LootListItem
-          key={i.id}
-          item={i}
-          session={sessions.find((s) => s.id === i.session)}
-          pc={i.claim ? pcs.find((c) => c.id === i.claim) : null}
-        />
+        <li key={i.id}>
+          <LootItem
+            item={i}
+            session={sessions.find((s) => s.id === i.session)}
+            pc={i.claim ? pcs.find((c) => c.id === i.claim) : null}
+          />
+        </li>
       ))}
     </StyledList>
   );
