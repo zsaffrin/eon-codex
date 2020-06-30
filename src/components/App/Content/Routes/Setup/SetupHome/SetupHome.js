@@ -63,6 +63,9 @@ const SetupHome = () => {
             <li>
               <Link to={`${path}/tools/updateFieldValues`}>Update Field Values</Link>
             </li>
+            <li>
+              <Link to={`${path}/tools/copyLinkString`}>Copy Link String</Link>
+            </li>
           </ul>
         </div>
       </ContentLayout>
