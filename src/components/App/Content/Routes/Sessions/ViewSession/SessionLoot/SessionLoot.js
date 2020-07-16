@@ -52,12 +52,16 @@ const SessionLoot = ({ participants }) => {
         </Auth>
       </ButtonRow>
 
-      <SessionLootCategories
-        lootItemData={sessionLootItems}
-        lootCategoryData={lootCategories}
-        schemaFields={schemaFields}
-        participants={Object.keys(participants).length}
-      />
+      {sessionLootItems.length > 0 ? (
+        <SessionLootCategories
+          lootItemData={sessionLootItems}
+          lootCategoryData={lootCategories}
+          schemaFields={schemaFields}
+          participants={Object.keys(participants).length}
+        />
+      ) : (
+        <div>No loot items</div>
+      )}
 
     </StyledLoot>
   );
