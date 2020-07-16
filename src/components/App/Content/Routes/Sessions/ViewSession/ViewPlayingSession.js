@@ -23,18 +23,20 @@ const ViewPlayingSession = ({ session }) => {
         <div>
           {'Location: '}
           <Lookup collection="gamingLocations" recordId={location} noLink />
-          {location === 'W3Pi4m3LNdcUIi4jL30c' && meetingUrl && (
-            <>
-              {' - '}
-              <Link to={meetingUrl} external>Join Meeting</Link>
-              {gameUrl && (
-                <>
-                  {' - '}
-                  <Link to={gameUrl} external>Game Session</Link>
-                </>
-              )}
-            </>
-          )}
+          <Auth level={1}>
+            {meetingUrl && (
+              <>
+                {' - '}
+                <Link to={meetingUrl} external>Join Meeting</Link>
+              </>
+            )}
+            {location === 'W3Pi4m3LNdcUIi4jL30c' && gameUrl && (
+              <>
+                {' - '}
+                <Link to={gameUrl} external>Game Session</Link>
+              </>
+            )}
+          </Auth>
         </div>
       </div>
 
