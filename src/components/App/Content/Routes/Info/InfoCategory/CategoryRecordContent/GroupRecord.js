@@ -1,7 +1,7 @@
 import React from 'react';
 import { shape, string, arrayOf } from 'prop-types';
 
-import { Auth, Markdown } from '../../../../../../ui';
+import { Markdown } from '../../../../../../ui';
 import { PlayerNotes } from '../../../../shared';
 
 const GroupRecord = ({ record, notes }) => {
@@ -10,13 +10,11 @@ const GroupRecord = ({ record, notes }) => {
   return (
     <>
       {desc && <Markdown content={desc} />}
-      <Auth level={1}>
-        <PlayerNotes
-          collection="groups"
-          article={record.id}
-          notes={notes}
-        />
-      </Auth>
+      <PlayerNotes
+        collection="groups"
+        article={record.id}
+        notes={notes}
+      />
     </>
   );
 };
