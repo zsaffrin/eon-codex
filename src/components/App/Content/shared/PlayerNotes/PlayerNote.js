@@ -135,7 +135,7 @@ const PlayerNote = ({ noteId, note, player }) => {
       ) : (
         <NoteContent>{noteContent}</NoteContent>
       )}
-      {user.uid === player.id && buttons}
+      {user && user.uid === player.id && buttons}
     </StyledNote>
   );
 };
