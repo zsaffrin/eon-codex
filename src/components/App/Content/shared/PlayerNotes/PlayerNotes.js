@@ -3,7 +3,7 @@ import { string } from 'prop-types';
 
 import { sortBy } from '../../../../../utils';
 import { useCollection } from '../../../../../hooks';
-import { H, Loading } from '../../../../ui';
+import { Auth, H, Loading } from '../../../../ui';
 import PlayerNotesList from './PlayerNotesList';
 import PlayerNotesEditor from './PlayerNotesEditor';
 
@@ -14,8 +14,12 @@ const PlayerNotes = ({ article, collection }) => {
   return notesLoading ? <Loading /> : (
     <div>
       <H l={3} compact>Player Notes</H>
-      <PlayerNotesList notes={sortBy(articleNotes, 'created')} />
-      <PlayerNotesEditor article={article} collection={collection} />
+      {articleNotes.length > 0
+        ? (<PlayerNotesList notes={sortBy(articleNotes, 'created')} />)
+        : (<div>No notes</div>)}
+      <Auth level={1}>
+        <PlayerNotesEditor article={article} collection={collection} />
+      </Auth>
     </div>
   );
 };
