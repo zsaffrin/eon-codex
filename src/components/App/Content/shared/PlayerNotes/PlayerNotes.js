@@ -1,8 +1,9 @@
 import React from 'react';
 import { string } from 'prop-types';
 
+import { sortBy } from '../../../../../utils';
 import { useCollection } from '../../../../../hooks';
-import { Loading } from '../../../../ui';
+import { H, Loading } from '../../../../ui';
 import PlayerNotesList from './PlayerNotesList';
 import PlayerNotesEditor from './PlayerNotesEditor';
 
@@ -12,8 +13,9 @@ const PlayerNotes = ({ article, collection }) => {
 
   return notesLoading ? <Loading /> : (
     <div>
-      <PlayerNotesList notes={articleNotes} />
-      <PlayerNotesEditor />
+      <H l={3} compact>Player Notes</H>
+      <PlayerNotesList notes={sortBy(articleNotes, 'created')} />
+      <PlayerNotesEditor article={article} collection={collection} />
     </div>
   );
 };
