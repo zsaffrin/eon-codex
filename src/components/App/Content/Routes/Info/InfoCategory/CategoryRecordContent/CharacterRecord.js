@@ -1,9 +1,10 @@
 import React from 'react';
-import { shape, string } from 'prop-types';
+import { arrayOf, shape, string } from 'prop-types';
 
 import { H, Lookup, Markdown } from '../../../../../../ui';
+import { PlayerNotes } from '../../../../shared';
 
-const CharacterRecord = ({ record }) => {
+const CharacterRecord = ({ record, notes }) => {
   const { player, bio, info } = record;
 
   return (
@@ -26,6 +27,11 @@ const CharacterRecord = ({ record }) => {
           <Markdown content={bio} />
         </div>
       )}
+      <PlayerNotes
+        collection="people"
+        article={record.id}
+        notes={notes}
+      />
     </>
   );
 };
@@ -34,11 +40,13 @@ CharacterRecord.propTypes = {
   record: shape({
     desc: string,
   }),
+  notes: arrayOf(shape({})),
 };
 CharacterRecord.defaultProps = {
   record: {
     desc: '',
   },
+  notes: [],
 };
 
 export default CharacterRecord;
