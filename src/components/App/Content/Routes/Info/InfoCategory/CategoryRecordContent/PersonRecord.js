@@ -1,15 +1,20 @@
 import React from 'react';
-import { shape, string } from 'prop-types';
+import { arrayOf, shape, string } from 'prop-types';
 
 import { Markdown } from '../../../../../../ui';
+import { PlayerNotes } from '../../../../shared';
 
-const PersonRecord = ({ record }) => {
+const PersonRecord = ({ record, notes }) => {
   const { desc } = record;
 
   return (
     <>
       {desc && <Markdown content={desc} />}
-      {/* <Notes /> */}
+      <PlayerNotes
+        collection="people"
+        article={record.id}
+        notes={notes}
+      />
     </>
   );
 };
@@ -18,11 +23,13 @@ PersonRecord.propTypes = {
   record: shape({
     desc: string,
   }),
+  notes: arrayOf(shape({})),
 };
 PersonRecord.defaultProps = {
   record: {
     desc: '',
   },
+  notes: [],
 };
 
 export default PersonRecord;

@@ -19,6 +19,7 @@ import {
   faScroll,
   faShieldAlt,
   faToolbox,
+  faTrashAlt,
   faUser,
 } from '@fortawesome/free-solid-svg-icons';
 import { faGithub, faSpotify } from '@fortawesome/free-brands-svg-icons';
@@ -49,6 +50,7 @@ library.add(
   faShieldAlt,
   faSpotify,
   faToolbox,
+  faTrashAlt,
   faUser,
 );
 

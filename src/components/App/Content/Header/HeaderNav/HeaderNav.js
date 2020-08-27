@@ -52,23 +52,19 @@ const HeaderNav = () => {
       url: '/',
       content: <Icon name="home" />,
     },
+    {
+      url: '/info',
+      content: 'Info',
+    },
+    {
+      url: '/sessions',
+      content: 'Sessions',
+    },
+    {
+      url: '/loot',
+      content: 'Loot',
+    },
   ];
-  primaryNavItems.push({
-    url: '/info',
-    content: 'Info',
-  });
-  if (user && user.authLevelNum > 1) {
-    primaryNavItems.push(
-      {
-        url: '/sessions',
-        content: 'Sessions',
-      },
-      {
-        url: '/loot',
-        content: 'Loot',
-      },
-    );
-  }
 
   const secondaryNavItems = user ? [
     {
