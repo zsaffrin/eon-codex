@@ -2,7 +2,7 @@ import { useContext } from 'react';
 
 import { UserContext } from '../contexts/userContext';
 
-const useCurrentUser = () => {
+const useUser = () => {
   const [user, isUserLoaded] = useContext(UserContext);
 
   return [
@@ -11,4 +11,4 @@ const useCurrentUser = () => {
   ];
 };
 
-export default useCurrentUser;
+export default useUser;
