@@ -1,20 +1,24 @@
 import styled from 'styled-components';
 import tinycolor from 'tinycolor2';
 
-const StyledButton = styled.button(({ small, theme, tiny }) => {
+const StyledButton = styled.button(({ large, small, theme, tiny }) => {
   const { space } = theme;
 
-  let fontSize = '1em';
-  let pad = `${space.md} ${space.lg}`;
+  let fontSize = '0.85rem';
+  let pad = `${space.sm} ${space.md}`;
   let lineHeight = 'inherit';
+  if (large) {
+    fontSize = '1.1rem';
+    pad = `${space.md} ${space.lg}`;
+  }
   if (small) {
-    fontSize = '0.85em';
-    pad = `${space.sm} ${space.md}`;
+    fontSize = '0.75rem';
+    pad = `${space.thin} ${space.sm}`;
   }
   if (tiny) {
-    fontSize = '0.85em';
+    fontSize = '0.7rem';
     lineHeight = 1;
-    pad = `${space.thin} ${space.thin}`;
+    pad = `${space.thin} ${space.sm}`;
   }
 
   return `
@@ -35,25 +39,25 @@ const ColorButton = styled(StyledButton)(
   ({
     primary, danger, disabled, theme,
   }) => {
-    const { buttons } = theme;
+    const { button } = theme;
     const {
-      dangerButtonColor,
-      defaultButtonColor,
-      disabledButtonColor,
-      primaryButtonColor,
+      dangerColor,
+      defaultColor,
+      disabledColor,
+      primaryColor,
       textColorLight,
       textColorDark,
-    } = buttons;
+    } = button;
 
-    let buttonColor = defaultButtonColor;
+    let buttonColor = defaultColor;
     if (primary) {
-      buttonColor = primaryButtonColor;
+      buttonColor = primaryColor;
     }
     if (disabled) {
-      buttonColor = disabledButtonColor;
+      buttonColor = disabledColor;
     }
     if (danger) {
-      buttonColor = dangerButtonColor;
+      buttonColor = dangerColor;
     }
 
     let buttonTextColor = '';
