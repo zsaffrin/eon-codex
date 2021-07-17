@@ -1,12 +1,11 @@
 import { FirebaseProvider, UserProvider } from '../../contexts';
+import AppContent from './AppContent';
 
 const App = () => {
   return (
     <FirebaseProvider>
       <UserProvider>
-        <div>
-          FIVE
-        </div>
+        <AppContent />
       </UserProvider>
     </FirebaseProvider>
   );
