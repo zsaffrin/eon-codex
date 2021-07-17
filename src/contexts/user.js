@@ -20,7 +20,6 @@ const UserProvider = ({ children }) => {
       }
 
       const populateUserDetail = (userData) => {
-        console.info(`Populate user ${userData.email}`);
         const { email, emailVerified, displayName, phoneNumber } = userData;
         const userDetails = {
           email,
@@ -60,7 +59,7 @@ const UserProvider = ({ children }) => {
   }, [firebase]);
 
   return (
-    <UserContext.Provider value={{ user, isUserLoaded }}>
+    <UserContext.Provider value={[user, isUserLoaded]}>
       {children}
     </UserContext.Provider>
   );
