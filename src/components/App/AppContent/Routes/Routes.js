@@ -1,8 +1,12 @@
+import { Route, Switch } from 'react-router-dom';
+
+import FourOhFour from './404';
+
 const Routes = () => {
   return (
-    <div>
-      App Routes
-    </div>
+    <Switch>
+      <Route component={FourOhFour} />
+    </Switch>
   );
 };
 
