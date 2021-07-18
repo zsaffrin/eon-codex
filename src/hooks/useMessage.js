@@ -5,9 +5,9 @@ import { Message } from '../components/ui';
 const useMessage = () => {
   const [message, setMessage] = useState(null);
 
-  const handleMessageUpdate = (messageType, messageContent) => {
+  const handleMessageUpdate = (messageType, messageContent, raw) => {
     setMessage(
-      <Message type={messageType}>
+      <Message type={messageType} raw={raw}>
         {messageContent}
       </Message>
     );
