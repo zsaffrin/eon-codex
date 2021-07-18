@@ -65,12 +65,18 @@ const message = {
   warnColor: color.warn,
 };
 
+const box = {
+  background: app.backgroundLevel[1],
+  borderColor: app.backgroundLevel[2],
+};
+
 const table = {
   borderColor: tinycolor(app.background).lighten(20),
 };
 
 const defaultDark = {
   app,
+  box,
   headers,
   button,
   color,
