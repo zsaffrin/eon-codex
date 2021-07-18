@@ -9,6 +9,7 @@ const GlobalStyle = createGlobalStyle(({ theme }) => {
     body {
       background: ${app.background};
       color: ${app.color};
+      font-size: 14px;
     }
 
     p {
