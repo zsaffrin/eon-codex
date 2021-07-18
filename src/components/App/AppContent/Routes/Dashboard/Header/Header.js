@@ -8,7 +8,7 @@ const Header = () => {
   return (
     <header>
       <ButtonRow>
-        <Button onClick={() => history.push('/login')}>Login</Button>
+        <Button onClick={() => history.push('/logout')}>Logout</Button>
       </ButtonRow>
     </header>
   );
