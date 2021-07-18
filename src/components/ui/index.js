@@ -7,6 +7,7 @@ import Loading from './Loading';
 import Message from './Message';
 import Page from './Page';
 import StackedList from './StackedList';
+import TitleRow from './TitleRow';
 import VerticalList from './VerticalList';
 
 export {
@@ -19,5 +20,6 @@ export {
   Message,
   Page,
   StackedList,
+  TitleRow,
   VerticalList,
 };
