@@ -12,7 +12,13 @@ const StyledPage = styled.div`
   align-items: center;
 `;
 
-const StyledForm = styled.div(({ theme }) => {
+const Title = styled.div(({ theme }) => {
+  const { space } = theme;
+  return `
+    padding: ${space.xl} 0;
+  `;
+});
+const StyledForm = styled.form(({ theme }) => {
   const { layout } = theme;
   return `
     display: grid;
@@ -69,21 +75,21 @@ const Login = () => {
   };
   
   return (
-    <>
-      <Header />
-      <StyledPage>
-        <Box>
-          {message}
-          <H l={1} compact centered>Login</H>
-          <StyledForm onSubmit={handleSubmit}>
-            <VerticalList items={formFields} />
-            <ButtonRow>
-              <Button large type="submit">Submit</Button>
-            </ButtonRow>
-          </StyledForm>
-        </Box>
-      </StyledPage>
-    </>
+    <StyledPage>
+      <Box>
+        <Title>
+          <H l={1} compact centered>Eon Codex</H>
+        </Title>
+        <H l={2} compact centered>Login</H>
+        {message}
+        <StyledForm onSubmit={handleSubmit}>
+          <VerticalList items={formFields} />
+          <ButtonRow>
+            <Button large type="submit">Submit</Button>
+          </ButtonRow>
+        </StyledForm>
+      </Box>
+    </StyledPage>
   );
 };
 
