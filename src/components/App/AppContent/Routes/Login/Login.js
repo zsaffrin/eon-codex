@@ -4,13 +4,24 @@ import styled from 'styled-components';
 import { useFirebase, useForm, useMessage } from '../../../../../hooks';
 import { Box, Button, ButtonRow, H, VerticalList } from '../../../../ui';
 
-const StyledPage = styled.div`
-  height: 100vh;
-  display: grid;
-  justify-content: center;
-  align-items: center;
-`;
-
+const StyledPage = styled.div(({ theme }) => {
+  const { layout } = theme;
+  return `
+    height: 100vh;
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    padding: ${layout.padding};
+  `;
+});
+const ContentWrap = styled.div(({ theme }) => {
+  const { layout } = theme;
+  return `
+    display: grid;
+    grid-gap: ${layout.padding};
+    justify-items: center;
+  `;
+});
 const Title = styled.div(({ theme }) => {
   const { space } = theme;
   return `
@@ -75,19 +86,20 @@ const Login = () => {
   
   return (
     <StyledPage>
-      <Box>
+      <ContentWrap>
         <Title>
           <H l={1} compact centered>Eon Codex</H>
         </Title>
-        <H l={2} compact centered>Login</H>
-        {message}
-        <StyledForm onSubmit={handleSubmit}>
-          <VerticalList items={formFields} />
-          <ButtonRow>
-            <Button large type="submit">Submit</Button>
-          </ButtonRow>
-        </StyledForm>
-      </Box>
+        <Box>
+          {message}
+          <StyledForm onSubmit={handleSubmit}>
+            <VerticalList items={formFields} />
+            <ButtonRow compact>
+              <Button large type="submit">Login</Button>
+            </ButtonRow>
+          </StyledForm>
+        </Box>
+      </ContentWrap>
     </StyledPage>
   );
 };
