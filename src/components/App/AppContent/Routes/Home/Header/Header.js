@@ -1,16 +1,31 @@
 import { useHistory } from 'react-router-dom';
+import styled from 'styled-components';
 
-import { Button, ButtonRow } from '../../../../../ui';
+import { Button, ButtonRow, H } from '../../../../../ui';
+
+const StyledHeader = styled.header(({ theme }) => {
+  const { headers, space } = theme;
+  return `
+    background: ${headers.background};
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: ${space.sm} ${space.md};
+  `;
+});
 
 const Header = () => {
   const history = useHistory();
   
   return (
-    <header>
+    <StyledHeader>
+      <H l={1} compact onClick={() => history.push('/')}>
+        Eon Codex
+      </H>
       <ButtonRow>
         <Button onClick={() => history.push('/login')}>Login</Button>
       </ButtonRow>
-    </header>
+    </StyledHeader>
   );
 };
 

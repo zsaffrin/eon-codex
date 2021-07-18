@@ -1,10 +1,14 @@
 import { H, Page } from '../../../../ui';
+import Header from './Header';
 
 const Dashboard = () => {
   return (
-    <Page>
-      <H l={1}>Dashy</H>
-    </Page>
+    <>
+      <Header />
+      <Page>
+        <H l={1}>Dashy</H>
+      </Page>
+    </>
   );
 };
 

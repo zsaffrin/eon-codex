@@ -1,14 +1,20 @@
 import { Route, Switch } from 'react-router-dom';
 
+import { useUser } from '../../../../hooks';
 import FourOhFour from './404';
 import Home from './Home';
+import Dashboard from './Dashboard';
+import Login from './Login';
 import Logout from './Logout';
 
 const Routes = () => {
+  const [user] = useUser();
+  
   return (
     <Switch>
-      <Route path="/" exact component={Home} />
+      <Route path="/" exact component={user ? Dashboard : Home} />
 
+      <Route path="/login" exact component={Login} />
       <Route path="/logout" exact component={Logout} />
       
       <Route component={FourOhFour} />
