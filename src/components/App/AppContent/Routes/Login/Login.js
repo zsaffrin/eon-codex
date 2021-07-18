@@ -2,7 +2,7 @@ import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 
 import { useFirebase, useForm, useMessage } from '../../../../../hooks';
-import { Button, ButtonRow, H, VerticalList } from '../../../../ui';
+import { Box, Button, ButtonRow, H, VerticalList } from '../../../../ui';
 import Header from './Header';
 
 const StyledPage = styled.div`
@@ -12,19 +12,11 @@ const StyledPage = styled.div`
   align-items: center;
 `;
 
-const FormPanel = styled.div(({ theme }) => {
-  const { app, layout } = theme;
+const StyledForm = styled.div(({ theme }) => {
+  const { layout } = theme;
   return `
-    border: 1px solid ${app.color};
-    border-radius: ${layout.borderRadius};
     display: grid;
-    padding: ${layout.padding};
     grid-gap: ${layout.padding};
-
-    & > form {
-      display: grid;
-      grid-gap: ${layout.padding};
-    }
   `;
 });
 
@@ -80,16 +72,16 @@ const Login = () => {
     <>
       <Header />
       <StyledPage>
-        <FormPanel>
+        <Box>
           {message}
           <H l={1} compact centered>Login</H>
-          <form onSubmit={handleSubmit}>
+          <StyledForm onSubmit={handleSubmit}>
             <VerticalList items={formFields} />
             <ButtonRow>
               <Button large type="submit">Submit</Button>
             </ButtonRow>
-          </form>
-        </FormPanel>
+          </StyledForm>
+        </Box>
       </StyledPage>
     </>
   );
