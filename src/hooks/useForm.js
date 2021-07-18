@@ -1,8 +1,18 @@
 import { useState } from 'react';
 
-const useForm = (initialData = {}) => {
-  const [formData, setFormData] = useState(initialData);
+import { Input } from '../components/ui';
 
+const buildFormState = (fields) => {
+  const formState = {};
+
+  fields.forEach(({ id, defaultValue }) => { formState[id] = defaultValue; });
+
+  return formState;
+};
+
+const useForm = (fields) => {
+  const [formData, setFormData] = useState(fields ? buildFormState(fields) : {});
+  
   const handleFieldChange = ({ id, value }) => {
     setFormData({
       ...formData,
@@ -10,7 +20,22 @@ const useForm = (initialData = {}) => {
     });
   };
 
-  return [formData, handleFieldChange];
+  const formFields = fields.map(({ choices, id, label, type }) => ({
+    label,
+    content: (
+      <Input
+        key={id}
+        id={id}
+        type={type}
+        choices={choices}
+        value={formData[id]}
+        onChange={handleFieldChange}
+      />
+    ),
+  }));
+
+
+  return [formData, formFields];
 };
 
 export default useForm;
