@@ -2,6 +2,7 @@ import { Button, ButtonRow } from './Button';
 import H from './H';
 import Link from './Link';
 import Loading from './Loading';
+import Message from './Message';
 import Page from './Page';
 
 export {
@@ -9,5 +10,6 @@ export {
   H,
   Link,
   Loading,
+  Message,
   Page,
 };
