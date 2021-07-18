@@ -3,7 +3,6 @@ import styled from 'styled-components';
 
 import { useFirebase, useForm, useMessage } from '../../../../../hooks';
 import { Box, Button, ButtonRow, H, VerticalList } from '../../../../ui';
-import Header from './Header';
 
 const StyledPage = styled.div`
   height: 100vh;
