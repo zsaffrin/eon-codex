@@ -74,6 +74,10 @@ const table = {
   borderColor: tinycolor(app.background).lighten(20),
 };
 
+const modal = {
+  background: tinycolor(color.black).lighten(10).setAlpha(0.95),
+};
+
 const defaultDark = {
   app,
   box,
@@ -82,6 +86,7 @@ const defaultDark = {
   color,
   input,
   message,
+  modal,
   name,
   table,
   text,
