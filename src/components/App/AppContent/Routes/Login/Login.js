@@ -2,7 +2,7 @@ import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 
 import { useFirebase, useForm, useMessage } from '../../../../../hooks';
-import { Box, Button, ButtonRow, H, VerticalList } from '../../../../ui';
+import { Box, Button, ButtonRow, H, StackedList } from '../../../../ui';
 
 const StyledPage = styled.div(({ theme }) => {
   const { layout } = theme;
@@ -93,7 +93,7 @@ const Login = () => {
         <Box>
           {message}
           <StyledForm onSubmit={handleSubmit}>
-            <VerticalList items={formFields} />
+            <StackedList items={formFields} />
             <ButtonRow compact>
               <Button large type="submit">Login</Button>
             </ButtonRow>
