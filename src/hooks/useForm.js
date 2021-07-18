@@ -5,7 +5,7 @@ import { Input } from '../components/ui';
 const buildFormState = (fields) => {
   const formState = {};
 
-  fields.forEach(({ id, defaultValue }) => { formState[id] = defaultValue; });
+  fields.forEach(({ id, defaultValue }) => { formState[id] = defaultValue || ''; });
 
   return formState;
 };
