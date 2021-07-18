@@ -1,8 +1,16 @@
+import { useHistory } from 'react-router-dom';
+
+import { Button, ButtonRow } from '../../../../../ui';
+
 const Header = () => {
+  const history = useHistory();
+  
   return (
-    <div>
-      Header
-    </div>
+    <header>
+      <ButtonRow>
+        <Button onClick={() => history.push('/logout')}>Logout</Button>
+      </ButtonRow>
+    </header>
   );
 };
 
