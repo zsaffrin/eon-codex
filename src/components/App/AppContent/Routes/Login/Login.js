@@ -9,7 +9,6 @@ const StyledPage = styled.div(({ theme }) => {
   return `
     height: 100vh;
     display: grid;
-    justify-content: center;
     align-items: center;
     padding: ${layout.padding};
   `;
@@ -19,7 +18,11 @@ const ContentWrap = styled.div(({ theme }) => {
   return `
     display: grid;
     grid-gap: ${layout.padding};
-    justify-items: center;
+    padding: ${layout.padding};
+    width: 100%;
+    max-width: 20rem;
+    min-width: 12rem;
+    margin: 0 auto;
   `;
 });
 const Title = styled.div(({ theme }) => {
