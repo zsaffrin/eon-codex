@@ -28,6 +28,10 @@ const app = {
   color: color.white,
 };
 
+const headers = {
+  background: app.backgroundLevel[1],
+};
+
 const text = {
   linkColor: '#64B5F6',
   linkHoverColor: '#EC407A',
@@ -67,6 +71,7 @@ const table = {
 
 const defaultDark = {
   app,
+  headers,
   button,
   color,
   input,
