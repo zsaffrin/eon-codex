@@ -15,20 +15,53 @@ const Label = styled.label`
 const Row = styled.div`
   grid-column: 1 / -1;
 `;
+const LabelCell = styled.div`
+  display: grid;
+  grid-auto-rows: minmax(1em, 1fr);
+`;
+const Detail = styled.div(({ theme }) => {
+  const { text } = theme;
+  return `
+    font-size: 0.9em;
+    color: ${text.fadedColor};
+  `;
+});
 
-const VerticalList = ({ items = [] }) => (
-  <List>
-    {items.map(({ label, content, fullRow }) => (fullRow ? (
-      <Row key={label}>
-        {content}
-      </Row>
-    ) : (
+const VerticalList = ({ items = [] }) => {
+  const rows = items.map(({ label, content, fullRow, detail }) => {
+    if (fullRow) {
+      return (
+        <Row key={label}>{content}</Row>
+      );
+    }
+    if (detail) {
+      return (
+        <Fragment key={label}>
+          <LabelCell>
+            <Label>{label}</Label>
+            <div />
+          </LabelCell>
+          <div>
+            <div>{content}</div>
+            <Detail>{detail}</Detail>
+          </div>
+        </Fragment>
+      );
+    }
+
+    return (
       <Fragment key={label}>
         <Label>{label}</Label>
         <div>{content}</div>
       </Fragment>
-    )))}
-  </List>
-);
+    );
+  });
+
+  return (
+    <List>
+      {rows}
+    </List>
+  );
+};
 
 export default VerticalList;
