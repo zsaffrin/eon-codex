@@ -35,7 +35,7 @@ const headers = {
 const text = {
   linkColor: '#64B5F6',
   linkHoverColor: '#EC407A',
-  fadedColor: color.darkgray,
+  fadedColor: color.gray,
 };
 
 const input = {
