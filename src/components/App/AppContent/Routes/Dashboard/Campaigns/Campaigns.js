@@ -1,10 +1,10 @@
-import { useUser, useBoolState, useCollection } from '../../../../../../hooks';
+import { useUser, useCollection, useToggle } from '../../../../../../hooks';
 import { Box, Button, ButtonRow, H, Loading, Modal, TitleRow } from '../../../../../ui';
 import CampaignList from './CampaignList';
 import NewCampaign from './NewCampaign';
 
 const Campaigns = () => {
-  const [isAdding, toggleIsAdding] = useBoolState();
+  const [isAdding, toggleIsAdding] = useToggle();
   const [user] = useUser();
   const [players, isPlayersLoading] = useCollection('players', ["user","==",user.uid]);
   const [campaigns, isCampaignsLoading] = useCollection('campaigns');
