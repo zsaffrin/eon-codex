@@ -17,7 +17,7 @@ const StyledInput = styled.input(({ theme }) => {
   `;
 });
 
-const TextInput = ({ id, value, onChange }) => {
+const TextInput = ({ id, value, onChange, onBlur }) => {
   return (
     <StyledInput
       type="text"
@@ -27,6 +27,7 @@ const TextInput = ({ id, value, onChange }) => {
         id,
         value: e.target.value,
       })}
+      onBlur={onBlur}
     />
   );
 };
