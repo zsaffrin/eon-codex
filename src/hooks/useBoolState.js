@@ -1,14 +1,10 @@
 import { useState } from 'react';
 
 const useBoolState = (initialValue) => {
-  const [value, setValue] = useState(initialValue || false);
+  const [value, setValue] = useState(!!initialValue || false);
 
   const updateValue = (newValue) => {
-    if (value) {
-      setValue(false);
-    } else {
-      setValue(newValue || true);
-    }
+    setValue(newValue || !value);
   };
 
   return [value, updateValue];
