@@ -4,7 +4,7 @@ const useBoolState = (initialValue) => {
   const [value, setValue] = useState(!!initialValue || false);
 
   const updateValue = (newValue) => {
-    setValue(newValue || !value);
+    setValue(!!newValue || !value);
   };
 
   return [value, updateValue];
