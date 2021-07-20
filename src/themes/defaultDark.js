@@ -36,6 +36,7 @@ const text = {
   linkColor: '#64B5F6',
   linkHoverColor: '#EC407A',
   fadedColor: color.gray,
+  highlightColor: '#f1c40f',
 };
 
 const input = {
