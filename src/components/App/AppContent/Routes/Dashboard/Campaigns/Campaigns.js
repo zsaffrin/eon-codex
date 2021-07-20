@@ -27,7 +27,7 @@ const Campaigns = () => {
       <TitleRow>
         <H l={2} compact>Campaigns</H>
         <ButtonRow>
-          <Button small onClick={toggleIsAdding}>New Campaign</Button>
+          <Button onClick={toggleIsAdding}>New Campaign</Button>
         </ButtonRow>
       </TitleRow>
       <CampaignList campaigns={userCampaigns} />
