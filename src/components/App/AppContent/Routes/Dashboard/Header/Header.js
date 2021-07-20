@@ -1,4 +1,5 @@
 import { useHistory } from 'react-router-dom';
+import { FaCog } from 'react-icons/fa';
 import styled from 'styled-components';
 
 import { Button, ButtonRow, H } from '../../../../../ui';
@@ -23,6 +24,9 @@ const Header = () => {
         Eon Codex
       </H>
       <ButtonRow>
+        <Button onClick={() => history.push('/setup')}>
+          <FaCog style={{ verticalAlign: 'middle' }} />
+        </Button>
         <Button onClick={() => history.push('/logout')}>Logout</Button>
       </ButtonRow>
     </StyledHeader>
