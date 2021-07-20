@@ -6,10 +6,13 @@ const useMessage = () => {
   const [message, setMessage] = useState(null);
 
   const handleMessageUpdate = (messageType, messageContent, raw) => {
-    setMessage(
-      <Message type={messageType} raw={raw}>
-        {messageContent}
-      </Message>
+    setMessage(!messageType && !messageContent
+      ? null
+      : (
+        <Message type={messageType} raw={raw}>
+          {messageContent}
+        </Message>
+      )
     );
   };
 
