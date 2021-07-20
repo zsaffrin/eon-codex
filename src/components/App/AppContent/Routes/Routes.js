@@ -6,6 +6,7 @@ import Home from './Home';
 import Dashboard from './Dashboard';
 import Login from './Login';
 import Logout from './Logout';
+import Setup from './Setup';
 
 const Routes = () => {
   const [user] = useUser();
@@ -16,6 +17,8 @@ const Routes = () => {
 
       <Route path="/login" exact component={Login} />
       <Route path="/logout" exact component={Logout} />
+
+      <Route path="/setup" component={Setup} />
       
       <Route component={FourOhFour} />
     </Switch>
