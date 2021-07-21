@@ -1,4 +1,5 @@
 import Box from './Box';
+import Breadcrumb from './Breadcrumb';
 import { Button, ButtonRow } from './Button';
 import H from './H';
 import Input from './Input';
@@ -14,6 +15,7 @@ import VerticalList from './VerticalList';
 
 export {
   Box,
+  Breadcrumb,
   Button, ButtonRow,
   H,
   Input,
