@@ -13,9 +13,9 @@ const Home = () => {
       <H l={1} compact>Setup</H>
       <Box>
         <TitleRow>
-          <H l={2} compact>Schemas</H>
+          <H l={2} compact>Collections</H>
           <ButtonRow compact>
-            <Button>New</Button>
+            <Button>New Schema</Button>
           </ButtonRow>
         </TitleRow>
         <div>
