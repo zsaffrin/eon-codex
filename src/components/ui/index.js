@@ -8,6 +8,7 @@ import Message from './Message';
 import Modal from './Modal';
 import Page from './Page';
 import StackedList from './StackedList';
+import Table from './Table';
 import TitleRow from './TitleRow';
 import VerticalList from './VerticalList';
 
@@ -22,6 +23,7 @@ export {
   Modal,
   Page,
   StackedList,
+  Table,
   TitleRow,
   VerticalList,
 };
