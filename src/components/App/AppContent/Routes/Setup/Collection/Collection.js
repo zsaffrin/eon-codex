@@ -1,7 +1,8 @@
 import { useHistory, useParams } from 'react-router-dom';
+import { GoPencil } from 'react-icons/go';
 
 import { useCollection, useSchema } from '../../../../../../hooks';
-import { Box, Button, ButtonRow, H, Loading, Page, TitleRow } from '../../../../../ui';
+import { Box, Button, ButtonRow, H, Loading, Page, Table, TitleRow } from '../../../../../ui';
 
 const Collection = () => {
   const { collectionId } = useParams();
@@ -12,6 +13,25 @@ const Collection = () => {
   if (isSchemaLoading) {
     return <Loading />;
   }
+
+  const tableColumns = schema && schema.fields
+    ? schema.fields.reduce((acc, { name, key, type, lookup }) => (
+      [ ...acc, {
+          key, 
+          lookup,
+          title: name,
+          type,
+        }
+      ]
+    ), [])
+    : [];
+  const tableActions = [
+    {
+      label: <GoPencil />,
+      action: () => {},
+      // action: (recordData) => setIsEditing(recordData),
+    }
+  ];
 
   return (
     <Page>
@@ -27,7 +47,11 @@ const Collection = () => {
         {isCollectionLoading
           ? <Loading />
           : (
-            <pre>{JSON.stringify(collection, ' ', 2)}</pre>
+            <Table
+              columns={tableColumns}
+              entries={collection}
+              actions={tableActions}
+            />
           )
         }
       </Box>
