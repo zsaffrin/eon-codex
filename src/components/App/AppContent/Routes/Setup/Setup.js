@@ -1,21 +1,23 @@
-import { Box, Button, ButtonRow, H, Page, TitleRow } from '../../../../ui';
+import { useRouteMatch, Switch, Route, Redirect } from 'react-router-dom';
+
 import Header from './Header';
+import Home from './Home';
+import Collection from './Collection';
+import Schema from './Schema';
 
 const Setup = () => {
+  const { url } = useRouteMatch();
+  
   return (
     <>
       <Header />
-      <Page>
-        <H l={1} compact>Setup</H>
-        <Box>
-          <TitleRow>
-            <H l={2} compact>Collections</H>
-            <ButtonRow compact>
-              <Button>New</Button>
-            </ButtonRow>
-          </TitleRow>
-        </Box>
-      </Page>
+      <Switch>
+        <Route path={url} exact component={Home} />
+        <Route path={`${url}/collection/:collectionId`} component={Collection} />
+        <Route path={`${url}/schema/:schemaId`} component={Schema} />
+
+        <Redirect to={url} />
+      </Switch>
     </>
   );
 };
