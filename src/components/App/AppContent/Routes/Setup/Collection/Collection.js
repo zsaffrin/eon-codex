@@ -2,7 +2,7 @@ import { useHistory, useParams } from 'react-router-dom';
 import { GoPencil } from 'react-icons/go';
 
 import { useCollection, useSchema } from '../../../../../../hooks';
-import { Box, Button, ButtonRow, H, Loading, Page, Table, TitleRow } from '../../../../../ui';
+import { Box, Breadcrumb, Button, ButtonRow, H, Link, Loading, Page, Table, TitleRow } from '../../../../../ui';
 
 const Collection = () => {
   const { collectionId } = useParams();
@@ -36,7 +36,13 @@ const Collection = () => {
   return (
     <Page>
       <TitleRow>
-        <H l={1} compact>{schema.name}</H>
+        <div>
+          <Breadcrumb items={[
+            <Link to="/setup">Setup</Link>,
+            'Collections'
+          ]} />
+          <H l={1} compact>{schema.name}</H>
+        </div>
         <ButtonRow compact>
           <Button onClick={() => history.push(`/setup/schema/${collectionId}`)}>
             Schema
