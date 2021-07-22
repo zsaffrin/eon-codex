@@ -1,3 +1,4 @@
+import { IconContext } from 'react-icons/lib';
 import { FirebaseProvider, UserProvider } from '../../contexts';
 import GlobalStyle from './GlobalStyle';
 import Theme from './Theme';
@@ -8,8 +9,10 @@ const App = () => {
     <FirebaseProvider>
       <UserProvider>
         <Theme>
-          <GlobalStyle />
-          <AppContent />
+          <IconContext.Provider value={{ verticalAlign: 'middle' }}>
+            <GlobalStyle />
+            <AppContent />
+          </IconContext.Provider>
         </Theme>
       </UserProvider>
     </FirebaseProvider>

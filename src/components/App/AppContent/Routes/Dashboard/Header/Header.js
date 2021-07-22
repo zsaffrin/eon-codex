@@ -25,7 +25,7 @@ const Header = () => {
       </H>
       <ButtonRow>
         <Button onClick={() => history.push('/setup')}>
-          <FaCog style={{ verticalAlign: 'middle' }} />
+          <FaCog />
         </Button>
         <Button onClick={() => history.push('/logout')}>Logout</Button>
       </ButtonRow>

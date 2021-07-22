@@ -8,7 +8,7 @@ const StyledCell = styled.div`
 const BooleanCell = ({ fieldValue }) => {
   return (
     <StyledCell>
-      {fieldValue && <BiCheck style={{ verticalAlign: 'middle' }} />}
+      {fieldValue && <BiCheck />}
     </StyledCell>
   );
 };

@@ -67,7 +67,7 @@ const Table = ({ columns, entries, actions, orderKey, schemaId }) => {
                 {minOrderValue !== entry[orderKey]
                   ? (
                     <Button tiny onClick={() => handleReorder(entry[orderKey], (entry[orderKey] - 1))}>
-                      <AiOutlineArrowUp style={{ verticalAlign: 'middle' }} />
+                      <AiOutlineArrowUp />
                     </Button>
                   )
                   : <div />
@@ -75,7 +75,7 @@ const Table = ({ columns, entries, actions, orderKey, schemaId }) => {
                 {maxOrderValue !== entry[orderKey]
                   ? (
                     <Button tiny onClick={() => handleReorder(entry[orderKey], (entry[orderKey] + 1))}>
-                      <AiOutlineArrowDown style={{ verticalAlign: 'middle' }} />
+                      <AiOutlineArrowDown />
                     </Button>
                   )
                   : <div />
