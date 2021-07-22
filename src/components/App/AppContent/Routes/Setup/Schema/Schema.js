@@ -1,7 +1,7 @@
 import { useHistory, useParams } from 'react-router-dom';
 
 import { useSchema } from '../../../../../../hooks';
-import { Box, Button, ButtonRow, H, Loading, Page, TitleRow } from '../../../../../ui';
+import { Box, Breadcrumb, Button, ButtonRow, H, Link, Loading, Page, TitleRow } from '../../../../../ui';
 
 const Schema = () => {
   const { schemaId } = useParams();
@@ -15,7 +15,13 @@ const Schema = () => {
   return (
     <Page>
       <TitleRow>
-        <H l={1} compact>{schema.name}</H>
+        <div>
+          <Breadcrumb items={[
+            <Link to="/setup">Setup</Link>,
+            'Collection Schemas'
+          ]} />
+          <H l={1} compact>{schema.name}</H>
+        </div>
         <ButtonRow compact>
           <Button onClick={() => history.push(`/setup/collection/${schemaId}`)}>
             Collection
