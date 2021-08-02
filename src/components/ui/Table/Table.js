@@ -1,16 +1,16 @@
 import { useState } from 'react';
 import styled from 'styled-components';
-import { AiOutlineArrowUp, AiOutlineArrowDown } from 'react-icons/ai';
 
 import { useFirebase } from '../../../hooks';
-import { Button, ButtonRow, Message } from '../../ui';
+import { Message } from '../../ui';
 import { maxFieldValue } from '../../../utilities';
 import HeaderCell from './HeaderCell';
 import TableCell from './TableCell';
 
 const StyledTable = styled.table`
-  width: 100%;
   border-collapse: collapse;
+  font-size: 0.8rem;
+  width: 100%;
 `;
 
 const Table = ({ columns, entries, actions, orderKey, schemaId }) => {
@@ -18,7 +18,6 @@ const Table = ({ columns, entries, actions, orderKey, schemaId }) => {
   const firebase = useFirebase();
 
   const handleReorder = async (oldOrder, newOrder) => {
-    console.info('Reorder', oldOrder, newOrder);
     const movingItem = entries.find(e => e[orderKey] === oldOrder);
     const existingItem = entries.find(e => e[orderKey] === newOrder);
 
@@ -62,26 +61,13 @@ const Table = ({ columns, entries, actions, orderKey, schemaId }) => {
       (
         <tr key={`entry-${idx}`}>
           {orderKey && (
-            <td>
-              <ButtonRow compact justify="space-between">
-                {minOrderValue !== entry[orderKey]
-                  ? (
-                    <Button tiny onClick={() => handleReorder(entry[orderKey], (entry[orderKey] - 1))}>
-                      <AiOutlineArrowUp />
-                    </Button>
-                  )
-                  : <div />
-                }
-                {maxOrderValue !== entry[orderKey]
-                  ? (
-                    <Button tiny onClick={() => handleReorder(entry[orderKey], (entry[orderKey] + 1))}>
-                      <AiOutlineArrowDown />
-                    </Button>
-                  )
-                  : <div />
-                }
-              </ButtonRow>
-            </td>
+            <TableCell 
+              type="reorder"
+              minOrderValue={minOrderValue}
+              maxOrderValue={maxOrderValue}
+              entryOrderKey={entry[orderKey]}
+              handleReorder={handleReorder}
+            />
           )}
           {columns.map(({ key, type, lookup }) => (
             <TableCell 

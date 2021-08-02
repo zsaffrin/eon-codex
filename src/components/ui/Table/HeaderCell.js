@@ -4,7 +4,7 @@ const StyledCell = styled.th(({ centered, theme }) => {
   const { space } = theme;
 
   return `
-    padding: ${space.sm} ${space.md};
+    padding: ${space.thin} ${space.sm};
     text-align: ${centered ? 'center' : 'left'};
     vertical-align: bottom;
   `;

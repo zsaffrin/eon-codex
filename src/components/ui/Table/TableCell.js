@@ -4,35 +4,46 @@ import ActionsCell from './ActionsCell';
 import BooleanCell from './BooleanCell';
 import DateCell from './DateCell';
 import LookupCell from './LookupCell';
+import ReorderCell from './ReorderCell';
 
 const StyledCell = styled.td(({ theme, collapsed }) => {
   const { table, space } = theme;
 
   return `
     border: 1px solid ${table.borderColor};
-    padding: ${space.sm} ${space.md};
+    padding: ${space.thin} ${space.sm};
     vertical-align: top;
     width: ${collapsed ? '0%' : 'auto'};
   `;
 });
 
-const TableCell = ({ actions, fieldValue, entry, lookup, type }) => {
+const TableCell = (props) => {
+  const { fieldValue, type } = props;
+  let collapsed = false;
+
   let content = fieldValue;
+  if (type === 'reorder') {
+    content = <ReorderCell {...props} />;
+    collapsed = true;
+  }
   if (type === 'actions') {
-    content = <ActionsCell actions={actions} entry={entry} />;
+    content = <ActionsCell {...props} />;
+    collapsed = true;
   }
   if (type === 'boolean') {
-    content = <BooleanCell fieldValue={fieldValue} />;
+    content = <BooleanCell {...props} />;
+    collapsed = true;
   }
   if (type === 'date') {
-    content = <DateCell fieldValue={fieldValue} />;
+    content = <DateCell {...props} />;
+    collapsed = true;
   }
   if (type === 'lookup') {
-    content = <LookupCell fieldValue={fieldValue} lookup={lookup} />;
+    content = <LookupCell {...props} />;
   }
   
   return (
-    <StyledCell collapsed={type === 'actions' ? 1 : 0}>
+    <StyledCell collapsed={collapsed ? 1 : 0}>
       {content}
     </StyledCell>
   );
