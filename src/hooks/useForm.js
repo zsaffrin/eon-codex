@@ -20,14 +20,14 @@ const useForm = (fields) => {
     });
   };
 
-  const formFields = fields.map(({ choices, id, label, type }) => ({
+  const formFields = fields.map(({ id, label, lookup, type }) => ({
     label,
     content: (
       <Input
         key={id}
         id={id}
         type={type}
-        choices={choices}
+        lookup={lookup}
         value={formData[id]}
         onChange={handleFieldChange}
       />
