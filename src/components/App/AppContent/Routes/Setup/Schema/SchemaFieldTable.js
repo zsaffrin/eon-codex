@@ -1,9 +1,12 @@
+import { useState } from 'react';
 import { GoPencil } from 'react-icons/go';
 
 import { useSchema } from '../../../../../../hooks';
-import { Loading, Table } from '../../../../../ui';
+import { Loading, Modal, Table } from '../../../../../ui';
+import EditSchemaField from './EditSchemaField';
 
 const SchemaFieldTable = ({ fields }) => {
+  const [editing, setEditing] = useState(null);
   const [schema, schemaLoading] = useSchema('schemaFields');
   
   if (schemaLoading) {
@@ -11,28 +14,37 @@ const SchemaFieldTable = ({ fields }) => {
   }
 
   const tableColumns = schema && schema.fields
-    ? schema.fields.reduce((acc, { name, key, type, lookup }) => (
-      key === 'displayOrder'
-        ? acc
-        : [ ...acc, {
+    ? schema.fields.reduce((acc, { name, key, type, lookup, showInTable }) => (
+      showInTable
+        ? [ ...acc, {
             key, 
             title: name,
             type,
             lookup,
           }
         ]
+        : acc
     ), [])
     : [];
 
   const tableActions = [
     {
       label: <GoPencil />,
-      action: () => {},
+      action: setEditing,
     }
   ];
 
   return (
     <div>
+      {editing && (
+        <Modal>
+          <EditSchemaField 
+            close={() => setEditing(null)}
+            item={editing}
+            schema={schema}
+          />
+        </Modal>
+      )}
       <Table 
         columns={tableColumns} 
         entries={fields}
