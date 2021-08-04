@@ -27,7 +27,13 @@ const AddRecord = ({ schema, imperativeFields, onCancel, onSuccess }) => {
           },
         ]
       : acc;
-  }, []));
+  }, schema.specifyId ? [
+    {
+      id: 'id',
+      label: 'Id',
+      type: 'text',
+    }
+  ] : []));
   const firebase = useFirebase();
 
   const handleSubmit = async (e) => {
@@ -43,7 +49,9 @@ const AddRecord = ({ schema, imperativeFields, onCancel, onSuccess }) => {
       : { ...formData };
 
     try {
-      const res = await firebase.addDoc(schema.id, recordToAdd);
+      const res = schema.specifyId
+        ? await firebase.setDoc(schema.id, recordToAdd.id, recordToAdd)
+        : await firebase.addDoc(schema.id, recordToAdd);
       switch (res.status) {
         case 'success':
           onSuccess(res.result);
