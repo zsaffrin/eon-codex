@@ -1,7 +1,9 @@
-import { useCollection } from '../../../../../../hooks';
-import { Box, Button, ButtonRow, H, Link, Loading, Page, TitleRow } from '../../../../../ui';
+import { useCollection, useToggle } from '../../../../../../hooks';
+import { Box, Button, ButtonRow, H, Link, Loading, Modal, Page, TitleRow } from '../../../../../ui';
+import AddSchema from './AddSchema';
 
 const Home = () => {
+  const [isAddingSchema, setIsAddingSchema] = useToggle();
   const [schemas, isSchemasLoading] = useCollection('schemas');
 
   if (isSchemasLoading) {
@@ -12,10 +14,15 @@ const Home = () => {
     <Page>
       <H l={1} compact>Setup</H>
       <Box>
+        {isAddingSchema && (
+          <Modal>
+            <AddSchema close={setIsAddingSchema} />
+          </Modal>
+        )}
         <TitleRow>
           <H l={2} compact>Collections</H>
           <ButtonRow compact>
-            <Button>New Schema</Button>
+            <Button onClick={setIsAddingSchema}>New Schema</Button>
           </ButtonRow>
         </TitleRow>
         <div>
