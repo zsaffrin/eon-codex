@@ -12,7 +12,7 @@ const StyledForm = styled.form(({ theme }) => {
   `;
 });
 
-const EditRecord = ({ onCancel, onSuccess, record, schema }) => {
+const EditRecord = ({ onCancel, onSuccess, record, schema, noDelete }) => {
   const [isDeleting, setIsDeleting] = useToggle();
   const [message, setMessage] = useMessage();
   const [formData, formFields] = useForm(schema.fields.reduce((acc, field) => {
@@ -89,7 +89,7 @@ const EditRecord = ({ onCancel, onSuccess, record, schema }) => {
           <ButtonRow>
             <Button primary type="submit">Submit</Button>
             <Button onClick={onCancel}>Cancel</Button>
-            <Button onClick={setIsDeleting}>Delete</Button>
+            {!noDelete && <Button onClick={setIsDeleting}>Delete</Button>}
           </ButtonRow>
         )
       }
