@@ -17,6 +17,7 @@ const EditSchemaDetails = ({ close, schema }) => {
         onSuccess={close}
         schema={schemaSchema}
         record={schema}
+        noDelete
       />
     </Page>
   );
