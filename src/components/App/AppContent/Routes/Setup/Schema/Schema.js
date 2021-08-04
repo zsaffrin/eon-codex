@@ -1,11 +1,13 @@
 import { useHistory, useParams } from 'react-router-dom';
-import { BiCheck, BiX } from 'react-icons/bi';
+import { BiSquare, BiCheckSquare } from 'react-icons/bi';
 import { GoPencil } from 'react-icons/go';
 import { FaPlus } from 'react-icons/fa';
 import styled from 'styled-components';
 
-import { useSchema } from '../../../../../../hooks';
-import { Box, Breadcrumb, Button, ButtonRow, H, Link, Loading, Page, TitleRow } from '../../../../../ui';
+import { useSchema, useToggle } from '../../../../../../hooks';
+import { Box, Breadcrumb, Button, ButtonRow, H, Link, Loading, Modal, Page, TitleRow } from '../../../../../ui';
+import EditSchemaDetails from './EditSchemaDetails';
+import AddSchemaField from './AddSchemaField';
 import SchemaFieldTable from './SchemaFieldTable';
 
 const Details = styled.div(({ theme }) => {
@@ -14,10 +16,23 @@ const Details = styled.div(({ theme }) => {
     display: grid;
     grid-gap: ${layout.padding};
     grid-auto-flow: column;
+    align-items: center;
+  `;
+});
+const InlineRow = styled.div(({ theme }) => {
+  const { space } = theme;
+
+  return `
+    display: grid;
+    align-items: center;
+    grid-template-columns: auto 1fr;
+    grid-gap: ${space.sm};
   `;
 });
 
 const Schema = () => {
+  const [adding, setAdding] = useToggle();
+  const [isEditingDetails, setIsEditingDetails] = useToggle();
   const { schemaId } = useParams();
   const [schema, isSchemaLoading] = useSchema(schemaId);
   const history = useHistory();
@@ -43,11 +58,19 @@ const Schema = () => {
         </ButtonRow>
       </TitleRow>
       <Box>
+        {isEditingDetails && (
+          <Modal>
+            <EditSchemaDetails
+              close={setIsEditingDetails}
+              schema={schema}
+            />
+          </Modal>
+        )}
         <TitleRow>
           <H l={2} compact>Details</H>
           <ButtonRow compact>
             <Button>
-              <GoPencil />
+              <GoPencil onClick={setIsEditingDetails} />
             </Button>
           </ButtonRow>
         </TitleRow>
@@ -55,21 +78,29 @@ const Schema = () => {
           <div>
             {`Record Name: ${schema.recordName}`}
           </div>
-          <div>
+          <InlineRow>
+            {schema.specifyId ? <BiCheckSquare /> : <BiSquare />}
             {'Specify Id? '}
-            {schema.specifyId ? <BiCheck /> : <BiX />}
-          </div>
-          <div>
+          </InlineRow>
+          <InlineRow>
+            {schema.isPerCampaign ? <BiCheckSquare /> : <BiSquare />}
             {'Per Campaign? '}
-            {schema.isPerCampaign ? <BiCheck /> : <BiX />}
-          </div>
+          </InlineRow>
         </Details>
       </Box>
       <Box>
+        {adding && (
+          <Modal>
+            <AddSchemaField
+              close={setAdding}
+              schemaId={schema.id}
+            />
+          </Modal>
+        )}
         <TitleRow>
           <H l={2} compact>Fields</H>
           <ButtonRow compact>
-            <Button>
+            <Button onClick={setAdding}>
               <FaPlus />
             </Button>
           </ButtonRow>

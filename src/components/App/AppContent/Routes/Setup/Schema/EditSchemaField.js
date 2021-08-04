@@ -4,7 +4,7 @@ import { EditRecord } from '../../../../../shared';
 const EditSchemaField = ({ close, item, schema }) => {
   return (
     <Page>
-      <H l={1}>EditSchemaField</H>
+      <H l={1}>Edit Schema Field</H>
       <EditRecord 
         onCancel={close}
         onSuccess={close}
