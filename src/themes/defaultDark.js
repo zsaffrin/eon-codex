@@ -67,7 +67,7 @@ const message = {
 };
 
 const box = {
-  background: app.backgroundLevel[1],
+  background: app.backgroundLevel[0],
   borderColor: app.backgroundLevel[3],
 };
 
