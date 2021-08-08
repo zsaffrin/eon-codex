@@ -12,7 +12,7 @@ const StyledForm = styled.form(({ theme }) => {
   `;
 });
 
-const EditRecord = ({ onCancel, onSuccess, record, schema, noDelete }) => {
+const EditRecord = ({ onCancel, onDeleteSuccess, onSaveSuccess, record, schema, noDelete }) => {
   const [isDeleting, setIsDeleting] = useToggle();
   const [message, setMessage] = useMessage();
   const [formData, formFields] = useForm(schema.fields.reduce((acc, field) => {
@@ -38,7 +38,7 @@ const EditRecord = ({ onCancel, onSuccess, record, schema, noDelete }) => {
       const res = await firebase.updateDoc(`${schema.id}/${record.id}`, formData);
       switch (res.status) {
         case 'success':
-          onSuccess(res.result);
+          onSaveSuccess(res.result);
           break;
         case 'error':
           setMessage('error', res.result);
@@ -57,7 +57,7 @@ const EditRecord = ({ onCancel, onSuccess, record, schema, noDelete }) => {
       const res = await firebase.deleteDoc(`${schema.id}/${record.id}`);
       switch (res.status) {
         case 'success':
-          onSuccess(res.result);
+          onDeleteSuccess(res.result);
           break;
         case 'error':
           setMessage('error', res.result);
