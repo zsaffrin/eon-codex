@@ -39,7 +39,7 @@ const CollectionRecordsTable = ({ collectionId, schema }) => {
         <Modal>
           <EditCollectionRecord 
             close={() => setEditing(null)}
-            record={editing}
+            item={editing}
             schema={schema}
           />
         </Modal>
