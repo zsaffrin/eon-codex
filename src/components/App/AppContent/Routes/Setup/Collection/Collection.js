@@ -1,37 +1,17 @@
 import { useHistory, useParams } from 'react-router-dom';
-import { GoPencil } from 'react-icons/go';
 
-import { useCollection, useSchema } from '../../../../../../hooks';
-import { Box, Breadcrumb, Button, ButtonRow, H, Link, Loading, Page, Table, TitleRow } from '../../../../../ui';
+import { useSchema } from '../../../../../../hooks';
+import { Box, Breadcrumb, Button, ButtonRow, H, Link, Loading, Page, TitleRow } from '../../../../../ui';
+import CollectionRecordsTable from './CollectionRecordsTable';
 
 const Collection = () => {
   const { collectionId } = useParams();
   const [schema, isSchemaLoading] = useSchema(collectionId);
-  const [collection, isCollectionLoading] = useCollection(collectionId);
   const history = useHistory();
 
   if (isSchemaLoading) {
     return <Loading />;
   }
-
-  const tableColumns = schema && schema.fields
-    ? schema.fields.reduce((acc, { name, key, type, lookup }) => (
-      [ ...acc, {
-          key, 
-          lookup,
-          title: name,
-          type,
-        }
-      ]
-    ), [])
-    : [];
-  const tableActions = [
-    {
-      label: <GoPencil />,
-      action: () => {},
-      // action: (recordData) => setIsEditing(recordData),
-    }
-  ];
 
   return (
     <Page>
@@ -50,16 +30,7 @@ const Collection = () => {
         </ButtonRow>
       </TitleRow>
       <Box>
-        {isCollectionLoading
-          ? <Loading />
-          : (
-            <Table
-              columns={tableColumns}
-              entries={collection}
-              actions={tableActions}
-            />
-          )
-        }
+        <CollectionRecordsTable collectionId={collectionId} schema={schema} />
       </Box>
     </Page>
   );
