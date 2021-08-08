@@ -1,8 +1,8 @@
-import { useState } from 'react';
+import { BiReset } from 'react-icons/bi';
 import styled from 'styled-components';
 
-import { useFirebase } from '../../../hooks';
-import { Message } from '../../ui';
+import { useFirebase, useMessage } from '../../../hooks';
+import { Button } from '../../ui';
 import { maxFieldValue } from '../../../utilities';
 import HeaderCell from './HeaderCell';
 import TableCell from './TableCell';
@@ -14,12 +14,39 @@ const StyledTable = styled.table`
 `;
 
 const Table = ({ columns, entries, actions, orderKey, schemaId }) => {
-  const [message, setMessage] = useState(null);
+  const [message, setMessage] = useMessage();
   const firebase = useFirebase();
+
+  const resetOrder = async () => {
+    console.info('reset order');
+    try {
+      const results = entries.map(async (entry, idx) => {
+        return firebase.updateDoc(`${schemaId}/${entry.id}`, {
+          [orderKey]: idx + 1,
+        });
+      });
+
+      return console.info(JSON.stringify(results));
+    } catch (err) {
+      setMessage('error', err, true);
+    }
+  };
 
   const handleReorder = async (oldOrder, newOrder) => {
     const movingItem = entries.find(e => e[orderKey] === oldOrder);
     const existingItem = entries.find(e => e[orderKey] === newOrder);
+
+    if (!movingItem || !existingItem) {
+      return setMessage('error', (
+        <div>
+          Problem moving item
+          <br />
+          {`Position ${oldOrder} [${movingItem ? movingItem.name : 'null'}] to position ${newOrder} [${existingItem ? existingItem.name : 'null'}]`}
+          <br />
+          Reset the display order then try again
+        </div>
+      ));
+    }
 
     try {
       const resA = await firebase.updateDoc(`${schemaId}/${existingItem.id}`, {
@@ -29,13 +56,10 @@ const Table = ({ columns, entries, actions, orderKey, schemaId }) => {
         [orderKey]: newOrder
       });
       if (resA.status === 'error' || resB.status === 'error') {
-        setMessage({ type: 'error', content: [
-          resA,
-          resB,
-        ] });
+        setMessage('error', [resA, resB], true);
       }
     } catch (err) {
-      setMessage({ type: 'error', content: err });
+      setMessage('error', err, true);
     }
   };
   
@@ -44,7 +68,13 @@ const Table = ({ columns, entries, actions, orderKey, schemaId }) => {
   ));
   if (orderKey) {
     headerCells.unshift(
-      <th key="reorder" />
+      <HeaderCell key="reorder" data={{
+        title: (
+          <Button tiny onClick={resetOrder} title="Reset display order">
+            <BiReset />
+          </Button>
+        ),
+      }} />
     );
   }
   if (actions) {
@@ -91,9 +121,7 @@ const Table = ({ columns, entries, actions, orderKey, schemaId }) => {
   
   return (
     <>
-      {message && (
-        <Message type={message.type} raw>{message.content}</Message>
-      )}
+      {message}
       <StyledTable>
         <thead>
           <tr>
