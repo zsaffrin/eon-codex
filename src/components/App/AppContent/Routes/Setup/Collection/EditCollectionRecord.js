@@ -1,8 +1,18 @@
-const EditCollectionRecord = () => {
+import { H, Page } from "../../../../../ui";
+import { EditRecord } from '../../../../../shared';
+
+const EditCollectionRecord = ({ close, item, schema }) => {
   return (
-    <div>
-      EditCollectionRecord
-    </div>
+    <Page>
+      <H l={1}>{`Edit ${schema.recordName}`}</H>
+      <EditRecord 
+        onCancel={close}
+        onDeleteSuccess={close}
+        onSaveSuccess={close}
+        schema={schema}
+        record={item}
+      />
+    </Page>
   );
 };
 
