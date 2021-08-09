@@ -59,7 +59,7 @@ const Login = () => {
   const [message, setMessage] = useMessage();
   const [formData, formFields] = useForm(fields);
 
-  const handleLoginSuccess = (uid) => {
+  const handleLoginSuccess = ({ uid }) => {
     return firebase.updateDoc(`users/${uid}`, {
       lastLoginDate: new Date(),
     }).then(() => {
@@ -73,7 +73,7 @@ const Login = () => {
       const res = await firebase.login(formData.username.trim(), formData.password);
       switch (res.status) {
         case 'success':
-          handleLoginSuccess(res.result.user.uid);  
+          handleLoginSuccess(res.result.user);  
           break;
         case 'error':
           setMessage('error', res.result);
