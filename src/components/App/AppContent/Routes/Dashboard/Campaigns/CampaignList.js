@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { useHistory } from 'react-router-dom';
 import { AiFillStar } from 'react-icons/ai';
 
 import { useCollection, useUser } from '../../../../../../hooks';
@@ -33,6 +34,7 @@ const Charm = styled.div(({ theme, highlight }) => {
 });
 
 const CampaignList = ({ campaigns }) => {
+  const history = useHistory();
   const [user] = useUser();
   const [players, isPlayersLoading] = useCollection('players');
 
@@ -40,13 +42,13 @@ const CampaignList = ({ campaigns }) => {
     return <Loading />;
   }
   
-  const listItems = campaigns.map(({ id, name }) => {
+  const listItems = campaigns.map(({ key, id, name }) => {
     const campaignPlayer = players.find(p => (
       p.user === user.uid && p.campaign === id
     ));
     
     return (
-      <StyledItem key={id}>
+      <StyledItem key={id} onClick={() => history.push(`/campaign/${key}`)}>
         {name}
         {campaignPlayer.isOwner && (
           <Charm highlight>
