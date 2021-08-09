@@ -30,6 +30,9 @@ const app = {
 
 const headers = {
   background: app.backgroundLevel[1],
+  backgroundHover: app.backgroundLevel[3],
+  campaignSiteBackground: '#332940',
+  campaignSiteBackgroundHover: '#554B62',
 };
 
 const text = {
