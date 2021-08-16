@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { arrayOf, shape, string } from 'prop-types';
 
 import { useFirebase, useForm, useMessage, useToggle } from '../../hooks';
 import { Button, ButtonRow, VerticalList } from "../ui";
@@ -12,23 +13,39 @@ const StyledForm = styled.form(({ theme }) => {
   `;
 });
 
-const EditRecord = ({ onCancel, onDeleteSuccess, onSaveSuccess, record, schema, noDelete }) => {
+const EditRecord = ({ excludeFieldIds, filterFields, onCancel, onDeleteSuccess, onSaveSuccess, record, schema, noDelete }) => {
   const [isDeleting, setIsDeleting] = useToggle();
   const [message, setMessage] = useMessage();
   const [formData, formFields] = useForm(schema.fields.reduce((acc, field) => {
     const { key, name, type, lookup } = field;
-    return field.showInEditor
-      ? [
-          ...acc,
-          {
-            id: key,
-            label: name,
-            type,
-            lookup,
-            defaultValue: record[key],
-          },
-        ]
-      : acc;
+
+    if (
+      !field.showInEditor
+      || excludeFieldIds.includes(key)
+    ) {
+      return acc;
+    }
+
+    const fieldfilter = filterFields.find(({ fieldKey }) => fieldKey === key);
+    let lookupFilterKey, lookupFilterValue = null;
+    if (fieldfilter) {
+      const { filterKey, value } = fieldfilter;
+      lookupFilterKey = filterKey;
+      lookupFilterValue = value;
+    }
+
+    return [
+      ...acc,
+      {
+        id: key,
+        label: name,
+        type,
+        lookup,
+        lookupFilterKey, 
+        lookupFilterValue,
+        defaultValue: record[key],
+      },
+    ];
   }, []));
   const firebase = useFirebase();
   
@@ -87,7 +104,7 @@ const EditRecord = ({ onCancel, onDeleteSuccess, onSaveSuccess, record, schema, 
         )
         : (
           <ButtonRow>
-            <Button primary type="submit">Submit</Button>
+            <Button primary type="submit">Save Changes</Button>
             <Button onClick={onCancel}>Cancel</Button>
             {!noDelete && <Button onClick={setIsDeleting}>Delete</Button>}
           </ButtonRow>
@@ -96,6 +113,18 @@ const EditRecord = ({ onCancel, onDeleteSuccess, onSaveSuccess, record, schema, 
 
     </StyledForm>
   );
+};
+EditRecord.propTypes = {
+  excludeFieldIds: arrayOf(string),
+  filterFields: arrayOf(shape({
+    fieldKey: string,
+    filterKey: string,
+    value: string,
+  })),
+};
+EditRecord.defaultProps = {
+  excludeFieldIds: [],
+  filterFields: [],
 };
 
 export default EditRecord;
