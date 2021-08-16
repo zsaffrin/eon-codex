@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { arrayOf, shape, string } from 'prop-types';
 
 import { useFirebase, useForm, useMessage } from '../../hooks';
 import { Button, ButtonRow, VerticalList } from "../ui";
@@ -55,7 +56,7 @@ const AddRecord = ({ schema, filterFields, imperativeFields, onCancel, onSuccess
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const recordToAdd = imperativeFields
+    const recordToAdd = imperativeFields.length > 0
       ? imperativeFields.reduce((acc, { id, value }) => {
         return {
           ...acc,
@@ -94,6 +95,21 @@ const AddRecord = ({ schema, filterFields, imperativeFields, onCancel, onSuccess
       </ButtonRow>
     </StyledForm>
   );
+};
+AddRecord.propTypes = {
+  imperativeFields: arrayOf(shape({
+    id: string,
+    value: string,
+  })),
+  filterFields: arrayOf(shape({
+    fieldKey: string,
+    filterKey: string,
+    value: string,
+  })),
+};
+AddRecord.defaultProps = {
+  excludeFieldIds: [],
+  filterFields: [],
 };
 
 export default AddRecord;
