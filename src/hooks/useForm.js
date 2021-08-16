@@ -20,7 +20,7 @@ const useForm = (fields) => {
     });
   };
 
-  const formFields = fields.map(({ id, label, lookup, type }) => ({
+  const formFields = fields.map(({ id, label, lookup, lookupFilterKey, lookupFilterValue, type }) => ({
     label,
     content: (
       <Input
@@ -28,6 +28,8 @@ const useForm = (fields) => {
         id={id}
         type={type}
         lookup={lookup}
+        lookupFilterKey={lookupFilterKey}
+        lookupFilterValue={lookupFilterValue}
         value={formData[id]}
         onChange={handleFieldChange}
       />
