@@ -4,8 +4,8 @@ import { sortBy } from '../../../utilities';
 import SelectInput from './SelectInput';
 
 const LookupInput = (props) => {
-  const { lookup, lookupDisplayKey, fieldValue } = props;
-  const [records, recordsLoading] = useCollection(lookup || ' ');
+  const { lookup, lookupFilterKey, lookupFilterValue, lookupDisplayKey, fieldValue } = props;
+  const [records, recordsLoading] = useCollection(lookup || ' ', lookupFilterKey && lookupFilterValue ? [lookupFilterKey,"==",lookupFilterValue] : null);
 
   if (recordsLoading) { return <Loading inline />; }
 
