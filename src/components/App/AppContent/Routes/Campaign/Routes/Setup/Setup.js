@@ -1,10 +1,18 @@
-import { H, Page } from "../../../../../../ui";
+import { useRouteMatch, Switch, Route, Redirect } from 'react-router-dom';
+
+import Home from './Home';
+import Collection from './Collection';
 
 const Setup = () => {
+  const { url } = useRouteMatch();
+  
   return (
-    <Page>
-      <H l={1}>Campaign Setup</H>
-    </Page>
+    <Switch>
+      <Route path={url} exact component={Home} />
+      <Route path={`${url}/collection/:collectionId`} component={Collection} />
+
+      <Redirect to={url} />
+    </Switch>
   );
 };
 
