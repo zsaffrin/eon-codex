@@ -12,21 +12,37 @@ const StyledForm = styled.form(({ theme }) => {
   `;
 });
 
-const AddRecord = ({ schema, imperativeFields, onCancel, onSuccess }) => {
+const AddRecord = ({ schema, filterFields, imperativeFields, onCancel, onSuccess }) => {
   const [message, setMessage] = useMessage();
   const [formData, formFields] = useForm(schema.fields.reduce((acc, field) => {
     const { key, name, type, lookup } = field;
-    return field.showInEditor
-      ? [
-          ...acc,
-          {
-            id: key,
-            label: name,
-            type,
-            lookup,
-          },
-        ]
-      : acc;
+
+    if (
+      !field.showInEditor
+      || imperativeFields.find(({ id }) => id === key)
+    ) {
+      return acc;
+    }
+
+    const fieldfilter = filterFields.find(({ fieldKey }) => fieldKey === key);
+    let lookupFilterKey, lookupFilterValue = null;
+    if (fieldfilter) {
+      const { filterKey, value } = fieldfilter;
+      lookupFilterKey = filterKey;
+      lookupFilterValue = value;
+    }
+
+    return ([
+      ...acc,
+      {
+        id: key,
+        label: name,
+        type,
+        lookup,
+        lookupFilterKey, 
+        lookupFilterValue,
+      },
+    ]);
   }, schema.specifyId ? [
     {
       id: 'id',
