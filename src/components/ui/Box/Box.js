@@ -9,6 +9,7 @@ const StyledBox = styled.div(({ theme }) => {
     display: grid;
     padding: ${layout.padding};
     grid-gap: ${layout.padding};
+    align-content: start;
   `;
 });
 
