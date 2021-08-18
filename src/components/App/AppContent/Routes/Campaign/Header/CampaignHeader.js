@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { FaCog } from 'react-icons/fa';
 import styled from 'styled-components';
 
@@ -14,13 +14,17 @@ const StyledDiv = styled.div(({ theme }) => {
     justify-content: space-between;
   `;
 });
-  
+
+const LinkGroup = styled.div`
+  display: grid;
+`;
+
 const StyledLink = styled(Link)(({ theme }) => {
   const { headers, space } = theme;
   
   return `
     color: inherit;
-    display: flex;
+    display: grid;
     align-items: center;
     padding: ${space.sm} ${space.md};
     text-decoration: none;
@@ -31,17 +35,27 @@ const StyledLink = styled(Link)(({ theme }) => {
   `;
 });
 
+
 const CampaignHeader = () => {
+  const { pathname } = useLocation();
   const { key, name } = useCampaign();
+
+  const shouldShowSetupLink = !pathname.includes(`/campaign/${key}/setup`);
 
   return (
     <StyledDiv>
-      <StyledLink to={`/campaign/${key}`} title="Campaign Home">
-        <H l={1} compact>{name}</H>
-      </StyledLink>
-      <StyledLink to={`/campaign/${key}/setup`} title="Campaign Setup">
-        <FaCog />
-      </StyledLink>
+      <LinkGroup>
+        <StyledLink to={`/campaign/${key}`} title="Campaign Home">
+          <H l={1} compact>{name}</H>
+        </StyledLink>
+      </LinkGroup>
+      <LinkGroup>
+        {shouldShowSetupLink && (
+          <StyledLink to={`/campaign/${key}/setup`} title="Campaign Setup">
+            <FaCog />
+          </StyledLink>
+        )}
+      </LinkGroup>
     </StyledDiv>
   );
 };
