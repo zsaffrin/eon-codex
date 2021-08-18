@@ -1,7 +1,19 @@
 import { useLocation } from 'react-router';
+import styled from 'styled-components';
 
 import { useCollection } from '../../../../../../../../hooks';
-import { Box, H, Link, Loading, Page } from '../../../../../../../ui';
+import { Box, ButtonRow, Button, H, Link, Loading, Page, TitleRow } from '../../../../../../../ui';
+import CampaignSettings from './CampaignSettings';
+
+const Layout = styled.div(({ theme }) => {
+  const { layout } = theme;
+
+  return `
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: ${layout.padding};
+  `;
+});
 
 const Home = () => {
   const { pathname } = useLocation();
@@ -13,7 +25,17 @@ const Home = () => {
 
   return (
     <Page>
-        <H l={1}>Campaign Setup</H>
+      <H l={1}>Campaign Setup</H>
+      <Layout>
+      <Box>
+        <TitleRow>
+          <H l={2} compact>Settings</H>
+          <ButtonRow>
+            <Button small>Edit</Button>
+          </ButtonRow>
+        </TitleRow>
+        <CampaignSettings />
+      </Box>
       <Box>
         <H l={2} compact>Collections</H>
         <ul>
@@ -24,6 +46,7 @@ const Home = () => {
           ))}
         </ul>
       </Box>
+      </Layout>
     </Page>
   );
 };
