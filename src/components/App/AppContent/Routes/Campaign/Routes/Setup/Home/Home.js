@@ -12,6 +12,7 @@ const Layout = styled.div(({ theme }) => {
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-gap: ${layout.padding};
+    align-items: start;
   `;
 });
 
@@ -27,25 +28,25 @@ const Home = () => {
     <Page>
       <H l={1}>Campaign Setup</H>
       <Layout>
-      <Box>
-        <TitleRow>
-          <H l={2} compact>Settings</H>
-          <ButtonRow>
-            <Button small>Edit</Button>
-          </ButtonRow>
-        </TitleRow>
-        <CampaignSettings />
-      </Box>
-      <Box>
-        <H l={2} compact>Collections</H>
-        <ul>
-          {schemas.map(({ id, name }) => (
-            <li key={id}>
-              <Link to={`${pathname}/collection/${id}`}>{name}</Link>
-            </li>
-          ))}
-        </ul>
-      </Box>
+        <Box>
+          <TitleRow>
+            <H l={2} compact>Settings</H>
+            <ButtonRow compact>
+              <Button small>Edit</Button>
+            </ButtonRow>
+          </TitleRow>
+          <CampaignSettings />
+        </Box>
+        <Box>
+          <H l={2} compact>Collections</H>
+          <ul>
+            {schemas.map(({ id, name }) => (
+              <li key={id}>
+                <Link to={`${pathname}/collection/${id}`}>{name}</Link>
+              </li>
+            ))}
+          </ul>
+        </Box>
       </Layout>
     </Page>
   );
