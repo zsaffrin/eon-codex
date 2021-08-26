@@ -82,6 +82,10 @@ const modal = {
   background: tinycolor(color.black).lighten(10).setAlpha(0.95),
 };
 
+const itemList = {
+  hoverBg: app.backgroundLevel[2],
+};
+
 const defaultDark = {
   app,
   box,
@@ -89,6 +93,7 @@ const defaultDark = {
   button,
   color,
   input,
+  itemList,
   message,
   modal,
   name,
