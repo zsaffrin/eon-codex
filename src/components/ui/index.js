@@ -3,6 +3,7 @@ import Breadcrumb from './Breadcrumb';
 import { Button, ButtonRow } from './Button';
 import H from './H';
 import Input from './Input';
+import ItemList from './ItemList';
 import Link from './Link';
 import Loading from './Loading';
 import Message from './Message';
@@ -19,6 +20,7 @@ export {
   Button, ButtonRow,
   H,
   Input,
+  ItemList,
   Link,
   Loading,
   Message,
