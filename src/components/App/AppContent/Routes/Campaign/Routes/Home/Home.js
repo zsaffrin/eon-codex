@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 import { Box, H, Page } from "../../../../../../ui";
+import Characters from './Characters';
 
 const Layout = styled.div(({ theme }) => {
   const { layout } = theme;
@@ -9,6 +10,7 @@ const Layout = styled.div(({ theme }) => {
     display: grid;
     grid-gap: ${layout.padding};
     grid-template-columns: 1fr 1fr 1fr;
+    align-items: start;
   `;
 });
 
@@ -18,7 +20,7 @@ const Home = () => {
       <H l={1}>Campaign Home</H>
       <Layout>
         <Box>
-          <H l={2}>Sessions</H>
+          <H l={2} compact>Sessions</H>
           <div>
             Next / Current
           </div>
@@ -30,10 +32,11 @@ const Home = () => {
           </div>
         </Box>
         <Box>
-          <H l={2}>Characters</H>
+          <H l={2} compact>Characters</H>
+          <Characters />
         </Box>
         <Box>
-          <H l={2}>Playlists</H>
+          <H l={2} compact>Playlists</H>
         </Box>
       </Layout>
     </Page>
