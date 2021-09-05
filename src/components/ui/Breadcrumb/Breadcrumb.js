@@ -13,6 +13,12 @@ const BreadcrumbTrail = styled.div(({ theme }) => {
     justify-items: start;
     white-space: nowrap;
 
+    & > div {
+      display: grid;
+      grid-auto-flow: column;
+      align-items: center;
+    }
+
     & > *:after {
       content: '/';
       padding-left: ${space.md};
