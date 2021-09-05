@@ -25,7 +25,7 @@ const AddRecord = ({ schema, filterFields, imperativeFields, onCancel, onSuccess
       return acc;
     }
 
-    const fieldfilter = filterFields.find(({ fieldKey }) => fieldKey === key);
+    const fieldfilter = filterFields.find(({ fieldId }) => fieldId === key);
     let lookupFilterKey, lookupFilterValue = null;
     if (fieldfilter) {
       const { filterKey, value } = fieldfilter;
