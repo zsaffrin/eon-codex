@@ -5,6 +5,8 @@ const StyledLink = styled(RRLink)(({ blended, theme }) => {
   const { text } = theme;
   return `
     color: ${blended ? 'inherit' : text.linkColor};
+    display: grid;
+    align-items: center;
     text-decoration: none;
     &:hover {
       color: ${text.linkHoverColor};
