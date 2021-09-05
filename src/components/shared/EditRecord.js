@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { arrayOf, shape, string } from 'prop-types';
 
 import { useFirebase, useForm, useMessage, useToggle } from '../../hooks';
-import { Button, ButtonRow, VerticalList } from "../ui";
+import { Button, ButtonRow, Message, VerticalList } from '../ui';
 
 const StyledForm = styled.form(({ theme }) => {
   const { layout } = theme;
@@ -12,6 +12,12 @@ const StyledForm = styled.form(({ theme }) => {
     grid-gap: ${layout.padding};
   `;
 });
+const Centered = styled.div`
+  text-align: center;
+`;
+const CenteredBolded = styled(Centered)`
+  font-weight: bold;
+`;
 
 const EditRecord = ({ excludeFieldIds, filterFields, onCancel, onDeleteSuccess, onSaveSuccess, record, schema, noDelete }) => {
   const [isDeleting, setIsDeleting] = useToggle();
@@ -95,7 +101,11 @@ const EditRecord = ({ excludeFieldIds, filterFields, onCancel, onDeleteSuccess, 
       {isDeleting
         ? (
           <>
-            <div>Are you sure?</div>
+            <Message type="error">
+              <Centered>DELETE THIS RECORD</Centered>
+              <Centered>This is permanent and cannot be undone</Centered>
+              <CenteredBolded>ARE YOU SURE?</CenteredBolded>
+            </Message>
             <ButtonRow>
               <Button danger onClick={handleDelete}>Yes, Delete</Button>
               <Button onClick={setIsDeleting}>Cancel</Button>
