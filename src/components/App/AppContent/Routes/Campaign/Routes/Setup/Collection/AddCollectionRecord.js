@@ -24,7 +24,7 @@ const AddCollectionRecord = ({ close, schema }) => {
         ]}
         filterFields={[
           {
-            fieldKey: 'player',
+            fieldId: 'player',
             filterKey: 'campaign',
             value: campaign.id,
           }
