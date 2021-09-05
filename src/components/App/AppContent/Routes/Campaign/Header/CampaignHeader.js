@@ -17,6 +17,7 @@ const StyledDiv = styled.div(({ theme }) => {
 
 const LinkGroup = styled.div`
   display: grid;
+  grid-auto-flow: column;
 `;
 
 const StyledLink = styled(Link)(({ theme }) => {
@@ -47,6 +48,9 @@ const CampaignHeader = () => {
       <LinkGroup>
         <StyledLink to={`/campaign/${key}`} title="Campaign Home">
           <H l={1} compact>{name}</H>
+        </StyledLink>
+        <StyledLink to={`/campaign/${key}/characters`} title="Characters">
+          Characters
         </StyledLink>
       </LinkGroup>
       <LinkGroup>
