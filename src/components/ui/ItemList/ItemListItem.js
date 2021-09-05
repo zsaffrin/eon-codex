@@ -1,20 +1,20 @@
 import styled from 'styled-components';
 
-const StyledItem = styled.li(({ theme }) => {
+const StyledItem = styled.li(({ theme, withHover }) => {
   const { itemList, layout } = theme;
 
   return `
     border-radius: ${layout.borderRadius};
 
     &:hover {
-      background: ${itemList.hoverBg};
+      background: ${withHover ? itemList.hoverBg : 'inherit'};
     }
   `;
 });
 
-const ItemListItem = ({ children }) => {
+const ItemListItem = ({ children, withHover }) => {
   return (
-    <StyledItem>
+    <StyledItem withHover={withHover ? 1 : 0}>
       {children}
     </StyledItem>
   );

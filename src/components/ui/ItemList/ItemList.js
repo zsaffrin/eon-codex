@@ -18,8 +18,8 @@ const StyledList = styled.ul(({ theme }) => {
 const ItemList = ({ items }) => {
   return (
     <StyledList>
-      {items.map(({ id, content }) => (
-        <ItemListItem key={id}>
+      {items.map(({ id, content, withHover }) => (
+        <ItemListItem key={id} withHover={withHover}>
           {content}
         </ItemListItem>
       ))}
