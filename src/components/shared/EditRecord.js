@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { arrayOf, shape, string } from 'prop-types';
+import { arrayOf, func, shape, string } from 'prop-types';
 
 import { useFirebase, useForm, useMessage, useToggle } from '../../hooks';
 import { Button, ButtonRow, Message, VerticalList } from '../ui';
@@ -17,6 +17,9 @@ const Centered = styled.div`
 `;
 const CenteredBolded = styled(Centered)`
   font-weight: bold;
+`;
+const CenteredUpper = styled(Centered)`
+  text-transform: uppercase;
 `;
 
 const EditRecord = ({ excludeFieldIds, filterFields, onCancel, onDeleteSuccess, onSaveSuccess, record, schema, noDelete }) => {
@@ -102,7 +105,7 @@ const EditRecord = ({ excludeFieldIds, filterFields, onCancel, onDeleteSuccess, 
         ? (
           <>
             <Message type="error">
-              <Centered>DELETE THIS RECORD</Centered>
+              <CenteredUpper>{`Delete this ${schema.recordName}?`}</CenteredUpper>
               <Centered>This is permanent and cannot be undone</Centered>
               <CenteredBolded>ARE YOU SURE?</CenteredBolded>
             </Message>
@@ -131,10 +134,14 @@ EditRecord.propTypes = {
     filterKey: string,
     value: string,
   })),
+  onDeleteSuccess: func,
+  onSaveSuccess: func,
 };
 EditRecord.defaultProps = {
   excludeFieldIds: [],
   filterFields: [],
+  onDeleteSuccess: () => {},
+  onSaveSuccess: () => {}
 };
 
 export default EditRecord;
