@@ -11,19 +11,18 @@ const EditCharacter = ({ character, close }) => {
   }
 
   const excludeFields = ['campaign'];
-  //TODO: Don't exclude Player selection if user has sufficient privileges
-  excludeFields.push('player');
+  //TODO: Exclude Player selection if user has sufficient privileges
+  // excludeFields.push('player');
 
   return (
     <Page>
       <H l={1}>Edit Character</H>
       <EditRecord
         onCancel={close}
-        onDeleteSuccess={close}
         onSaveSuccess={close}
         schema={schema}
         record={character}
-        excludeFieldIds={['campaign']}
+        excludeFieldIds={excludeFields}
         filterFields={[
           {
             fieldKey: 'player',
