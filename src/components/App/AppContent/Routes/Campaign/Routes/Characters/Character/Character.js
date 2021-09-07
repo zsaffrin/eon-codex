@@ -7,7 +7,7 @@ import EditCharacter from '../EditCharacter';
 const Character = ({ character }) => {
   const { key: campaignKey } = useCampaign();
   const [isEditing, setIsEditing] = useToggle();
-  const { name } = character;
+  const { backstory, classDesc, description, level, name, race } = character;
   
   return (
     <Page>
@@ -27,18 +27,21 @@ const Character = ({ character }) => {
             </Link>,
           ]} />
           <H l={1} compact>{name}</H>
+          <div>
+            {`${level && `Level ${level}`}${race && ` ${race}`}${classDesc && ` ${classDesc}`}`}
+          </div>
         </div>
         <ButtonRow>
           <Button onClick={setIsEditing}>Edit</Button>
         </ButtonRow>
       </TitleRow>
       <Box>
-        <H l={2} compact>Info</H>
-        Stuff and whatnot
+        <H l={2} compact>Description</H>
+        {description}
       </Box>
       <Box>
         <H l={2} compact>Backstory</H>
-        Ways and means
+        {backstory}
       </Box>
     </Page>
   );
