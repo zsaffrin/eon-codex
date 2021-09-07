@@ -4,10 +4,10 @@ const StyledInput = styled.input(({ theme }) => {
   const { input } = theme;
   return `
     background: ${input.inputBg};
-    border: ${input.border};
-    border-radius: 0.25em;
-    padding: 0.5em;
-    font-size: 0.9em;
+    border: ${input.inputBorder};
+    border-radius: ${input.inputBorderRadius};
+    padding: ${input.inputPadding};
+    font-size: ${input.inputFontSize};
     width: 100%;
 
     &:focus {

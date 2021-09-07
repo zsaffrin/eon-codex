@@ -45,6 +45,9 @@ const text = {
 const input = {
   labelColor: color.lightgray,
   inputBorder: `1px solid ${color.darkgray}`,
+  inputBorderRadius: '0.25rem',
+  inputFontSize: '0.9rem',
+  inputPadding: '0.25rem',
   inputBg: color.lightgray,
   inputActiveBg: color.white,
   inputColor: color.black,
