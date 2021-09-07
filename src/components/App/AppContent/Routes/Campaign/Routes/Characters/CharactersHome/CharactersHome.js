@@ -47,7 +47,7 @@ const CharactersHome = () => {
   const { key: campaignKey, characters } = useCampaign();
   const [isAdding, setIsAdding] = useToggle();
 
-  const listItems = characters.map(({ id, name, classDesc, race }) => ({
+  const listItems = characters.map(({ id, level, name, classDesc, race }) => ({
     id,
     content: (
       <StyledItem to={`/campaign/${campaignKey}/characters/${id}`}>
@@ -56,7 +56,9 @@ const CharactersHome = () => {
         </Avatar>
         <div>
           <Name>{name}</Name>
-          <Description>{`${race}${race && classDesc && ' - '}${classDesc}`}</Description>
+          <Description>
+            {`${level && `Level ${level}`}${race && ` ${race}`}${classDesc && ` ${classDesc}`}`}
+          </Description>
         </div>
       </StyledItem>
     ),
