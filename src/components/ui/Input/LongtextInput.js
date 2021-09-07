@@ -1,13 +1,14 @@
 import styled from 'styled-components';
 
-const StyledInput = styled.input(({ theme }) => {
+const StyledInput = styled.textarea(({ height, theme }) => {
   const { input } = theme;
   return `
     background: ${input.inputBg};
-    border: ${input.border};
-    border-radius: 0.25em;
-    padding: 0.5em;
-    font-size: 0.9em;
+    border: ${input.inputBorder};
+    border-radius: ${input.inputBorderRadius};
+    padding: ${input.inputPadding};
+    font-size: ${input.inputFontSize};
+    min-height: ${height || '4rem'};
     width: 100%;
 
     &:focus {
@@ -17,16 +18,16 @@ const StyledInput = styled.input(({ theme }) => {
   `;
 });
 
-const LongtextInput = ({ id, value, onChange }) => {
+const LongtextInput = ({ id, height, value, onChange }) => {
   return (
     <StyledInput
-      type="text"
       id={id}
       value={value}
       onChange={(e) => onChange({
         id,
         value: e.target.value,
       })}
+      height={height}
     />
   );
 };
