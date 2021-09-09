@@ -2,6 +2,7 @@ import styled from 'styled-components';
 
 import { Box, H, Page } from "../../../../../../ui";
 import Characters from './Characters';
+import Players from './Players';
 
 const Layout = styled.div(({ theme }) => {
   const { layout } = theme;
@@ -36,7 +37,8 @@ const Home = () => {
           <Characters />
         </Box>
         <Box>
-          <H l={2} compact>Playlists</H>
+          <H l={2} compact>Players</H>
+          <Players />
         </Box>
       </Layout>
     </Page>

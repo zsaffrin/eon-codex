@@ -52,6 +52,9 @@ const CampaignHeader = () => {
         <StyledLink to={`/campaign/${key}/characters`} title="Characters">
           Characters
         </StyledLink>
+        <StyledLink to={`/campaign/${key}/players`} title="Players">
+          Players
+        </StyledLink>
       </LinkGroup>
       <LinkGroup>
         {shouldShowSetupLink && (
