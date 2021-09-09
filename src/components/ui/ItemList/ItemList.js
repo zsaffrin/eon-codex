@@ -18,8 +18,8 @@ const StyledList = styled.ul(({ theme }) => {
 const ItemList = ({ items }) => {
   return (
     <StyledList>
-      {items.map(({ id, content, withHover }) => (
-        <ItemListItem key={id} withHover={withHover}>
+      {items.map(({ id, content, url }) => (
+        <ItemListItem key={id} url={url}>
           {content}
         </ItemListItem>
       ))}
@@ -30,6 +30,7 @@ ItemList.propTypes = {
   items: arrayOf(shape({
     id: oneOfType([number, string]),
     content: oneOfType([node, string]),
+    url: string,
   })),
 };
 ItemList.defaultProps = {

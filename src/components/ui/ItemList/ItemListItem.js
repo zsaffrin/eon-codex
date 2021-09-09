@@ -1,23 +1,41 @@
+import { Link as rrLink } from 'react-router-dom';
 import styled from 'styled-components';
 
-const StyledItem = styled.li(({ theme, withHover }) => {
+const StyledLink = styled(rrLink)(({ theme }) => {
   const { itemList, layout } = theme;
 
   return `
     border-radius: ${layout.borderRadius};
+    color: inherit;
+    text-decoration: inherit;
 
     &:hover {
-      background: ${withHover ? itemList.hoverBg : 'inherit'};
+      background: ${itemList.hoverBg};
     }
   `;
 });
 
-const ItemListItem = ({ children, withHover }) => {
-  return (
-    <StyledItem withHover={withHover ? 1 : 0}>
-      {children}
-    </StyledItem>
-  );
+const StyledItem = styled.li(({ theme }) => {
+  const { layout } = theme;
+
+  return `
+    border-radius: ${layout.borderRadius};
+  `;
+});
+
+const ItemListItem = ({ children, url }) => {
+  //TODO: An li should be rendered regardless of url
+  return url
+    ? (
+      <StyledLink to={url}>
+        {children}
+      </StyledLink>
+    )
+    : (
+      <StyledItem>
+        {children}
+      </StyledItem>
+    );
 };
 
 export default ItemListItem;
