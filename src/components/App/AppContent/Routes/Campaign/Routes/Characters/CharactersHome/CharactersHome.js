@@ -1,4 +1,3 @@
-import { Link as rrLink } from 'react-router-dom';
 import { AiFillHome } from 'react-icons/ai';
 import { FaUserCircle } from 'react-icons/fa';
 import styled from 'styled-components';
@@ -7,21 +6,14 @@ import { useCampaign, useToggle } from '../../../../../../../../hooks';
 import { Box, Breadcrumb, ButtonRow, Button, H, ItemList, Modal, TitleRow, Link, Page } from '../../../../../../../ui';
 import AddCharacter from '../AddCharacter';
 
-const StyledItem = styled(rrLink)(({ theme }) => {
-  const { itemList, layout, space } = theme;
+const StyledItem = styled.div(({ theme }) => {
+  const { space } = theme;
 
   return `
     align-items: center;
-    border-radius: ${layout.borderRadius};
-    color: inherit;
     display: grid;
     grid-gap: ${space.md};
     grid-template-columns: max-content 1fr;
-    text-decoration: inherit;
-
-    &:hover {
-      background: ${itemList.hoverBg};
-    }
 
     & > div {
       padding: ${space.md};
@@ -49,8 +41,9 @@ const CharactersHome = () => {
 
   const listItems = characters.map(({ id, level, name, classDesc, race }) => ({
     id,
+    url: `/campaign/${campaignKey}/characters/${id}`,
     content: (
-      <StyledItem to={`/campaign/${campaignKey}/characters/${id}`}>
+      <StyledItem>
         <Avatar>
           <FaUserCircle style={{ fontSize: '1.5em' }} />
         </Avatar>
