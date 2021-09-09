@@ -6,6 +6,7 @@ import Input from './Input';
 import ItemList from './ItemList';
 import Link from './Link';
 import Loading from './Loading';
+import Markdown from './Markdown';
 import Message from './Message';
 import Modal from './Modal';
 import Page from './Page';
@@ -23,6 +24,7 @@ export {
   ItemList,
   Link,
   Loading,
+  Markdown,
   Message,
   Modal,
   Page,
