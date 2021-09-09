@@ -1,7 +1,7 @@
 import { AiFillHome } from 'react-icons/ai';
 
 import { useCampaign, useToggle } from '../../../../../../../../hooks';
-import { Box, Breadcrumb, ButtonRow, Button, H, Link, Modal, Page, TitleRow } from '../../../../../../../ui';
+import { Box, Breadcrumb, ButtonRow, Button, H, Link, Markdown, Modal, Page, TitleRow } from '../../../../../../../ui';
 import EditCharacter from '../EditCharacter';
 
 const Character = ({ character }) => {
@@ -37,11 +37,11 @@ const Character = ({ character }) => {
       </TitleRow>
       <Box>
         <H l={2} compact>Description</H>
-        {description}
+        <Markdown content={description} />
       </Box>
       <Box>
         <H l={2} compact>Backstory</H>
-        {backstory}
+        <Markdown content={backstory} />
       </Box>
     </Page>
   );
