@@ -59,10 +59,11 @@ const input = {
 const button = {
   dangerColor: color.danger,
   defaultColor: color.darkgray,
-  disabledColor: color.gray,
+  disabledColor: color.darkgray,
   primaryColor: '#332940',
   textColorLight: color.white,
   textColorDark: color.black,
+  textColorDisabled: color.lightgray,
 };
 
 const message = {

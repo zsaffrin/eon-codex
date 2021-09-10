@@ -47,6 +47,7 @@ const ColorButton = styled(StyledButton)(
       primaryColor,
       textColorLight,
       textColorDark,
+      textColorDisabled,
     } = button;
 
     let buttonColor = defaultColor;
@@ -66,30 +67,36 @@ const ColorButton = styled(StyledButton)(
     } else {
       buttonTextColor = textColorLight;
     }
+    if (disabled) {
+      buttonTextColor = textColorDisabled;
+    }
 
     return `
-    background: ${tinycolor(buttonColor)};
-    background: linear-gradient(${tinycolor(buttonColor).lighten(
-    15,
-  )}, ${tinycolor(buttonColor)});
-    color: ${tinycolor(buttonTextColor)};
-    border: 1px solid ${tinycolor(buttonColor).darken(10)};
-    box-shadow: inset 0 1px 0 ${tinycolor(buttonColor).lighten(10)};
-    text-shadow: ${
-  tinycolor(buttonColor).isLight()
-    ? `0 1px 0 ${tinycolor(buttonColor)
-      .lighten(50)
-      .setAlpha(0.25)
-      .toRgbString()}`
-    : `0 -1px 0 ${tinycolor(buttonColor)
-      .darken(50)
-      .setAlpha(0.5)
-      .toRgbString()}`
-};
-    &:hover {
       background: ${tinycolor(buttonColor)};
-    }
-  `;
+      ${!disabled && `
+        background: linear-gradient(
+          ${tinycolor(buttonColor).lighten(15)}, 
+          ${tinycolor(buttonColor)}
+        );
+      `}
+      color: ${tinycolor(buttonTextColor)};
+      border: 1px solid ${tinycolor(buttonColor).darken(10)};
+      box-shadow: inset 0 1px 0 ${tinycolor(buttonColor).lighten(10)};
+      text-shadow: ${
+        tinycolor(buttonColor).isLight()
+          ? `0 1px 0 ${tinycolor(buttonColor)
+            .lighten(50)
+            .setAlpha(0.25)
+            .toRgbString()}`
+          : `0 -1px 0 ${tinycolor(buttonColor)
+            .darken(50)
+            .setAlpha(0.5)
+            .toRgbString()}`
+      };
+      &:hover {
+        background: ${tinycolor(buttonColor)};
+      }
+    `;
   },
 );
 
