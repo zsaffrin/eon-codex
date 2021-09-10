@@ -48,7 +48,7 @@ const PlayersHome = () => {
           <H l={1} compact>Players</H>
         </div>
         <ButtonRow compact>
-          <Button>Invite Player</Button>
+          <Button disabled>Invite Player</Button>
         </ButtonRow>
       </TitleRow>
       <Box>
