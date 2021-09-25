@@ -11,6 +11,7 @@ const BreadcrumbTrail = styled.div(({ theme }) => {
     grid-auto-columns: min-content;
     grid-gap: ${space.md};
     justify-items: start;
+    margin-bottom: ${space.sm};
     white-space: nowrap;
 
     & > div {
