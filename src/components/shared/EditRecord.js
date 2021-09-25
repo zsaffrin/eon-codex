@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { arrayOf, func, shape, string } from 'prop-types';
+import { arrayOf, func, oneOfType, number, shape, string } from 'prop-types';
 
 import { useFirebase, useForm, useMessage, useToggle } from '../../hooks';
 import { Button, ButtonRow, Message, VerticalList } from '../ui';
@@ -132,7 +132,7 @@ EditRecord.propTypes = {
   filterFields: arrayOf(shape({
     fieldKey: string,
     filterKey: string,
-    value: string,
+    value: oneOfType([number, string]),
   })),
   onDeleteSuccess: func,
   onSaveSuccess: func,
