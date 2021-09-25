@@ -1,12 +1,11 @@
-import { useCampaign, useUser, useSchema } from '../../../../../../../../hooks';
+import { useCampaign, usePlayer, useSchema } from '../../../../../../../../hooks';
 import { H, Loading, Page } from '../../../../../../../ui';
 import { AddRecord } from '../../../../../../../shared';
 
 const AddCharacter = ({ close }) => {
-  const [user] = useUser();
   const [schema, isSchemaLoading] = useSchema('characters');
-  const { id: campaignId, players } = useCampaign();
-  const currentUserPlayer = players.find(p => p.user === user.uid);
+  const { id: campaignId } = useCampaign();
+  const [player] = usePlayer();
 
   if (isSchemaLoading) {
     return <Loading />;
@@ -23,7 +22,7 @@ const AddCharacter = ({ close }) => {
   //TODO: Make this selectable if user has sufficient privileges
   imperativeFields.push({
     id: 'player',
-    value: currentUserPlayer.id,
+    value: player.id,
   });
   
   return (
