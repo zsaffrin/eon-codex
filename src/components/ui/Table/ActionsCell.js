@@ -9,8 +9,8 @@ const ActionsCell = ({ actions, entry }) => {
     //   ))}
     // </ButtonRow>
     <ButtonRow justify="center" compact>
-      {actions.map(({ label, action }) => (
-        <Button tiny onClick={() => action(entry)} key={label}>{label}</Button>
+      {actions.map(({ label, action, title }) => (
+        <Button tiny onClick={() => action(entry)} key={label} title={title}>{label}</Button>
       ))}
     </ButtonRow>
   );
