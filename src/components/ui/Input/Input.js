@@ -1,4 +1,5 @@
 import BooleanInput from './BooleanInput';
+import DateInput from './DateInput';
 import LookupInput from './LookupInput';
 import LongtextInput from './LongtextInput';
 import NumberInput from './NumberInput';
@@ -9,6 +10,9 @@ import TextInput from './TextInput';
 const Input = (props) => {
   if (props.type === 'boolean') {
     return <BooleanInput {...props} />;
+  }
+  if (props.type === 'date') {
+    return <DateInput {...props} />;
   }
   if (props.type === 'longtext') {
     return <LongtextInput {...props} />;
