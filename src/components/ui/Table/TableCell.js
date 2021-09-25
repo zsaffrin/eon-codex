@@ -36,7 +36,6 @@ const TableCell = (props) => {
   }
   if (type === 'date') {
     content = <DateCell {...props} />;
-    collapsed = true;
   }
   if (type === 'lookup') {
     content = <LookupCell {...props} />;
