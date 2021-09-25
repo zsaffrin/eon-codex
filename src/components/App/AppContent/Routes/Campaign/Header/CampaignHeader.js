@@ -1,8 +1,8 @@
 import { Link, useLocation } from 'react-router-dom';
-import { FaCog } from 'react-icons/fa';
+import { FaCog, FaUser } from 'react-icons/fa';
 import styled from 'styled-components';
 
-import { useCampaign } from '../../../../../../hooks';
+import { useCampaign, usePlayer } from '../../../../../../hooks';
 import { H } from '../../../../../ui';
 
 const StyledDiv = styled.div(({ theme }) => {
@@ -26,6 +26,8 @@ const StyledLink = styled(Link)(({ theme }) => {
   return `
     color: inherit;
     display: grid;
+    grid-auto-flow: column;
+    grid-gap: ${space.sm};
     align-items: center;
     padding: ${space.sm} ${space.md};
     text-decoration: none;
@@ -40,6 +42,7 @@ const StyledLink = styled(Link)(({ theme }) => {
 const CampaignHeader = () => {
   const { pathname } = useLocation();
   const { key, name } = useCampaign();
+  const [player] = usePlayer();
 
   const shouldShowSetupLink = !pathname.includes(`/campaign/${key}/setup`);
 
@@ -49,14 +52,21 @@ const CampaignHeader = () => {
         <StyledLink to={`/campaign/${key}`} title="Campaign Home">
           <H l={1} compact>{name}</H>
         </StyledLink>
+        <StyledLink to={`/campaign/${key}/info`} title="Info">
+          Info
+        </StyledLink>
+        <StyledLink to={`/campaign/${key}/sessions`} title="Sessions">
+          Sessions
+        </StyledLink>
         <StyledLink to={`/campaign/${key}/characters`} title="Characters">
           Characters
         </StyledLink>
-        <StyledLink to={`/campaign/${key}/players`} title="Players">
-          Players
-        </StyledLink>
       </LinkGroup>
       <LinkGroup>
+        <StyledLink to={`/campaign/${key}/players/${player.id}`} title="My Player">
+          <FaUser />
+          {player.name}
+        </StyledLink>
         {shouldShowSetupLink && (
           <StyledLink to={`/campaign/${key}/setup`} title="Campaign Setup">
             <FaCog />
