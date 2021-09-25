@@ -1,5 +1,5 @@
 import { useUser, useCollection, useToggle } from '../../../../../../hooks';
-import { Box, Button, ButtonRow, H, Loading, Modal, TitleRow } from '../../../../../ui';
+import { Box, Button, ButtonRow, H, Loading, Message, Modal, TitleRow } from '../../../../../ui';
 import CampaignList from './CampaignList';
 import NewCampaign from './NewCampaign';
 
@@ -11,6 +11,15 @@ const Campaigns = () => {
 
   if (isPlayersLoading || isCampaignsLoading) {
     return <Loading />;
+  }
+
+  if (!players || !campaigns) {
+    return (
+      <Message type="error">
+        <p>Error loading data</p>
+        <p>You are offline or the database is unavailable</p>
+      </Message>
+    );
   }
 
   const userCampaigns = players.map(({ campaign }) => (

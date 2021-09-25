@@ -4,6 +4,7 @@ import { Redirect } from 'react-router-dom';
 
 import { useCollection } from '../../../../../hooks';
 import { Loading } from '../../../../ui';
+import CampaignError from './CampaignError';
 import CampaignDataProvider from './CampaignDataProvider';
 import Header from './Header';
 import Routes from './Routes';
@@ -14,6 +15,10 @@ const Campaign = () => {
 
   if (campaignsLoading) {
     return <Loading />;
+  }
+
+  if (!campaigns) {
+    return <CampaignError />;
   }
 
   const campaign = campaigns.find(({ key }) => key === campaignKey);
