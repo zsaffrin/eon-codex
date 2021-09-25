@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { arrayOf, shape, string } from 'prop-types';
+import { arrayOf, oneOfType, number, shape, string } from 'prop-types';
 
 import { useFirebase, useForm, useMessage } from '../../hooks';
 import { Button, ButtonRow, VerticalList } from "../ui";
@@ -99,7 +99,7 @@ const AddRecord = ({ schema, filterFields, imperativeFields, onCancel, onSuccess
 AddRecord.propTypes = {
   imperativeFields: arrayOf(shape({
     id: string,
-    value: string,
+    value: oneOfType([number, string]),
   })),
   filterFields: arrayOf(shape({
     fieldKey: string,
