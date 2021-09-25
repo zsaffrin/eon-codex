@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { useCollection } from '../../../../../../../../hooks';
 import { Box, ButtonRow, Button, H, Link, Loading, Page, TitleRow } from '../../../../../../../ui';
 import CampaignSettings from './CampaignSettings';
+import Invitations from './Invitations';
 
 const Layout = styled.div(({ theme }) => {
   const { layout } = theme;
@@ -12,7 +13,6 @@ const Layout = styled.div(({ theme }) => {
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-gap: ${layout.padding};
-    align-items: start;
   `;
 });
 
@@ -46,6 +46,9 @@ const Home = () => {
               </li>
             ))}
           </ul>
+        </Box>
+        <Box>
+          <Invitations />
         </Box>
       </Layout>
     </Page>
