@@ -2,6 +2,7 @@ import { BrowserRouter } from 'react-router-dom';
 
 import { useUser } from '../../../hooks';
 import { Loading } from '../../ui';
+import AppDataProvider from './AppDataProvider';
 import Routes from './Routes';
 
 const AppContent = () => {
@@ -11,7 +12,9 @@ const AppContent = () => {
   
   return (
     <BrowserRouter>
-      <Routes />
+      <AppDataProvider>
+        <Routes />
+      </AppDataProvider>
     </BrowserRouter>
   );
 };
