@@ -15,6 +15,7 @@ const GlobalStyle = createGlobalStyle(({ theme }) => {
     p {
       line-height: 1.4;
       margin: 0 0 1em;
+      max-width: 48rem;
     }
   `;
 });
