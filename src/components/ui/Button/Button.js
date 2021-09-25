@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import tinycolor from 'tinycolor2';
 
-const StyledButton = styled.button(({ large, small, theme, tiny }) => {
+const StyledButton = styled.button(({ disabled, large, small, theme, tiny }) => {
   const { space } = theme;
 
   let fontSize = '0.85rem';
@@ -24,7 +24,7 @@ const StyledButton = styled.button(({ large, small, theme, tiny }) => {
   return `
     -webkit-appearance: none;
     border-radius: ${space.sm};
-    cursor: pointer;
+    cursor: ${disabled ? 'auto' : 'pointer'};
     font-size: ${fontSize};
     font-weight: bold;
     line-height: ${lineHeight};
