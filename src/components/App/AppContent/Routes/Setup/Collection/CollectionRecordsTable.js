@@ -29,6 +29,7 @@ const CollectionRecordsTable = ({ collectionId, schema }) => {
   const tableActions = [
     {
       label: <GoPencil />,
+      title: `Edit ${schema.recordName}`,
       action: setEditing,
     }
   ];

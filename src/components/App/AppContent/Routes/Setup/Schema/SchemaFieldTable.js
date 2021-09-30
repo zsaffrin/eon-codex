@@ -30,6 +30,7 @@ const SchemaFieldTable = ({ fields }) => {
   const tableActions = [
     {
       label: <GoPencil />,
+      title: `Edit ${schema.recordName}`,
       action: setEditing,
     }
   ];
