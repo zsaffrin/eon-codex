@@ -49,7 +49,7 @@ const CampaignList = ({ campaigns }) => {
     
     return (
       <StyledItem key={id} onClick={() => history.push(`/campaign/${key}`)}>
-        {name}
+        {name || ''}
         {campaignPlayer.isOwner && (
           <Charm highlight>
             <AiFillStar title="Owner" />
