@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import { FaTimesCircle } from 'react-icons/fa';
+import { BiReset } from 'react-icons/bi';
 
-import { useCampaign, useToggle } from '../../../../../../../../../hooks';
+import { useCampaign, useFirebase, useMessage, useToggle } from '../../../../../../../../../hooks';
 import { Button, ButtonRow, H, Modal, Table, TitleRow } from '../../../../../../../../ui';
 import InvitePlayer from './InvitePlayer';
 import DeleteInvitation from './DeleteInvitation';
@@ -10,6 +11,23 @@ const Invitations = () => {
   const { invitations } = useCampaign();
   const [isAdding, setIsAdding] = useToggle();
   const [deleteInvite, setDeleteInvite] = useState();
+  const firebase = useFirebase();
+  const [message, setMessage] = useMessage();
+
+  const resendInvite = async (invitation) => {
+    try {
+      const res = await firebase.updateDoc(`invitations/${invitation.id}`, {
+        status: 'pending',
+      });
+      if (res.status === 'error') {
+        setMessage('error', res.result);
+      } else if (res.status !== 'success') {
+        setMessage('error', 'Something went wrong');
+      }
+    } catch (err) {
+      setMessage('error', err, true);
+    }
+  };
 
   const columns = [
     {
@@ -30,6 +48,11 @@ const Invitations = () => {
     }
   ];
   const actions = [
+    {
+      label: <BiReset />,
+      title: 'Resend Invitation',
+      action: resendInvite,
+    },
     {
       label: <FaTimesCircle />,
       title: 'Cancel Invitation',
@@ -54,6 +77,7 @@ const Invitations = () => {
       )}
       <TitleRow>
         <H l={2} compact>Invitations</H>
+        {message}
         <ButtonRow compact>
           <Button small onClick={setIsAdding}>Invite Player</Button>
         </ButtonRow>

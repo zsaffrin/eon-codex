@@ -2,7 +2,7 @@ import { useState } from 'react';
 import styled from 'styled-components';
 
 import { isValidEmail } from '../../../../../../../../../utilities';
-import { useAppData, useCampaign, useFirebase, useMessage, usePlayer } from '../../../../../../../../../hooks';
+import { useCampaign, useFirebase, useMessage, usePlayer } from '../../../../../../../../../hooks';
 import { Button, ButtonRow, H, Input, Page, VerticalList } from '../../../../../../../../ui';
 
 const StyledForm = styled.form(({ theme }) => {
@@ -17,8 +17,7 @@ const StyledForm = styled.form(({ theme }) => {
 const InvitePlayer = ({ close }) => {
   const [message, setMessage] = useMessage();
   const firebase = useFirebase();
-  const { invitationStatuses } = useAppData();
-  const { id: campaignId, invitations } = useCampaign();
+  const { id: campaignId, name: campaignName, invitations } = useCampaign();
   const [currentPlayer] = usePlayer();
   const [formData, setFormData] = useState({
     email: '',
@@ -47,8 +46,10 @@ const InvitePlayer = ({ close }) => {
     const recordToAdd = {
       ...formData,
       campaign: campaignId,
+      campaignName: campaignName,
       invitedByPlayer: currentPlayer.id,
-      status: invitationStatuses.find(({ name }) => name === 'Pending').id,
+      invitedByPlayerName: currentPlayer.name,
+      status: 'pending',
     };
 
     try {
@@ -98,7 +99,7 @@ const InvitePlayer = ({ close }) => {
   return (
     <Page>
       <H l={1}>Invite Player</H>
-      <p>Invite a player to join this Campaign by entering their email.</p>
+      <p>Invite a player to join this Campaign by entering their email</p>
       <StyledForm onSubmit={handleSubmit}>
         {message}
         <VerticalList items={listItems} />
