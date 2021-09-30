@@ -10,7 +10,7 @@ const ActionsCell = ({ actions, entry }) => {
     // </ButtonRow>
     <ButtonRow justify="center" compact>
       {actions.map(({ label, action, title }) => (
-        <Button tiny onClick={() => action(entry)} key={label} title={title}>{label}</Button>
+        <Button tiny onClick={() => action(entry)} key={title} title={title}>{label}</Button>
       ))}
     </ButtonRow>
   );
