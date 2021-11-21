@@ -1,14 +1,13 @@
 import { createGlobalStyle } from 'styled-components';
 
-const GlobalStyle = createGlobalStyle(({ theme }) => {
-  const { app } = theme;
+const GlobalStyle = createGlobalStyle(() => {
   return `
     html { box-sizing: border-box; }
     *, *:before, *:after { box-sizing: inherit; }
 
     body {
-      background: ${app.background};
-      color: ${app.color};
+      background: #ccc;
+      color: #006;
     }
 
     p {
