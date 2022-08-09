@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import { FaPlus } from 'react-icons/fa';
 import styled from 'styled-components';
 
 import { useCollection, useToggledModal, useUser } from '../../../../../../../hooks';
@@ -42,7 +43,7 @@ const Campaigns = () => {
       <HeaderRow
         title="Campaigns"
         content={(
-          <Button small label="New Campaign" onClick={toggleAddModal} />
+          <Button small icon={<FaPlus />} label="New Campaign" onClick={toggleAddModal} />
         )}
       />
       {userCampaigns.map(({ key, id, name }) => (

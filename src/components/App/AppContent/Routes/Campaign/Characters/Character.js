@@ -1,4 +1,5 @@
 import { Navigate, useParams } from 'react-router-dom';
+import { FaEdit } from 'react-icons/fa';
 import styled from 'styled-components';
 
 import { useCampaign, useToggledModal } from "../../../../../../hooks";
@@ -65,6 +66,7 @@ const Character = () => {
           <ButtonRow>
             <Button
               small
+              icon={<FaEdit />}
               label="Edit"
               onClick={() => toggleEditModal(character)}
             />

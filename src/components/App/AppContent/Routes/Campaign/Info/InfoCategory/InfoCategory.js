@@ -59,7 +59,13 @@ const InfoCategory = () => {
           ]}
           content={(
             <ButtonRow>
-              <Button small icon={<FaPlus />} label="New Article" onClick={toggleAddArticleModal} />
+              <Button
+                primary
+                small
+                icon={<FaPlus />}
+                label="New Article"
+                onClick={toggleAddArticleModal}
+              />
             </ButtonRow>
           )}
         />

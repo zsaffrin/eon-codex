@@ -1,3 +1,5 @@
+import { FaPlus } from 'react-icons/fa';
+
 import { useCampaign, useToggledModal } from '../../../../../../hooks';
 import { Box, Button, H, ItemList, Page, PageHeader } from '../../../../../ui';
 import AddCharacter from './AddCharacter';
@@ -24,7 +26,9 @@ const Characters = () => {
         title="Characters"
         content={(
           <Button
+            primary
             small
+            icon={<FaPlus />}
             label="New Character"
             onClick={toggleAddModal}
           />

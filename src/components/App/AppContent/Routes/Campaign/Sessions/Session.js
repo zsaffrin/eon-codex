@@ -1,5 +1,5 @@
 import { Navigate, useParams } from 'react-router-dom';
-import { FaCog } from 'react-icons/fa';
+import { FaEdit } from 'react-icons/fa';
 import styled from 'styled-components';
 
 import { useCampaign, useToggledModal } from '../../../../../../hooks';
@@ -81,7 +81,7 @@ const Session = () => {
           <ButtonRow>
             <Button
               small
-              icon={<FaCog />}
+              icon={<FaEdit />}
               label="Edit Session"
               onClick={() => toggleEditModal(session)}
             />
@@ -108,7 +108,7 @@ const Session = () => {
             <ButtonRow>
               <Button
                 small
-                icon={<FaCog />}
+                icon={<FaEdit />}
                 title="Edit Recap"
                 onClick={() => toggleEditFieldModal({ 
                   record: session, 
@@ -129,7 +129,7 @@ const Session = () => {
             <ButtonRow>
               <Button
                 small
-                icon={<FaCog />}
+                icon={<FaEdit />}
                 title="Edit Live Notes"
                 onClick={() => toggleEditFieldModal({ 
                   record: session, 

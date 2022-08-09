@@ -1,3 +1,4 @@
+import { FaPlus } from 'react-icons/fa';
 import styled from "styled-components";
 
 import { useCampaign, useToggledModal } from "../../../../../../hooks";
@@ -55,7 +56,9 @@ const Sessions = () => {
         title="Sessions"
         content={(
           <Button
+            primary
             small
+            icon={<FaPlus />}
             label="New Session"
             onClick={toggleAddModal}
           />

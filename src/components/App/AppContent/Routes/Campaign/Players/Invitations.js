@@ -1,4 +1,4 @@
-import { GoPencil } from 'react-icons/go';
+import { FaEdit, FaShare } from 'react-icons/fa';
 import { IoClose } from 'react-icons/io5';
 import styled from 'styled-components';
 
@@ -56,7 +56,7 @@ const Invitations = () => {
     let actions = (
       <Button
         small
-        icon={<GoPencil />}
+        icon={<FaEdit />}
         onClick={() => toggleEditModal(invitation)}
       />
     );
@@ -102,6 +102,7 @@ const Invitations = () => {
         content={(
           <Button
             small
+            icon={<FaShare />}
             label="Invite Player"
             onClick={() => toggleAddModal()}
           />
