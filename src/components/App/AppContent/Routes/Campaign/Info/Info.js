@@ -1,7 +1,7 @@
 import { FaCog, FaPlus } from 'react-icons/fa';
 
 import { useCampaign, useToggledModal } from '../../../../../../hooks';
-import { Button, ButtonRow, H, ItemList, Page, PageHeader } from '../../../../../ui';
+import { Box, Button, ButtonRow, H, ItemList, Page, PageHeader } from '../../../../../ui';
 import AddArticle from './AddArticle';
 import EditCategories from './EditCategories';
 
@@ -27,11 +27,13 @@ const Info = () => {
         content={(
           <ButtonRow>
             <Button small icon={<FaCog />} label="Categories" onClick={toggleEditCategoriesModal} />
-            <Button small icon={<FaPlus />} label="New Article" onClick={toggleAddArticleModal} />
+            <Button primary small icon={<FaPlus />} label="New Article" onClick={toggleAddArticleModal} />
           </ButtonRow>
         )}
       />
-      <ItemList items={categoryListItems} isLinks />
+      <Box>
+        <ItemList items={categoryListItems} isLinks />
+      </Box>
     </Page>
   );
 };
