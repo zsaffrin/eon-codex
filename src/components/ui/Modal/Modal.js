@@ -17,6 +17,8 @@ const Content = styled.div(({ theme }) => {
   return `
     background: ${app.background};
     max-height: 85vh;
+    width: 95%;
+    max-width: 32rem;
     overflow: auto;
   `;
 });
