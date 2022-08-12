@@ -72,7 +72,7 @@ const CampaignDataProvider = ({ campaign, children }) => {
 
   const campaignData = {
     ...campaign,
-    articleCategories,
+    articleCategories: sortByKey(articleCategories, 'displayOrder'),
     articles,
     characters: sortByKey(updatedCharacters, 'name'),
     invitations: sortByKey(updatedInvitations, 'createdDate'),
