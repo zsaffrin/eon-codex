@@ -30,7 +30,7 @@ const PlayerProfile = () => {
         }]}
       />
       <Box>
-        <PlayerCharacters characters={playerCharacters} />
+        <PlayerCharacters characters={playerCharacters} player={player} />
       </Box>
     </Page>
   );
