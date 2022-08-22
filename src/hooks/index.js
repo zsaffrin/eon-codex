@@ -1,5 +1,6 @@
 import useCampaign from './useCampaign';
 import useCampaignCollection from './useCampaignCollection';
+import useCloudinary from './useCloudinary';
 import useCollection from './useCollection';
 import useDocument from './useDocument';
 import useFirebase from './useFirebase';
@@ -16,6 +17,7 @@ import useUser from './useUser';
 export {
   useCampaign,
   useCampaignCollection,
+  useCloudinary,
   useCollection,
   useDocument,
   useFirebase,
