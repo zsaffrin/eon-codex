@@ -10,7 +10,7 @@ const StyledList = styled.div(({ theme }) => {
     display: grid;
     grid-gap: ${space.md};
     grid-auto-flow: column;
-    grid-auto-columns: 8em;
+    grid-auto-columns: min-content;
   `;
 });
 

@@ -1,7 +1,9 @@
-import { shape, string } from "prop-types";
+import { shape, string } from 'prop-types';
+import { AdvancedImage } from '@cloudinary/react';
+import { thumbnail } from '@cloudinary/url-gen/actions/resize';
 import styled from 'styled-components';
 
-import { useCampaign } from '../../../../../../../hooks';
+import { useCampaign, useCloudinary } from '../../../../../../../hooks';
 import { Link } from '../../../../../../ui';
 
 const StyledItem = styled(Link)(({ theme }) => {
@@ -11,9 +13,10 @@ const StyledItem = styled(Link)(({ theme }) => {
     background: ${box.background};
     border: 1px solid ${box.mutedBorderColor};
     border-radius: ${layout.borderRadius};
-    padding: ${space.lg};
+    padding: ${space.md};
     color: inherit;
     display: grid;
+    grid-gap: ${space.md};
     align-items: center;
     min-height: 4em;
 
@@ -32,10 +35,15 @@ const ItemName = styled.div`
 
 const ParticipantListItem = ({ character }) => {
   const { key: campaignKey } = useCampaign();
-  const { id: characterId, name } = character;
+  const { id: characterId, name, imagePublicId } = character;
+  const { cloudinaryUrlGen } = useCloudinary();
+
+  const charImg = cloudinaryUrlGen.image(imagePublicId);
+  charImg.resize(thumbnail().width(100).height(100));
   
   return (
     <StyledItem to={`/campaign/${campaignKey}/character/${characterId}`}>
+      {imagePublicId && <AdvancedImage cldImg={charImg} />}
       <ItemName>{name}</ItemName>
     </StyledItem>
   );
