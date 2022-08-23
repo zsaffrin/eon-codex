@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import { useCampaign, useToggledModal } from "../../../../../../hooks";
 import { Box, Button, ButtonRow, HeaderRow, Link, Page, PageHeader, VerticalList } from '../../../../../ui';
 import EditCharacter from './EditCharacter';
+import CharacterImage from './CharacterImage';
 
 const StyledSubtitle = styled.div(({ theme }) => {
   const { space } = theme;
@@ -13,6 +14,15 @@ const StyledSubtitle = styled.div(({ theme }) => {
     display: grid;
     grid-template-columns: repeat(2, max-content);
     grid-gap: ${space.sm};
+  `;
+});
+const Row = styled.div(({ theme }) => {
+  const { layout } = theme;
+
+  return `
+    display: grid;
+    grid-gap: ${layout.padding};
+    grid-template-columns: min-content 1fr;
   `;
 });
 
@@ -73,9 +83,14 @@ const Character = () => {
           </ButtonRow>
         )}
       />
-      <Box>
-        <VerticalList items={detailFields} />
-      </Box>
+      <Row>
+        <Box>
+          <CharacterImage imageKey={character.imagePublicId} />
+        </Box>
+        <Box>
+          <VerticalList items={detailFields} />
+        </Box>
+      </Row>
       <Box>
         <HeaderRow title="Description" />
         <div>{character.description}</div>
