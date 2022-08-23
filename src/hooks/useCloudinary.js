@@ -1,3 +1,5 @@
+import { Cloudinary } from '@cloudinary/url-gen';
+
 const useCloudinary = () => {
   const cloudinary = window.cloudinary;
 
@@ -16,8 +18,14 @@ const useCloudinary = () => {
       }
     });
   };
+
+  const cloudinaryUrlGen = new Cloudinary({
+    cloud: {
+      cloudName: process.env.REACT_APP_CLOUDINARY_CLOUDNAME,
+    }
+  });
   
-  return { createUploadWidget };
+  return { cloudinaryUrlGen, createUploadWidget };
 };
 
 export default useCloudinary;
