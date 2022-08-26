@@ -1,4 +1,5 @@
 import { shape, string } from 'prop-types';
+import { FaUserCircle } from 'react-icons/fa';
 import { AdvancedImage } from '@cloudinary/react';
 import { thumbnail } from '@cloudinary/url-gen/actions/resize';
 import styled from 'styled-components';
@@ -17,7 +18,7 @@ const StyledItem = styled(Link)(({ theme }) => {
     color: inherit;
     display: grid;
     grid-gap: ${space.md};
-    align-items: center;
+    align-items: start;
     min-height: 4em;
 
     &:hover {
@@ -27,7 +28,21 @@ const StyledItem = styled(Link)(({ theme }) => {
     }
   `;
 });
-const ItemName = styled.div`
+const ImagePlaceholder = styled.div(({ theme }) => {
+  const { app, color } = theme;
+
+  return `
+    background: ${app.backgroundLevel[2]};
+    color: ${color.gray};
+    font-size: 2rem;
+    display: grid;
+    align-items: center;
+    justify-items: center;
+    height: 72px;
+    width: 72px;
+  `;
+});
+const CharacterName = styled.div`
   font-size: 1.2em;
   font-weight: bold;
   text-align: center;
@@ -39,12 +54,19 @@ const ParticipantListItem = ({ character }) => {
   const { cloudinaryUrlGen } = useCloudinary();
 
   const charImg = cloudinaryUrlGen.image(imagePublicId);
-  charImg.resize(thumbnail().width(100).height(100));
+  charImg.resize(thumbnail().width(72).height(72));
   
   return (
     <StyledItem to={`/campaign/${campaignKey}/character/${characterId}`}>
-      {imagePublicId && <AdvancedImage cldImg={charImg} />}
-      <ItemName>{name}</ItemName>
+      {imagePublicId
+        ? <AdvancedImage cldImg={charImg} />
+        : (
+            <ImagePlaceholder>
+              <FaUserCircle />
+            </ImagePlaceholder>
+          )
+      }
+      <CharacterName>{name}</CharacterName>
     </StyledItem>
   );
 };
