@@ -2,6 +2,7 @@ import { string } from 'prop-types';
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { FaCloudUploadAlt } from 'react-icons/fa';
+import { AiOutlinePlusCircle } from 'react-icons/ai';
 import { AdvancedImage } from '@cloudinary/react';
 import { thumbnail } from '@cloudinary/url-gen/actions/resize';
 import styled from 'styled-components';
@@ -9,11 +10,25 @@ import styled from 'styled-components';
 import { useCloudinary, useFirebase, useMessage, usePlayer } from '../../../../../../../hooks';
 import { Button, ButtonRow } from '../../../../../../ui';
 
-const AddPrompt = styled.div`
-  display: grid;
-  align-items: center;
-  justify-content: center;
-`;
+const AddPrompt = styled.div(({ theme }) => {
+  const { color, space } = theme;
+
+  return `
+    display: grid;
+    align-items: center;
+    justify-content: center;
+    border: 3px dashed ${color.darkgray};
+    padding: ${space.lg};
+    cursor: pointer;
+    color: ${color.darkgray};
+    font-size: 2rem;
+
+    &:hover {
+      border-color: ${color.white};
+      color: ${color.white};
+    }
+  `;
+});
 
 const CharacterImage = ({ imageKey }) => {
   const { cloudinaryUrlGen, createUploadWidget } = useCloudinary();
@@ -57,7 +72,7 @@ const CharacterImage = ({ imageKey }) => {
       <>
         {message}
         <AddPrompt onClick={handleWidgetOpen}>
-          Upload image!
+          <AiOutlinePlusCircle />
         </AddPrompt>
       </>
     );
