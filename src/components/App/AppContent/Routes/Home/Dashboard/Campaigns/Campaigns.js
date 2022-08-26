@@ -1,25 +1,9 @@
-import { Link } from 'react-router-dom';
 import { FaPlus } from 'react-icons/fa';
-import styled from 'styled-components';
 
 import { useCollection, useToggledModal, useUser } from '../../../../../../../hooks';
-import { Button, HeaderRow, Loading } from '../../../../../../ui';
+import { Button, H, HeaderRow, ItemList, Loading } from '../../../../../../ui';
 
 import AddCampaign from './AddCampaign';
-
-const CampaignLink = styled(Link)(({ theme }) => {
-  const { links, space } = theme;
-
-  return `
-    color: inherit;
-    padding: ${space.sm};
-    text-decoration: none;
-
-    &:hover {
-      background: ${links.backgroundHover};
-    }
-  `;
-});
 
 const Campaigns = () => {
   const [user] = useUser();
@@ -36,6 +20,16 @@ const Campaigns = () => {
   const userCampaigns = players.map(({ campaign }) => (
     campaigns.find(c => c.id === campaign)
   ));
+
+  const listItems = userCampaigns.map(({ key, name }) => ({
+    key,
+    content: (
+      <H l={3} compact>
+        {name}
+      </H>
+    ),
+    to: `/campaign/${key}`,
+  }));
   
   return (
     <>
@@ -46,9 +40,7 @@ const Campaigns = () => {
           <Button small icon={<FaPlus />} label="New Campaign" onClick={toggleAddModal} />
         )}
       />
-      {userCampaigns.map(({ key, id, name }) => (
-        <CampaignLink key={id} to={`/campaign/${key}`}>{name}</CampaignLink>
-      ))}
+      <ItemList isLinks items={listItems} />
     </>
   );
 };
