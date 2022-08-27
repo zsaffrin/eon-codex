@@ -17,6 +17,9 @@ const defaultValueType = (fieldType) => {
   if (fieldType === 'multiselect') {
     return [];
   }
+  if (fieldType === 'boolean') {
+    return false;
+  }
 
   return '';
 };
