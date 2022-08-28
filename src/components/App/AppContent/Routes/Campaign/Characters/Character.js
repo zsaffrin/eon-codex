@@ -2,7 +2,7 @@ import { Navigate, useParams } from 'react-router-dom';
 import { FaEdit } from 'react-icons/fa';
 import styled from 'styled-components';
 
-import { useCampaign, useToggledModal } from "../../../../../../hooks";
+import { useCampaign, usePlayer, useToggledModal } from "../../../../../../hooks";
 import { Box, Button, ButtonRow, HeaderRow, Link, Page, PageHeader, VerticalList } from '../../../../../ui';
 import EditCharacter from './EditCharacter';
 import CharacterImage from './CharacterImage';
@@ -28,6 +28,7 @@ const Row = styled.div(({ theme }) => {
 
 const Character = () => {
   const { characterId } = useParams();
+  const [player] = usePlayer();
   const { key: campaignKey, characters } = useCampaign();
   const [editModal, toggleEditModal] = useToggledModal(EditCharacter);
 
@@ -36,6 +37,8 @@ const Character = () => {
   if (!characterId || !character) {
     return <Navigate to={`/campaign/${campaignKey}/players`} />;
   }
+
+  const isPlayerCharacter = character.player === player.id;
 
   const subtitleContent = (
     <StyledSubtitle>
@@ -74,18 +77,20 @@ const Character = () => {
         }]}
         content={(
           <ButtonRow>
-            <Button
-              small
-              icon={<FaEdit />}
-              label="Edit"
-              onClick={() => toggleEditModal(character)}
-            />
+            {isPlayerCharacter && (
+              <Button
+                small
+                icon={<FaEdit />}
+                label="Edit"
+                onClick={() => toggleEditModal(character)}
+              />
+            )}
           </ButtonRow>
         )}
       />
       <Row>
         <Box>
-          <CharacterImage imageKey={character.imagePublicId} />
+          <CharacterImage imageKey={character.imagePublicId} canEdit={isPlayerCharacter} />
         </Box>
         <Box>
           <VerticalList items={detailFields} />

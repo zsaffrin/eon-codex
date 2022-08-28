@@ -1,7 +1,7 @@
-import { string } from 'prop-types';
+import { bool, string } from 'prop-types';
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { FaCloudUploadAlt } from 'react-icons/fa';
+import { FaCloudUploadAlt, FaUserCircle } from 'react-icons/fa';
 import { AiOutlinePlusCircle } from 'react-icons/ai';
 import { AdvancedImage } from '@cloudinary/react';
 import { thumbnail } from '@cloudinary/url-gen/actions/resize';
@@ -29,8 +29,21 @@ const AddPrompt = styled.div(({ theme }) => {
     }
   `;
 });
+const ImagePlaceholder = styled.div(({ theme }) => {
+  const { color } = theme;
 
-const CharacterImage = ({ imageKey }) => {
+  return `
+    height: 50px;
+    width: 50px;
+    display: grid;
+    align-items: center;
+    justify-items: center;
+    font-size: 2rem;
+    color: ${color.gray};
+  `;
+});
+
+const CharacterImage = ({ imageKey, canEdit }) => {
   const { cloudinaryUrlGen, createUploadWidget } = useCloudinary();
   const { characterId } = useParams();
   const [player] = usePlayer();
@@ -71,9 +84,17 @@ const CharacterImage = ({ imageKey }) => {
     return (
       <>
         {message}
-        <AddPrompt onClick={handleWidgetOpen}>
-          <AiOutlinePlusCircle />
-        </AddPrompt>
+        {canEdit
+          ? (
+            <AddPrompt onClick={handleWidgetOpen}>
+              <AiOutlinePlusCircle />
+            </AddPrompt>
+            )
+          : (
+            <ImagePlaceholder>
+              <FaUserCircle />
+            </ImagePlaceholder>
+          )}
       </>
     );
   }
@@ -98,7 +119,10 @@ const CharacterImage = ({ imageKey }) => {
 };
 CharacterImage.propTypes = {
   imageKey: string,
+  canEdit: bool,
 };
-CharacterImage.defaultProps = {};
+CharacterImage.defaultProps = {
+  canEdit: false,
+};
 
 export default CharacterImage;
