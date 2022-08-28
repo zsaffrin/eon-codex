@@ -18,7 +18,7 @@ const SchemaFields = ({ schemaId, fields }) => {
 
   const tableColumns = schema && schema.fields
     ? schema.fields.reduce((acc, { key, lookup, name, showInTable, type }) => (
-      showInTable
+      showInTable && key !== 'schema'
         ? [...acc, {
             key,
             lookup,
