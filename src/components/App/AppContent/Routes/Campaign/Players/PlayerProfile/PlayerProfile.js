@@ -1,13 +1,14 @@
 import { Navigate, useParams } from 'react-router-dom';
 import { FaEdit } from 'react-icons/fa';
 
-import { useCampaign, useToggledModal } from '../../../../../../../hooks';
+import { useCampaign, useToggledModal, useUser } from '../../../../../../../hooks';
 import { Box, Button, ButtonRow, Page, PageHeader } from '../../../../../../ui';
 import PlayerCharacters from './PlayerCharacters';
 import EditPlayer from './EditPlayer';
 
 const PlayerProfile = () => {
   const { playerId } = useParams();
+  const [user] = useUser();
   const { key: campaignKey, players, characters } = useCampaign();
   const [editModal, toggleEditModal] = useToggledModal(EditPlayer);
 
@@ -16,6 +17,8 @@ const PlayerProfile = () => {
   if (!playerId || !player) {
     return <Navigate to={`/campaign/${campaignKey}/players`} />;
   }
+
+  const isCurrentUserPlayer = player.user === user.id;
 
   const playerCharacters = characters.filter(
     ({ player: playerId }) => playerId === player.id
@@ -34,12 +37,14 @@ const PlayerProfile = () => {
         }]}
         content={(
           <ButtonRow compact>
-            <Button
-              small
-              icon={<FaEdit />}
-              label="Edit"
-              onClick={() => toggleEditModal(player)}
-            />
+            {isCurrentUserPlayer && (
+              <Button
+                small
+                icon={<FaEdit />}
+                label="Edit"
+                onClick={() => toggleEditModal(player)}
+              />
+            )}
           </ButtonRow>
         )}
       />
